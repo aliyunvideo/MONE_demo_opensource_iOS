@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>vf_time_progress</key>
+	<string>#00F2FFFF</string>
+	<key>vf_time_duration</key>
+	<string>#FFFFFFFF</string>
+	<key>vf_text_moreInfo</key>
+	<string>#BBBBBBFF</string>
+	<key>vf_video_bg</key>
+	<string>#EDEDEDFF</string>
+	<key>vf_speed_bg</key>
+	<string>#00000066</string>
+	<key>vf_progress_track</key>
+	<string>#FFFFFF66</string>
+	<key>vf_tip_text</key>
+	<string>#FFFFFFFF</string>
+	<key>vf_slider</key>
+	<string>#00F2FFFF</string>
+</dict>
+</plist>

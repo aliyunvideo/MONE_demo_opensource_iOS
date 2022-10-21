@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ir_picker_bg</key>
+	<string>#FFFFFF66</string>
+	<key>ir_musicsetting_line</key>
+	<string>#8D8D8DFF</string>
+	<key>ir_musicsetting_name</key>
+	<string>#00C0FBFF</string>
+	<key>ir_musicsetting_bg</key>
+	<string>#4A4A4AFF</string>
+	<key>ir_debugchart_bg</key>
+	<string>#FFFFFFCC</string>
+	<key>ir_pushbutton_title</key>
+	<string>#333333FF</string>
+</dict>
+</plist>

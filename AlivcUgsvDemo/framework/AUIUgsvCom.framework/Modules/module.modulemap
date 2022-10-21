@@ -1,0 +1,6 @@
+framework module AUIUgsvCom {
+  umbrella header "AUIUgsvCom.h"
+
+  export *
+  module * { export * }
+}

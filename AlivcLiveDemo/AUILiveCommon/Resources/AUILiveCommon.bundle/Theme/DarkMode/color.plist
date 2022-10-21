@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ir_watermarksetting_bg</key>
+	<string>#D8D8D8FF</string>
+	<key>ir_monitor_title</key>
+	<string>#07C2DEFF</string>
+	<key>ir_sheet_button</key>
+	<string>#4DCFE1FF</string>
+	<key>ir_button_pulling</key>
+	<string>#F53F3FFF</string>
+	<key>ir_button_unenable</key>
+	<string>#006E87FF</string>
+	<key>ir_toaste_bg</key>
+	<string>#FFFFFF66</string>
+</dict>
+</plist>

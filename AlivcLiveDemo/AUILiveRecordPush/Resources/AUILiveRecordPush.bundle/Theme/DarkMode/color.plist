@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ir_button_text</key>
+	<string>#FFFFFFFF</string>
+	<key>ir_content_bg</key>
+	<string>#FFFFFF66</string>
+	<key>ir_button_push</key>
+	<string>#4DCFE14D</string>
+</dict>
+</plist>

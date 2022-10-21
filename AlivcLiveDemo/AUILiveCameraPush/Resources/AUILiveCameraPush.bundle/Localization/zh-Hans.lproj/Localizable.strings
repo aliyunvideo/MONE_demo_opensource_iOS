@@ -1,0 +1,301 @@
+
+"live_scene_list" = "直播场景列表";
+
+"live_basic_function" = "低延迟直播推流SDKv3.6.1";
+
+"live_basic_function_old" = "推流SDKv1.3";
+
+"license_declaration" = "版权信息";
+
+"screen_record_live" = "录屏直播（iOS11及以上）";
+
+"version" = "版本:v3.6.1";
+
+"pusher_setting" = "推流设置";
+
+"input_tips_more_settings" = "请输入";
+
+"url_copy_tips" = "播放地址已复制，推流后使用播放器进行观看";
+
+"resolution_label" = "分辨率";
+
+"max_bitrate" = "视频最大码率";
+
+"captrue_fps" = "采集帧率";
+
+"audio_sampling_rate" = "音频采样率";
+
+"sound_track" = "声道数";
+
+"audio_profile" = "音频格式";
+
+"preview_display_mode" = "显示模式";
+
+"push_url_notice_text" = "防止多人使用同一地址推流造成异常，建议更换推流地址";
+
+"mirror" = "前置镜像";
+
+"push_streaming" = "推流模式";
+
+"audio_video_push_streaming" = "音视频";
+
+"video_encode_b_frame" = "B-Frame";
+
+"video_hardware_encode_codec" = "视频硬编Codec";
+
+"start_preview_button" = "开始预览";
+
+"stop_preview_button" = "停止预览";
+
+"start_push" = "开始推流";
+
+"pause_button" = "暂停";
+"pause_push_button" = "暂停推图";
+
+"resume_button" = "继续";
+"resume_push_button" = "继续推图";
+
+"more_setting_button" = "更多设置";
+"more_data_button" = "数据指标";
+"watermark_button" = "添加水印";
+"remove_watermark_button" = "水印显隐";
+
+"repush_button" = "重新推流";
+
+"slide_right_view_log_char" = "右滑查看log";
+
+"slide_left_view_log" = "左滑查看log图表";
+
+"share_button" = "分享";
+
+"tile" = "平铺";
+
+"fit" = "适应";
+
+"cut" = "裁剪";
+
+"add_button" = "加贴纸";
+
+"remove_button" = "删贴纸";
+
+"save_log" = "保存日志";
+
+"modules_time_consuming" = "各模块耗时";
+
+"modules_audio_fps" = "各模块音频帧率";
+
+"modules_video_fps" = "各模块视频帧率";
+
+"modules_bitrate" = "各模块码率";
+
+"capture" = "采集";
+
+"zoom" = "缩放";
+
+"encode" = "编码";
+
+"push" = "推流";
+
+"audio_mode_music" = "音乐模式";
+
+"local_log" = "本地日志";
+
+"user_mix_stream" = "自定义混流";
+
+"auto_resolution" = "分辨率自适应";
+"gaojisetting" = "高级设置";
+
+"sweep_code" = "扫码";
+
+"keyframe_interval" = "关键帧";
+
+"flash" = "闪光灯";
+
+"render" = "渲染";
+
+"video_encode" = "视频编码";
+
+"audio_encode" = "音频编码";
+
+"sweep_code_label" = "将二维码放入框内, 即可自动扫描";
+
+"mirror_button_open" = "开启镜像";
+
+"mirror_button_close" = "关闭镜像";
+
+"log_button_open" = "开启日志";
+
+"log_button_close" = "关闭日志";
+
+"no_camera_permission" = "没有权限使用摄像头，请开启摄像头权限";
+
+"no_record_audio_permission" = "没有权限使用录音，请开启录音权限";
+
+"dialog_title" = "错误提示";
+
+"ok" = "确定";
+
+"network_poor" = "网络差，请退出或者重连";
+
+"network_recovery" = "网络恢复";
+
+"reconnect_start" = "重连开始";
+
+"reconnect_fail" = "重连失败";
+
+"connect_fail" = "链接失败";
+
+"reconnect_success" = "重连成功";
+
+"senddata_timeout" = "发送数据超时";
+
+"restart_success" = "重启成功";
+
+"system_error" = "系统错误：";
+
+"sdk_error" = "SDK错误：";
+
+"argument_exception" = "参数错误";
+
+"state_exception" = "状态错误";
+
+"bite_error" = "码率参数设置错误！";
+
+"drop_frame" = "丢帧";
+
+"adjust_bitrate" = "调整码率";
+
+"adjust_fps" = "调整帧率";
+
+"start_drop_gop" = "开丢GOP";
+
+"stop_drop_gop" = "停丢GOP";
+
+"bit_control" = "报网差包数";
+
+"min_control_interval" = "码控最小时间间隔";
+
+"upbps_duration" = "上涨最小时间间隔";
+
+"upbps_min_pree" = "上涨码率%";
+
+"upbps_size" = "上涨码率";
+
+"control_times" = "调控次数";
+
+"url_empty" = "请输入推流地址";
+
+"start_preview_log" = "开始预览";
+
+"connectRecovery_log" = "网络恢复";
+
+"stop_preview_log" = "停止预览";
+
+"start_push_log" = "开始推流";
+
+"stop_push_log" = "停止推流";
+
+"pause_push_log" = "暂停";
+
+"resume_push_log" = "恢复";
+
+"first_frame_log" = "首帧渲染";
+
+"push_url_log" = "推流地址";
+
+"ispushing_log" = "推流中";
+"un_ispushing_log" = "未推流";
+
+"restart_push_log" = "重新推流";
+
+"exit" = "退出";
+
+"reconnect_button" = "重连";
+
+"modules_time_consuming" = "各模块耗时";
+
+"modules_audio_fps" = "各模块音频帧率";
+
+"modules_video_fps" = "各模块视频帧率";
+
+"modules_bitrate" = "各模块码率";
+
+"capture" = "采集";
+
+"render" = "渲染";
+
+"encode" = "编码";
+
+"total_time" = "总耗时";
+
+"audio_fps" = "各模块audio fps";
+
+"video_fps" = "各模块video fps";
+
+"bitrate" = "各模块bitrate";
+
+"video_encode" = "视频编码";
+
+"audio_encode" = "音频编码";
+
+"buffer" = "各模块buffer";
+
+"video_renderbuffer" = "视频渲染";
+
+"video_encodebuffer" = "视频编码";
+
+"video_uploadbuffer" = "视频上传";
+
+"audio_encodebuffer" = "音频编码";
+
+"audio_uploadbuffer" = "音频上传";
+
+"bitrate_enable" = "码率调控";
+
+"publisher_log" = "推流参数log";
+
+"text_log_1" = "当前CPU：";
+"text_log_2" = "当前Memory：";
+"text_log_3" = "视频采集帧率：";
+"text_log_4" = "音频采集帧率：";
+"text_log_5" = "音频编码码率：";
+"text_log_6" = "音频编码帧率：";
+"text_log_7" = "视频渲染帧率：";
+"text_log_8" = "视频编码模式：";
+"text_log_9" = "视频编码码率：";
+"text_log_10" = "视频编码帧率：";
+"text_log_11" = "视频编码总帧数：";
+"text_log_12" = "视频编码总耗时：";
+"text_log_13" = "视频编码器设置码率：";
+"text_log_14" = "音频输出码率：";
+"text_log_15" = "视频输出码率：";
+"text_log_16" = "缓存音频帧总数：";
+"text_log_17" = "缓存视频帧总数：";
+"text_log_18" = "视频上传帧率：";
+"text_log_19" = "音频上传帧率：";
+"text_log_20" = "当前上传视频帧PTS：";
+"text_log_21" = "当前上传音频帧PTS：";
+"text_log_22" = "上一个视频关键帧PTS：";
+"text_log_23" = "缓冲区中最后一帧视频：";
+"text_log_24" = "缓冲区中最后一帧音频：";
+"text_log_25" = "数据上传总大小：";
+"text_log_26" = "视频推流总耗时：";
+"text_log_27" = "当前视频流已发送总帧数：";
+"text_log_28" = "视频丢帧总数：";
+"text_log_29" = "视频丢帧次数：";
+"text_log_30" = "总的断网次数：";
+"text_log_31" = "总的重连次数：";
+"text_log_32" = "视频延迟时长：";
+"text_log_33" = "音频延迟时长：";
+"text_log_34" = "当前上传帧大小：";
+"text_log_35" = "音视频pts差异：";
+"text_log_36" = "两秒内上传数据总大小：";
+"text_log_37" = "缓冲队列中曾经最大的视频帧size：";
+"text_log_38" = "缓冲队列中曾经最大的音频帧size：";
+"text_log_39" = "待发送队列中最后一个视频包的pts：";
+"text_log_40" = "带发送队列中最后一个音频包的pts：";
+"text_log_41" = "当前发送的音视频包pts diff：";
+"text_log_42" = "音频编码器队列中帧缓存数：";
+"text_log_43" = "视频编码器队列中帧缓存数：";
+"text_log_44" = "渲染队列中帧缓存数：";
+"text_log_45" = "每帧平均渲染时长：";
