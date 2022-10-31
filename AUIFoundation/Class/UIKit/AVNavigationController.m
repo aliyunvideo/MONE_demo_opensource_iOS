@@ -6,6 +6,7 @@
 //
 
 #import "AVNavigationController.h"
+#import "AUIFoundationMacro.h"
 
 @interface AVNavigationController ()
 @end
@@ -43,6 +44,10 @@
         }
     }
     return YES;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return [AVTheme preferredStatusBarStyle];
 }
 
 -(BOOL)shouldAutorotate {

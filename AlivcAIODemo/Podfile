@@ -22,24 +22,24 @@ end
 
 # ===================================直播推流集成===================================
 def aliyun_demo_aui_live
-  pod 'AlivcLiveDemo/AliVCSDK_Premium', :path => '../AlivcLiveDemo/'
-  pod 'AlivcLiveDemo/List', :path => '../AlivcLiveDemo/'
-  pod 'AlivcLiveDemo/LiveCameraPush', :path => '../AlivcLiveDemo/'
-  pod 'AlivcLiveDemo/LivePlay', :path => '../AlivcLiveDemo/'
-  pod 'AlivcLiveDemo/LiveLinkMic', :path => '../AlivcLiveDemo/'
-  pod 'AlivcLiveDemo/LivePK', :path => '../AlivcLiveDemo/'
+  pod 'AUILive/AliVCSDK_Premium', :path => '../AUILive/'
+  pod 'AUILive/List', :path => '../AUILive/'
+  pod 'AUILive/LiveCameraPush', :path => '../AUILive/'
+  pod 'AUILive/LivePlay', :path => '../AUILive/'
+  pod 'AUILive/LiveLinkMic', :path => '../AUILive/'
+  pod 'AUILive/LivePK', :path => '../AUILive/'
 end
 
 # ===================================播放器集成===================================
 def aliyun_demo_aui_player
-  pod 'AlivcPlayerDemo/AliVCSDK_Premium', :path => '../AlivcPlayerDemo/'
-  pod 'AlivcPlayerDemo/All', :path => '../AlivcPlayerDemo/'
+  pod 'AUIPlayer/AliVCSDK_Premium', :path => '../AUIPlayer/'
+  pod 'AUIPlayer/All', :path => '../AUIPlayer/'
 end
 
 # ===================================短视频剪辑集成===================================
 def aliyun_demo_aui_ugsv
-  pod 'AlivcUgsv/AliVCSDK_Premium', :path => '../AlivcUgsvDemo/'
-  pod 'AlivcUgsv/All', :path => '../AlivcUgsvDemo/'
+  pod 'AUIUgsv/AliVCSDK_Premium', :path => '../AUIUgsv/'
+  pod 'AUIUgsv/All', :path => '../AUIUgsv/'
 end
 
 

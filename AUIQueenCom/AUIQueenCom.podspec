@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUIQueenCom'
-  s.version          = '1.0.0'
+  s.version          = '1.5.0'
   s.summary          = 'A short description of AUIQueenCom.'
 
 # This description is used to generate tags and improve search results.
@@ -21,16 +21,17 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/aliyunvideo/AliAIOSDK'
+  s.homepage         = 'https://github.com/aliyunvideo/MONE_demo_opensource_iOS'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :text => 'LICENSE' }
-  s.author           = { 'AliyunVideo' => 'aliyunvideo@alibaba-inc.com' }
-  s.source           = { :git => 'https://github.com/aliyunvideo/AliAIOSDK.git', :tag => s.version.to_s }
+  s.author           = { 'aliyunvideo' => 'videosdk@service.aliyun.com' }
+  s.source           = { :git => 'https://github.com/aliyunvideo/MONE_demo_opensource_iOS.git', :tag =>"v#{s.version}" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '9.0'
   s.static_framework = true
-
+  s.default_subspec = 'Queen'
+  
   s.subspec 'Common' do |ss|
     ss.vendored_frameworks = 'AliyunQueenUIKit.framework'
     ss.resource = 'AliyunQueenUIKit.framework/queen_res.bundle'

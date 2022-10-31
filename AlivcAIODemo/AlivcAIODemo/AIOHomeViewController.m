@@ -21,10 +21,6 @@
 #import "AUILiveViewController.h"
 #endif
 
-#ifdef AIO_DEMO_ENABLE_SVIDEO
-#import "SVHomeViewController.h"
-#endif
-
 #define AIOGetImage(key) AVGetImage((key), @"AIO")
 #define AIOGetColor(key) AVGetColor((key), @"AIO")
 #define AIOGetString(key) AVGetString((key), @"AIO")
@@ -263,13 +259,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     item1.icon = AIOGetImage(@"ic_ugc");
     item1.tag = 0;
     item1.clickBlock = ^{
-#ifdef AIO_DEMO_ENABLE_SVIDEO
-        __weak typeof(self) weakSelf = self;
-        SVHomeViewController *sv = [[SVHomeViewController alloc] init];
-        [weakSelf.navigationController pushViewController:sv animated:YES];
-#else
         [AVAlertController show:@"敬请期待！"];
-#endif
     };
     
     AVCommonListItem *item2 = [AVCommonListItem new];

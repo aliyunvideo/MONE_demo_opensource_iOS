@@ -153,6 +153,20 @@ typedef NS_ENUM(NSUInteger, AVThemeMode) {
     return nil;
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    if (self.defaultMode == AVThemeModeDark) {
+        return UIStatusBarStyleLightContent;
+    }
+    if (self.defaultMode == AVThemeModeLight) {
+        if (@available(iOS 13.0, *)) {
+            return UIStatusBarStyleDarkContent;
+        } else {
+            return UIStatusBarStyleDefault;
+        }
+    }
+    return UIStatusBarStyleDefault;
+}
+
 + (instancetype)currentTheme {
     static AVTheme *_global = nil;
     if (!_global) {
@@ -192,6 +206,10 @@ typedef NS_ENUM(NSUInteger, AVThemeMode) {
 
 + (UIFont *)ultralightFont:(CGFloat)size {
     return [UIFont fontWithName:@"PingFangSC-Ultralight" size:size];
+}
+
++ (UIStatusBarStyle)preferredStatusBarStyle {
+    return [[self currentTheme] preferredStatusBarStyle];
 }
 
 @end

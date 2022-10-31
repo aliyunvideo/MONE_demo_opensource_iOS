@@ -119,6 +119,10 @@
     
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return [AVTheme preferredStatusBarStyle];
+}
+
 // MARK: - 屏幕旋转
 - (BOOL)shouldAutorotate {
     return NO;

@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIFont *)lightFont:(CGFloat)size;
 + (UIFont *)ultralightFont:(CGFloat)size;
 
++ (UIStatusBarStyle)preferredStatusBarStyle;
+
 @end
 
 NS_ASSUME_NONNULL_END

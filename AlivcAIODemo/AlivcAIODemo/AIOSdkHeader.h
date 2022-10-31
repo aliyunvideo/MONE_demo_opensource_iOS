@@ -89,9 +89,4 @@
 #define AIO_DEMO_ENABLE_QUEEN
 #endif
 
-
-#if defined AIO_DEMO_ENABLE_UGSV && defined AIO_DEMO_ENABLE_LIVE
-//#define AIO_DEMO_ENABLE_SVIDEO
-#endif
-
 #endif /* AIOSdkHeader_h */
