@@ -15,6 +15,8 @@
 
 + (void)show:(NSString *)message vc:(UIViewController *)vc {
     UIAlertController *alertController =[UIAlertController alertControllerWithTitle:@"" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [AVTheme updateRootViewControllerInterfaceStyle:alertController];
+    
     UIAlertAction *action2 =[UIAlertAction actionWithTitle:AVGetString(@"OK", @"AUIFoundation") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     }];
     [alertController addAction:action2];
@@ -28,6 +30,8 @@
 
 + (void)showInput:(NSString *)title vc:(UIViewController *)vc onCompleted:(void(^)(NSString *input))completed {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [AVTheme updateRootViewControllerInterfaceStyle:alertController];
+    
     [alertController addAction:[UIAlertAction actionWithTitle:AVGetString(@"OK", @"AUIFoundation") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
         UITextField *titleTextField = alertController.textFields.firstObject;
         NSLog(@"%@", titleTextField.text);
@@ -46,6 +50,8 @@
 
 + (void)showInput:(NSString *)input title:(NSString *)title message:(NSString *)message okTitle:(NSString *)okTitle cancelTitle:(NSString *)cancelTitle vc:(UIViewController *)vc onCompleted:(void(^)(NSString *input, BOOL isCancel))completed {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [AVTheme updateRootViewControllerInterfaceStyle:alertController];
+    
     [alertController addAction:[UIAlertAction actionWithTitle:okTitle ?: AVGetString(@"OK", @"AUIFoundation") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action){
         UITextField *titleTextField = alertController.textFields.firstObject;
         if (completed) {
@@ -72,9 +78,11 @@
 }
 
 + (void)showWithTitle:(NSString *)title message:(NSString *)message cancelTitle:(NSString *)cancelTitle okTitle:(NSString *)okTitle onCompleted:(void(^)(BOOL isCanced))completed {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
+    [AVTheme updateRootViewControllerInterfaceStyle:alertController];
+    
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:okTitle
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction *action) {
@@ -82,7 +90,7 @@
             completed(NO);
         }
     }];
-    [alert addAction:okAction];
+    [alertController addAction:okAction];
     
     if (cancelTitle.length > 0) {
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:cancelTitle
@@ -92,15 +100,17 @@
                 completed(YES);
             }
         }];
-        [alert addAction:cancelAction];
+        [alertController addAction:cancelAction];
     }
     
     UIViewController *topVC = UIViewController.av_topViewController;
-    [topVC presentViewController:alert animated:YES completion:nil];
+    [topVC presentViewController:alertController animated:YES completion:nil];
 }
 
 + (void)showSheet:(NSArray<NSString *> *)actionTitles alertTitle:(NSString *)alertTitle message:(NSString *)message cancelTitle:(NSString *)cancelTitle vc:(UIViewController *)vc onCompleted:(void (^)(NSInteger idx))completed {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alertTitle message:message preferredStyle:UIAlertControllerStyleActionSheet];
+    [AVTheme updateRootViewControllerInterfaceStyle:alertController];
+    
     [actionTitles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         UIAlertAction *action = [UIAlertAction actionWithTitle:obj style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if (completed) {

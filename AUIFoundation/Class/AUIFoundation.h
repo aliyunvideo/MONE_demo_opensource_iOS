@@ -29,6 +29,8 @@
 #import "AVIgnoreSelfHitView.h"
 #import "AVSliderView.h"
 #import "AUIPickerPanel.h"
+#import "AVBlockButton.h"
+#import "AVEdgeInsetLabel.h"
 
 #import "AVBaseControllPanel.h"
 #import "AVBaseCollectionControllPanel.h"

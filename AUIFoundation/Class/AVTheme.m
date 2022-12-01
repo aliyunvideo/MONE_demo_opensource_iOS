@@ -7,6 +7,7 @@
 
 #import "AVTheme.h"
 #import "UIColor+AVHelper.h"
+#import "UIImage+AVHelper.h"
 #import "NSDictionary+AVHelper.h"
 
 @interface AVColorReader : NSObject
@@ -41,19 +42,21 @@
 
 @end
 
-
-typedef NS_ENUM(NSUInteger, AVThemeMode) {
-    AVThemeModeAuto,
-    AVThemeModeLight,
-    AVThemeModeDark,
-};
-
 @interface AVTheme ()
 
 @property (nonatomic, strong) NSMutableDictionary<NSString *, AVColorReader *> *moduleColorMap;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSBundle *> *moduleImageBundleMap;
 
-@property (nonatomic, assign) AVThemeMode defaultMode;
+@property (nonatomic, assign) AVThemeMode currentMode;
+
+// App是否支持自动模式
+// YES时，支持AVThemeModeAuto，切换模式时实时生效
+// NO时，AVThemeModeAuto与Light一致，切换模式时必须重启APP生效，
+// iOS13及以上以上默认为YES，其他默认为NO。当你APP不支持多种主题模式时（即使是iOS13及以上），建议设置为NO，并选择Light或Dark作为你的界面UI样式
+@property (nonatomic, assign) BOOL supportsAutoMode;
+
+@property (nonatomic, strong, readonly, class) AVTheme *currentTheme;
+
 
 @end
 
@@ -63,16 +66,27 @@ typedef NS_ENUM(NSUInteger, AVThemeMode) {
     self = [super init];
     if (self) {
         if (@available(iOS 13.0, *)) {
-            // 暂时只支持Dark mode
-//            self.defaultMode = AVThemeModeAuto;
-            self.defaultMode = AVThemeModeDark;
+            _supportsAutoMode = YES;
+            self.currentMode = AVThemeModeLight;
         }
         else {
-            self.defaultMode = AVThemeModeDark;
+            _supportsAutoMode = NO;
+            self.currentMode = AVThemeModeLight;
         }
     }
     return self;
 }
+
+- (void)setSupportsAutoMode:(BOOL)supportsAutoMode {
+    if (@available(iOS 13.0, *)) {
+        _supportsAutoMode = supportsAutoMode;
+    }
+    else {
+        _supportsAutoMode = NO;
+    }
+}
+
+#pragma mark - Color
 
 - (AVColorReader *)addColorModule:(NSString *)module {
     if (module.length == 0) {
@@ -87,10 +101,6 @@ typedef NS_ENUM(NSUInteger, AVThemeMode) {
     return colorReader;
 }
 
-- (UIColor *)colorNamed:(NSString *)name module:(NSString *)module {
-    return [self colorNamed:name opacity:-1.0 module:module];
-}
-
 - (UIColor *)colorNamed:(NSString *)name opacity:(CGFloat)opacity module:(NSString *)module {
     if (name.length == 0) {
         return nil;
@@ -103,18 +113,27 @@ typedef NS_ENUM(NSUInteger, AVThemeMode) {
         darkColor = [darkColor colorWithAlphaComponent:opacity];
     }
     
-    if (self.defaultMode == AVThemeModeDark) {
-        NSAssert(darkColor, @"In dark mode, darkColor can't be nil");
-        return darkColor;
-    }
-    else if (self.defaultMode == AVThemeModeLight) {
-        NSAssert(lightColor, @"In light mode, lightColor can't be nil");
-        return lightColor;
+    if (self.supportsAutoMode) {
+        NSAssert(darkColor, @"In auto mode, darkColor(name:%@) can't be nil", name);
+        NSAssert(lightColor, @"In auto mode, lightColor(name:%@) can't be nil", name);
+        return [UIColor av_colorWithLightColor:lightColor darkColor:darkColor];
     }
     
-    NSAssert(lightColor && darkColor, [NSString stringWithFormat:@"The color of the name does not exist. If supports light mode，lightColor can't be nil; If supports dark mode，darkColor can't be nil."]);
-    return [UIColor av_colorWithLightColor:lightColor darkColor:darkColor];
+    if (self.currentMode == AVThemeModeDark) {
+        NSAssert(darkColor, @"In dark mode, darkColor(name:%@) can't be nil", name);
+        return darkColor;
+    }
+
+    NSAssert(lightColor, @"In light mode, lightColor(name:%@) can't be nil", name);
+    return lightColor;
 }
+
+- (UIColor *)colorNamed:(NSString *)name module:(NSString *)module {
+    return [self colorNamed:name opacity:-1.0 module:module];
+}
+
+
+#pragma mark - Image
 
 - (NSBundle *)addImageModule:(NSString *)module {
     NSBundle *bundle = [self.moduleImageBundleMap objectForKey:module];
@@ -128,64 +147,88 @@ typedef NS_ENUM(NSUInteger, AVThemeMode) {
     return bundle;
 }
 
+- (UIImage *)imageWithLightNamed:(NSString *)lightNamed withDarkNamed:(NSString *)darkNamed inBundle:(nullable NSBundle *)bundle {
+    
+    if (self.supportsAutoMode) {
+        return [UIImage av_imageWithLightNamed:lightNamed withDarkNamed:darkNamed inBundle:bundle];
+    }
+    
+    if (self.currentMode == AVThemeModeDark) {
+        UIImage *image = [UIImage imageNamed:darkNamed inBundle:bundle compatibleWithTraitCollection:nil];
+        return image;
+    }
+
+    UIImage *image = [UIImage imageNamed:lightNamed inBundle:bundle compatibleWithTraitCollection:nil];
+    return image;
+}
+
 - (UIImage *)imageNamed:(NSString *)name module:(NSString *)module {
     if (name.length == 0) {
         return nil;
     }
     NSBundle *bundle = [self addImageModule:module];
-    if (self.defaultMode == AVThemeModeDark) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"DarkMode/%@", name] inBundle:bundle compatibleWithTraitCollection:nil];
-        return image;
-    }
-    else if (self.defaultMode == AVThemeModeLight) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"LightMode/%@", name] inBundle:bundle compatibleWithTraitCollection:nil];
-        return image;
-    }
-    
-    if (@available(iOS 13.0, *)) {
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"DarkMode/%@", name] inBundle:bundle compatibleWithTraitCollection:[UITraitCollection traitCollectionWithUserInterfaceStyle:UIUserInterfaceStyleDark]];
-        [image.imageAsset registerImage:[UIImage imageNamed:[NSString stringWithFormat:@"LightMode/%@", name] inBundle:bundle compatibleWithTraitCollection:nil] withTraitCollection:[UITraitCollection traitCollectionWithUserInterfaceStyle:UIUserInterfaceStyleLight]];
-        image = [image.imageAsset imageWithTraitCollection:UITraitCollection.currentTraitCollection];
-        return image;
-    } else {
-        
-    }
-    return nil;
+    NSString *lightNamed = [NSString stringWithFormat:@"LightMode/%@", name];
+    NSString *darkNamed = [NSString stringWithFormat:@"DarkMode/%@", name];
+    return [self imageWithLightNamed:lightNamed withDarkNamed:darkNamed inBundle:bundle];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    if (self.defaultMode == AVThemeModeDark) {
-        return UIStatusBarStyleLightContent;
+- (UIImage *)imageWithCommonNamed:(NSString *)named module:(NSString *)module {
+    if (named.length == 0) {
+        return nil;
     }
-    if (self.defaultMode == AVThemeModeLight) {
-        if (@available(iOS 13.0, *)) {
-            return UIStatusBarStyleDarkContent;
-        } else {
-            return UIStatusBarStyleDefault;
-        }
-    }
-    return UIStatusBarStyleDefault;
+    NSBundle *bundle = [self addImageModule:module];
+    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"Common/%@", named] inBundle:bundle compatibleWithTraitCollection:nil];
+    return image;
 }
 
-+ (instancetype)currentTheme {
+#pragma mark - Global Methods
+
++ (AVTheme *)currentTheme {
     static AVTheme *_global = nil;
     if (!_global) {
         _global = [AVTheme new];
     }
-    
+
     return _global;
 }
 
-+ (UIColor *)colorWithNamed:(NSString *)name withModule:(NSString *)module {
-    return [[self currentTheme] colorNamed:name module:module];
++ (void)setCurrentMode:(AVThemeMode)themeMode {
+    [AVTheme.currentTheme setCurrentMode:themeMode];
+    if (AVTheme.currentTheme.supportsAutoMode) {
+        [self updateRootViewInterfaceStyle:[UIApplication sharedApplication].delegate.window];
+    }
 }
 
-+ (UIColor *)colorWithNamed:(NSString *)name withOpacity:(CGFloat)opacity withModule:(NSString *)module {
-    return [[self currentTheme] colorNamed:name opacity:opacity module:module];
++ (AVThemeMode)currentMode {
+    return AVTheme.currentTheme.currentMode;
 }
 
-+ (UIImage *)imageWithNamed:(NSString *)name withModule:(NSString *)module {
-    return [[self currentTheme] imageNamed:name module:module];
++ (void)setSupportsAutoMode:(BOOL)supportsAutoMode {
+    [AVTheme.currentTheme setSupportsAutoMode:supportsAutoMode];
+}
+
++ (BOOL)supportsAutoMode {
+    return AVTheme.currentTheme.supportsAutoMode;
+}
+
++ (UIColor *)colorWithNamed:(NSString *)named withModule:(NSString *)module {
+    return [AVTheme.currentTheme colorNamed:named module:module];
+}
+
++ (UIColor *)colorWithNamed:(NSString *)named withOpacity:(CGFloat)opacity withModule:(NSString *)module {
+    return [AVTheme.currentTheme colorNamed:named opacity:opacity module:module];
+}
+
++ (UIImage *)imageWithNamed:(NSString *)named withModule:(NSString *)module {
+    return [AVTheme.currentTheme imageNamed:named module:module];
+}
+
++ (UIImage *)imageWithCommonNamed:(NSString *)named withModule:(NSString *)module {
+    return [AVTheme.currentTheme imageWithCommonNamed:named module:module];
+}
+
++ (UIImage *)imageWithLightNamed:(NSString *)lightNamed withDarkNamed:(NSString *)darkNamed inBundle:(NSBundle *)bundle {
+    return [AVTheme.currentTheme imageWithLightNamed:lightNamed withDarkNamed:darkNamed inBundle:bundle];
 }
 
 + (UIFont *)semiboldFont:(CGFloat)size {
@@ -209,7 +252,58 @@ typedef NS_ENUM(NSUInteger, AVThemeMode) {
 }
 
 + (UIStatusBarStyle)preferredStatusBarStyle {
-    return [[self currentTheme] preferredStatusBarStyle];
+    if (AVTheme.supportsAutoMode) {
+        return UIStatusBarStyleDefault;
+    }
+    if (AVTheme.currentMode == AVThemeModeDark) {
+        return UIStatusBarStyleLightContent;
+    }
+    
+    // auth or light
+    if (@available(iOS 13.0, *)) {
+        return UIStatusBarStyleDarkContent;
+    }
+    return UIStatusBarStyleDefault;
+}
+
++ (void)updateRootViewInterfaceStyle:(UIView *)view {
+    if (AVTheme.currentMode == AVThemeModeDark) {
+        if (@available(iOS 13.0, *)) {
+            view.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+        }
+        return;
+    }
+    
+    if (AVTheme.currentMode == AVThemeModeLight) {
+        if (@available(iOS 13.0, *)) {
+            view.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        }
+        return;
+    }
+    
+    if (@available(iOS 13.0, *)) {
+        view.overrideUserInterfaceStyle = UIUserInterfaceStyleUnspecified;
+    }
+}
+
++ (void)updateRootViewControllerInterfaceStyle:(UIViewController *)vc {
+    if (AVTheme.currentMode == AVThemeModeDark) {
+        if (@available(iOS 13.0, *)) {
+            vc.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
+        }
+        return;
+    }
+    
+    if (AVTheme.currentMode == AVThemeModeLight) {
+        if (@available(iOS 13.0, *)) {
+            vc.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+        }
+        return;
+    }
+    
+    if (@available(iOS 13.0, *)) {
+        vc.overrideUserInterfaceStyle = UIUserInterfaceStyleUnspecified;
+    }
 }
 
 @end

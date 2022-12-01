@@ -7,6 +7,7 @@
 
 #import "AVProgressHUD.h"
 #import "AUIFoundationMacro.h"
+#import "UIColor+AVHelper.h"
 #import "UIView+AVHelper.h"
 
 @interface AVProgressHUD ()
@@ -120,7 +121,7 @@
 
     // create
     _label = [UILabel new];
-    _label.textColor = AUIFoundationColor(@"text_medium");
+    _label.textColor = [UIColor av_colorWithHexString:@"#FCFCFD"];
     _label.font = AVGetRegularFont(18.0);
     _label.numberOfLines = 0;
     [self addSubview:_label];
@@ -131,9 +132,6 @@
     [self addSubview:_iconView];
     
     UIActivityIndicatorViewStyle style = UIActivityIndicatorViewStyleWhiteLarge;
-    if (@available(iOS 13.0, *)) {
-        style = UIActivityIndicatorViewStyleLarge;
-    }
     _activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:style];
     [self addSubview:_activityView];
     [_activityView startAnimating];
@@ -141,7 +139,7 @@
     // update
     self.layer.cornerRadius = 8.0;
     self.layer.masksToBounds = YES;
-    self.backgroundColor = AUIFoundationColor(@"tsp_fill_medium");
+    self.backgroundColor = [UIColor av_colorWithHexString:@"#1C1D22" alpha:0.8];
     
     _label.text = _labelText;
     self.position = AVProgressHUDShowPosMid;
@@ -158,29 +156,34 @@
     const CGFloat kMinWidth = 112.0;
     const CGFloat kMaxWidth = 198.0;
     const CGFloat kLabelMargin = 12.0;
-    const CGFloat kIconMargin = 22.0;
+    const CGFloat kIconMargin = 12.0;
     const CGFloat kIconSize = 48.0;
     
     BOOL hasIcon = (_iconType != AVProgressHUDIconTypeNone);
     BOOL hasLabel = (_labelText.length > 0);
     
-    CGSize size = CGSizeMake(kMinWidth, 0);
+    CGSize size = CGSizeMake(0, 0);
     if (hasIcon) {
         size.width = kIconSize + kIconMargin * 2;
         size.height = kIconSize + kIconMargin * 2;
     }
     CGSize labelSize = CGSizeZero;
     if (hasLabel) {
-        labelSize = [self.label sizeThatFits:CGSizeMake(kMaxWidth, 0)];
+        labelSize = [self.label sizeThatFits:CGSizeMake(kMaxWidth - kLabelMargin * 2, 0)];
         size.width = MAX(size.width, labelSize.width + kLabelMargin * 2);
         size.height = MAX(size.height, labelSize.height + kLabelMargin * 2);
     }
+    
+    size.width = MIN(MAX(size.width, kMinWidth), kMaxWidth);
+    size.height = MAX(size.height, kMinWidth);
+    
     if (hasIcon && hasLabel) {
         size.height = MAX(size.height, kIconMargin + kIconSize + MIN(kIconMargin, kLabelMargin) + labelSize.height + kLabelMargin);
     }
     
-    CGRect iconFrame = CGRectMake(0, kIconMargin, kIconSize, kIconSize);
+    CGRect iconFrame = CGRectMake(0, 0, kIconSize, kIconSize);
     iconFrame.origin.x = (size.width - kIconSize) * 0.5;
+    iconFrame.origin.y = hasLabel ? kIconMargin : (size.height - kIconSize) * 0.5;
     _iconView.frame = iconFrame;
     _activityView.frame = iconFrame;
     
@@ -220,10 +223,10 @@
     _iconType = iconType;
     switch (iconType) {
         case AVProgressHUDIconTypeWarn:
-            _iconView.image = AUIFoundationImage(@"ic_warn");
+            _iconView.image = AUIFoundationCommonImage(@"ic_warn");
             break;
         case AVProgressHUDIconTypeSuccess:
-            _iconView.image = AUIFoundationImage(@"ic_right");
+            _iconView.image = AUIFoundationCommonImage(@"ic_right");
             break;
         default:
             _iconView.image = nil;

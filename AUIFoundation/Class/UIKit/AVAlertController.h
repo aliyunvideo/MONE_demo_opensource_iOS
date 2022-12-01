@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
            needCancel:(BOOL)needCancel
           onCompleted:(void(^)(BOOL isCanced))completed;
 
-+ (void)showWithTitle:(NSString *)title
++ (void)showWithTitle:(nullable NSString *)title
               message:(NSString *)message
           cancelTitle:(NSString *)cancelTitle
               okTitle:(NSString *)okTitle

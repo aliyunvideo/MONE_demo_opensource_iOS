@@ -131,6 +131,10 @@
     return _menuButton && !_menuButton.hidden;
 }
 
+- (UIView *)bgViewOnShowing {
+    return self.bgView;
+}
+
 + (CGFloat)panelHeight {
     return 300;
 }

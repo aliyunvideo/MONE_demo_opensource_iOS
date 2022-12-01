@@ -15,6 +15,7 @@
 #define AUIFoundationColor(key)  AVGetColor(key, @"AUIFoundation")
 #define AUIFoundationColor2(key, opacity)  AVGetColor2(key, opacity, @"AUIFoundation")
 #define AUIFoundationImage(key)  AVGetImage(key, @"AUIFoundation")
+#define AUIFoundationCommonImage(key)  AVGetCommonImage(key, @"AUIFoundation")
 
 
 #endif /* AUIFoundationMacro_h */

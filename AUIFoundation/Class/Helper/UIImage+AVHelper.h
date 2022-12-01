@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (UIImage *)av_imageWithColor:(UIColor *)color size:(CGSize)size;
 
++ (UIImage *)av_imageWithLightNamed:(NSString *)lightNamed withDarkNamed:(NSString *)darkNamed inBundle:(nullable NSBundle *)bundle;
 
 
 @end

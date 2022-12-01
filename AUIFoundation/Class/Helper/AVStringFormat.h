@@ -10,8 +10,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AVStringFormat : NSObject
-
+// 00:00
 + (NSString *)formatWithDuration:(float)duration;
+
+// 00:00:00
++ (NSString *)format2WithDuration:(float)duration;
 
 @end
 

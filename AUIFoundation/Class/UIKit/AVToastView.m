@@ -9,6 +9,7 @@
 #import "AVLocalization.h"
 #import "UIView+AVHelper.h"
 #import "AUIFoundationMacro.h"
+#import "UIColor+AVHelper.h"
 
 @interface AVToastView ()
 
@@ -21,7 +22,6 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
     }
     return self;
 }
@@ -33,11 +33,11 @@
     
     self.layer.cornerRadius = 8.0;
     self.layer.masksToBounds = YES;
-    self.backgroundColor = AUIFoundationColor(@"tsp_fill_medium");
+    self.backgroundColor = [UIColor av_colorWithHexString:@"#1C1D22" alpha:0.8];
     
     self.toastLabel = [[UILabel alloc] init];
     self.toastLabel.font = AVGetRegularFont(14.0);
-    self.toastLabel.textColor = AUIFoundationColor(@"text_strong");
+    self.toastLabel.textColor = [UIColor av_colorWithHexString:@"#FCFCFD"];
     self.toastLabel.numberOfLines = 0;
     self.toastLabel.text = toast;
     [self addSubview:self.toastLabel];

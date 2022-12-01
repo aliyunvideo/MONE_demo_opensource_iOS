@@ -27,6 +27,8 @@ typedef NS_ENUM(NSUInteger, AVControllPanelBackgroundType) {
 @property (nonatomic, assign) BOOL showMenuButton;
 @property (nonatomic, assign) BOOL showBackButton;
 
+@property (nonatomic, weak, readonly) UIView *bgViewOnShowing;
+
 @property (nonatomic, readonly) BOOL isShowing;
 @property (nonatomic, copy, nullable) void(^onShowChanged)(AVBaseControllPanel *sender);
 

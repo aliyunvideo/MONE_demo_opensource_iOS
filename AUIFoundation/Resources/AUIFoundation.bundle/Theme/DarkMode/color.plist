@@ -54,14 +54,20 @@
 	<string>#E6E7ECFF</string>
 	<key>fill_infrared</key>
 	<string>#FCFCFDFF</string>
+	<key>fill_microwave</key>
+	<string>#23262FFF</string>
 	<key>tsp_fill_ultrastrong</key>
-	<string></string>
+	<string>#747A8C26</string>
 	<key>tsp_fill_strong</key>
-	<string></string>
+	<string>#14141600</string>
 	<key>tsp_fill_medium</key>
-	<string>#141416B4</string>
+	<string>#141416B2</string>
 	<key>tsp_fill_weak</key>
-	<string>#1C1E2266</string>
+	<string>#1C1D2266</string>
+	<key>tsp_fill_ultraweak</key>
+	<string>#1C1D22CC</string>
+	<key>tsp_fill_infrared</key>
+	<string>#FCFCFD66</string>
 	<key>colourful_text_strong</key>
 	<string>#4DCFE1FF</string>
 	<key>colourful_ic_strong</key>
@@ -76,5 +82,7 @@
 	<string>#F7355DFF</string>
 	<key>colourful_fill_strong</key>
 	<string>#4DCFE1FF</string>
+	<key>colourful_fill_disabled</key>
+	<string>#B2EBF2FF</string>
 </dict>
 </plist>
