@@ -66,8 +66,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    // 仅支持暗黑模式
+    AVTheme.supportsAutoMode = NO;
+    AVTheme.currentMode = AVThemeModeDark;
     
     AVNavigationController *nav =[[AVNavigationController alloc]initWithRootViewController:[AIOHomeViewController new]];
     [self.window setRootViewController:nav];
