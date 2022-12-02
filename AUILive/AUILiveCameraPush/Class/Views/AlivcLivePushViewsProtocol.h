@@ -61,6 +61,10 @@
 
 - (void)publisherOnSelectPreviewDisplayMode:(int)mode;
 
+- (void)publisherOnSelectAudioEffectsVoiceChangeMode:(NSInteger)mode;
+
+- (void)publisherOnSelectAudioEffectsReverbMode:(NSInteger)mode;
+
 @end
 
 

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUILive'
-  s.version          = '1.5.1'
+  s.version          = '1.6.0'
   s.summary          = 'A short description of AUILive.'
 
 # This description is used to generate tags and improve search results.
@@ -62,15 +62,24 @@ TODO: Add long description of the pod here.
     ss.prefix_header_contents = '#import "AUILivePlay.h"'
   end
   
+  s.subspec 'LiveRtsPlay' do |ss|
+    ss.source_files = 'AUILiveRtsPlay/Class/**/*.{h,m,mm}'
+    ss.resource = 'AUILiveRtsPlay/Resources/AUILiveRtsPlay.bundle'
+    ss.dependency 'AUILive/LiveCommon'
+    ss.prefix_header_contents = '#import "AUILiveRtsPlay.h"'
+  end
+  
   s.subspec 'LiveLinkMic' do |ss|
     ss.source_files = 'AUILiveLinkMic/Class/**/*.{h,m,mm}'
     ss.resource = 'AUILiveLinkMic/Resources/AUILiveLinkMic.bundle'
+    ss.dependency 'AUILive/LiveCommon'
     ss.prefix_header_contents = '#import "AUILiveLinkMic.h"'
   end
   
   s.subspec 'LivePK' do |ss|
     ss.source_files = 'AUILivePK/Class/**/*.{h,m,mm}'
     ss.resource = 'AUILivePK/Resources/AUILivePK.bundle'
+    ss.dependency 'AUILive/LiveCommon'
     ss.prefix_header_contents = '#import "AUILivePK.h"'
   end
 
@@ -85,6 +94,7 @@ TODO: Add long description of the pod here.
     ss.dependency 'AUILive/LiveCameraPush'
     ss.dependency 'AUILive/LiveRecordPush'
     ss.dependency 'AUILive/LivePlay'
+    ss.dependency 'AUILive/LiveRtsPlay'
     ss.dependency 'AUILive/LiveLinkMic'
     ss.dependency 'AUILive/LivePK'
   end

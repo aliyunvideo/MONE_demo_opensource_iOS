@@ -32,6 +32,7 @@
     AVTheme.supportsAutoMode = NO;
     AVTheme.currentMode = AVThemeModeDark;
     
+    
     AUIUgsvViewController *rootVC = [AUIUgsvViewController new];
     rootVC.hiddenBackButton = YES;
     AVNavigationController *nav =[[AVNavigationController alloc]initWithRootViewController:rootVC];

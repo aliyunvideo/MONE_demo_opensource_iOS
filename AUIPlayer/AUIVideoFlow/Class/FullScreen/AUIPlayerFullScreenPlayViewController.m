@@ -164,10 +164,16 @@
         AUIPlayerDetailViewController *detailVC = [[AUIPlayerDetailViewController alloc] init];
         detailVC.item = self.item;
         
-        __block AVNavigationController *presentingViewController = (AVNavigationController *)self.presentingViewController;
-        [self dismissViewControllerAnimated:NO completion:^{
-            [presentingViewController pushViewController:detailVC animated:YES];
-        }];
+        if (@available(iOS 16.1, *)) {
+            AVNavigationController *presentingViewController = (AVNavigationController *)self.presentingViewController;
+            [self dismissViewControllerAnimated:NO completion:nil];
+            [presentingViewController pushViewController:detailVC animated:NO];
+        } else {
+            __block AVNavigationController *presentingViewController = (AVNavigationController *)self.presentingViewController;
+            [self dismissViewControllerAnimated:NO completion:^{
+                [presentingViewController pushViewController:detailVC animated:YES];
+            }];
+        }
     }
 }
 

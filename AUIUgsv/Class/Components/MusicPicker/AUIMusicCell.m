@@ -191,6 +191,8 @@
     if (_model.delegate == self) {
         _model.delegate = nil;
     }
+    self.isShowCropView = NO;
+    
     _model = model;
     _model.delegate = self;
     [self updateUI];

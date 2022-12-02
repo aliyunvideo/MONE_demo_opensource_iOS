@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUIFoundation'
-  s.version          = '1.5.1'
+  s.version          = '1.6.0'
   s.summary          = 'A short description of AUIFoundation.'
 
 # This description is used to generate tags and improve search results.

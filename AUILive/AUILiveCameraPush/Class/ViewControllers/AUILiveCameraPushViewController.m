@@ -1105,6 +1105,17 @@ int64_t getCurrentTimeUs()
     }
 }
 
+- (void)publisherOnSelectAudioEffectsVoiceChangeMode:(NSInteger)mode {
+    if (self.livePusher) {
+        [self.livePusher setAudioEffectVoiceChangeMode:mode];
+    }
+}
+
+- (void)publisherOnSelectAudioEffectsReverbMode:(NSInteger)mode {
+    if (self.livePusher) {
+        [self.livePusher setAudioEffectReverbMode:mode];
+    }
+}
 
 - (void)publisherOnClickPreviewMirrorButton:(BOOL)isPreviewMorror {
     

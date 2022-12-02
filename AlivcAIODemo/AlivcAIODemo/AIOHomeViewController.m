@@ -251,10 +251,20 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
 #endif
 }
 
+- (void)openSolution:(NSString *)appScheme webUrl:(NSString *)webUrl {
+    NSURL *url = [NSURL URLWithString:appScheme];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    else {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:webUrl]];
+    }
+}
+
 - (void)openMore {
     
     AVCommonListItem *item1 = [AVCommonListItem new];
-    item1.title = AIOGetString(@"小视频");
+    item1.title = AIOGetString(@"短视频解决方案");
     item1.info = AIOGetString(@"适用于从生产到消费的短视频解决方案");
     item1.icon = AIOGetImage(@"ic_ugc");
     item1.tag = 0;
@@ -263,12 +273,12 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     };
     
     AVCommonListItem *item2 = [AVCommonListItem new];
-    item2.title = AIOGetString(@"小直播");
+    item2.title = AIOGetString(@"互动直播解决方案");
     item2.info = AIOGetString(@"适用于各种直播解决方案");
     item2.icon = AIOGetImage(@"ic_live");
     item2.tag = 1;
     item2.clickBlock = ^{
-        [AVAlertController show:@"敬请期待！"];
+        [self openSolution:@"auilive://" webUrl:@"https://alivc-demo-cms.alicdn.com/versionProduct/installPackage/AUI_interaction/installPackage-AUI.html"];
     };
     NSArray *list = @[item1, item2];
     

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>rp_startbtn_unselect</key>
+	<string>#004C61FF</string>
+	<key>rp_err_msg</key>
+	<string>#F53F3FFF</string>
+	<key>rp_jiangji_msg</key>
+	<string>#3BB346FF</string>
+	<key>rp_toast_bg</key>
+	<string>#000000BB</string>
+	<key>rp_startbtn_select</key>
+	<string>#00BCD4FF</string>
+</dict>
+</plist>

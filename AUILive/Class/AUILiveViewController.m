@@ -10,6 +10,7 @@
 #import "AUILiveCameraPushModule.h"
 #import "AUILiveRecordPushModule.h"
 #import "AUILivePlayModule.h"
+#import "AUILiveRtsPlayModule.h"
 #import "AUILiveLinkMicModule.h"
 #import "AUILivePKModule.h"
 
@@ -19,6 +20,7 @@
 
 @property (nonatomic, assign) NSInteger recordPushItemIndex;
 @property (nonatomic, assign) NSInteger playItemIndex;
+@property (nonatomic, assign) NSInteger rtsPlayItemIndex;
 @property (nonatomic, assign) NSInteger linkMicItemIndex;
 @property (nonatomic, assign) NSInteger pkItemIndex;
 
@@ -56,28 +58,39 @@
    } else {
       self.playItemIndex = 1;
    }
+    
+    AVCommonListItem *item4 = [AVCommonListItem new];
+    item4.title = AlivcLiveString(@"Rts Play");
+    item4.info = AlivcLiveString(@"The demonstration of the rts play");
+    item4.icon = AlivcLiveImage(@"zhibo_ic_laliu");
+    [list addObject:item4];
+    if (self.recordPushItemIndex != ITEMINDEX_PLACEHOLDER) {
+       self.rtsPlayItemIndex = 3;
+    } else {
+       self.rtsPlayItemIndex = 2;
+    }
    
    if ([AUILiveLinkMicModule checkCanOpen]) {
-       AVCommonListItem *item4 = [AVCommonListItem new];
-       item4.title = AlivcLiveString(@"Link Mic");
-       item4.info = AlivcLiveString(@"The demonstration of the link mic");
-       item4.icon = AlivcLiveImage(@"zhibo_ic_linkmic");
-       [list addObject:item4];
-       self.linkMicItemIndex = self.playItemIndex + 1;
+       AVCommonListItem *item5 = [AVCommonListItem new];
+       item5.title = AlivcLiveString(@"Link Mic");
+       item5.info = AlivcLiveString(@"The demonstration of the link mic");
+       item5.icon = AlivcLiveImage(@"zhibo_ic_linkmic");
+       [list addObject:item5];
+       self.linkMicItemIndex = self.rtsPlayItemIndex + 1;
    } else {
        self.linkMicItemIndex = ITEMINDEX_PLACEHOLDER;
    }
 
    if ([AUILivePKModule checkCanOpen]) {
-       AVCommonListItem *item5 = [AVCommonListItem new];
-       item5.title = AlivcLiveString(@"PK");
-       item5.info = AlivcLiveString(@"The demonstration of the PK");
-       item5.icon = AlivcLiveImage(@"zhibo_ic_pk");
-       [list addObject:item5];
+       AVCommonListItem *item6 = [AVCommonListItem new];
+       item6.title = AlivcLiveString(@"PK");
+       item6.info = AlivcLiveString(@"The demonstration of the PK");
+       item6.icon = AlivcLiveImage(@"zhibo_ic_pk");
+       [list addObject:item6];
        if (self.linkMicItemIndex != ITEMINDEX_PLACEHOLDER) {
            self.pkItemIndex = self.linkMicItemIndex + 1;
        } else {
-           self.pkItemIndex = self.playItemIndex + 1;
+           self.pkItemIndex = self.rtsPlayItemIndex + 1;
        }
    } else {
        self.pkItemIndex = ITEMINDEX_PLACEHOLDER;
@@ -105,6 +118,8 @@
         [self openRecordPush];
     } else if (indexPath.item == self.playItemIndex) {
         [self openPlay];
+    } else if (indexPath.item == self.rtsPlayItemIndex) {
+        [self openRtsPlay];
     } else if (indexPath.item == self.linkMicItemIndex) {
         [self openLinkMic];
     } else if (indexPath.item == self.pkItemIndex) {
@@ -124,6 +139,11 @@
 
 - (void)openPlay {
     AUILivePlayModule *module = [[AUILivePlayModule alloc] initWithSourceViewController:self];
+    [module open];
+}
+
+- (void)openRtsPlay {
+    AUILiveRtsPlayModule *module = [[AUILiveRtsPlayModule alloc] initWithSourceViewController:self];
     [module open];
 }
 

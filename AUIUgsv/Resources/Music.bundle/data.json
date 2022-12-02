@@ -1,7 +1,7 @@
 {
     "result": "true",
     "requestId": "1db4494a-cc41-423a-a208-4401c139c372",
-    "message": "",
+    "message": "⚠️本产品内置的音乐资源及下载地址，仅用于官方demo演示使用，请勿使用。如需使用请自身购买版权。",
     "code": "200",
     "data": {
         "musicList": [

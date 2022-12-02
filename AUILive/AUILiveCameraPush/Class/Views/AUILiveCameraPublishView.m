@@ -15,13 +15,14 @@
 #import "AUILiveBgMusicSettingView.h"
 #import "AUILiveAnswerGameView.h"
 #import "AlivcLivePushViewsProtocol.h"
+#import "AUILiveSegmentPanel.h"
 
 #import "AUILiveSDKHeader.h"
 
 #define topHeight (44 + AVSafeTop)
 #define viewWidth AlivcSizeWidth(80)
 #define viewHeight viewWidth/4*3
-#define topViewButtonSize AlivcSizeWidth(55)
+#define topViewButtonSize AlivcSizeWidth(50)
 
 static const int maxDynamicWatermarkCount = 3;
 
@@ -35,6 +36,7 @@ static const int maxDynamicWatermarkCount = 3;
 
 @property (nonatomic, strong) UIScrollView *topView;
 @property (nonatomic, strong) UIButton *backButton;
+@property (nonatomic, strong) UIButton *audioEffectsButton;
 @property (nonatomic, strong) UIButton *snapshotButton;
 @property (nonatomic, strong) UIButton *switchButton;
 @property (nonatomic, strong) UIButton *flashButton;
@@ -60,6 +62,7 @@ static const int maxDynamicWatermarkCount = 3;
 @property (nonatomic, strong) AUILiveBgMusicSettingView *musicSettingView;
 @property (nonatomic, strong) AUILiveAnswerGameView *answerGameView;
 
+@property (nonatomic, strong) AUILiveSegmentPanel *audioEffectsPanel;
 
 @property (nonatomic, strong) AUILiveDebugChartView *debugChartView;
 @property (nonatomic, strong) AUILiveDebugTextView *debugTextView;
@@ -149,7 +152,7 @@ static const int maxDynamicWatermarkCount = 3;
     if (_config.orientation == AlivcLivePushOrientationLandscapeLeft || _config.orientation == AlivcLivePushOrientationLandscapeRight ) {
         self.topView.frame = CGRectMake(self.av_width - 80, 50, 80, self.av_height-100);
     }else{
-        self.topView.frame = CGRectMake(self.av_width - 80, self.av_height - 600, 80, 400);
+        self.topView.frame = CGRectMake(self.av_width - 80, self.av_height - 600, 80, 420);
     }
     self.topView.backgroundColor = [UIColor clearColor];
     [self addSubview: self.topView];
@@ -160,43 +163,60 @@ static const int maxDynamicWatermarkCount = 3;
                                           action:@selector(backButtonAction:)];
     [self addSubview: self.backButton];
     
-    self.snapshotButton = [self setupButtonWithFrame:CGRectMake(0, 320, topViewButtonSize, topViewButtonSize) title: AUILiveCameraPushString(@"截图")
-                                       normalImage:AUILiveCameraPushImage(@"alivc_capture")
-                                       selectImage:nil
-                                            action:@selector(snapshotButtonAction:)];
-    [self.topView addSubview:self.snapshotButton];
+    self.audioEffectsButton = [self setupButtonWithFrame:CGRectMake(0, 0, topViewButtonSize, topViewButtonSize)
+                                                   title:AUILiveCameraPushString(@"音效")
+                                             normalImage:[AUILiveCameraPushImage(@"alivc_audio_effects") imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                                             selectImage:[AUILiveCameraPushImage(@"alivc_audio_effects") imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+                                                  action:@selector(audioEffectsButtonAction:)
+                                             customImage:YES];
+    [self.topView addSubview:self.audioEffectsButton];
     
-    self.switchButton = [self setupButtonWithFrame:CGRectMake(0, 240, topViewButtonSize, topViewButtonSize) title: AUILiveCameraPushString(@"摄像头")
-                                       normalImage:AUILiveCameraPushImage(@"alivc_camera_switch")
-                                       selectImage:AUILiveCameraPushImage(@"alivc_camera_switch")
-                                            action:@selector(switchButtonAction:)];
-    [self.topView addSubview:self.switchButton];
+    self.beautySettingButton = [self setupButtonWithFrame:CGRectMake(0, 70, topViewButtonSize, topViewButtonSize)
+                                                    title: AUILiveCameraPushString(@"美颜")
+                                              normalImage:AUILiveCameraPushImage(@"alivc_beauty")
+                                              selectImage:nil
+                                                   action:@selector(beautySettingButtonAction:)
+                                              customImage:NO];
+    //[self.beautySettingButton setEnabled:self.config.beautyOn];
+    [self.topView addSubview: self.beautySettingButton];
     
-    self.flashButton = [self setupButtonWithFrame:CGRectMake(0, 160, topViewButtonSize, topViewButtonSize) title: AUILiveCameraPushString(@"闪光灯")
-                                                   normalImage:AUILiveCameraPushImage(@"alivc_flash")
-                                                   selectImage:AUILiveCameraPushImage(@"alivc_flash_selected")
-                                                   action:@selector(flashButtonAction:)];
-    [self.flashButton setSelected:self.config.flash];
-    [self.flashButton setEnabled:self.config.cameraType==AlivcLivePushCameraTypeFront?NO:YES];
-    [self.topView addSubview:self.flashButton];
-    
-    self.musicButton = [self setupButtonWithFrame:CGRectMake(0, 80, topViewButtonSize, topViewButtonSize) title: AUILiveCameraPushString(@"背景音乐")
-                                     normalImage:AUILiveCameraPushImage(@"alivc_back_music")
-                                     selectImage:nil
-                                          action:@selector(musicButtonAction:)];
+    self.musicButton = [self setupButtonWithFrame:CGRectMake(0, 140, topViewButtonSize, topViewButtonSize)
+                                            title: AUILiveCameraPushString(@"背景音乐")
+                                      normalImage:AUILiveCameraPushImage(@"alivc_back_music")
+                                      selectImage:nil
+                                           action:@selector(musicButtonAction:)
+                                      customImage:NO];
     [self.topView addSubview: self.musicButton];
-    
     if (self.config.videoOnly) {
         [self.musicButton setHidden:YES];
     }
     
-    self.beautySettingButton = [self setupButtonWithFrame:CGRectMake(0, 0, topViewButtonSize, topViewButtonSize) title: AUILiveCameraPushString(@"美颜")
-                                              normalImage:AUILiveCameraPushImage(@"alivc_beauty")
-                                              selectImage:nil
-                                                   action:@selector(beautySettingButtonAction:)];
-    //[self.beautySettingButton setEnabled:self.config.beautyOn];
-    [self.topView addSubview: self.beautySettingButton];
-
+    self.flashButton = [self setupButtonWithFrame:CGRectMake(0, 210, topViewButtonSize, topViewButtonSize)
+                                            title: AUILiveCameraPushString(@"闪光灯")
+                                      normalImage:AUILiveCameraPushImage(@"alivc_flash")
+                                      selectImage:AUILiveCameraPushImage(@"alivc_flash_selected")
+                                           action:@selector(flashButtonAction:)
+                                      customImage:NO];
+    [self.flashButton setSelected:self.config.flash];
+    [self.flashButton setEnabled:self.config.cameraType==AlivcLivePushCameraTypeFront?NO:YES];
+    [self.topView addSubview:self.flashButton];
+    
+    self.switchButton = [self setupButtonWithFrame:CGRectMake(0, 280, topViewButtonSize, topViewButtonSize)
+                                             title: AUILiveCameraPushString(@"摄像头")
+                                       normalImage:AUILiveCameraPushImage(@"alivc_camera_switch")
+                                       selectImage:AUILiveCameraPushImage(@"alivc_camera_switch")
+                                            action:@selector(switchButtonAction:)
+                                       customImage:NO];
+    [self.topView addSubview:self.switchButton];
+    
+    self.snapshotButton = [self setupButtonWithFrame:CGRectMake(0, 350, topViewButtonSize, topViewButtonSize)
+                                               title: AUILiveCameraPushString(@"截图")
+                                         normalImage:AUILiveCameraPushImage(@"alivc_capture")
+                                         selectImage:nil
+                                              action:@selector(snapshotButtonAction:)
+                                         customImage:NO];
+    [self.topView addSubview:self.snapshotButton];
+    
     self.topView.showsVerticalScrollIndicator = NO;
     [self.topView setContentSize:CGSizeMake(topViewButtonSize, topViewButtonSize * 7)];
     //[self setupMusicSettingView];
@@ -341,6 +361,50 @@ static const int maxDynamicWatermarkCount = 3;
     [self addSubview:self.musicSettingView];
 }
 
+- (void)setupAudioEffectsPanel {
+    self.audioEffectsPanel = [[AUILiveSegmentPanel alloc] initWithView:self items:@[@"变声", @"混响"] animation:YES];
+    self.audioEffectsPanel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.9];
+    self.audioEffectsPanel.contentImagePath = [[[NSBundle mainBundle] pathForResource:@"AUILiveAudioEffects" ofType:@"bundle"] stringByAppendingFormat:@"/Theme/DarkMode"];
+    self.audioEffectsPanel.contentTitlePath = [[[NSBundle mainBundle] pathForResource:@"AUILiveAudioEffects" ofType:@"bundle"] stringByAppendingFormat:@"/Localization"];
+    
+    self.audioEffectsPanel.contents = @[
+        @[
+            @{@"image":@"ic_panel_reset", @"title":@"无"},
+            @{@"image":@"ic_audioeffect_uncle", @"title":@"老人"},
+            @{@"image":@"ic_audioeffect_minions", @"title":@"男孩"},
+            @{@"image":@"ic_audioeffect_lolita", @"title":@"女孩"},
+            @{@"image":@"ic_audioeffect_robot", @"title":@"机器人"},
+            @{@"image":@"ic_audioeffect_bigdevil", @"title":@"大魔王"},
+            @{@"image":@"ic_audioeffect_ktv", @"title":@"KTV"},
+            @{@"image":@"ic_audioeffect_reverb", @"title":@"回声"},
+        ],
+        @[
+            @{@"image":@"", @"title":@"无"},
+            @{@"image":@"", @"title":@"人声I"},
+            @{@"image":@"", @"title":@"人声II"},
+            @{@"image":@"", @"title":@"澡堂"},
+            @{@"image":@"", @"title":@"明亮小房间"},
+            @{@"image":@"", @"title":@"黑暗小房间"},
+            @{@"image":@"", @"title":@"中等房间"},
+            @{@"image":@"", @"title":@"大房间"},
+            @{@"image":@"", @"title":@"教堂走廊"},
+        ],
+    ];
+    
+    __weak typeof(self) weakSelf = self;
+    self.audioEffectsPanel.selectContent = ^(NSInteger itemIndex, NSInteger contentIndex) {
+        __strong typeof(self) strongSelf = weakSelf;
+        if (itemIndex == 0) {  // 变声
+            if ([strongSelf.delegate respondsToSelector:@selector(publisherOnSelectAudioEffectsVoiceChangeMode:)]) {
+                [strongSelf.delegate publisherOnSelectAudioEffectsVoiceChangeMode:contentIndex];
+            }
+        } else { // 混响
+            if ([strongSelf.delegate respondsToSelector:@selector(publisherOnSelectAudioEffectsReverbMode:)]) {
+                [strongSelf.delegate publisherOnSelectAudioEffectsReverbMode:contentIndex];
+            }
+        }
+    };
+}
 
 - (void)setupAnswerGameView {
     
@@ -477,7 +541,7 @@ static const int maxDynamicWatermarkCount = 3;
     return button;
 }
 
-- (UIButton *)setupButtonWithFrame:(CGRect)rect title:(NSString *)title normalImage:(UIImage *)normal selectImage:(UIImage *)select action:(SEL)action {
+- (UIButton *)setupButtonWithFrame:(CGRect)rect title:(NSString *)title normalImage:(UIImage *)normal selectImage:(UIImage *)select action:(SEL)action customImage:(BOOL)customImage {
     
     UIButton *button = [UIButton buttonWithType:(UIButtonTypeCustom)];
     button.frame = rect;
@@ -491,6 +555,14 @@ static const int maxDynamicWatermarkCount = 3;
     button.titleLabel.textAlignment = NSTextAlignmentCenter;
     [button setTitleEdgeInsets:UIEdgeInsetsMake(40, -button.imageView.av_width+10, 0, 15)];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    if (customImage) {
+        button.imageView.tintColor = [UIColor colorWithRed:38/255.0 green:38/255.0 blue:38/255.0 alpha:1];
+        button.imageView.backgroundColor = [UIColor colorWithRed:218/255.0 green:218/255.0 blue:218/255.0 alpha:1];
+        button.imageView.layer.cornerRadius = 16;
+        button.imageView.layer.masksToBounds = YES;
+    }
+    
     return button;
 }
 
@@ -544,6 +616,8 @@ static const int maxDynamicWatermarkCount = 3;
     }
     [self.musicSettingView show:self.config];
     self.isMusicSettingShow = YES;
+    
+    [self hideAudioEffects];
 }
 
 
@@ -554,6 +628,8 @@ static const int maxDynamicWatermarkCount = 3;
     }
     [self addSubview:self.answerGameView];
     self.isAnswerGameViewShow = YES;
+    
+    [self hideAudioEffects];
 }
 
 
@@ -561,6 +637,8 @@ static const int maxDynamicWatermarkCount = 3;
     if (self.delegate) {
         [self.delegate publisherOnClickedBeautyButton:YES];
     }
+    
+    [self hideAudioEffects];
 }
 
 - (void)moreSettingButtonAction:(UIButton *)sender {
@@ -568,6 +646,8 @@ static const int maxDynamicWatermarkCount = 3;
         [self setupMoreSettingView];
     }
     [self.moreSettingView show];
+    
+    [self hideAudioEffects];
 }
 
 - (void)publisherDataMonitorView{
@@ -597,6 +677,26 @@ static const int maxDynamicWatermarkCount = 3;
     }
     
     [self.flashButton setEnabled:!self.flashButton.enabled];
+    
+    [self hideAudioEffects];
+}
+
+- (void)audioEffectsButtonAction:(UIButton *)sender {
+    if (!self.audioEffectsPanel) {
+        [self setupAudioEffectsPanel];
+    }
+    
+    if ([self.audioEffectsPanel isShow]) {
+        [self.audioEffectsPanel hide];
+    } else {
+        [self.audioEffectsPanel show];
+    }
+}
+
+- (void)hideAudioEffects {
+    if ([self.audioEffectsPanel isShow]) {
+        [self.audioEffectsPanel hide];
+    }
 }
 
 - (void)snapshotButtonAction:(UIButton *)sender {
@@ -604,6 +704,8 @@ static const int maxDynamicWatermarkCount = 3;
     if (self.delegate) {
         [self.delegate publisherOnClickedSnapshotButton];
     }
+    
+    [self hideAudioEffects];
 }
 
 
@@ -613,6 +715,8 @@ static const int maxDynamicWatermarkCount = 3;
     if (self.delegate) {
         [self.delegate publisherOnClickedFlashButton:sender.selected button:sender];
     }
+    
+    [self hideAudioEffects];
 }
 
 
@@ -794,6 +898,7 @@ static const int maxDynamicWatermarkCount = 3;
         }
     }
     
+    [self hideAudioEffects];
 }
 
 static CGFloat lastPinchDistance = 0;

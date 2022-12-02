@@ -12,6 +12,8 @@
 	<string>#F53F3FFF</string>
 	<key>ir_button_unenable</key>
 	<string>#006E87FF</string>
+	<key>ir_segment_selected</key>
+	<string>#00BCDEFF</string>
 	<key>ir_toaste_bg</key>
 	<string>#FFFFFF66</string>
 </dict>

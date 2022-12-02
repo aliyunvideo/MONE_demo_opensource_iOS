@@ -15,6 +15,12 @@
 #import "AUICaptionFontModel.h"
 
 
+// ⚠️警告
+// ⚠️本产品内置的字体资源，需要使用请自身确认版权问题，如不可商用或无版权，请勿使用
+// ⚠️本产品内置的音乐资源及下载地址，仅用于官方demo演示使用，请勿使用。如需使用请自身购买版权
+// ⚠️本产品内置的所有素材为官方demo演示使用，无法达到商业化使用程度，如有问题，请联系官方。
+
+
 @interface AUIResourceManager ()
 @property (nonatomic, strong) AFHTTPSessionManager *sessionManager;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, NSString *> *musicFileRecords; // musicId: fileName
@@ -102,7 +108,7 @@
   
 }
 
-
+// ⚠️本产品内置的字体资源，需要使用请自身确认版权问题，如不可商用或无版权，请勿使用
 - (void)fetchFontFlowerDataWithCallBack:(ResourceCallBack)callBack
 {
     NSString *base_path =  [[NSBundle mainBundle] pathForResource:@"FlowerFont.bundle" ofType:nil];
@@ -193,6 +199,7 @@ static void s_fetchData(NSString *bundleName, Class modelClass, ResourceCallBack
     s_fetchData(@"CaptionStyle", AUICaptionStyleTempleteModel.class, callBack);
 }
 
+// ⚠️本产品内置的字体资源，需要使用请自身确认版权问题，如不可商用或无版权，请勿使用
 - (void)fetchCaptionFontWithCallback:(ResourceCallBack)callBack
 {
     
@@ -220,6 +227,7 @@ static void s_fetchData(NSString *bundleName, Class modelClass, ResourceCallBack
 }
 
 // MARK: - Music
+// ⚠️本产品内置的音乐资源及下载地址，仅用于官方demo演示使用，请勿使用。如需使用请自身购买版权
 - (void)fetchMusicDataWithCallback:(ResourceCallBack)callBack {
     NSString *dataPath = [NSBundle.mainBundle pathForResource:@"Music" ofType:@"bundle"];
     dataPath = [dataPath stringByAppendingPathComponent:@"data.json"];

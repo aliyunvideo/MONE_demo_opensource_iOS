@@ -80,6 +80,12 @@ typedef NS_ENUM(NSInteger, AQUFeatureID) {
  */
 - (void)selectTab:(AQUFeatureID)featureID;
 
+/**
+ * 是否隐藏/展示功能项（仅可操作当前QueenSDK版本支持的功能项）
+ * @param featureID 功能ID
+ */
+- (void)setTabHidden:(BOOL)hidden withTabID:(AQUFeatureID)featureID;
+
 @end
 
 NS_ASSUME_NONNULL_END
