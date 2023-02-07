@@ -6,7 +6,6 @@
 //
 
 #import "AlivcPlayerDemoConfig.h"
-#import <AliyunPlayer/AliyunPlayer.h>
 
 #define AlivcPlayerFirstLaunchKey @"AlivcPlayerFirstLaunchKey"
 #define AlivcPlayerFirstLaunch_AUIVideoFlow_speedTipKey @"AlivcPlayerFirstLaunch_AUIVideoFlow_speedTipKey"

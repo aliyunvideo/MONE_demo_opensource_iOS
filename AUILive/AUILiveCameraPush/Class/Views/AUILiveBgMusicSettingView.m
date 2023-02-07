@@ -122,6 +122,7 @@ typedef NS_ENUM(NSInteger, AUILiveBgMusicSettingCellSectionType) {
 - (void)pressCancel {
     [self forceCloseEarBack];
     [self forceCloseDenoise];
+    [self forceIntelligentDenoise];
     [self forceCloseMusicPlay];
     [self forceCloseMuted];
     [self forceOpenLoop];
@@ -134,8 +135,8 @@ typedef NS_ENUM(NSInteger, AUILiveBgMusicSettingCellSectionType) {
 
 - (void)forceCloseEarBack {
     if (self.manager.musicEarBack) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(musicOnClickPlayButton:musicPath:)]) {
-            [self.delegate musicOnClickPlayButton:NO musicPath:@""];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(musicOnClickEarBackButton:)]) {
+            [self.delegate musicOnClickEarBackButton:NO];
         }
         self.manager.musicEarBack = NO;
     }
@@ -143,17 +144,26 @@ typedef NS_ENUM(NSInteger, AUILiveBgMusicSettingCellSectionType) {
 
 - (void)forceCloseDenoise {
     if (self.manager.musicDenoise) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(musicOnClickEarBackButton:)]) {
-            [self.delegate musicOnClickEarBackButton:NO];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(musicOnClickDenoiseButton:)]) {
+            [self.delegate musicOnClickDenoiseButton:NO];
         }
         self.manager.musicDenoise = NO;
     }
 }
 
+- (void)forceIntelligentDenoise {
+    if (self.manager.musicIntelligentDenoise) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(musicOnClickIntelligentDenoiseButton:)]) {
+            [self.delegate musicOnClickIntelligentDenoiseButton:NO];
+        }
+        self.manager.musicIntelligentDenoise = NO;
+    }
+}
+
 - (void)forceCloseMusicPlay {
     if (self.manager.musicPlay) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(musicOnClickDenoiseButton:)]) {
-            [self.delegate musicOnClickDenoiseButton:NO];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(musicOnClickPlayButton:musicPath:)]) {
+            [self.delegate musicOnClickPlayButton:NO musicPath:@""];
         }
         self.manager.musicPlay = NO;
     }
@@ -231,8 +241,21 @@ typedef NS_ENUM(NSInteger, AUILiveBgMusicSettingCellSectionType) {
             strongSelf.manager.musicDenoise = open;
         }
     };
+    
+    AlivcLiveParamModel *intelligentDenoiseModel = [[AlivcLiveParamModel alloc] init];
+    intelligentDenoiseModel.title = AUILiveCameraPushString(@"智能降噪");
+    intelligentDenoiseModel.defaultValue = NO;
+    intelligentDenoiseModel.defaultValueAppose = 0;
+    intelligentDenoiseModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
+    intelligentDenoiseModel.switchBlock = ^(int index, BOOL open) {
+        __strong typeof(self) strongSelf = weakSelf;
+        if (strongSelf.delegate && [strongSelf.delegate respondsToSelector:@selector(musicOnClickIntelligentDenoiseButton:)]) {
+            [strongSelf.delegate musicOnClickIntelligentDenoiseButton:open];
+            strongSelf.manager.musicIntelligentDenoise = open;
+        }
+    };
 
-    return @[blankSegmentModel, earBackModel, denoiseModel];
+    return @[blankSegmentModel, earBackModel, denoiseModel, intelligentDenoiseModel];
 }
 
 - (void)updateFuctionSettingDisplay {

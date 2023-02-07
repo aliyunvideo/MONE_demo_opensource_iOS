@@ -134,7 +134,7 @@
     if (!_inputField) {
         _inputField = [[UITextField alloc] init];
         _inputField.returnKeyType = UIReturnKeyDone;
-        _inputField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"" attributes:@{
+        _inputField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@" " attributes:@{
             NSForegroundColorAttributeName: AUIFoundationColor(@"text_ultraweak"),
             NSFontAttributeName: AVGetRegularFont(14)
         }];

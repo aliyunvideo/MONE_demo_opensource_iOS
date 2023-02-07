@@ -107,7 +107,9 @@
     NSString *imageFormat = [NSString stringWithFormat:@"mediaType == %ld", PHAssetMediaTypeImage];
     NSString *videoFormat = [NSString stringWithFormat:@"mediaType == %ld", PHAssetMediaTypeVideo];
     if (!CMTimeRangeEqual(range, kCMTimeRangeZero)) {
-        NSString *rangeForamt = [NSString stringWithFormat:@" && duration >= %f && duration <= %f", CMTimeGetSeconds(range.start), CMTimeGetSeconds(CMTimeRangeGetEnd(range))];
+        NSTimeInterval start = MAX(CMTimeGetSeconds(range.start), 0.0);
+        NSTimeInterval end = MIN(CMTimeGetSeconds(CMTimeRangeGetEnd(range)), 60 * 60 * 100);
+        NSString *rangeForamt = [NSString stringWithFormat:@" && duration >= %f && duration <= %f", start, end];
         videoFormat = [videoFormat stringByAppendingString:rangeForamt];
     }
     if (image && !video) {

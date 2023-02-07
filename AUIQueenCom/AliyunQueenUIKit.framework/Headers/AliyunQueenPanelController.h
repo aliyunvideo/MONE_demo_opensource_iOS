@@ -21,6 +21,12 @@ typedef NS_ENUM(NSInteger, AQUFeatureID) {
     AQUFeatureIDFaceEffect
 };
 
+typedef NS_ENUM(NSInteger, AQUPanelSkinStyle) {
+    AQUPanelSkinStyleTransparent = 0,
+    AQUPanelSkinStyleDark,
+    AQUPanelSkinStyleLight
+};
+
 @class QueenEngine;
 
 @interface AliyunQueenPanelController : NSObject
@@ -34,6 +40,11 @@ typedef NS_ENUM(NSInteger, AQUFeatureID) {
  * 面板是否展示
  */
 @property (nonatomic, assign, readonly) BOOL panelOnShown;
+
+/**
+ * 面板样式
+ */
+@property (nonatomic, assign) AQUPanelSkinStyle panelSkinStyle;
 
 /**
  * 初始化面板

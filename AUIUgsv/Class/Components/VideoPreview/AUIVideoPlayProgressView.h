@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) UIButton *fullScreenBtn;
 
 @property (nonatomic, weak, nullable) id<AUIVideoPlayProtocol> player;
-@property (nonatomic, copy) void(^onFullScreenBtnClicked)(void);
+@property (nonatomic, copy) void(^onFullScreenBtnClicked)(BOOL fullScreen);
 
 @end
 

@@ -82,7 +82,7 @@
     self.playTimeView = [[AUIVideoPlayTimeView alloc] initWithFrame:frame];
     [self.contentView addSubview:self.playTimeView];
     __weak typeof(self) weakSelf = self;
-    self.playTimeView.onEnterFullScreenClicked = ^{
+    self.playTimeView.onFullScreenBtnClicked = ^(BOOL fullScreen){
         [weakSelf.videoPreview enterFullScreen:weakSelf.view];
     };
     self.playTimeView.player = self.player;

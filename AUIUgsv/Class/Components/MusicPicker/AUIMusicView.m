@@ -22,6 +22,7 @@ static NSString *kMusicCellIdentifier = @"MusicCellIdentifier";
 @property (nonatomic, strong) NSArray<AUIMusicStateModel *> *dataList;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) AUIAssetPlay *selfPlayer;
+@property (nonatomic, assign) BOOL showCropView;
 @end
 
 @implementation AUIMusicView
@@ -29,10 +30,15 @@ static NSString *kMusicCellIdentifier = @"MusicCellIdentifier";
 @synthesize player = _player;
 
 - (instancetype)initWithLimitDuration:(NSTimeInterval)limitDuration {
+    return [self initWithLimitDuration:limitDuration withShowCropView:YES];
+}
+
+- (instancetype)initWithLimitDuration:(NSTimeInterval)limitDuration withShowCropView:(BOOL)showCropView {
     self = [super init];
     if (self) {
         [self setup];
         _limitDuration = limitDuration;
+        _showCropView = showCropView;
     }
     return self;
 }
@@ -167,7 +173,16 @@ static NSString *kMusicCellIdentifier = @"MusicCellIdentifier";
     
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [weakSelf updateTableSelection];
+        
+        if (!weakSelf.showCropView && weakSelf.currentSelected) {
+            [weakSelf.player enablePlayInRange:weakSelf.currentSelected.beginTime
+                                 rangeDuration:weakSelf.currentSelected.duration];
+            [weakSelf.player seek:weakSelf.currentSelected.beginTime];
+            [weakSelf.player play];
+        }
+        else {
+            [weakSelf updateTableSelection];
+        }
     });
 }
 
@@ -209,7 +224,7 @@ static NSString *kMusicCellIdentifier = @"MusicCellIdentifier";
     if (indexPath.row == _currentSelectedIndex) {
         musicCell.player = self.player;
         musicCell.selectedModel = self.currentSelected;
-        musicCell.isShowCropView = YES;
+        musicCell.isShowCropView = self.showCropView;
     } else {
         musicCell.player = nil;
         musicCell.selectedModel = nil;
@@ -219,7 +234,7 @@ static NSString *kMusicCellIdentifier = @"MusicCellIdentifier";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == _currentSelectedIndex) {
+    if (indexPath.row == _currentSelectedIndex && self.showCropView) {
         return 140.0;
     }
     return 70.0;

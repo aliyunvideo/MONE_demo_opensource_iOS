@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, AUIPhotoAssetType) {
 @property (nonatomic, assign) AUIPhotoAssetType type;
 @property (nonatomic, assign) NSTimeInterval assetDuration;
 @property (nonatomic, strong) UIImage *thumbnailImage;
+@property (nonatomic, assign, class) NSTimeInterval photoDefaultDuration;
 
 + (instancetype)modelWithAsset:(PHAsset *)asset type:(AUIPhotoAssetType)type;
 

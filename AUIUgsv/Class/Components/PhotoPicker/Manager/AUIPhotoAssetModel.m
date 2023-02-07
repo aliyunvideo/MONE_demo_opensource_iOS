@@ -14,8 +14,20 @@
     AUIPhotoAssetModel *model = [[AUIPhotoAssetModel alloc] init];
     model.asset = asset;
     model.type = type;
-    model.assetDuration = type == AUIPhotoAssetTypeVideo ? asset.duration : 3.0;
+    model.assetDuration = type == AUIPhotoAssetTypeVideo ? asset.duration : self.photoDefaultDuration;
     return model;
+}
+
+static NSTimeInterval _photoDefaultDuration = 3.0;
++ (NSTimeInterval)photoDefaultDuration {
+    return _photoDefaultDuration;
+}
+
++ (void)setPhotoDefaultDuration:(NSTimeInterval)photoDefaultDuration {
+    if (photoDefaultDuration < 0.1) {
+        return;
+    }
+    _photoDefaultDuration = photoDefaultDuration;
 }
 
 @end

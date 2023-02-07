@@ -21,10 +21,11 @@
 + (AUIMusicPicker *)present:(UIView *)onView
               selectedModel:(AUIMusicSelectedModel * _Nullable)selectedModel
               limitDuration:(NSTimeInterval)limitDuration
+               showCropView:(BOOL)showCropView
            onSelectedChange:(OnMusicSelectedChanged _Nullable)onSelectedChanged
               onShowChanged:(OnMusicPickerShowChanged _Nullable)onShowChanged {
     CGRect frame = CGRectMake(0, 0, onView.av_width, self.panelHeight);
-    AUIMusicPicker *picker = [[AUIMusicPicker alloc] initWithFrame:frame limitDuration:limitDuration];
+    AUIMusicPicker *picker = [[AUIMusicPicker alloc] initWithFrame:frame limitDuration:limitDuration withShowCropView:showCropView];
     picker.currentSelected = selectedModel;
     picker.onSelectedChanged = onSelectedChanged;
     picker.onShowChanged = ^(AVBaseControllPanel * _Nonnull sender) {
@@ -41,13 +42,13 @@
 }
 
 - (instancetype) initWithFrame:(CGRect)frame {
-    return [self initWithFrame:frame limitDuration:15.0];
+    return [self initWithFrame:frame limitDuration:15.0 withShowCropView:YES];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame limitDuration:(NSTimeInterval)limitDuration {
+- (instancetype)initWithFrame:(CGRect)frame limitDuration:(NSTimeInterval)limitDuration  withShowCropView:(BOOL)showCropView {
     self = [super initWithFrame:frame];
     if (self) {
-        [self setupWithLimitDuration:limitDuration];
+        [self setupWithLimitDuration:limitDuration withShowCropView:showCropView];
     }
     return self;
 }
@@ -58,7 +59,7 @@
     }
 }
 
-- (void) setupWithLimitDuration:(NSTimeInterval)limitDuration {
+- (void) setupWithLimitDuration:(NSTimeInterval)limitDuration withShowCropView:(BOOL)showCropView {
     // clear
     [_musicView removeFromSuperview];
     [_clearBtn removeFromSuperview];
@@ -86,7 +87,7 @@
         make.centerY.equalTo(self.headerView);
     }];
     
-    _musicView = [[AUIMusicView alloc] initWithLimitDuration:limitDuration];
+    _musicView = [[AUIMusicView alloc] initWithLimitDuration:limitDuration withShowCropView:showCropView];
     _musicView.onSelectedChanged = ^(AUIMusicSelectedModel *model) {
         weakSelf.clearBtn.disabled = (model == nil);
         if (weakSelf.onSelectedChanged) {

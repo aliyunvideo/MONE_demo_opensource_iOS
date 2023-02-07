@@ -14,87 +14,73 @@
 #import "AUILiveLinkMicModule.h"
 #import "AUILivePKModule.h"
 
-#define ITEMINDEX_PLACEHOLDER -1
+typedef NS_ENUM(NSUInteger, AUILiveModuleIndex) {
+    AUILiveModuleIndexCameraPush = 1,
+    AUILiveModuleIndexRecordPush,
+    AUILiveModuleIndexPlayPull,
+    AUILiveModuleIndexPlayRts,
+    AUILiveModuleIndexLinkMic,
+    AUILiveModuleIndexLinkPK,
+};
 
 @interface AUILiveViewController ()
-
-@property (nonatomic, assign) NSInteger recordPushItemIndex;
-@property (nonatomic, assign) NSInteger playItemIndex;
-@property (nonatomic, assign) NSInteger rtsPlayItemIndex;
-@property (nonatomic, assign) NSInteger linkMicItemIndex;
-@property (nonatomic, assign) NSInteger pkItemIndex;
 
 @end
 
 @implementation AUILiveViewController
 
 - (instancetype)init {
-   NSMutableArray *list = [NSMutableArray array];
+    NSMutableArray *list = [NSMutableArray array];
    
-   AVCommonListItem *item1 = [AVCommonListItem new];
-   item1.title = AlivcLiveString(@"Camera Push");
-   item1.info = AlivcLiveString(@"The demonstration of the camera push");
-   item1.icon = AlivcLiveImage(@"zhibo_ic_tuiliu");
-   [list addObject:item1];
+    AVCommonListItem *item1 = [AVCommonListItem new];
+    item1.title = AlivcLiveString(@"Camera Push");
+    item1.info = AlivcLiveString(@"The demonstration of the camera push");
+    item1.icon = AlivcLiveImage(@"zhibo_ic_tuiliu");
+    item1.tag = AUILiveModuleIndexCameraPush;
+    [list addObject:item1];
    
-   if ([AUILiveRecordPushModule checkCanOpen]) {
-       AVCommonListItem *item2 = [AVCommonListItem new];
-       item2.title = AlivcLiveString(@"Record Push");
-       item2.info = AlivcLiveString(@"The demonstration of the record push");
-       item2.icon = AlivcLiveImage(@"zhibo_ic_luping");
-       [list addObject:item2];
-       self.recordPushItemIndex = 1;
-   } else {
-       self.recordPushItemIndex = ITEMINDEX_PLACEHOLDER;
-   }
-
-   AVCommonListItem *item3 = [AVCommonListItem new];
-   item3.title = AlivcLiveString(@"Pull Play");
-   item3.info = AlivcLiveString(@"The demonstration of the pull play");
-   item3.icon = AlivcLiveImage(@"zhibo_ic_laliu");
-   [list addObject:item3];
-   if (self.recordPushItemIndex != ITEMINDEX_PLACEHOLDER) {
-      self.playItemIndex = 2;
-   } else {
-      self.playItemIndex = 1;
-   }
-    
-    AVCommonListItem *item4 = [AVCommonListItem new];
-    item4.title = AlivcLiveString(@"Rts Play");
-    item4.info = AlivcLiveString(@"The demonstration of the rts play");
-    item4.icon = AlivcLiveImage(@"zhibo_ic_laliu");
-    [list addObject:item4];
-    if (self.recordPushItemIndex != ITEMINDEX_PLACEHOLDER) {
-       self.rtsPlayItemIndex = 3;
-    } else {
-       self.rtsPlayItemIndex = 2;
+    if ([AUILiveRecordPushModule checkCanOpen]) {
+        AVCommonListItem *item2 = [AVCommonListItem new];
+        item2.title = AlivcLiveString(@"Record Push");
+        item2.info = AlivcLiveString(@"The demonstration of the record push");
+        item2.icon = AlivcLiveImage(@"zhibo_ic_luping");
+        item2.tag = AUILiveModuleIndexRecordPush;
+        [list addObject:item2];
     }
-   
-   if ([AUILiveLinkMicModule checkCanOpen]) {
-       AVCommonListItem *item5 = [AVCommonListItem new];
-       item5.title = AlivcLiveString(@"Link Mic");
-       item5.info = AlivcLiveString(@"The demonstration of the link mic");
-       item5.icon = AlivcLiveImage(@"zhibo_ic_linkmic");
-       [list addObject:item5];
-       self.linkMicItemIndex = self.rtsPlayItemIndex + 1;
-   } else {
-       self.linkMicItemIndex = ITEMINDEX_PLACEHOLDER;
-   }
 
-   if ([AUILivePKModule checkCanOpen]) {
-       AVCommonListItem *item6 = [AVCommonListItem new];
-       item6.title = AlivcLiveString(@"PK");
-       item6.info = AlivcLiveString(@"The demonstration of the PK");
-       item6.icon = AlivcLiveImage(@"zhibo_ic_pk");
-       [list addObject:item6];
-       if (self.linkMicItemIndex != ITEMINDEX_PLACEHOLDER) {
-           self.pkItemIndex = self.linkMicItemIndex + 1;
-       } else {
-           self.pkItemIndex = self.rtsPlayItemIndex + 1;
-       }
-   } else {
-       self.pkItemIndex = ITEMINDEX_PLACEHOLDER;
-   }
+    AVCommonListItem *item3 = [AVCommonListItem new];
+    item3.title = AlivcLiveString(@"Pull Play");
+    item3.info = AlivcLiveString(@"The demonstration of the pull play");
+    item3.icon = AlivcLiveImage(@"zhibo_ic_laliu");
+    item3.tag = AUILiveModuleIndexPlayPull;
+    [list addObject:item3];
+
+    if ([AUILiveRtsPlayModule checkCanOpen]) {
+        AVCommonListItem *item4 = [AVCommonListItem new];
+        item4.title = AlivcLiveString(@"Rts Play");
+        item4.info = AlivcLiveString(@"The demonstration of the rts play");
+        item4.icon = AlivcLiveImage(@"zhibo_ic_laliu");
+        item4.tag = AUILiveModuleIndexPlayRts;
+        [list addObject:item4];
+    }
+
+    if ([AUILiveLinkMicModule checkCanOpen]) {
+        AVCommonListItem *item5 = [AVCommonListItem new];
+        item5.title = AlivcLiveString(@"Link Mic");
+        item5.info = AlivcLiveString(@"The demonstration of the link mic");
+        item5.icon = AlivcLiveImage(@"zhibo_ic_linkmic");
+        item5.tag = AUILiveModuleIndexLinkMic;
+        [list addObject:item5];
+    }
+
+    if ([AUILivePKModule checkCanOpen]) {
+        AVCommonListItem *item6 = [AVCommonListItem new];
+        item6.title = AlivcLiveString(@"PK");
+        item6.info = AlivcLiveString(@"The demonstration of the PK");
+        item6.icon = AlivcLiveImage(@"zhibo_ic_pk");
+        item6.tag = AUILiveModuleIndexLinkPK;
+        [list addObject:item6];
+    }
 
    self = [super initWithItemList:list];
    if (self) {
@@ -112,17 +98,23 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.item == 0) {
+    AVCommonListItem *item = [self.itemList objectAtIndex:indexPath.row];
+    if (item.tag == AUILiveModuleIndexCameraPush) {
         [self openCameraPush];
-    } else if (indexPath.item == self.recordPushItemIndex) {
+    }
+    else if (item.tag == AUILiveModuleIndexRecordPush) {
         [self openRecordPush];
-    } else if (indexPath.item == self.playItemIndex) {
+    }
+    else if (item.tag == AUILiveModuleIndexPlayPull) {
         [self openPlay];
-    } else if (indexPath.item == self.rtsPlayItemIndex) {
+    }
+    else if (item.tag == AUILiveModuleIndexPlayRts) {
         [self openRtsPlay];
-    } else if (indexPath.item == self.linkMicItemIndex) {
+    }
+    else if (item.tag == AUILiveModuleIndexLinkMic) {
         [self openLinkMic];
-    } else if (indexPath.item == self.pkItemIndex) {
+    }
+    else if (item.tag == AUILiveModuleIndexLinkPK) {
         [self openPK];
     }
 }

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUILive'
-  s.version          = '1.6.0'
+  s.version          = '1.7.0'
   s.summary          = 'A short description of AUILive.'
 
 # This description is used to generate tags and improve search results.
@@ -37,6 +37,7 @@ TODO: Add long description of the pod here.
     ss.dependency 'AUIFoundation/All'
     ss.dependency 'Masonry'
     ss.prefix_header_contents = '#import "AUILiveCommon.h"'
+    ss.dependency 'AUILive/LiveIntelligentDenoise'
   end
   
   s.subspec 'LiveCameraPush' do |ss|
@@ -56,8 +57,6 @@ TODO: Add long description of the pod here.
   s.subspec 'LivePlay' do |ss|
     ss.source_files = 'AUILivePlay/Class/**/*.{h,m,mm}'
     ss.resource = 'AUILivePlay/Resources/AUILivePlay.bundle'
-    ss.dependency 'RtsSDK'
-    ss.dependency 'AliPlayerSDK_iOS_ARTC'
     ss.dependency 'AUILive/LiveCommon'
     ss.prefix_header_contents = '#import "AUILivePlay.h"'
   end
@@ -81,6 +80,10 @@ TODO: Add long description of the pod here.
     ss.resource = 'AUILivePK/Resources/AUILivePK.bundle'
     ss.dependency 'AUILive/LiveCommon'
     ss.prefix_header_contents = '#import "AUILivePK.h"'
+  end
+  
+  s.subspec 'LiveIntelligentDenoise' do |ss|
+    ss.vendored_frameworks = 'AUILiveIntelligentDenoise/MNN.framework', 'AUILiveIntelligentDenoise/pluginAliDenoise.framework'
   end
 
   s.subspec 'List' do |ss|

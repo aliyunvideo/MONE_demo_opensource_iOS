@@ -41,7 +41,7 @@
     }
 #endif
     
-    [self.contentView addSubview:self.self.collectionView];
+    [self.contentView addSubview:self.collectionView];
 }
 
 #pragma mark - UICollectionViewDataSource

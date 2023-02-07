@@ -7,7 +7,7 @@ platform :ios, '9.0'
 
 # ===================================集成音视频终端SDK===================================
 def aliyun_demo_dependency_sdk
-  pod 'AliVCSDK_Premium', '1.6.0'
+  pod 'AliVCSDK_Premium', '1.7.0'
 end
 
 # ===================================集成AUIFoundation===================================
@@ -39,7 +39,7 @@ end
 
 # ===================================短视频剪辑集成===================================
 def aliyun_demo_aui_ugsv
-  pod 'AUIUgsv/AliVCSDK_Premium', :path => '../AUIUgsv/'
+  pod 'AUIUgsv/AliVCSDK_Premium_all', :path => '../AUIUgsv/'
   pod 'AUIUgsv/All', :path => '../AUIUgsv/'
 end
 

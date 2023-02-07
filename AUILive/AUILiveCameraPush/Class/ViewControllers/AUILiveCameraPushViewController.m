@@ -1189,6 +1189,16 @@ int64_t getCurrentTimeUs()
     }
 }
 
+- (void)musicOnClickIntelligentDenoiseButton:(BOOL)isIntelligentDenoiseOpen {
+    if (self.livePusher) {
+        if (isIntelligentDenoiseOpen) {
+            [self.livePusher startIntelligentDenoise];
+        } else {
+            [self.livePusher stopIntelligentDenoise];
+        }
+    }
+}
+
 - (void)musicOnClickMuteButton:(BOOL)isMute {
     
     if (self.livePusher) {

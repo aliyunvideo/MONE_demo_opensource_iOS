@@ -82,6 +82,8 @@
 
 - (void)musicOnClickDenoiseButton:(BOOL)isDenoiseOpen;
 
+- (void)musicOnClickIntelligentDenoiseButton:(BOOL)isIntelligentDenoiseOpen;
+
 - (void)musicOnSliderAccompanyValueChanged:(int)value;
 
 - (void)musicOnSliderVoiceValueChanged:(int)value;

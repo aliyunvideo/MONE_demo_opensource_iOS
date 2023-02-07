@@ -78,6 +78,7 @@ static NSString * s_featureName(AliyunVideoFeatureType type)
         case AliyunVideoFeatureTypeSticker: return AUIUgsvGetString(@"动态贴纸");
         case AliyunVideoFeatureTypeCropCompose: return AUIUgsvGetString(@"剪裁压缩");
         case AliyunVideoFeatureTypeCaption: return AUIUgsvGetString(@"字幕");
+        case AliyunVideoFeatureTypeAETemplate: return AUIUgsvGetString(@"剪同款");
         default: return AUIUgsvGetString(@"未知");
     }
 }

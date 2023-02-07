@@ -82,7 +82,7 @@
 
 - (instancetype)initWithClips:(NSArray<AliyunClip *> *)clips withParam:(AUIVideoOutputParam *)param {
     
-    if (param && param.outputSizeType == AUIVideoOutputSizeTypeOriginal) {
+    if (param && (param.outputSizeType == AUIVideoOutputSizeTypeOriginal || param.outputSizeRatio == AUIVideoOutputSizeRatio_original)) {
         AliyunClip *clip = clips.firstObject;
         if (clip) {
             param = [[AUIVideoOutputParam alloc] initWithOutputSize:CGSizeMake(clip.mediaWidth, clip.mediaHeight) withAliyunVideoParam:param];
@@ -204,7 +204,7 @@
     self.playTimeView = [[AUIVideoPlayTimeView alloc] initWithFrame:frame];
     [self.contentView addSubview:self.playTimeView];
     __weak typeof(self) weakSelf = self;
-    self.playTimeView.onEnterFullScreenClicked = ^{
+    self.playTimeView.onFullScreenBtnClicked = ^(BOOL fullScreen){
         [weakSelf.videoPreview enterFullScreen:weakSelf.view];
     };
 }

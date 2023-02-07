@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isShowing;
 
 - (instancetype)initWithLimitDuration:(NSTimeInterval)limitDuration;
+- (instancetype)initWithLimitDuration:(NSTimeInterval)limitDuration withShowCropView:(BOOL)showCropView;
 @end
 
 NS_ASSUME_NONNULL_END

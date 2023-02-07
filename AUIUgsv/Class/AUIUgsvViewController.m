@@ -14,10 +14,14 @@
 #import "AUIUgsvParamsViewController.h"
 #import "AUIUgsvOpenModuleHelper.h"
 
+#import "AUIVideoTemplateListViewController.h"
+
+
 typedef NS_ENUM(NSUInteger, AUIUgsvEntranceType) {
     AUIUgsvEntranceTypeRecorder,
     AUIUgsvEntranceTypeEditor,
     AUIUgsvEntranceTypeClipper,
+    AUIUgsvEntranceTypeTemplate,
     AUIUgsvEntranceTypeMore
 };
 
@@ -46,12 +50,18 @@ typedef NS_ENUM(NSUInteger, AUIUgsvEntranceType) {
     item3.tag = AUIUgsvEntranceTypeClipper;
     
     AVCommonListItem *item4 = [AVCommonListItem new];
-    item4.title = AUIUgsvGetString(@"More");
+    item4.title = AUIUgsvGetString(@"剪同款");
     item4.info = AUIUgsvGetString(@"");
     item4.icon = AUIUgsvGetImage(@"ic_ugsv_more");
-    item4.tag = AUIUgsvEntranceTypeMore;
+    item4.tag = AUIUgsvEntranceTypeTemplate;
     
-    NSArray *list = @[item1, item2, item3, item4];
+    AVCommonListItem *item5 = [AVCommonListItem new];
+    item5.title = AUIUgsvGetString(@"More");
+    item5.info = AUIUgsvGetString(@"");
+    item5.icon = AUIUgsvGetImage(@"ic_ugsv_more");
+    item5.tag = AUIUgsvEntranceTypeMore;
+    
+    NSArray *list = @[item1, item2, item3, item4, item5];
     
     self = [super initWithItemList:list];
     if (self) {
@@ -86,6 +96,11 @@ typedef NS_ENUM(NSUInteger, AUIUgsvEntranceType) {
             [self openClipper];
         }
             break;
+        case AUIUgsvEntranceTypeTemplate:
+        {
+            [self openTemplate];
+        }
+            break;
         case AUIUgsvEntranceTypeMore:
         {
             [self openMore];
@@ -113,6 +128,15 @@ typedef NS_ENUM(NSUInteger, AUIUgsvEntranceType) {
 - (void)openClipper {
     AUIUgsvPublishParamInfo *publishInfo = [AUIUgsvPublishParamInfo InfoWithSaveToAlbum:YES needToPublish:YES];
     [AUIUgsvOpenModuleHelper openClipper:self param:[AUIVideoOutputParam Portrait720P] publishParam:publishInfo];
+}
+
+- (void)openTemplate {
+    if (![AliyunAETemplateManager canSupport]) {
+        [AVAlertController show:@"当前机型不支持"];
+        return;
+    }
+    AUIVideoTemplateListViewController *vc = [[AUIVideoTemplateListViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)openMore {

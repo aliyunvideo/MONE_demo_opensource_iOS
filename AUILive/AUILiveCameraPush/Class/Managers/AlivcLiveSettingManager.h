@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) NSInteger currentMusicPlayIndex;
 @property (nonatomic, assign) BOOL musicEarBack;
 @property (nonatomic, assign) BOOL musicDenoise;
+@property (nonatomic, assign) BOOL musicIntelligentDenoise;
 @property (nonatomic, assign) BOOL musicPlay;
 @property (nonatomic, assign) BOOL musicMuted;
 @property (nonatomic, assign) BOOL musicLoop;

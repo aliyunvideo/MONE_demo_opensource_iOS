@@ -233,7 +233,7 @@ static NSString * const MusicModelAssociatedKey = @"music_selected_model";
     AUIMusicSelectedModel *model = [self.class selectedModel:operator];
     NSTimeInterval duration = operator.currentPlayer.duration;
     
-    AUIMusicPicker *picker = [AUIMusicPicker present:operator.currentVC.view selectedModel:model limitDuration:duration onSelectedChange:^(AUIMusicSelectedModel * _Nullable model) {
+    AUIMusicPicker *picker = [AUIMusicPicker present:operator.currentVC.view selectedModel:model limitDuration:duration showCropView:YES onSelectedChange:^(AUIMusicSelectedModel * _Nullable model) {
         
         [self.class onSelectMusicModel:model operator:operator];
         

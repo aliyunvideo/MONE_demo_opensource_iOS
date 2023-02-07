@@ -5,23 +5,23 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 def aliyun_sdk
-    pod 'AliyunVideoSDKPro/all', '3.34.0'
+    pod 'AliyunVideoSDKPro/all', '3.35.0'
 end
 
 def aliyun_uicom
 
     pod "AUIUgsv/All", :path => "../"
-    pod "AUIUgsv/AliyunVideoSDKPro", :path => "../"
+    pod "AUIUgsv/AliyunVideoSDKPro_all", :path => "../"
     
-    pod "AUIFoundation/All", "1.6.0"
-    pod "AUIQueenCom/Queen", "1.6.0"
+    pod "AUIFoundation/All", "1.7.0"
+    pod "AUIQueenCom/Queen", "1.7.0"
 
 end
 
 def common_demo_pods
     pod 'Masonry'
     pod 'AFNetworking'
-    pod 'YYWebImage'
+    pod 'SDWebImage'
     pod 'ZipArchive'
 end
 

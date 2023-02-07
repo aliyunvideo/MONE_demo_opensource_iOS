@@ -6,7 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AliyunPlayer/AVPDef.h>
 
 
 @protocol AlivcPlayerPlayer <NSObject>

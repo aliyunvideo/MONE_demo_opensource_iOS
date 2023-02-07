@@ -531,6 +531,7 @@ const static CGFloat HeaderHeight = 44.0;
     AUIMusicPicker *musicPanel = [AUIMusicPicker present:self.view
                                            selectedModel:_selectedMusic
                                            limitDuration:_recorderConfig.maxDuration
+                                            showCropView:YES
                                         onSelectedChange:nil onShowChanged:nil];
     __weak AUIMusicPicker *weakMusicSelf = musicPanel;
     __weak typeof(self) weakSelf = self;
@@ -556,8 +557,8 @@ const static CGFloat HeaderHeight = 44.0;
 }
 
 // MARK: - ViewController
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     _recorder.enabledPreview = YES;
 }
 

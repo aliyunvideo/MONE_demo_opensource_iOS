@@ -7,7 +7,6 @@
 
 #import "AUILiveLinkMicAudienceLinkViewController.h"
 #import "AUILiveSDKHeader.h"
-#import <AliyunPlayer/AliyunPlayer.h>
 #import "AliveLiveDemoUtil.h"
 #import "AUILiveInteractiveParamManager.h"
 #import "AUILiveIntercativeBgStatusView.h"

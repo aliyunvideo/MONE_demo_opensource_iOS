@@ -118,8 +118,9 @@
     
     __weak typeof(self) weakSelf = self;
     self.bottomView = [[AUIVideoPlayProgressView alloc] initWithFrame:CGRectMake(0, self.fullScreenView.av_height - AVSafeBottom - 42 - 2, self.fullScreenView.av_width, 42)];
+    self.bottomView.fullScreenBtn.selected = YES;
     self.bottomView.backgroundColor = UIColor.clearColor;
-    self.bottomView.onFullScreenBtnClicked = ^{
+    self.bottomView.onFullScreenBtnClicked = ^(BOOL fullScreen){
         [weakSelf exsitFullScreen];
     };
     self.bottomView.player = self.player;

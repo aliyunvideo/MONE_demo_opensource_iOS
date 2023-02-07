@@ -12,7 +12,7 @@
 #import "AUIMusicStateModel.h"
 #import "AVCircularProgressView.h"
 #import "AUIMusicCropView.h"
-#import "YYWebImage.h"
+#import "SDWebImage.h"
 
 @interface AUIMusicCell () <AUIMusicStateModelDelegate>
 @property (nonatomic, strong) UIView *mainView;
@@ -39,7 +39,7 @@
 
 - (void) prepareForReuse {
     [super prepareForReuse];
-    [_coverImageView yy_cancelCurrentImageRequest];
+    [_coverImageView sd_cancelCurrentImageLoad];
 }
 
 - (void) setup {
@@ -170,13 +170,8 @@
     }
     
     AUIMusicModel *music = _model.music;
-    [_coverImageView yy_setImageWithURL:[NSURL URLWithString:music.coverUrl]
-                            placeholder:AUIUgsvGetImage(@"ic_music_cover_placeholder")
-                                options:YYWebImageOptionSetImageWithFadeAnimation|YYWebImageOptionIgnoreImageDecoding // 服务端提供的图片过大，直接解码会爆内存
-                               progress:nil
-                              transform:^UIImage * _Nullable(UIImage * _Nonnull image, NSURL * _Nonnull url) {
-        return [image yy_imageByResizeToSize:CGSizeMake(150, 150) contentMode:UIViewContentModeScaleAspectFill];
-    } completion:nil];
+    [_coverImageView sd_setImageWithURL:[NSURL URLWithString:music.coverUrl] placeholderImage:AUIUgsvGetImage(@"ic_music_cover_placeholder")];
+    
     _titleLabel.text = music.title;
     _artistNameLabel.text = music.artistName;
     _durationLabel.text = music.formatDuration;

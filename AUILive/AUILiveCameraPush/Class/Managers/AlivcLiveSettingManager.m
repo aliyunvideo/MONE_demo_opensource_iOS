@@ -102,6 +102,7 @@
     self.musicData = @[];
     self.musicEarBack = NO;
     self.musicDenoise = NO;
+    self.musicIntelligentDenoise = NO;
     self.musicPlay = NO;
     self.musicMuted = NO;
     self.musicLoop = YES;

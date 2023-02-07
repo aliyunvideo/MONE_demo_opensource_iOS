@@ -26,8 +26,10 @@ typedef void(^OnMusicPickerMenu)(AUIMusicPicker *picker);
 + (AUIMusicPicker *)present:(UIView *)present
               selectedModel:(AUIMusicSelectedModel * _Nullable)selectedModel
               limitDuration:(NSTimeInterval)limitDuration
+               showCropView:(BOOL)showCropView
            onSelectedChange:(OnMusicSelectedChanged _Nullable)onSelectedChanged
               onShowChanged:(OnMusicPickerShowChanged _Nullable)onShowChanged;
+
 @end
 
 NS_ASSUME_NONNULL_END

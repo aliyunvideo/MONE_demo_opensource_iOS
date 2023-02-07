@@ -6,6 +6,7 @@
 //
 
 #import "AVCircularProgressView.h"
+#import "UIView+AVHelper.h""
 #import "AUIFoundationMacro.h"
 
 @interface AVCircularProgressView()<CAAnimationDelegate>
@@ -176,4 +177,31 @@ static void s_updatePath(CAShapeLayer *layer, CGFloat radius, CGFloat beginAngle
         [_progressLayer removeAnimationForKey:kAnimationKey];
     }
 }
+
+
++ (AVCircularProgressView *)presentOnView:(UIView *)onView message:(NSString *)message {
+    
+    UIView *bgView = [[UIView alloc] initWithFrame:onView.bounds];
+    bgView.backgroundColor = AUIFoundationColor(@"tsp_fill_medium");
+    [onView addSubview:bgView];
+    
+    AVCircularProgressView *progressView = [[AVCircularProgressView alloc] initWithFrame:CGRectMake((bgView.av_width - 64) / 2.0, (bgView.av_height - 64) / 2.0, 64, 64)];
+    progressView.progress = 0.0;
+    [bgView addSubview:progressView];
+    
+    UILabel *textView = [[UILabel alloc] initWithFrame:CGRectMake(0, progressView.av_bottom + 12, bgView.av_width, 20)];
+    textView.text = message;
+    textView.textColor = AUIFoundationColor(@"text_strong");
+    textView.font = AVGetMediumFont(16);
+    textView.textAlignment = NSTextAlignmentCenter;
+    [bgView addSubview:textView];
+    
+    return progressView;
+}
+
++ (void)dismiss:(AVCircularProgressView *)progressView {
+    [progressView.superview removeFromSuperview];
+}
+
+
 @end

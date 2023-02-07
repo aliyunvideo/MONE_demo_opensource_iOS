@@ -10,6 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AVCircularProgressView : UIView
+
 @property(nonatomic, assign) float progress;
 @property(nonatomic, assign) CGFloat lineWidth;
 @property(nonatomic, assign) CAShapeLayerLineCap lineCap;
@@ -17,6 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong, nullable) UIColor* trackTintColor;
 @property(nonatomic, assign) NSTimeInterval animationFullDuration;
 - (void)setProgress:(float)progress animated:(BOOL)animated;
+
++ (AVCircularProgressView *)presentOnView:(UIView *)onView message:(NSString *)message;
++ (void)dismiss:(AVCircularProgressView *)progressView;
+
 @end
 
 NS_ASSUME_NONNULL_END

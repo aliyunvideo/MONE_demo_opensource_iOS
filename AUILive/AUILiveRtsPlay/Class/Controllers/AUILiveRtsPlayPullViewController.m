@@ -7,8 +7,7 @@
 //
 
 #import "AUILiveRtsPlayPullViewController.h"
-#import <AliyunPlayer/AliPlayer.h>
-#import <RtsSDK/rts_messages.h>
+#import "AUILiveSDKHeader.h"
 #import "AUILiveRtsPlayStatusTipView.h"
 #import "AUILiveRtsPlayTraceIDAlert.h"
 

@@ -8,7 +8,6 @@
 
 #import "AUIVideoListTool.h"
 #import <CommonCrypto/CommonDigest.h>
-#import <AliyunPlayer/AliyunPlayer.h>
 
 #define Cache_dir_KEY           @"ud_key_Cache_dir"
 #define Cache_size_KEY          @"ud_key_Cache_size"

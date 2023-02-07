@@ -28,6 +28,14 @@
 #import <Queen/Queen.h>
 #endif
 
+#if __has_include(<AliyunPlayer/AliyunPlayer.h>)
+#import <AliyunPlayer/AliyunPlayer.h>
+#endif
+
+#if __has_include(<RtsSDK/rts_messages.h>)
+#import <RtsSDK/rts_messages.h>
+#endif
+
 #if __has_include("AUILiveLinkMicConfigViewController.h")
 #define ALIVC_LIVE_INTERACTIVE_MODE
 #elif __has_include("AUILivePKConfigViewController.h")

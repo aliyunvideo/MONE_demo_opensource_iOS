@@ -7,6 +7,7 @@
 
 #import "AUIVideoOutputParam.h"
 #import "AUIVideoParamBuilder.h"
+#import "AUIUgsvParamModel_Inner.h"
 
 
 typedef struct _AUIOutputSizeTypeValue {
@@ -231,7 +232,6 @@ const static size_t RatioValueListCount = sizeof(RatioValueList) / sizeof(RatioV
 - (AUIUgsvParamBuilder *)paramBuilderWithAudioParam:(BOOL)hasAudioParam {
     AUIUgsvParamBuilder *builder = [AUIUgsvParamBuilder new];
     AUIUgsvParamGroupBuilder *group = builder.group(@"VideoOutput", @"视频输出");
-    
     if (self.outputSizeType == AUIVideoOutputSizeTypeCustom) {
         group = group
             .textFieldItem(@"Ratio", @"视频比例")
@@ -242,19 +242,10 @@ const static size_t RatioValueListCount = sizeof(RatioValueList) / sizeof(RatioV
                 .editabled(NO)
         ;
     }
-    else if (self.outputSizeType == AUIVideoOutputSizeTypeOriginal) {
-        group = group
-            .textFieldItem(@"Ratio", @"视频比例")
-                .defaultValue(@"原始比例")
-                .editabled(NO)
-            .textFieldItem(@"Size", @"分辨率")
-                .defaultValue(@"原始视频")
-                .editabled(NO)
-        ;
-    }
     else {
         group = group
             .radioItem(@"Ratio", @"视频比例")
+                .option(@"原始比例", @(AUIVideoOutputSizeRatio_original))
                 .option(@"9:16", @(AUIVideoOutputSizeRatio_9_16))
                 .option(@"3:4", @(AUIVideoOutputSizeRatio_3_4))
                 .option(@"1:1", @(AUIVideoOutputSizeRatio_1_1))
@@ -263,9 +254,19 @@ const static size_t RatioValueListCount = sizeof(RatioValueList) / sizeof(RatioV
                 .defaultValue(@(self.outputSizeRatio))
                 .onValueDidChange(^(id  _Nullable oldValue, id  _Nullable curValue) {
                     AUIVideoOutputSizeRatio ratio = [curValue unsignedIntValue];
+                    AUIVideoOutputSizeType sizeType = self.outputSizeType;
+                    if (sizeType == AUIVideoOutputSizeTypeOriginal && ratio != AUIVideoOutputSizeRatio_original) {
+                        self.outputSizeType = AUIVideoOutputSizeType720P; // 默认选择720p
+                    }
+                    
                     [self updateOutputSizeType:self.outputSizeType ratio:ratio];
+                    if (sizeType != self.outputSizeType) {
+                        AUIUgsvParamItemModel *sizeOp = [builder findParamItemWithName:@"Size"];
+                        sizeOp.paramValue = @(self.outputSizeType);
+                    }
                 })
             .radioItem(@"Size", @"分辨率")
+                .option(@"原始视频", @(AUIVideoOutputSizeTypeOriginal))
                 .option(@"480p", @(AUIVideoOutputSizeType480P))
                 .option(@"540", @(AUIVideoOutputSizeType540P))
                 .option(@"720p", @(AUIVideoOutputSizeType720P))
@@ -273,11 +274,20 @@ const static size_t RatioValueListCount = sizeof(RatioValueList) / sizeof(RatioV
                 .defaultValue(@(self.outputSizeType))
                 .onValueDidChange(^(id  _Nullable oldValue, id  _Nullable curValue) {
                     AUIVideoOutputSizeType type = [curValue unsignedIntValue];
+                    AUIVideoOutputSizeRatio ratioType = self.outputSizeRatio;
+                    if (ratioType == AUIVideoOutputSizeRatio_original && type != AUIVideoOutputSizeTypeOriginal) {
+                        self.outputSizeRatio = AUIVideoOutputSizeRatio_9_16; // 默认选择9:16
+                    }
+                    
                     [self updateOutputSizeType:type ratio:self.outputSizeRatio];
+                    if (ratioType != self.outputSizeRatio) {
+                        AUIUgsvParamItemModel *ratioOp = [builder findParamItemWithName:@"Ratio"];
+                        ratioOp.paramValue = @(self.outputSizeRatio);
+                    }
                 })
         ;
     }
-    
+
     group = group
         .radioItem(@"ScaleModel", @"缩放模式")
             .option(@"裁剪", @(AliyunScaleModeFit))

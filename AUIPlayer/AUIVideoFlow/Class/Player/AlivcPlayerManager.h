@@ -6,7 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AliyunPlayer/AliyunPlayer.h>
 #import "AlivcPlayerPlayer.h"
 #import "AUIPlayerPlayViewLayerManagerProtocol.h"
 #import "AlivcPlayerEventCenterProtocol.h"

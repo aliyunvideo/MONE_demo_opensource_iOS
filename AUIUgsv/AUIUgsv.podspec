@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUIUgsv'
-  s.version          = '1.6.0'
+  s.version          = '1.7.0'
   s.summary          = 'A short description of AUIUgsv.'
 
 # This description is used to generate tags and improve search results.
@@ -34,7 +34,8 @@ TODO: Add long description of the pod here.
   s.dependency 'VODUpload'
   s.dependency 'Masonry'
   s.dependency 'AFNetworking'
-  s.dependency 'YYWebImage'
+  s.dependency 'SDWebImage'
+  s.dependency 'ZipArchive', '~> 1.4.0'
 
   s.subspec 'All' do |ss|
     ss.resource = 'Resources/*.bundle'
@@ -69,10 +70,22 @@ TODO: Add long description of the pod here.
     ss.dependency 'AUIFoundation/All'
   end
   
+  s.subspec 'Template' do |ss|
+    ss.resource = 'Resources/AlivcUgsv.bundle','Resources/Template.bundle','Resources/Music.bundle'
+    ss.source_files = 'Class/Base/**/*.{h,m,mm}', 'Class/Components/**/*.{h,m,mm}', 'Class/Modules/VideoTemplate/**/*.{h,m,mm}'
+    ss.vendored_frameworks = 'framework/*.framework'
+    ss.dependency 'AUIFoundation/All'
+  end
   
   s.subspec 'AliVCSDK_Premium' do |ss|
     ss.dependency 'AliVCSDK_Premium'
     ss.dependency 'AUIQueenCom/AliVCSDK_Premium'
+  end
+  
+  s.subspec 'AliVCSDK_Premium_all' do |ss|
+    ss.dependency 'AUIUgsv/AliVCSDK_Premium'
+    ss.dependency 'AliVCSDK_Premium/AlivcUgsvTemplate'
+    ss.dependency 'AliVCSDK_Premium/AlivcUgsvBundle'
   end
   
   s.subspec 'AliVCSDK_Standard' do |ss|
@@ -80,9 +93,21 @@ TODO: Add long description of the pod here.
     ss.dependency 'AUIQueenCom/Queen'
   end
   
+  s.subspec 'AliVCSDK_Standard_all' do |ss|
+    ss.dependency 'AUIUgsv/AliVCSDK_Standard'
+    ss.dependency 'AliVCSDK_Standard/AlivcUgsvTemplate'
+    ss.dependency 'AliVCSDK_Standard/AlivcUgsvBundle'
+  end
+  
   s.subspec 'AliVCSDK_UGC' do |ss|
     ss.dependency 'AliVCSDK_UGC'
     ss.dependency 'AUIQueenCom/Queen'
+  end
+  
+  s.subspec 'AliVCSDK_UGC_all' do |ss|
+    ss.dependency 'AUIUgsv/AliVCSDK_UGC'
+    ss.dependency 'AliVCSDK_UGC/AlivcUgsvTemplate'
+    ss.dependency 'AliVCSDK_UGC/AlivcUgsvBundle'
   end
   
   s.subspec 'AliVCSDK_UGCPro' do |ss|
@@ -90,8 +115,20 @@ TODO: Add long description of the pod here.
     ss.dependency 'AUIQueenCom/AliVCSDK_UGCPro'
   end
   
+  s.subspec 'AliVCSDK_UGCPro_all' do |ss|
+    ss.dependency 'AUIUgsv/AliVCSDK_UGCPro'
+    ss.dependency 'AliVCSDK_UGCPro/AlivcUgsvTemplate'
+    ss.dependency 'AliVCSDK_UGCPro/AlivcUgsvBundle'
+  end
+  
+  
   s.subspec 'AliyunVideoSDKPro' do |ss|
     ss.dependency 'AliyunVideoSDKPro'
+    ss.dependency 'AUIQueenCom/Queen'
+  end
+  
+  s.subspec 'AliyunVideoSDKPro_all' do |ss|
+    ss.dependency 'AliyunVideoSDKPro/all'
     ss.dependency 'AUIQueenCom/Queen'
   end
 

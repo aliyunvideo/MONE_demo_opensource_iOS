@@ -10,8 +10,8 @@
 #import "AUILiveQRCodeViewController.h"
 #import "Masonry.h"
 #import "AUILiveMonitorView.h"
-#import <AliyunPlayer/AliPlayer.h>
 #import "AUILivePullPlayActionView.h"
+#import "AUILiveSDKHeader.h"
 
 @interface AUILivePullTestViewController ()<AVPDelegate, UITextFieldDelegate>
 @property (nonatomic, strong) UIView *renderView;

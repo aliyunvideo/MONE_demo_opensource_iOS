@@ -6,18 +6,17 @@
 //
 
 #import "AUIFoundation.h"
-#import "AUIPhotoAssetCell.h"
+#import "AUIPhotoAssetSelectedCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AUIPhotoPickerBottomView : UIView
 
+@property (nonatomic, copy) NSAttributedString *attributeText;
+@property (nonatomic, copy) NSArray<AUIPhotoAssetSelectedItem *> *selectedList;
+
 - (instancetype)initWithFrame:(CGRect)frame
-          withMaxPickingCount:(NSUInteger)maxPickingCount
-        withAllowPickingImage:(BOOL)allowPickingImage
-        withAllowPickingVideo:(BOOL)allowPickingVideo
-           withAlbumModelList:(NSArray<AUIPhotoAssetCellItem *> *)selectedList
-          withWillRemoveBlock:(void(^)(AUIPhotoAssetCellItem *item))willRemoveBlock
+          withWillRemoveBlock:(void(^)(AUIPhotoAssetSelectedItem *item))willRemoveBlock
            withCompletedBlock:(void(^)(void))completedBlock;
 
 - (void)reloadSelectedList;

@@ -6,7 +6,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <AliyunPlayer/AliyunPlayer.h>
 
 
 @interface AUIPlayerLandScapeResolutionView : UIView

@@ -7,7 +7,6 @@
 //
 
 #import "AUIVideoListPlayerViewController.h"
-#import <AliyunPlayer/AliyunPlayer.h>
 #import "AVTheme.h"
 #import "AUIVideoListPlayScrollView.h"
 #import "AUIVideoListManager.h"

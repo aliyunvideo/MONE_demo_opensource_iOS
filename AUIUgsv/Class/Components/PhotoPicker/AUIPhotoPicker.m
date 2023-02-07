@@ -13,19 +13,33 @@
 #import "AUIPhotoPickerBottomView.h"
 #import "AUIUgsvMacro.h"
 
-@implementation AUIPhotoPickerResult
+@implementation AUIPhotoPickerInputItem
 
-- (instancetype)init:(NSString *)filePath model:(AUIPhotoAssetModel *)model {
+- (instancetype)init {
     self = [super init];
     if (self) {
-        _filePath = filePath;
-        _model = model;
+        _allowPickingImage = YES;
+        _allowPickingVideo = YES;
     }
     return self;
 }
 
-+ (AUIPhotoPickerResult *)result:(NSString *)filePath model:(AUIPhotoAssetModel *)model {
-    AUIPhotoPickerResult *result = [[AUIPhotoPickerResult alloc] init:filePath model:model];
+@end
+
+@implementation AUIPhotoPickerResult
+
+- (instancetype)init:(NSString *)filePath model:(AUIPhotoAssetModel *)model inputItem:(AUIPhotoPickerInputItem *)inputItem {
+    self = [super init];
+    if (self) {
+        _filePath = filePath;
+        _model = model;
+        _inputItem = inputItem;
+    }
+    return self;
+}
+
++ (AUIPhotoPickerResult *)result:(NSString *)filePath model:(AUIPhotoAssetModel *)model inputItem:(AUIPhotoPickerInputItem *)inputItem {
+    AUIPhotoPickerResult *result = [[AUIPhotoPickerResult alloc] init:filePath model:model inputItem:inputItem];
     return result;
 }
 
@@ -33,10 +47,12 @@
 
 @interface AUIPhotoPicker ()
 
-@property (nonatomic, assign) NSUInteger maxPickingCount; //0表示不限制
+@property (nonatomic, assign) NSUInteger maxPickingCount;
 @property (nonatomic, assign) BOOL allowPickingImage;
 @property (nonatomic, assign) BOOL allowPickingVideo;
 @property (nonatomic, assign) CMTimeRange timeRange; //kCMTimeRangeZero则为不限时长
+
+@property (nonatomic, copy) NSArray<AUIPhotoPickerInputItem *> *inputItems;
 
 @property (nonatomic, strong) AUIPhotoPickerTitleView *pickerTitleView;
 @property (nonatomic, strong) AUIPhotoAlbumListView *albumListView;
@@ -50,7 +66,9 @@
 @property (nonatomic, strong) NSArray<AUIPhotoAssetCellItem *> *imageAssetArray;
 @property (nonatomic, assign) AUIPhotoPickerTabType currentTabType;
 
-@property (nonatomic, strong) NSMutableArray<AUIPhotoAssetCellItem *> *selectedAssetArray;
+@property (nonatomic, strong) NSMutableArray<AUIPhotoAssetSelectedItem *> *selectedAssetArray;
+@property (nonatomic, assign) NSUInteger currentSelectedItemIndex;
+
 @property (nonatomic, copy) void(^modelsCompletedBlock)(AUIPhotoPicker *sender, NSArray<AUIPhotoAssetModel *> *models);
 @property (nonatomic, copy) void(^resultsCompletedBlock)(AUIPhotoPicker *sender, NSArray<AUIPhotoPickerResult *> *results);
 @property (nonatomic, copy) NSString *outputDir;
@@ -69,10 +87,34 @@
                           withTimeRange:(CMTimeRange)timeRange {
     self = [super init];
     if (self) {
-        _maxPickingCount = maxPickingCount;
+        _maxPickingCount = maxPickingCount == 0 ? NSUIntegerMax : maxPickingCount;
         _allowPickingImage = allowPickingImage;
         _allowPickingVideo = allowPickingVideo;
         _timeRange = timeRange;
+    }
+    return self;
+}
+
+- (instancetype)initWithInputItems:(NSArray<AUIPhotoPickerInputItem *> *)items {
+    self = [super init];
+    if (self) {
+        _inputItems = items;
+        _maxPickingCount = [_inputItems count];
+        _allowPickingImage = YES;
+        _allowPickingVideo = YES;
+        __block CMTime minDuration = kCMTimePositiveInfinity;
+        [_inputItems enumerateObjectsUsingBlock:^(AUIPhotoPickerInputItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (CMTIME_IS_POSITIVE_INFINITY(minDuration)) {
+                minDuration = obj.duration;
+            }
+            else {
+                minDuration = CMTimeMinimum(minDuration, obj.duration);
+            }
+        }];
+        if (CMTIME_IS_POSITIVE_INFINITY(minDuration)) {
+            minDuration = kCMTimeZero;
+        }
+        _timeRange = CMTimeRangeMake(minDuration, kCMTimePositiveInfinity);
     }
     return self;
 }
@@ -100,15 +142,15 @@
         self.currentTabType = AUIPhotoPickerTabTypeAll;
     }
     
-    if (self.maxPickingCount != 1) {
+    if (self.maxPickingCount != 1 || self.inputItems) {
         CGFloat bottomHeight = 50 + AVSafeBottom;
-        self.pickerBottomView = [[AUIPhotoPickerBottomView alloc] initWithFrame:CGRectMake(0, self.contentView.av_height - bottomHeight, self.contentView.av_width, bottomHeight) withMaxPickingCount:self.maxPickingCount withAllowPickingImage:self.allowPickingImage withAllowPickingVideo:self.allowPickingVideo withAlbumModelList:self.selectedAssetArray withWillRemoveBlock:^(AUIPhotoAssetCellItem * _Nonnull item) {
-            [weakSelf removeSelectedItem:item];
+        self.pickerBottomView = [[AUIPhotoPickerBottomView alloc] initWithFrame:CGRectMake(0, self.contentView.av_height - bottomHeight, self.contentView.av_width, bottomHeight) withWillRemoveBlock:^(AUIPhotoAssetSelectedItem * _Nonnull item) {
+            [weakSelf removeCellItem:item.asset];
         } withCompletedBlock:^{
             [weakSelf raiseSelectionCompleted];
         }];
-        [self.pickerBottomView reloadSelectedList];
         [self.contentView addSubview:self.pickerBottomView];
+        [self refreshBottomView];
     }
     
     self.collectionView.frame = CGRectMake(0, y, self.contentView.av_width, self.contentView.av_height - y);
@@ -136,7 +178,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AUIPhotoAssetCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:AVCollectionViewCellIdentifier forIndexPath:indexPath];
-    [cell updateItem:[self currentCellItems][indexPath.row] singleSelect:self.maxPickingCount == 1];
+    [cell updateItem:[self currentCellItems][indexPath.row] singleSelect:self.pickerBottomView == nil];
     return cell;
 }
 
@@ -162,15 +204,18 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AUIPhotoAssetCellItem *item = [self currentCellItems][indexPath.row];
+    if (item.disableSelection) {
+        return;;
+    }
     
     if (item.selectedIndex > 0) {
-        [self removeSelectedItem:item];
+        [self removeCellItem:item];
     }
     else {
-        [self addSelectedItem:item];
+        [self addCellItem:item];
     }
     
-    if (self.selectedAssetArray.count == 1 && self.maxPickingCount == 1) {
+    if (self.pickerBottomView == nil) {
         [self raiseSelectionCompleted];
     }
 }
@@ -191,8 +236,10 @@
     
     if (self.modelsCompletedBlock) {
         NSMutableArray<AUIPhotoAssetModel *> *models = [NSMutableArray array];
-        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetCellItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [models addObject:obj.assetModel];
+        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.asset) {
+                [models addObject:obj.asset.assetModel];
+            }
         }];
         self.modelsCompletedBlock(self, models);
     }
@@ -215,22 +262,31 @@
             }];
             if (isCompleted) {
                 NSMutableArray<AUIPhotoPickerResult *> *results = [NSMutableArray array];
-                [weakSelf.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetCellItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [weakSelf.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                     NSString *path = [infos objectForKey:@(idx)];
-                    [results addObject:[AUIPhotoPickerResult result:path model:obj.assetModel]];
+                    AUIPhotoPickerInputItem *inputItem = nil;
+                    if (idx < weakSelf.inputItems.count) {
+                        inputItem = [weakSelf.inputItems objectAtIndex:idx];
+                    }
+                    [results addObject:[AUIPhotoPickerResult result:path model:obj.asset.assetModel inputItem:inputItem]];
                 }];
                 weakSelf.resultsCompletedBlock(weakSelf, results);
                 [loading hideAnimated:YES];
             }
         };
         
-        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetCellItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [infos setObject:@"" forKey:@(idx)];
         }];
         
-        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetCellItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [self fetchFilePath:obj.assetModel completion:^(NSString *filePath, NSError *error) {
-                NSLog(@"Picker result:%@  error: %@", filePath, error);
+        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (!obj.asset) {
+                [infos removeObjectForKey:@(idx)];
+                fetchCompleted();
+                return;
+            }
+            [self fetchFilePath:obj.asset.assetModel completion:^(NSString *filePath, NSError *error) {
+                NSLog(@"Picker selected asset completed result:%@  error: %@", filePath, error);
                 if (filePath.length > 0) {
                     [infos setObject:filePath forKey:@(idx)];
                     fetchCompleted();
@@ -246,62 +302,191 @@
 
 #pragma mark - selection
 
-- (NSMutableArray<AUIPhotoAssetCellItem *> *)selectedAssetArray {
+- (NSMutableArray<AUIPhotoAssetSelectedItem *> *)selectedAssetArray {
     if (!_selectedAssetArray) {
         _selectedAssetArray = [NSMutableArray array];
+        [self.inputItems enumerateObjectsUsingBlock:^(AUIPhotoPickerInputItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            AUIPhotoAssetSelectedItem *item = [AUIPhotoAssetSelectedItem new];
+            item.assetDuration = CMTimeGetSeconds(obj.duration);
+            item.durationMode = YES;
+            item.selected = idx == 0;
+            [_selectedAssetArray addObject:item];
+        }];
+        self.currentSelectedItemIndex = 0;
     }
     return _selectedAssetArray;
 }
 
 - (void)refreshDisableSelection {
-    BOOL disableSelection = self.selectedAssetArray.count >= self.maxPickingCount && self.maxPickingCount > 0;
-    [self.allAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetCellItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (![self.selectedAssetArray containsObject:obj]) {
-            obj.disableSelection = disableSelection;
+    __block BOOL disableSelection = self.selectedAssetArray.count >= self.maxPickingCount || self.maxPickingCount == 0;
+    if (disableSelection) {
+        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (!obj.asset) {
+                disableSelection = NO;
+                *stop = YES;
+            }
+        }];
+    }
+    
+    AUIPhotoPickerInputItem *willSelectItem = nil;
+    if (self.currentSelectedItemIndex < self.selectedAssetArray.count) {
+        willSelectItem = [self.inputItems objectAtIndex:self.currentSelectedItemIndex];
+    }
+    
+    [self.allAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetCellItem * _Nonnull cellItem, NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        __block AUIPhotoAssetSelectedItem *find = nil;
+        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull selectedItem, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (selectedItem.asset == cellItem) {
+                find = selectedItem;
+            }
+        }];
+        if (!find) {
+            BOOL shouldDisable = disableSelection;
+            if (willSelectItem) {
+                if (!shouldDisable) {
+                    if (cellItem.assetModel.type == AUIPhotoAssetTypePhoto && !willSelectItem.allowPickingImage) {
+                        shouldDisable = YES;
+                    }
+                }
+                if (!shouldDisable) {
+                    if (cellItem.assetModel.type == AUIPhotoAssetTypeVideo && !willSelectItem.allowPickingVideo) {
+                        shouldDisable = YES;
+                    }
+                }
+                if (!shouldDisable) {
+                    if (cellItem.assetModel.type == AUIPhotoAssetTypeVideo && willSelectItem.filterByDuration && CMTimeGetSeconds(willSelectItem.duration) > cellItem.assetModel.assetDuration ) {
+                        shouldDisable = YES;
+                    }
+                }
+            }
+            cellItem.disableSelection = shouldDisable;
         }
         else {
-            obj.disableSelection = NO;
+            cellItem.disableSelection = NO;
         }
     }];
 }
 
-- (void)refreshVisiableCell {
+- (void)refreshCollectionView {
     [[self.collectionView visibleCells] enumerateObjectsUsingBlock:^(__kindof AUIPhotoAssetCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj refreshSelectionState];
     }];
-}
-
-- (void)refreshBottomView {
-    [self.pickerBottomView reloadSelectedList];
     [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
-- (void)addSelectedItem:(AUIPhotoAssetCellItem *)item {
-    if (self.maxPickingCount > 0 && self.selectedAssetArray.count >= self.maxPickingCount) {
+- (void)refreshBottomView {
+    
+    NSMutableAttributedString *as = [[NSMutableAttributedString alloc] init];
+    if (self.inputItems) {
+        [as appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:AUIUgsvGetString(@"选择 %tu 个素材效果最佳"), self.inputItems.count]]];
+    }
+    else {
+        if (self.selectedAssetArray.count == 0) {
+            if (self.maxPickingCount == NSUIntegerMax) {
+                [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"请选择至少一")]];
+            }
+            else {
+                [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"最多能选")]];
+                NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %tu ", self.maxPickingCount] attributes:@{NSForegroundColorAttributeName:AUIFoundationColor(@"colourful_text_strong")}];
+                [as appendAttributedString:countString];
+            }
+            
+            if (self.allowPickingVideo && self.allowPickingImage) {
+                [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"个视频或图片")]];
+            }
+            else if (self.allowPickingImage) {
+                [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"个图片")]];
+            }
+            else if (self.allowPickingVideo) {
+                [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"个视频")]];
+            }
+        }
+        else {
+            __block NSTimeInterval duration = 0;
+            [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                duration += obj.assetDuration;
+            }];
+            [as appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@", AUIUgsvGetString(@"总时长"), [AVStringFormat formatWithDuration:duration]]]];
+        }
+    }
+    
+    self.pickerBottomView.attributeText = as;
+    self.pickerBottomView.selectedList = self.selectedAssetArray;
+    [self.pickerBottomView reloadSelectedList];
+}
+
+- (void)addCellItem:(AUIPhotoAssetCellItem *)cellItem {
+    if (self.maxPickingCount == 0 || self.currentSelectedItemIndex >= self.maxPickingCount) {
         return;
     }
     
-    [self.selectedAssetArray addObject:item];
-    item.selectedIndex = self.selectedAssetArray.count;
+    if (self.currentSelectedItemIndex < self.selectedAssetArray.count) {
+        cellItem.selectedIndex = self.currentSelectedItemIndex + 1;
+        AUIPhotoAssetSelectedItem *selectedItem = [self.selectedAssetArray objectAtIndex:self.currentSelectedItemIndex];
+        selectedItem.selected = NO;
+        selectedItem.asset = cellItem;
+    }
+    else {
+        AUIPhotoAssetSelectedItem *selectedItem = [AUIPhotoAssetSelectedItem new];
+        selectedItem.asset = cellItem;
+        [self.selectedAssetArray addObject:selectedItem];
+        cellItem.selectedIndex = self.selectedAssetArray.count;
+    }
+    
+    __block NSUInteger next = NSUIntegerMax;
+    [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (!obj.asset) {
+            next = idx;
+            obj.selected = YES;
+            *stop = YES;
+        }
+    }];
+    if (next == NSUIntegerMax) {
+        next = self.selectedAssetArray.count;
+    }
+    self.currentSelectedItemIndex = next;
+    NSLog(@"Picker add cell item updated currentSelectedItemIndex:%tu", self.currentSelectedItemIndex);
     
     [self refreshDisableSelection];
-    [self refreshVisiableCell];
+    [self refreshCollectionView];
     [self refreshBottomView];
 }
 
-- (void)removeSelectedItem:(AUIPhotoAssetCellItem *)item {
-    if (![self.selectedAssetArray containsObject:item]) {
+- (void)removeCellItem:(AUIPhotoAssetCellItem *)cellItem {
+    __block AUIPhotoAssetSelectedItem *find = nil;
+    [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull selectedItem, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (selectedItem.asset == cellItem) {
+            find = selectedItem;
+        }
+    }];
+    if (!find) {
         return;
     }
-    [self.selectedAssetArray removeObject:item];
-    item.selectedIndex = 0;
     
-    [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetCellItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        obj.selectedIndex = idx + 1;
+    if (self.currentSelectedItemIndex < self.selectedAssetArray.count) {
+        AUIPhotoAssetSelectedItem *selectedItem = [self.selectedAssetArray objectAtIndex:self.currentSelectedItemIndex];
+        selectedItem.selected = NO;
+    }
+    
+    cellItem.selectedIndex = 0;
+    if (self.inputItems) {
+        find.asset = nil;
+        find.selected = YES;
+        self.currentSelectedItemIndex = [self.selectedAssetArray indexOfObject:find];
+    }
+    else {
+        [self.selectedAssetArray removeObject:find];
+        self.currentSelectedItemIndex = self.selectedAssetArray.count;
+    }
+    NSLog(@"Picker remove cell item updated currentSelectedItemIndex:%tu", self.currentSelectedItemIndex);
+    
+    [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        obj.asset.selectedIndex = idx + 1;
     }];
     
     [self refreshDisableSelection];
-    [self refreshVisiableCell];
+    [self refreshCollectionView];
     [self refreshBottomView];
 }
 
@@ -369,9 +554,9 @@
     [models enumerateObjectsUsingBlock:^(AUIPhotoAssetModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
         __block AUIPhotoAssetCellItem *item = nil;
-        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetCellItem * _Nonnull selectedItem, NSUInteger idx, BOOL * _Nonnull stop) {
-            if ([selectedItem.assetModel.asset.localIdentifier isEqualToString:obj.asset.localIdentifier]) {
-                item = selectedItem;
+        [self.selectedAssetArray enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull selectedItem, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([selectedItem.asset.assetModel.asset.localIdentifier isEqualToString:obj.asset.localIdentifier]) {
+                item = selectedItem.asset;
                 *stop = YES;
             }
         }];
@@ -391,6 +576,7 @@
     self.videoAssetArray = videoAssetArray;
     self.imageAssetArray = imageAssetArray;
     
+    [self refreshDisableSelection];
     [self.collectionView reloadData];
 }
 

@@ -62,8 +62,10 @@
         
         UIButton *fullScreen = [[UIButton alloc] initWithFrame:CGRectZero];
         fullScreen.titleEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
-        [fullScreen setImage:AUIUgsvEditorImage(@"ic_preview_unfullscreen") forState:UIControlStateNormal];
+        [fullScreen setImage:AUIUgsvEditorImage(@"ic_preview_fullscreen") forState:UIControlStateNormal];
+        [fullScreen setImage:AUIUgsvEditorImage(@"ic_preview_unfullscreen") forState:UIControlStateSelected];
         [fullScreen addTarget:self action:@selector(onFullScreenBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
+        fullScreen.selected = NO;
         [self addSubview:fullScreen];
         self.fullScreenBtn = fullScreen;
     }
@@ -139,7 +141,7 @@
 
 - (void)onFullScreenBtnClicked:(UIButton *)sender {
     if (self.onFullScreenBtnClicked) {
-        self.onFullScreenBtnClicked();
+        self.onFullScreenBtnClicked(self.fullScreenBtn.isSelected);
     }
 }
 

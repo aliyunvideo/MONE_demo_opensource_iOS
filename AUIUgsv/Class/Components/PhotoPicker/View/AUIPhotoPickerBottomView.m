@@ -16,12 +16,7 @@
 @property (nonatomic, strong) UILabel *durationView;
 @property (nonatomic, strong) UIButton *nextButton;
 
-@property (nonatomic, assign) NSUInteger maxPIckingCount;
-@property (nonatomic, assign) BOOL allowPickingImage;
-@property (nonatomic, assign) BOOL allowPickingVideo;
-
-@property (nonatomic, copy) NSArray<AUIPhotoAssetCellItem *> *selectedList;
-@property (nonatomic, copy) void(^willRemoveBlock)(AUIPhotoAssetCellItem *item);
+@property (nonatomic, copy) void(^willRemoveBlock)(AUIPhotoAssetSelectedItem *item);
 @property (nonatomic, copy) void(^completedBlock)(void);
 
 @end
@@ -29,18 +24,10 @@
 @implementation AUIPhotoPickerBottomView
 
 - (instancetype)initWithFrame:(CGRect)frame
-          withMaxPickingCount:(NSUInteger)maxPickingCount
-        withAllowPickingImage:(BOOL)allowPickingImage
-        withAllowPickingVideo:(BOOL)allowPickingVideo
-           withAlbumModelList:(NSArray<AUIPhotoAssetCellItem *> *)selectedList
-          withWillRemoveBlock:(void(^)(AUIPhotoAssetCellItem *item))willRemoveBlock
+          withWillRemoveBlock:(void(^)(AUIPhotoAssetSelectedItem *item))willRemoveBlock
            withCompletedBlock:(void(^)(void))completedBlock {
     self = [super initWithFrame:frame];
     if (self) {
-        _maxPIckingCount = maxPickingCount;
-        _allowPickingImage = allowPickingImage;
-        _allowPickingVideo = allowPickingVideo;
-        _selectedList = selectedList;
         _willRemoveBlock = willRemoveBlock;
         _completedBlock = completedBlock;
         
@@ -56,7 +43,7 @@
         [self addSubview:_durationView];
         
         _nextButton = [[UIButton alloc] initWithFrame:CGRectZero];
-        _nextButton.backgroundColor = AUIFoundationColor(@"colourful_fg_strong");
+        _nextButton.backgroundColor = AUIFoundationColor(@"colourful_fill_strong");
         _nextButton.titleLabel.font = AVGetRegularFont(12);
         [_nextButton setTitleColor:AUIFoundationColor(@"text_strong") forState:UIControlStateNormal];
         [_nextButton setTitleColor:AUIFoundationColor(@"text_ultraweak") forState:UIControlStateDisabled];
@@ -108,60 +95,40 @@
     self.collectionView.frame = CGRectMake(0, 54.0, self.collectionView.av_width, 60.0);
 }
 
-- (NSAttributedString *)attributeStringForNoneSelected {
-    
-    NSMutableAttributedString *as = [[NSMutableAttributedString alloc] init];
-    
-    if (self.maxPIckingCount == 0) {
-        [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"请选择至少一个")]];
-    }
-    else {
-        [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"最多能选")]];
-        NSAttributedString *countString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %tu ", self.maxPIckingCount] attributes:@{NSForegroundColorAttributeName:AUIFoundationColor(@"colourful_text_strong")}];
-        [as appendAttributedString:countString];
-    }
-    
-    if (self.allowPickingVideo && self.allowPickingImage) {
-        [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"个视频或图片")]];
-    }
-    else if (self.allowPickingImage) {
-        [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"个图片")]];
-    }
-    else if (self.allowPickingVideo) {
-        [as appendAttributedString:[[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"个视频")]];
-    }
-    
-    return as;
-}
-
 - (void)reloadSelectedList {
+    self.durationView.attributedText = self.attributeText;
+    [self.durationView sizeToFit];
+    
     [self.collectionView reloadData];
-    if (self.selectedList.count == 0) {
-        
-        self.durationView.attributedText = [self attributeStringForNoneSelected];
-        [self.durationView sizeToFit];
-        
+    
+    BOOL canNext = self.selectedList.count > 0;
+    if (canNext) {
+        __block BOOL isEmpty = NO;
+        [self.selectedList enumerateObjectsUsingBlock:^(AUIPhotoAssetSelectedItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (!obj.asset) {
+                isEmpty = YES;
+                *stop = YES;
+            }
+        }];
+        canNext = !isEmpty;
+    }
+    if (!canNext) {
         [self.nextButton setTitle:AUIUgsvGetString(@"下一步") forState:UIControlStateNormal];
         self.nextButton.backgroundColor = [UIColor clearColor];
         self.nextButton.enabled = NO;
-        
+    }
+    else {
+        [self.nextButton setTitle:[NSString stringWithFormat:@"%@ %tu", AUIUgsvGetString(@"下一步"), self.selectedList.count] forState:UIControlStateNormal];
+        self.nextButton.backgroundColor = AUIFoundationColor(@"colourful_fill_strong");
+        self.nextButton.enabled = YES;
+    }
+    
+    if (self.selectedList.count == 0) {
         self.collectionView.hidden = YES;
         CGFloat height = AVSafeBottom + 50;
         self.frame = CGRectMake(self.av_left, self.av_bottom - height, self.av_width, height);
     }
     else {
-        
-        __block NSTimeInterval duration = 0;
-        [self.selectedList enumerateObjectsUsingBlock:^(AUIPhotoAssetCellItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            duration += obj.assetModel.assetDuration;
-        }];
-        self.durationView.attributedText =[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ %@", AUIUgsvGetString(@"总时长"), [AVStringFormat formatWithDuration:duration]]];
-        [self.durationView sizeToFit];
-        
-        [self.nextButton setTitle:[NSString stringWithFormat:@"%@ %tu", AUIUgsvGetString(@"下一步"), self.selectedList.count] forState:UIControlStateNormal];
-        self.nextButton.backgroundColor = AUIFoundationColor(@"colourful_fg_strong");
-        self.nextButton.enabled = YES;
-        
         self.collectionView.hidden = NO;
         CGFloat height = AVSafeBottom + 130;
         self.frame = CGRectMake(self.av_left, self.av_bottom - height, self.av_width, height);
@@ -183,8 +150,15 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     AUIPhotoAssetSelectedCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:AVCollectionViewCellIdentifier forIndexPath:indexPath];
-    [cell updateItem:self.selectedList[indexPath.row]];
-    cell.willRemoveBlock = self.willRemoveBlock;
+    AUIPhotoAssetSelectedItem *item = self.selectedList[indexPath.row];
+    [cell updateItem:item];
+    
+    __weak typeof(self) weakSelf = self;
+    cell.willRemoveBlock = ^(AUIPhotoAssetSelectedItem * _Nonnull item) {
+        if (weakSelf.willRemoveBlock) {
+            weakSelf.willRemoveBlock(item);
+        }
+    };
     return cell;
 }
 
