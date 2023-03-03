@@ -29,7 +29,10 @@
 - (void)reset {
     self.resolution = AlivcLivePushResolution540P;
     self.videoEncoderMode = AlivcLivePushVideoEncoderModeHard;
-    self.audioEncoderMode = AlivcLivePushAudioEncoderModeHard;
+    self.audioEncoderMode = AlivcLivePushAudioEncoderModeSoft;
+    self.audioOnly = NO;
+    self.videoEncodeGop = AlivcLivePushVideoEncodeGOP_2;
+    self.isUserMainStream = NO;
 }
 
 @end

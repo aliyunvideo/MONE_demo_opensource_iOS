@@ -138,6 +138,7 @@
         _appIDInputView = [[AUILiveInputNumberView alloc] initWithFrame:CGRectMake(20, 30, self.contentView.av_width - 20 * 2, 73) type:AUILiveInputNumberTypeInputAndScan sourceVC:self];
         _appIDInputView.themeName = AUILiveCommonString(@"AppID");
         _appIDInputView.maxNumber = kAUILiveInputNotMaxNumer;
+        _appIDInputView.isAllowExtraSpecialCharacters = YES;
     }
     return _appIDInputView;
 }
@@ -147,6 +148,7 @@
         _appKeyInputView = [[AUILiveInputNumberView alloc] initWithFrame:CGRectMake(20, self.appIDInputView.av_bottom + 30, self.contentView.av_width - 20 * 2, 73) type:AUILiveInputNumberTypeInputAndScan sourceVC:self];
         _appKeyInputView.themeName = AUILiveCommonString(@"AppKey");
         _appKeyInputView.maxNumber = kAUILiveInputNotMaxNumer;
+        _appKeyInputView.isAllowExtraSpecialCharacters = YES;
     }
     return _appKeyInputView;
 }
@@ -156,6 +158,7 @@
         _playDomainInputView = [[AUILiveInputNumberView alloc] initWithFrame:CGRectMake(20, self.appKeyInputView.av_bottom + 30, self.contentView.av_width - 20 * 2, 73) type:AUILiveInputNumberTypeInputAndScan sourceVC:self];
         _playDomainInputView.themeName = AUILiveCommonString(@"播流域名");
         _playDomainInputView.maxNumber = kAUILiveInputNotMaxNumer;
+        _playDomainInputView.isAllowExtraSpecialCharacters = YES;
     }
     return _playDomainInputView;
 }

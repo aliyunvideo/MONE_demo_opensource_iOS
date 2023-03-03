@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *themeName;
 @property (nonatomic, assign) NSInteger maxNumber;
 @property (nonatomic, strong) NSString *defaultInput;
+// 是否允许输入额外特殊字符。默认不允许。开启后支持"."、"-"。
+@property (nonatomic, assign) BOOL isAllowExtraSpecialCharacters;
 @property (nonatomic, copy) void(^inputChanged)(NSString *value);
 
 - (instancetype)initWithFrame:(CGRect)frame type:(AUILiveInputNumberType)type sourceVC:(UIViewController *)sourceVC;

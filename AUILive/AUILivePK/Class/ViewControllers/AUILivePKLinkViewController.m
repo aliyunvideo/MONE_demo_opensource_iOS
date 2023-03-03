@@ -10,6 +10,7 @@
 #import "AUILiveInteractiveParamManager.h"
 #import "AUILiveIntercativeLinkCustomerView.h"
 #import "AUILiveInputNumberAlert.h"
+#import "AUILiveExternMainStreamManager.h"
 
 typedef NS_ENUM(NSInteger, AUILivePKAnchorPushStatus) {
     AUILivePKAnchorPushStatusNone = 0,
@@ -49,6 +50,8 @@ typedef NS_ENUM(NSInteger, AUILivePKAudiencePullStatus) {
 @property (nonatomic, assign) AUILivePKAnchorPushStatus anchorPushStatus;
 @property (nonatomic, assign) AUILivePKAudiencePullStatus audiencePullStatus;
 
+@property (nonatomic, strong) AUILiveExternMainStreamManager *userMainStreamManager;
+
 @end
 
 @implementation AUILivePKLinkViewController
@@ -68,6 +71,12 @@ typedef NS_ENUM(NSInteger, AUILivePKAudiencePullStatus) {
     [self setupContent];
     
     [self startRTCPushPreview];
+    
+    if (self.paramManager.isUserMainStream) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.userMainStreamManager addUserStream];
+        });
+    }
     
     // [self addNotifications];
 }
@@ -402,6 +411,10 @@ typedef NS_ENUM(NSInteger, AUILivePKAudiencePullStatus) {
 }
 
 - (void)destory {
+    if (self.paramManager.isUserMainStream) {
+        [self.userMainStreamManager releaseUserStream];
+    }
+    
     [self.rtcPlayer stopPlay];
     self.rtcPlayer = nil;
     self.audiencePullStatus = AUILivePKAudiencePullStatusNone;
@@ -603,7 +616,7 @@ typedef NS_ENUM(NSInteger, AUILivePKAudiencePullStatus) {
         _rtcPushConfig.resolution = self.paramManager.resolution;
         _rtcPushConfig.fps = AlivcLivePushFPS20;
         _rtcPushConfig.enableAutoBitrate = true;
-        _rtcPushConfig.videoEncodeGop = AlivcLivePushVideoEncodeGOP_2;
+        _rtcPushConfig.videoEncodeGop = self.paramManager.videoEncodeGop;
         _rtcPushConfig.connectRetryInterval = 2000;
         _rtcPushConfig.previewMirror = false;
         _rtcPushConfig.orientation = AlivcLivePushOrientationPortrait;
@@ -611,6 +624,14 @@ typedef NS_ENUM(NSInteger, AUILivePKAudiencePullStatus) {
         _rtcPushConfig.previewDisplayMode = ALIVC_LIVE_PUSHER_PREVIEW_ASPECT_FIT;
         _rtcPushConfig.videoEncoderMode = self.paramManager.videoEncoderMode;
         _rtcPushConfig.audioEncoderMode = self.paramManager.audioEncoderMode;
+        _rtcPushConfig.audioOnly = self.paramManager.audioOnly;
+        
+        if(self.paramManager.isUserMainStream) {
+            _rtcPushConfig.externMainStream = true;
+            _rtcPushConfig.externVideoFormat = AlivcLivePushVideoFormatYUVNV12;
+        } else {
+            _rtcPushConfig.externMainStream = false;
+        }
     }
     return _rtcPushConfig;
 }
@@ -661,6 +682,15 @@ typedef NS_ENUM(NSInteger, AUILivePKAudiencePullStatus) {
         [_playerActionButton addTarget:self action:@selector(changeCustomerAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playerActionButton;
+}
+
+- (AUILiveExternMainStreamManager *)userMainStreamManager {
+    if (!_userMainStreamManager) {
+        _userMainStreamManager = [[AUILiveExternMainStreamManager alloc] init];
+        _userMainStreamManager.pushConfig = self.rtcPushConfig;
+        _userMainStreamManager.livePusher = self.rtcPusher;
+    }
+    return _userMainStreamManager;
 }
 
 @end

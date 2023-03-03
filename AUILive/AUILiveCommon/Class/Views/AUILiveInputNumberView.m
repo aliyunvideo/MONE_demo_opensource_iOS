@@ -9,6 +9,7 @@
 #import "AUILiveQRCodeViewController.h"
 
 #define ALLOWSTRSET @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+#define ALLOWEXTRASPECIALCHARACTERS @".-"
 
 @interface AUILiveInputNumberView ()<UITextFieldDelegate>
 
@@ -124,6 +125,9 @@
     }
     
     if (![ALLOWSTRSET containsString:string]) {
+        if (self.isAllowExtraSpecialCharacters && [ALLOWEXTRASPECIALCHARACTERS containsString:string]) {
+            return YES;
+        }
         return NO;
     }
     

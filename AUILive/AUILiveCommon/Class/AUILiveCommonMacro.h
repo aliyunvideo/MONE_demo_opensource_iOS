@@ -13,6 +13,7 @@
 #define AUILiveCommonImage(key) AVGetImage(key, @"AUILiveCommon")
 #define AUILiveCommonString(key) AVGetString(key, @"AUILiveCommon")
 #define AUILiveCommonColor(key) AVGetColor(key, @"AUILiveCommon")
+#define AUILiveCommonData(key) [[NSBundle bundleWithPath:[NSBundle.mainBundle.resourcePath stringByAppendingPathComponent:@"AUILiveCommon.bundle/Data"]] pathForResource:key ofType:@""]
 
 #define AlivcScreenWidth  [UIScreen mainScreen].bounds.size.width
 #define AlivcScreenHeight  [UIScreen mainScreen].bounds.size.height

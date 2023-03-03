@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
               param:(nullable AUIVideoOutputParam *)param
        publishParam:(AUIUgsvPublishParamInfo *)publishParam;
 
++ (void)openTemplateList:(UIViewController *)currentVC;
+
 + (void)openPickerToPublish:(UIViewController *)currentVC;
 
 @end

@@ -5,7 +5,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 def aliyun_sdk
-    pod 'AliyunVideoSDKPro/all', '3.35.0'
+    pod 'AliyunVideoSDKPro/all', '3.36.0'
 end
 
 def aliyun_uicom

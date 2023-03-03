@@ -14,9 +14,6 @@
 #import "AUIUgsvParamsViewController.h"
 #import "AUIUgsvOpenModuleHelper.h"
 
-#import "AUIVideoTemplateListViewController.h"
-
-
 typedef NS_ENUM(NSUInteger, AUIUgsvEntranceType) {
     AUIUgsvEntranceTypeRecorder,
     AUIUgsvEntranceTypeEditor,
@@ -131,12 +128,7 @@ typedef NS_ENUM(NSUInteger, AUIUgsvEntranceType) {
 }
 
 - (void)openTemplate {
-    if (![AliyunAETemplateManager canSupport]) {
-        [AVAlertController show:@"当前机型不支持"];
-        return;
-    }
-    AUIVideoTemplateListViewController *vc = [[AUIVideoTemplateListViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [AUIUgsvOpenModuleHelper openTemplateList:self];
 }
 
 - (void)openMore {

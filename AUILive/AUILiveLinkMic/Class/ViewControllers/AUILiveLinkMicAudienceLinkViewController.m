@@ -12,6 +12,7 @@
 #import "AUILiveIntercativeBgStatusView.h"
 #import "AUILiveIntercativeLinkCustomerView.h"
 #import "AUILiveInputNumberAlert.h"
+#import "AUILiveExternMainStreamManager.h"
 
 typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePushStatus) {
     AUILiveLinkMicAudiencePushStatusNone = 0,
@@ -56,6 +57,8 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 @property (nonatomic, assign) AUILiveLinkMicAnchorPullStatus anchorPullStatus;
 
 @property (nonatomic, assign) BOOL switchRTCPull;
+
+@property (nonatomic, strong) AUILiveExternMainStreamManager *userMainStreamManager;
 
 @end
 
@@ -200,6 +203,10 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
                 if ([strongSelf stopRTCPush]) {
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [strongSelf stopRTCPushPreview];
+                        
+                        if (self.paramManager.isUserMainStream) {
+                            [self.userMainStreamManager releaseUserStream];
+                        }
                     });
                 }
                 
@@ -217,6 +224,12 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if ([self startRTCPushPreview]) {
+                if (self.paramManager.isUserMainStream) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.userMainStreamManager addUserStream];
+                    });
+                }
+                
                 [self startRTCPush];
             }
         });
@@ -469,6 +482,10 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 }
 
 - (void)destory {
+    if (self.paramManager.isUserMainStream) {
+        [self.userMainStreamManager releaseUserStream];
+    }
+    
     [self.cdnPlayer stop];
     self.cdnPlayer.playerView = nil;
     [self.cdnPlayer destroy];
@@ -727,6 +744,14 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
         _rtcPushConfig.previewDisplayMode = ALIVC_LIVE_PUSHER_PREVIEW_ASPECT_FIT;
         _rtcPushConfig.videoEncoderMode = self.paramManager.videoEncoderMode;
         _rtcPushConfig.audioEncoderMode = self.paramManager.audioEncoderMode;
+        _rtcPushConfig.audioOnly = self.paramManager.audioOnly;
+        
+        if(self.paramManager.isUserMainStream) {
+            _rtcPushConfig.externMainStream = true;
+            _rtcPushConfig.externVideoFormat = AlivcLivePushVideoFormatYUVNV12;
+        } else {
+            _rtcPushConfig.externMainStream = false;
+        }
     }
     return _rtcPushConfig;
 }
@@ -779,6 +804,15 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
         [_pusherActionButton addTarget:self action:@selector(changeCustomerAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _pusherActionButton;
+}
+
+- (AUILiveExternMainStreamManager *)userMainStreamManager {
+    if (!_userMainStreamManager) {
+        _userMainStreamManager = [[AUILiveExternMainStreamManager alloc] init];
+        _userMainStreamManager.pushConfig = self.rtcPushConfig;
+        _userMainStreamManager.livePusher = self.rtcPusher;
+    }
+    return _userMainStreamManager;
 }
 
 @end

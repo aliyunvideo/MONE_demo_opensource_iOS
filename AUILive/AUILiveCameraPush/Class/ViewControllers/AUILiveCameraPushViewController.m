@@ -10,7 +10,6 @@
 #import "AUILiveCameraPublishView.h"
 #import "AlivcLivePushViewsProtocol.h"
 #import <CommonCrypto/CommonDigest.h>
-#include <sys/time.h>
 #import "Masonry.h"
 #import "AUILiveFixedOrientationDirAlertController.h"
 //#import "UIView+Toast.h"
@@ -20,34 +19,14 @@
 #import "AUILiveSDKHeader.h"
 #import "AUILiveMonitorView.h"
 #import "AlivcLiveSettingManager.h"
+#import "AUILiveExternMainStreamManager.h"
 
 #define kAlivcLivePusherVCAlertTag 89976
 #define kAlivcLivePusherNoticeTimerInterval 5.0
 
-#define TEST_EXTERN_YUV_BUFFER_SIZE 1280*720*3/2
-#define TEST_EXTERN_PCM_BUFFER_SIZE 3200
-
-#define TEST_EXTERN_YUV_DURATION 40000
-#define TEST_EXTERN_PCM_DURATION 30000
-
 @interface AUILiveCameraPushViewController () <AUILiveCameraPublishViewDelegate, AUILiveMusicViewDelegate,AUILiveAnswerGameViewDelegate,UIAlertViewDelegate,AlivcLivePusherInfoDelegate,AlivcLivePusherErrorDelegate,AlivcLivePusherNetworkDelegate,AlivcLivePusherBGMDelegate,AlivcLivePusherCustomFilterDelegate,AlivcLivePusherCustomDetectorDelegate, AlivcLivePusherSnapshotDelegate, AlivcLiveBaseObserver>{
-    
-    dispatch_source_t _streamingTimer;
-    int _userVideoStreamHandle;
-    int _userAudioStreamHandle;
-    FILE*  _videoStreamFp;
-    FILE*  _audioStreamFp;
-    int64_t _lastVideoPTS;
-    int64_t _lastAudioPTS;
-    char yuvData[TEST_EXTERN_YUV_BUFFER_SIZE];
-    char pcmData[TEST_EXTERN_PCM_BUFFER_SIZE];
-    AlivcLivePushResolution defaultRes;
-    int defaultChannel;
-    AlivcLivePushAudioSampleRate defaultSampleRate;
     int waterMarkCount;
     BOOL isShowWaterMark;
-    
-    
 }
 
 // UI
@@ -61,17 +40,10 @@
 
 // SDK
 @property (nonatomic, strong) AlivcLivePusher *livePusher;
-@end
 
-int64_t getCurrentTimeUs()
-{
-    uint64_t ret;
-    struct timeval time;
-    gettimeofday(&time, NULL);
-    ret = time.tv_sec * 1000000ll + (time.tv_usec);
-    
-    return ret;
-}
+@property (nonatomic, strong) AUILiveExternMainStreamManager *userMainStreamManager;
+
+@end
 
 @implementation AUILiveCameraPushViewController
 
@@ -92,10 +64,6 @@ int64_t getCurrentTimeUs()
     
     [self setupDebugTimer];
 
-    defaultRes = self.pushConfig.resolution;
-    defaultChannel = self.pushConfig.audioChannel;
-    defaultSampleRate = self.pushConfig.audioSampleRate;
-
     [self registerSDK];
     
     int ret = [self setupPusher];
@@ -110,6 +78,12 @@ int64_t getCurrentTimeUs()
     if (ret != 0) {
         [self showPusherStartPreviewErrorAlert:ret isStart:YES];
         return;
+    }
+    
+    if (self.isUserMainStream) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.userMainStreamManager addUserStream];
+        });
     }
     
     [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -139,85 +113,6 @@ int64_t getCurrentTimeUs()
     [[AUILiveBeautyController sharedInstance] destroyBeautyControllerUI];
     [[AlivcLiveSettingManager manager] clear];
 }
-
-- (void)addUserStream {
-    
-    if(self.isUserMainStream) {
-        
-        if(!_streamingTimer) {
-            
-            _videoStreamFp = 0;
-            _audioStreamFp = 0;
-            _lastVideoPTS = 0;
-            _lastAudioPTS = 0;
-
-            dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-            _streamingTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
-            dispatch_source_set_timer(_streamingTimer,DISPATCH_TIME_NOW,10*NSEC_PER_MSEC, 0);
-            dispatch_source_set_event_handler(_streamingTimer, ^{
-                
-                if(!_videoStreamFp) {
-                    NSString* userVideoPath = [AliveLiveDemoUtil getExternalStreamResourceSavePath];
-                    const char* video_path = [userVideoPath UTF8String];
-                    _videoStreamFp = fopen(video_path, "rb");
-                }
-                
-                if(!_audioStreamFp) {
-                    NSString* userAudioPath = AUILiveCameraPushData(@"441.pcm");
-                    const char* audio_path = [userAudioPath UTF8String];
-                    _audioStreamFp = fopen(audio_path, "rb");
-                }
-                
-                if(_videoStreamFp) {
-                    
-                    int64_t nowTime = getCurrentTimeUs();
-                    if(nowTime  - _lastVideoPTS >= TEST_EXTERN_YUV_DURATION) {
-                        
-                        int dataSize = TEST_EXTERN_YUV_BUFFER_SIZE;
-                        size_t size = fread((void *)yuvData, 1, dataSize, _videoStreamFp);
-                        if(size<dataSize) {
-                             fseek(_videoStreamFp,0,SEEK_SET);
-                             size = fread((void *)yuvData, 1, dataSize, _videoStreamFp);
-                        }
-                        
-                        if(size == dataSize) {
-                            if(self.isUserMainStream) {
-                                [self.livePusher sendVideoData:yuvData width:720 height:1280 size:dataSize pts:nowTime rotation:0];
-                            }
-                        }
-                        _lastVideoPTS = nowTime;
-                    }
-                }
-                
-                if(_audioStreamFp) {
-                    
-                    int64_t nowTime = getCurrentTimeUs();
-                    
-                    if(nowTime  - _lastAudioPTS >= TEST_EXTERN_PCM_DURATION) {
-                        
-                        int dataSize = TEST_EXTERN_PCM_BUFFER_SIZE;
-                        size_t size =fread((void *)pcmData, 1, dataSize,  _audioStreamFp);
-                        if(size<dataSize){
-                            fseek(_audioStreamFp,0,SEEK_SET);
-                        }
-                        
-                        if(size > 0) {
-                            if(self.isUserMainStream){
-                                [self.livePusher sendPCMData:pcmData size:(int)size sampleRate:44100 channel:1 pts:nowTime];
-                            }
-                        }
-                        _lastAudioPTS = nowTime;
-                        
-                    }
-                }
-                
-            });
-            dispatch_resume(_streamingTimer);
-        }
-        
-    }
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -271,17 +166,11 @@ int64_t getCurrentTimeUs()
     if(self.isUserMainStream) {
         
         self.pushConfig.externMainStream = true;
-        self.pushConfig.resolution  = defaultRes;
-        self.pushConfig.audioChannel = defaultChannel;
-        self.pushConfig.audioSampleRate = defaultSampleRate;
         self.pushConfig.externVideoFormat = AlivcLivePushVideoFormatYUVNV12;
         
     }else {
         
         self.pushConfig.externMainStream = false;
-        self.pushConfig.resolution  = defaultRes;
-        self.pushConfig.audioChannel = defaultChannel;
-        self.pushConfig.audioSampleRate = defaultSampleRate;
     }
     self.livePusher = [[AlivcLivePusher alloc] initWithConfig:self.pushConfig];
     
@@ -304,25 +193,9 @@ int64_t getCurrentTimeUs()
  销毁推流
  */
 - (void)destoryPusher {
-    
-    if(_streamingTimer) {
-        dispatch_cancel(_streamingTimer);
-        _streamingTimer = 0;
+    if (self.isUserMainStream) {
+        [self.userMainStreamManager releaseUserStream];
     }
-    
-    if(_videoStreamFp) {
-        fclose(_videoStreamFp);
-        _videoStreamFp = 0;
-    }
-    
-    if(_audioStreamFp) {
-        fclose(_audioStreamFp);
-        _audioStreamFp = 0;
-    }
-    
-    
-        
-   
     
     if (self.livePusher) {
         [self.livePusher destory];
@@ -606,10 +479,6 @@ int64_t getCurrentTimeUs()
 #endif
         [[AUILiveBeautyController sharedInstance] setupBeautyController:processPixelBuffer];
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self addUserStream];
-    });
 }
 
 
@@ -1595,6 +1464,16 @@ int64_t getCurrentTimeUs()
     }
     
     return digest;
+}
+
+#pragma mark -- lazy load
+- (AUILiveExternMainStreamManager *)userMainStreamManager {
+    if (!_userMainStreamManager) {
+        _userMainStreamManager = [[AUILiveExternMainStreamManager alloc] init];
+        _userMainStreamManager.pushConfig = self.pushConfig;
+        _userMainStreamManager.livePusher = self.livePusher;
+    }
+    return _userMainStreamManager;
 }
 
 @end

@@ -36,6 +36,25 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) AlivcLivePushAudioEncoderMode audioEncoderMode;
 
+/**
+ 纯音频推流
+ * 默认 : NO，不开启
+ */
+@property (nonatomic, assign) bool audioOnly;
+
+/**
+ 关键帧间隔
+ * 默认 : AlivcLivePushVideoEncodeGOP_2
+ * 单位 : s
+ */
+@property (nonatomic, assign) AlivcLivePushVideoEncodeGOP videoEncodeGop;
+
+/**
+ 选择开启外部音视频推流
+ * 默认 : NO，不开启
+ */
+@property (nonatomic, assign) BOOL isUserMainStream;
+
 + (instancetype)manager;
 - (void)reset;
 

@@ -17,6 +17,7 @@
 #import "AlivcUgsvSDKHeader.h"
 #ifndef USING_SVIDEO_BASIC
 #import "AUIVideoEditor.h"
+#import "AUIVideoTemplateListViewController.h"
 #endif // USING_SVIDEO_BASIC
 
 #ifdef INCLUDE_QUEEN
@@ -309,6 +310,19 @@ static AUIVideoOutputParam * s_convertRecordToEdit(AUIRecorderConfig *config) {
     } withOutputDir:[AUIUgsvPath cacheDir]];
     
     [currentVC av_presentFullScreenViewController:picker animated:YES completion:nil];
+}
+
++ (void)openTemplateList:(UIViewController *)currentVC {
+#ifdef USING_SVIDEO_BASIC
+    [AVAlertController show:@"当前SDK不支持"];
+#else // USING_SVIDEO_BASIC
+    if (![AliyunAETemplateManager canSupport]) {
+        [AVAlertController show:@"当前机型不支持"];
+        return;
+    }
+    AUIVideoTemplateListViewController *vc = [[AUIVideoTemplateListViewController alloc] init];
+    [currentVC.navigationController pushViewController:vc animated:YES];
+#endif
 }
 
 + (void)openPickerToPublish:(UIViewController *)currentVC {
