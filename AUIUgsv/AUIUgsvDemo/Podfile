@@ -13,8 +13,8 @@ def aliyun_uicom
     pod "AUIUgsv/All", :path => "../"
     pod "AUIUgsv/AliyunVideoSDKPro_all", :path => "../"
     
-    pod "AUIFoundation/All", "1.7.0"
-    pod "AUIQueenCom/Queen", "1.7.0"
+    pod "AUIFoundation/All", "1.8.0"
+    pod "AUIQueenCom/Queen", "1.8.0"
 
 end
 
