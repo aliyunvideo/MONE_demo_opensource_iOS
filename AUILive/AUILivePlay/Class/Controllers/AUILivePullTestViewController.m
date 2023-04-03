@@ -83,7 +83,7 @@
     // 播放view
     
     // 背景图片
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:AUILivePlayImage(@"camera_push_bgm_bgImage")];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:AUILiveCommonImage(@"camera_push_bgm_bgImage")];
     [self.view addSubview:imageView];
     [self.view sendSubviewToBack:imageView];
     [imageView mas_makeConstraints:^(MASConstraintMaker *make) {

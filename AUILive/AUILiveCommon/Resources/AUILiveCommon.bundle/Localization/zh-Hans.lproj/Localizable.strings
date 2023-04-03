@@ -37,3 +37,4 @@
 "quality_mode_label" = "码率模式";
 "video_hardware_encode" = "视频硬编码";
 "stop_button" = "停止推流";
+"input ID error bits" = "字符长度不能超过%d位";

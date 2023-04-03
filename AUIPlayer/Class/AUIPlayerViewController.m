@@ -25,19 +25,24 @@
    
    AVCommonListItem *item2 = [AVCommonListItem new];
    item2.title = AlivcPlayerString(@"Video List");
-   item2.info = AlivcPlayerString(@"The demonstration of the video list");
+   item2.info = AlivcPlayerString(@"The demonstration of the video function list");
    item2.icon = AlivcPlayerImage(@"bofangqi_ic_chenjin");
-   
+    
    AVCommonListItem *item3 = [AVCommonListItem new];
-   item3.title = AlivcPlayerString(@"Video Full Screen");
-   item3.info = AlivcPlayerString(@"The demonstration of the video full screen");
+   item3.title = AlivcPlayerString(@"Video List");
+   item3.info = AlivcPlayerString(@"The demonstration of the video standrad list");
    item3.icon = AlivcPlayerImage(@"bofangqi_ic_quanping");
+   
+   AVCommonListItem *item4 = [AVCommonListItem new];
+   item4.title = AlivcPlayerString(@"Video Full Screen");
+   item4.info = AlivcPlayerString(@"The demonstration of the video full screen");
+   item4.icon = AlivcPlayerImage(@"bofangqi_ic_zidingyi");
    
 //   AVCommonListItem *item4 = [AVCommonListItem new];
 //   item4.title = AlivcPlayerString(@"Video Custom");
 //   item4.info = AlivcPlayerString(@"The demonstration of the video custom");
 //   item4.icon = AlivcPlayerImage(@"bofangqi_ic_zidingyi");
-   NSArray *list = @[item1, item2, item3];
+   NSArray *list = @[item1, item2, item3, item4];
    
    self = [super initWithItemList:list];
    if (self) {
@@ -63,19 +68,19 @@
             break;
         case 1:
         {
-            [self openVideoList];
+            [self openVideoFunctionList];
         }
             break;
         case 2:
         {
+            [self openVideoStandradList];
+        }
+            break;
+        case 3:
+        {
             [self openVideoFullScreen];
         }
             break;
-//        case 3:
-//        {
-//            [self openVideoCustom];
-//        }
-//            break;
         default:
             break;
     }
@@ -86,19 +91,19 @@
     [module open];
 }
 
-- (void)openVideoList {
+- (void)openVideoFunctionList {
     AUIVideoListModule *module = [[AUIVideoListModule alloc] initWithSourceViewController:self];
-    [module open];
+    [module openFunctionListPage];
+}
+
+- (void)openVideoStandradList {
+    AUIVideoListModule *module = [[AUIVideoListModule alloc] initWithSourceViewController:self];
+    [module openStandradListPage];
 }
 
 - (void)openVideoFullScreen {
     AUIVideoFullScreenModule *module = [[AUIVideoFullScreenModule alloc] initWithSourceViewController:self];
     [module open];
 }
-
-//- (void)openVideoCustom {
-//    AUIVideoCustomModule *module = [[AUIVideoCustomModule alloc] initWithSourceViewController:self];
-//    [module open];
-//}
 
 @end

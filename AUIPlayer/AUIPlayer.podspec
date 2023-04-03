@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUIPlayer'
-  s.version          = '1.8.0'
+  s.version          = '1.9.0'
   s.summary          = 'A short description of AUIPlayer.'
 
 # This description is used to generate tags and improve search results.
@@ -44,11 +44,29 @@ TODO: Add long description of the pod here.
     ss.dependency 'BarrageRenderer'
     ss.prefix_header_contents = '#import "AUIVideoFlow.h"'
   end
-
+  
+  # VideoList
   s.subspec 'VideoList' do |ss|
-    ss.source_files = 'AUIVideoList/Class/**/*.{h,m,mm}'
-    ss.resource = 'AUIVideoList/Resources/AUIVideoList.bundle'
+    ss.resource = 'AUIVideoList/AUIVideoListCommon/Resources/AUIVideoList.bundle'
+    ss.source_files = 'AUIVideoList/AUIVideoListCommon/**/*.{h,m,mm}', 'AUIVideoList/AUIVideoFunctionList/**/*.{h,m,mm}', 'AUIVideoList/AUIVideoStandradList/**/*.{h,m,mm}'
     ss.dependency 'SDWebImage'
+    ss.dependency 'AFNetworking'
+    ss.prefix_header_contents = '#import "AUIVideoList.h"'
+  end
+    
+  s.subspec 'VideoFunctionList' do |ss|
+    ss.resource = 'AUIVideoList/AUIVideoListCommon/Resources/AUIVideoList.bundle'
+    ss.source_files = 'AUIVideoList/AUIVideoListCommon/**/*.{h,m,mm}', 'AUIVideoList/AUIVideoFunctionList/**/*.{h,m,mm}'
+    ss.dependency 'SDWebImage'
+    ss.dependency 'AFNetworking'
+    ss.prefix_header_contents = '#import "AUIVideoList.h"'
+  end
+  
+  s.subspec 'VideoStandradList' do |ss|
+    ss.resource = 'AUIVideoList/AUIVideoListCommon/Resources/AUIVideoList.bundle'
+    ss.source_files = 'AUIVideoList/AUIVideoListCommon/**/*.{h,m,mm}', 'AUIVideoList/AUIVideoStandradList/**/*.{h,m,mm}'
+    ss.dependency 'SDWebImage'
+    ss.dependency 'AFNetworking'
     ss.prefix_header_contents = '#import "AUIVideoList.h"'
   end
   

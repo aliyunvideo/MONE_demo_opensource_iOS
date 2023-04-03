@@ -15,7 +15,6 @@
 
 @property (nonatomic, strong) UILabel *themeLabel;
 @property (nonatomic, strong) UITextField *inputField;
-@property (nonatomic, strong) UILabel *inputCountChangeLabel;
 @property (nonatomic, strong) UIButton *actionButton;
 @property (nonatomic, assign) AUILiveInputNumberType type;
 @property (nonatomic, strong) UIViewController *sourceVC;
@@ -31,7 +30,6 @@
         
         [self addSubview:self.themeLabel];
         [self addSubview:self.inputField];
-        [self addSubview:self.inputCountChangeLabel];
         [self addSubview:self.actionButton];
     
         self.themeLabel.frame = CGRectMake(0, 0, self.av_width, 24);
@@ -42,9 +40,8 @@
             self.actionButton.frame = CGRectMake(self.av_width - 5 - 18, 0, 18, 18);
         }
         
-        self.inputCountChangeLabel.frame = CGRectMake(self.actionButton.av_left - 12 - 45,   0, 45, 36);
-        self.inputField.frame = CGRectMake(0, self.av_height - 36, self.inputCountChangeLabel.av_left - 12, 36);
-        self.actionButton.av_centerY = self.inputCountChangeLabel.av_centerY = self.inputField.av_centerY;
+        self.inputField.frame = CGRectMake(0, self.av_height - 36, self.actionButton.av_left - 12, 36);
+        self.actionButton.av_centerY = self.inputField.av_centerY;
         
         UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, self.av_height - 1, self.av_width, 1)];
         lineView.backgroundColor = AUIFoundationColor(@"border_weak");
@@ -62,8 +59,6 @@
 }
 
 - (void)inputFieldValueChanged:(UITextField *)textField {
-    [self updateInputCountChange];
-    
     if (textField.text.length > 0) {
         self.actionButton.hidden = NO;
     } else {
@@ -73,11 +68,6 @@
     if (self.inputChanged) {
         self.inputChanged(textField.text);
     }
-}
-
-- (void)updateInputCountChange {
-    NSInteger currentNumber = self.inputField.text.length;
-    self.inputCountChangeLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)currentNumber, (long)self.maxNumber];
 }
 
 - (void)pressActionButton {
@@ -102,7 +92,6 @@
         [self.sourceVC.navigationController pushViewController:QRController animated:YES];
     }
     [self resignInputStatus];
-    [self updateInputCountChange];
 }
 
 #pragma mark -- UITextFieldDelegate
@@ -120,6 +109,7 @@
     
     if (self.maxNumber != kAUILiveInputNotMaxNumer) {
         if (range.location > (self.maxNumber - 1)) {
+            [AVToastView show:[NSString stringWithFormat:AUILiveCommonString(@"input ID error bits"), self.maxNumber] view:self.sourceVC.view position:AVToastViewPositionMid];
             return NO;
         }
     }
@@ -170,16 +160,6 @@
     return _inputField;
 }
 
-- (UILabel *)inputCountChangeLabel {
-    if (!_inputCountChangeLabel) {
-        _inputCountChangeLabel = [[UILabel alloc] init];
-        _inputCountChangeLabel.textColor = AUIFoundationColor(@"text_ultraweak");
-        _inputCountChangeLabel.font = AVGetRegularFont(14);
-        _inputCountChangeLabel.textAlignment = NSTextAlignmentRight;
-    }
-    return _inputCountChangeLabel;
-}
-
 - (UIButton *)actionButton {
     if (!_actionButton) {
         _actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -197,16 +177,6 @@
     _themeName = themeName;
     self.themeLabel.text = themeName;
     
-}
-
-- (void)setMaxNumber:(NSInteger)maxNumber {
-    _maxNumber = maxNumber;
-    if (maxNumber == kAUILiveInputNotMaxNumer) {
-        self.inputCountChangeLabel.hidden = YES;
-    } else {
-        self.inputCountChangeLabel.hidden = NO;
-        [self updateInputCountChange];
-    }
 }
 
 - (void)setDefaultInput:(NSString *)defaultInput {

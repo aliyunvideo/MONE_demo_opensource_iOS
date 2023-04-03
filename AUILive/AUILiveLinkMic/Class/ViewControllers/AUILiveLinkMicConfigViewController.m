@@ -161,7 +161,7 @@
     if (!_userIdInputView) {
         _userIdInputView = [[AUILiveInputNumberView alloc] initWithFrame:CGRectMake(20, 30, self.contentView.av_width - 20 * 2, 73) type:AUILiveInputNumberTypeInput sourceVC:self];
         _userIdInputView.themeName = AUILiveLinkMicString(@"用户ID");
-        _userIdInputView.maxNumber = kAUILiveInputNotMaxNumer;
+        _userIdInputView.maxNumber = 64;
     }
     return _userIdInputView;
 }
@@ -170,7 +170,7 @@
     if (!_streamIdInputView) {
         _streamIdInputView = [[AUILiveInputNumberView alloc] initWithFrame:CGRectMake(20, self.userIdInputView.av_bottom + 30, self.contentView.av_width - 20 * 2, 73) type:AUILiveInputNumberTypeInput sourceVC:self];
         _streamIdInputView.themeName = AUILiveLinkMicString(@"房间号");
-        _streamIdInputView.maxNumber = kAUILiveInputNotMaxNumer;
+        _streamIdInputView.maxNumber = 64;
     }
     return _streamIdInputView;
 }

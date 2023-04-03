@@ -64,6 +64,10 @@ typedef NS_ENUM(NSInteger, AUILivePKAudiencePullStatus) {
     [self.menuButton setImage:AUILiveCommonImage(@"ic_camera") forState:UIControlStateNormal];
     [self.menuButton addTarget:self action:@selector(publisherSwitchCamera) forControlEvents:UIControlEventTouchUpInside];
     
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.image = AUILiveCommonImage(@"camera_push_bgm_bgImage");
+    [self.view addSubview:imageView];
+    
     [self registerSDK];
     
     [self setupRTCPusher];
@@ -177,7 +181,7 @@ typedef NS_ENUM(NSInteger, AUILivePKAudiencePullStatus) {
         }];
     } else {
         __weak typeof(self) weakSelf = self;
-        [AUILiveInputNumberAlert show:@[AUILivePKString(@"请输入主播的用户ID"), AUILivePKString(@"请输入主播的房间号")] view:self.view maxNumber:kAUILiveInputAlertNotMaxNumer inputAction:^(BOOL ok, NSArray<NSString *> * _Nonnull inputs) {
+        [AUILiveInputNumberAlert show:@[AUILivePKString(@"请输入主播的用户ID"), AUILivePKString(@"请输入主播的房间号")] view:self.view maxNumber:64 inputAction:^(BOOL ok, NSArray<NSString *> * _Nonnull inputs) {
             __strong typeof(self) strongSelf = weakSelf;
             if (ok) {
                 if (inputs.firstObject == strongSelf.rtcPush.userId) {

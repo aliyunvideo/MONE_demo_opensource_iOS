@@ -72,6 +72,10 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     [self.menuButton setImage:AUILiveCommonImage(@"ic_camera") forState:UIControlStateNormal];
     [self.menuButton addTarget:self action:@selector(publisherSwitchCamera) forControlEvents:UIControlEventTouchUpInside];
     
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    imageView.image = AUILiveCommonImage(@"camera_push_bgm_bgImage");
+    [self.view addSubview:imageView];
+    
     [self registerSDK];
     
     [self setupCDNPlayer];
@@ -98,7 +102,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 
 - (void)showAnchorUserId {
     __weak typeof(self) weakSelf = self;
-    [AUILiveInputNumberAlert show:@[AUILiveLinkMicString(@"请输入主播的用户ID")] view:self.view maxNumber:kAUILiveInputAlertNotMaxNumer inputAction:^(BOOL ok, NSArray<NSString *> * _Nonnull inputs) {
+    [AUILiveInputNumberAlert show:@[AUILiveLinkMicString(@"请输入主播的用户ID")] view:self.view maxNumber:64 inputAction:^(BOOL ok, NSArray<NSString *> * _Nonnull inputs) {
         __strong typeof(self) strongSelf = weakSelf;
         if (ok) {
             if (inputs.firstObject == strongSelf.rtcPush.userId) {
@@ -174,6 +178,15 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     self.cdnPlayer = [[AliPlayer alloc] init];
     self.cdnPlayer.delegate = self;
     self.cdnPlayer.autoPlay = YES;
+    //针对纯音频场景需要设置启播buffer，加快首桢播放
+    if(self.paramManager.audioOnly)
+    {
+        AVPConfig *config = [self.cdnPlayer getConfig];
+        config.enableStrictFlvHeader = YES; //纯音频 或 纯视频 的flv 需要设置 以加快起播
+        config.startBufferDuration = 1000; //起播缓存，越大起播越稳定，但会影响起播时间，可酌情设置
+        config.highBufferDuration = 500;//卡顿恢复需要的缓存，网络不好的情况可以设置大一些，当前纯音频设置500还好，视频的话建议用默认值3000.
+        [self.cdnPlayer setConfig:config];
+    }
 }
 
 - (void)setupRTCPusher {
@@ -697,6 +710,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
         _cdnPlay.isRTC = NO;
         _cdnPlay.isPlay = YES;
         _cdnPlay.streamName = self.rtcConfig.streamName;
+        _cdnPlay.isAudioOnly = self.paramManager.audioOnly;
     }
     return _cdnPlay;
 }

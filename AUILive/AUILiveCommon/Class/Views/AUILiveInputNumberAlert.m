@@ -42,6 +42,7 @@
     AUILiveInputNumberAlert *alertView = [[AUILiveInputNumberAlert alloc] init];
     alertView.sourceView = view;
     alertView.messages = messages;
+    alertView.maxNumber = maxNumber;
     alertView.inputAction = inputAction;
     [view addSubview:alertView];
     [alertView show];
@@ -117,6 +118,7 @@
     
     if (self.maxNumber != kAUILiveInputAlertNotMaxNumer) {
         if (range.location > (self.maxNumber - 1)) {
+            [AVToastView show:[NSString stringWithFormat:AUILiveCommonString(@"input ID error bits"), self.maxNumber] view:self.sourceView position:AVToastViewPositionMid];
             return NO;
         }
     }

@@ -30,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
  *  房间号
  */
 @property (nonatomic, strong) NSString *streamName;
+/**
+ * 是否是纯音频
+ */
+@property (nonatomic, assign) BOOL isAudioOnly;
 
 - (NSString *)getRTCURL;
 - (NSString *)getCDNURL;

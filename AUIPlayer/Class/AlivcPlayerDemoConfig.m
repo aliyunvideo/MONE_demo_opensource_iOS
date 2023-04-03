@@ -11,7 +11,6 @@
 #define AlivcPlayerFirstLaunch_AUIVideoFlow_speedTipKey @"AlivcPlayerFirstLaunch_AUIVideoFlow_speedTipKey"
 #define AlivcPlayerFirstLaunch_AUIVideoFlow_FullScreenSpeedTipKey @"AlivcPlayerFirstLaunch_AUIVideoFlow_FullScreenSpeedTipKey"
 #define AlivcPlayerFirstLaunch_AUIVideoFlow_FirstLandsacpeSpeedTipKey @"AlivcPlayerFirstLaunch_AUIVideoFlow_FirstLandsacpeSpeedTipKey"
-#define AlivcPlayerFirstLaunch_AUIVideoList_HandUpKey @"AlivcPlayerFirstLaunch_AUIVideoList_HandUpKey"
 
 @interface AlivcPlayerDemoConfig ()
 
@@ -48,15 +47,6 @@
         }
     }
     
-    NSObject *videoListConfig = [self getConfig:@"AUIVideoListConfig"];
-    if (videoListConfig) {
-        [self loadVideoListUserDefaults];
-        
-        if ([videoListConfig respondsToSelector:@selector(didFinishLaunching)]) {
-            [videoListConfig performSelector:@selector(didFinishLaunching)];
-        }
-    }
-    
     [self loadPlayrLicense];
 }
 
@@ -87,15 +77,6 @@
         [userDefaults setBool:YES forKey:AlivcPlayerFirstLaunch_AUIVideoFlow_FirstLandsacpeSpeedTipKey];
     } else {
         [userDefaults setBool:NO forKey:AlivcPlayerFirstLaunch_AUIVideoFlow_FirstLandsacpeSpeedTipKey];
-    }
-}
-
-- (void)loadVideoListUserDefaults {
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if (self.firstLaunching || [userDefaults boolForKey:AlivcPlayerFirstLaunch_AUIVideoList_HandUpKey]) {
-        [userDefaults setBool:YES forKey:AlivcPlayerFirstLaunch_AUIVideoList_HandUpKey];
-    } else {
-        [userDefaults setBool:NO forKey:AlivcPlayerFirstLaunch_AUIVideoList_HandUpKey];
     }
 }
 

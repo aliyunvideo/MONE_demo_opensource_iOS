@@ -51,3 +51,4 @@
 "stop_button" = "Stop\n";
 "需要相机权限以开启直播功能" = "The camera permission is required to enable live streaming.";
 "需要麦克风权限以开启直播功能" = "The microphone permission is required to enable live streaming.";
+"input ID error bits" = "Character length shall not exceed %d bits.";

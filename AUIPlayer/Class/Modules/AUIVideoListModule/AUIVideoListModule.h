@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface AUIVideoListModule : NSObject
 
 - (instancetype)initWithSourceViewController:(UIViewController *)sourceVC;
-- (void)open;
+- (void)openFunctionListPage;
+- (void)openStandradListPage;
 
 @end
 

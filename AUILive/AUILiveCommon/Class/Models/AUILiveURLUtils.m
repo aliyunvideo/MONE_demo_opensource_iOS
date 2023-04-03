@@ -92,7 +92,15 @@
     
     NSString *urlMode = [self getURLMode];
     NSString *cdnURL = [NSString stringWithFormat:@"%@://%@/%@/", self.prefix,  self.domain, urlMode];
-    NSString *streamURL = [NSString stringWithFormat:@"%@_%@_%@_camera.flv", self.appID, self.streamName, self.userId];
+    NSString *streamURL = nil;
+    if(self.isAudioOnly)
+    {
+        streamURL = [NSString stringWithFormat:@"%@_%@_%@_audio.flv", self.appID, self.streamName, self.userId];
+    }
+    else
+    {
+        streamURL = [NSString stringWithFormat:@"%@_%@_%@_camera.flv", self.appID, self.streamName, self.userId];
+    }
     cdnURL = [cdnURL stringByAppendingString:streamURL];
     NSLog(@"cdnURL:%@", cdnURL);
     return cdnURL;
