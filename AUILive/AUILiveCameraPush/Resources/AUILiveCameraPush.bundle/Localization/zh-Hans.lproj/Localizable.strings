@@ -41,8 +41,6 @@
 
 "video_encode_b_frame" = "B-Frame";
 
-"video_hardware_encode_codec" = "视频硬编Codec";
-
 "start_preview_button" = "开始预览";
 
 "stop_preview_button" = "停止预览";

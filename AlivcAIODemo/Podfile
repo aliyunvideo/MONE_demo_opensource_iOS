@@ -7,7 +7,7 @@ platform :ios, '9.0'
 
 # ===================================集成音视频终端SDK===================================
 def aliyun_demo_dependency_sdk
-  pod 'AliVCSDK_Premium', '1.9.0'
+  pod 'AliVCSDK_Premium', '6.0.0'
 end
 
 # ===================================集成AUIFoundation===================================

@@ -50,6 +50,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) AlivcLivePushVideoEncodeGOP videoEncodeGop;
 
 /**
+ 视频硬编码方式 （当videoEncoderMode设置为AlivcLivePushVideoEncoderModeHard时，有两种可选的视频硬件编码方式：H264和HEVC(H265)）
+ * 默认：AlivcLivePushVideoEncoderModeHardCodecH264，使用H264进行硬件编码
+ */
+@property (nonatomic, assign) AlivcLivePushVideoEncoderModeHardCodec videoHardEncoderCodec;
+
+/**
  选择开启外部音视频推流
  * 默认 : NO，不开启
  */

@@ -798,7 +798,7 @@
     };
 
     AlivcLiveParamModel *videoHardEncodeCodecModel = [[AlivcLiveParamModel alloc] init];
-    videoHardEncodeCodecModel.title = AUILiveCameraPushString(@"video_hardware_encode_codec");
+    videoHardEncodeCodecModel.title = AUILiveCommonString(@"video_hardware_encode_codec");
     videoHardEncodeCodecModel.pickerPanelTextArray = @[@"H264", @"H265"];
     videoHardEncodeCodecModel.defaultValue = 0;
     videoHardEncodeCodecModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;

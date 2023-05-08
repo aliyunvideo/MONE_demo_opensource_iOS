@@ -759,6 +759,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
         _rtcPushConfig.videoEncoderMode = self.paramManager.videoEncoderMode;
         _rtcPushConfig.audioEncoderMode = self.paramManager.audioEncoderMode;
         _rtcPushConfig.audioOnly = self.paramManager.audioOnly;
+        _rtcPushConfig.videoHardEncoderCodec = self.paramManager.videoHardEncoderCodec;
         
         if(self.paramManager.isUserMainStream) {
             _rtcPushConfig.externMainStream = true;

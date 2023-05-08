@@ -24,6 +24,7 @@
 @property (nonatomic, assign) AlivcLivePushAudioEncoderMode audioEncoderMode_temp;
 @property (nonatomic, assign) bool audioOnly_temp;
 @property (nonatomic, assign) AlivcLivePushVideoEncodeGOP videoEncodeGop_temp;
+@property (nonatomic, assign) AlivcLivePushVideoEncoderModeHardCodec videoHardEncoderCode_temp;
 @property (nonatomic, assign) BOOL isUserMainStream_temp;
 
 @end
@@ -109,6 +110,16 @@
         self.videoEncodeGop_temp = value;
     };
     
+    self.videoHardEncoderCode_temp = self.manager.videoHardEncoderCodec;
+    AlivcLiveParamModel *videoHardEncodeCodecModel = [[AlivcLiveParamModel alloc] init];
+    videoHardEncodeCodecModel.title = AUILiveCommonString(@"video_hardware_encode_codec");
+    videoHardEncodeCodecModel.pickerPanelTextArray = @[@"H264", @"H265"];
+    videoHardEncodeCodecModel.defaultValue = 0;
+    videoHardEncodeCodecModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;
+    videoHardEncodeCodecModel.pickerSelectBlock = ^(int value) {
+        self.videoHardEncoderCode_temp = (value == 1 ? AlivcLivePushVideoEncoderModeHardCodecHEVC : AlivcLivePushVideoEncoderModeHardCodecH264);
+    };
+    
     self.isUserMainStream_temp = self.manager.isUserMainStream;
     AlivcLiveParamModel *userMainStreamModel = [[AlivcLiveParamModel alloc] init];
     userMainStreamModel.title = AUILiveCommonString(@"user_main_stream");
@@ -140,7 +151,7 @@
         }
     };
     
-    self.dataArray = @[titleResolutionModel, resolutionModel, titlePlaceholderModel, videoEncoderModeModel, audioEncoderModeModel, audiOnlyModeModel, titleVideoEncodeGopModel, videoEncodeGopModel, titlePlaceholderModel, userMainStreamModel];
+    self.dataArray = @[titleResolutionModel, resolutionModel, titlePlaceholderModel, videoEncoderModeModel, audioEncoderModeModel, audiOnlyModeModel, titleVideoEncodeGopModel, videoEncodeGopModel, titlePlaceholderModel, videoHardEncodeCodecModel, userMainStreamModel];
 }
 
 - (void)clickSettingButton:(UIButton *)sender {
@@ -149,6 +160,7 @@
     self.manager.audioEncoderMode = self.audioEncoderMode_temp;
     self.manager.audioOnly = self.audioOnly_temp;
     self.manager.videoEncodeGop = self.videoEncodeGop_temp;
+    self.manager.videoHardEncoderCodec = self.videoHardEncoderCode_temp;
     self.manager.isUserMainStream = self.isUserMainStream_temp;
     
     [self goBack];

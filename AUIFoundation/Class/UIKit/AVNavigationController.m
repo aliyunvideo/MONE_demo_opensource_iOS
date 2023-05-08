@@ -36,10 +36,12 @@
         if (self.viewControllers.count < 2 || self.visibleViewController == [self.viewControllers objectAtIndex:0]) {
             return NO;
         }
-        if ([self.visibleViewController conformsToProtocol:@protocol(AVUIViewControllerInteractivePodGesture)]) {
-            id<AVUIViewControllerInteractivePodGesture> p = (id<AVUIViewControllerInteractivePodGesture>)self.visibleViewController;
-            if ([p disableInteractivePodGesture]) {
-                return NO;
+        if ([self.visibleViewController conformsToProtocol:@protocol(AVUIViewControllerInteractivePopGesture)]) {
+            id<AVUIViewControllerInteractivePopGesture> p = (id<AVUIViewControllerInteractivePopGesture>)self.visibleViewController;
+            if ([p performSelector:@selector(disableInteractivePopGesture)]) {
+                if ([p disableInteractivePopGesture]) {
+                    return NO;
+                }
             }
         }
     }
@@ -48,6 +50,10 @@
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return [AVTheme preferredStatusBarStyle];
+}
+
+- (UIViewController *)childViewControllerForStatusBarStyle {
+    return self.topViewController;
 }
 
 -(BOOL)shouldAutorotate {

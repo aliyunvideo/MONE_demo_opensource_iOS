@@ -9,9 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol AVUIViewControllerInteractivePodGesture <NSObject>
+@protocol AVUIViewControllerInteractivePopGesture <NSObject>
 
-- (BOOL)disableInteractivePodGesture;
+- (BOOL)disableInteractivePopGesture;
 
 @end
 

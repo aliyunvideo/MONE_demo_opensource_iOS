@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AVBaseViewController : UIViewController<AVUIViewControllerInteractivePodGesture>
+@interface AVBaseViewController : UIViewController<AVUIViewControllerInteractivePopGesture>
 
 @property (nonatomic, strong, readonly) UIView *headerView;
 @property (nonatomic, strong, readonly) UIView *headerLineView;

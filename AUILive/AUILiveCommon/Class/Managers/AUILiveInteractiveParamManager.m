@@ -32,6 +32,7 @@
     self.audioEncoderMode = AlivcLivePushAudioEncoderModeSoft;
     self.audioOnly = NO;
     self.videoEncodeGop = AlivcLivePushVideoEncodeGOP_2;
+    self.videoHardEncoderCodec = AlivcLivePushVideoEncoderModeHardCodecH264;
     self.isUserMainStream = NO;
 }
 

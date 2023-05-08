@@ -98,7 +98,7 @@
     return self.menuButton.hidden;
 }
 
-- (BOOL)disableInteractivePodGesture {
+- (BOOL)disableInteractivePopGesture {
     return NO;
 }
 

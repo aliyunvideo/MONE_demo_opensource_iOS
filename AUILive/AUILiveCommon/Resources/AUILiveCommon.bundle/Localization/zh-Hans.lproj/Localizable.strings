@@ -15,6 +15,7 @@
 "min_bitrate" = "视频最小码率";
 "initial_bitrate" = "视频初始码率";
 "audio_bitrate" = "音频码率";
+"video_hardware_encode_codec" = "视频硬编Codec";
 "reconnect_duration" = "重连时长";
 "reconnect_times" = "重连次数";
 "landscape_model" = "推流方向";

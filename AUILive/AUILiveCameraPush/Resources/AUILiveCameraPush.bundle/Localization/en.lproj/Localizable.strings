@@ -27,11 +27,6 @@
 
 "video_encode_b_frame" = "B-Frame";
 
-"video_hardware_encode_codec" = "Video Hardware Encode Codec";
-
-
-
-
 "start_preview_button" = "Start\nPreview";
 
 "stop_preview_button" = "Stop\nPreview";

@@ -20,6 +20,7 @@
 "min_bitrate" = "Min Bitrate";
 "initial_bitrate" = "Initial Bitrate";
 "audio_bitrate" = "Audio Bitrate";
+"video_hardware_encode_codec" = "Video Hardware Encode Codec";
 "reconnect_duration" = "Reconnect Duration";
 "reconnect_times" = "Reconnect Times";
 "landscape_model" = "Orientation";

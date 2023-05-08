@@ -47,6 +47,16 @@ typedef NS_ENUM(NSInteger, AQUPanelSkinStyle) {
 @property (nonatomic, assign) AQUPanelSkinStyle panelSkinStyle;
 
 /**
+ * 贴纸名字本地化字符串前缀
+ */
+@property (nonatomic, copy) NSString *stickerItemNameLocalizedStrPreFix;
+
+/**
+ * 滤镜名字本地化字符串前缀
+ */
+@property (nonatomic, copy) NSString *filterItemNameLocalizedStrPreFix;
+
+/**
  * 初始化面板
  * @param view 需要面板添加到上面的视图。
  */
