@@ -38,7 +38,7 @@
         }
         if ([self.visibleViewController conformsToProtocol:@protocol(AVUIViewControllerInteractivePopGesture)]) {
             id<AVUIViewControllerInteractivePopGesture> p = (id<AVUIViewControllerInteractivePopGesture>)self.visibleViewController;
-            if ([p performSelector:@selector(disableInteractivePopGesture)]) {
+            if ([p respondsToSelector:@selector(disableInteractivePopGesture)]) {
                 if ([p disableInteractivePopGesture]) {
                     return NO;
                 }

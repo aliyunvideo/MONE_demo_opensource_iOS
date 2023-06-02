@@ -29,4 +29,8 @@
     return  output;
 }
 
+- (NSDictionary *)av_jsonDict {
+    return [NSJSONSerialization JSONObjectWithData:[self dataUsingEncoding:NSUTF8StringEncoding] options:kNilOptions error:nil];
+}
+
 @end

@@ -18,7 +18,9 @@ typedef NS_ENUM(NSInteger, AQUFeatureID) {
     AQUFeatureIDSticker,
     AQUFeatureIDBodyShape,
     AQUFeatureIDHairRecolor,
-    AQUFeatureIDFaceEffect
+    AQUFeatureIDFaceEffect,
+    AQUFeatureIDSegmentGreen,
+    AQUFeatureIDSegmentAI
 };
 
 typedef NS_ENUM(NSInteger, AQUPanelSkinStyle) {

@@ -26,6 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (long long)av_longLongValueForKey:(NSString*)key;
 - (long)av_longValueForKey:(NSString*)key;
 
+- (NSString *)av_jsonString;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUIQueenCom'
-  s.version          = '6.0.0'
+  s.version          = '6.1.0'
   s.summary          = 'A short description of AUIQueenCom.'
 
 # This description is used to generate tags and improve search results.
@@ -38,7 +38,7 @@ TODO: Add long description of the pod here.
   end
 
   s.subspec 'Queen' do |ss|
-    ss.dependency 'Queen', '2.6.0-official-full'
+    ss.dependency 'Queen', '6.1.0-official-pro'
     ss.dependency 'AUIQueenCom/Common'
   end
   

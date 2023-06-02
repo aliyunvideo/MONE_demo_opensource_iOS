@@ -142,5 +142,9 @@
     return NO;
 }
 
+- (NSString *)av_jsonString {
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:self options:NSJSONWritingPrettyPrinted error:nil];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
 
 @end

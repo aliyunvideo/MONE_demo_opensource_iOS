@@ -345,6 +345,7 @@ static void s_retryForFinish(NSError *error, void(^onCompleted)(BOOL isCancel)) 
     if (!_beautyEngine) {
         QueenEngineConfigInfo *configInfo = [QueenEngineConfigInfo new];
         configInfo.runOnCustomThread = NO;
+        configInfo.autoSettingImgAngle = YES;
         _beautyEngine = [[QueenEngine alloc] initWithConfigInfo:configInfo];
         if (_beautyPanelController) {
             _beautyPanelController.queenEngine = _beautyEngine;
