@@ -59,6 +59,10 @@
 }
 
 - (void)hide {
+    for (UITextField *input in self.inputs) {
+        [input resignFirstResponder];
+    }
+    
     [UIView animateWithDuration:0.3 animations:^{
         self.av_top = AlivcScreenHeight;
         self.av_height = 0;
@@ -177,9 +181,9 @@
             [inputField addTarget:self action:@selector(inputEditingChanged:) forControlEvents:UIControlEventEditingChanged];
             [inputContentView addSubview:inputField];
             
-            if (i == 0) {
-                [inputField becomeFirstResponder];
-            }
+//            if (i == 0) {
+//                [inputField becomeFirstResponder];
+//            }
             
             [self.inputs addObject:inputField];
         }

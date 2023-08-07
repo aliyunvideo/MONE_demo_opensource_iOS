@@ -61,6 +61,18 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, assign) BOOL isUserMainStream;
 
+/**
+ 视频采集帧率
+ * 默认 : AlivcLivePushFPS20
+ */
+@property (nonatomic, assign) AlivcLivePushFPS fps;
+
+/**
+ 打开美颜
+ * 默认：YES
+ */
+@property (nonatomic, assign) BOOL beautyOn;
+
 + (instancetype)manager;
 - (void)reset;
 

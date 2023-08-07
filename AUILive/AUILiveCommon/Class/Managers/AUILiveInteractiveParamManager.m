@@ -34,6 +34,8 @@
     self.videoEncodeGop = AlivcLivePushVideoEncodeGOP_2;
     self.videoHardEncoderCodec = AlivcLivePushVideoEncoderModeHardCodecH264;
     self.isUserMainStream = NO;
+    self.fps = AlivcLivePushFPS20;
+    self.beautyOn = YES;
 }
 
 @end

@@ -313,7 +313,7 @@
     }
     self.beautyPanelController = [[AliyunQueenPanelController alloc] initWithParentView:view];
     self.beautyPanelController.queenEngine = self.beautyEngine;
-    [self.beautyPanelController selectDefaultBeautyEffect];
+//    [self.beautyPanelController selectDefaultBeautyEffect];
 }
 
 - (void)destroyBeautyConfigPanel

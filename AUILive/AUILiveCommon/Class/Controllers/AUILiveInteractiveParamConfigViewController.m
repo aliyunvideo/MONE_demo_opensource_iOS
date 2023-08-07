@@ -25,7 +25,9 @@
 @property (nonatomic, assign) bool audioOnly_temp;
 @property (nonatomic, assign) AlivcLivePushVideoEncodeGOP videoEncodeGop_temp;
 @property (nonatomic, assign) AlivcLivePushVideoEncoderModeHardCodec videoHardEncoderCode_temp;
+@property (nonatomic, assign) AlivcLivePushFPS fps_temp;
 @property (nonatomic, assign) BOOL isUserMainStream_temp;
+@property (nonatomic, assign) BOOL beautyOn_temp;
 
 @end
 
@@ -120,6 +122,24 @@
         self.videoHardEncoderCode_temp = (value == 1 ? AlivcLivePushVideoEncoderModeHardCodecHEVC : AlivcLivePushVideoEncoderModeHardCodecH264);
     };
     
+    AlivcLiveParamModel *titlefpsModel = [[AlivcLiveParamModel alloc] init];
+    titlefpsModel.reuseId = AlivcLiveParamModelReuseCellSliderHeader;
+    titlefpsModel.title = AUILiveCommonString(@"captrue_fps");
+    
+    NSArray *fpsArray = @[@"8",@"10",@"12",@"15",@"20",@"25",@"30"];
+    self.fps_temp = self.manager.fps;
+    NSString *fpsStr = [NSString stringWithFormat:@"%ld", self.manager.fps];
+    AlivcLiveParamModel *fpsModel = [[AlivcLiveParamModel alloc] init];
+    fpsModel.title = AUILiveCommonString(@"captrue_fps");
+    fpsModel.defaultValue = [fpsArray indexOfObject:fpsStr] / (float)fpsArray.count;
+    fpsModel.infoText = fpsStr;
+    fpsModel.placeHolder = fpsStr;
+    fpsModel.infoUnit = @"fps";
+    fpsModel.reuseId = AlivcLiveParamModelReuseCellSlider;
+    fpsModel.sliderBlock = ^(int value) {
+        self.fps_temp = value;
+    };
+    
     self.isUserMainStream_temp = self.manager.isUserMainStream;
     AlivcLiveParamModel *userMainStreamModel = [[AlivcLiveParamModel alloc] init];
     userMainStreamModel.title = AUILiveCommonString(@"user_main_stream");
@@ -151,7 +171,17 @@
         }
     };
     
-    self.dataArray = @[titleResolutionModel, resolutionModel, titlePlaceholderModel, videoEncoderModeModel, audioEncoderModeModel, audiOnlyModeModel, titleVideoEncodeGopModel, videoEncodeGopModel, titlePlaceholderModel, videoHardEncodeCodecModel, userMainStreamModel];
+    self.beautyOn_temp = self.manager.beautyOn;
+    AlivcLiveParamModel *beautyOnModel = [[AlivcLiveParamModel alloc] init];
+    beautyOnModel.title = AUILiveCommonString(@"beauty_button");
+    beautyOnModel.defaultValue = self.manager.beautyOn;
+    beautyOnModel.defaultValueAppose = 1.0;
+    beautyOnModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
+    beautyOnModel.switchBlock = ^(int index, BOOL open) {
+            self.beautyOn_temp = open;
+    };
+    
+    self.dataArray = @[titleResolutionModel, resolutionModel, titlePlaceholderModel, videoEncoderModeModel, audioEncoderModeModel, audiOnlyModeModel, titleVideoEncodeGopModel, videoEncodeGopModel, titlePlaceholderModel, videoHardEncodeCodecModel, titlefpsModel, fpsModel, userMainStreamModel, beautyOnModel];
 }
 
 - (void)clickSettingButton:(UIButton *)sender {
@@ -161,7 +191,9 @@
     self.manager.audioOnly = self.audioOnly_temp;
     self.manager.videoEncodeGop = self.videoEncodeGop_temp;
     self.manager.videoHardEncoderCodec = self.videoHardEncoderCode_temp;
+    self.manager.fps = self.fps_temp;
     self.manager.isUserMainStream = self.isUserMainStream_temp;
+    self.manager.beautyOn = self.beautyOn_temp;
     
     [self goBack];
     if (self.changeParam) {

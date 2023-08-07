@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUIQueenCom'
-  s.version          = '6.1.0'
+  s.version          = '6.3.0'
   s.summary          = 'A short description of AUIQueenCom.'
 
 # This description is used to generate tags and improve search results.

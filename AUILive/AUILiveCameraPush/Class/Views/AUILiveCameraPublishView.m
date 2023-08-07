@@ -173,7 +173,7 @@ static const int maxDynamicWatermarkCount = 3;
     
     self.beautySettingButton = [self setupButtonWithFrame:CGRectMake(0, 70, topViewButtonSize, topViewButtonSize)
                                                     title: AUILiveCameraPushString(@"美颜")
-                                              normalImage:AUILiveCameraPushImage(@"alivc_beauty")
+                                              normalImage:AUILiveCommonImage(@"alivc_beauty")
                                               selectImage:nil
                                                    action:@selector(beautySettingButtonAction:)
                                               customImage:NO];

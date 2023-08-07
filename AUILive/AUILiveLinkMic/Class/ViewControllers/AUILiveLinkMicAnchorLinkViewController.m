@@ -11,6 +11,7 @@
 #import "AUILiveIntercativeLinkCustomerView.h"
 #import "AUILiveInputNumberAlert.h"
 #import "AUILiveExternMainStreamManager.h"
+#import "AUILiveBeautyController.h"
 
 typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPushStatus) {
     AUILiveLinkMicAnchorPushStatusNone = 0,
@@ -28,7 +29,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
     AUILiveLinkMicAudiencePullStatusStop,
 };
 
-@interface AUILiveLinkMicAnchorLinkViewController ()<AlivcLivePusherInfoDelegate, AlivcLivePusherErrorDelegate, AlivcLivePusherNetworkDelegate, AliLivePlayerDelegate, AlivcLiveBaseObserver>
+@interface AUILiveLinkMicAnchorLinkViewController ()<AlivcLivePusherInfoDelegate, AlivcLivePusherErrorDelegate, AlivcLivePusherNetworkDelegate, AlivcLivePusherCustomFilterDelegate, AlivcLivePusherCustomDetectorDelegate, AliLivePlayerDelegate, AlivcLiveBaseObserver>
 
 @property (nonatomic, strong) AUILiveInteractiveParamManager *paramManager;
 
@@ -46,6 +47,8 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
 @property (nonatomic, strong) AUILiveIntercativeLinkCustomerView *playerView;
 @property (nonatomic, strong) UILabel *playerStatusLabel;
 @property (nonatomic, strong) UIButton *playerActionButton;
+
+@property (nonatomic, strong) UIButton *beautyButton;
 
 @property (nonatomic, assign) AUILiveLinkMicAnchorPushStatus anchorPushStatus;
 @property (nonatomic, assign) AUILiveLinkMicAudiencePullStatus audiencePullStatus;
@@ -91,6 +94,9 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] setupBeautyControllerUIWithView:self.view];
+    }
     BOOL success = [self startRTCPush];
     if (success) {
         self.playerView.hidden = NO;
@@ -132,10 +138,15 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
     [self.view addSubview:self.playerActionButton];
     self.playerActionButton.hidden = YES;
     
+    if (self.paramManager.beautyOn) {
+        [self.view addSubview:self.beautyButton];
+    }
+    
     [self.view bringSubviewToFront:self.headerView];
     [self.view bringSubviewToFront:self.playerView];
     [self.view bringSubviewToFront:self.playerStatusLabel];
     [self.view bringSubviewToFront:self.playerActionButton];
+    [self.view bringSubviewToFront:self.beautyButton];
 }
 
 - (void)setupRTCPusher {
@@ -148,6 +159,8 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
     [self.rtcPusher setInfoDelegate:self];
     [self.rtcPusher setErrorDelegate:self];
     [self.rtcPusher setNetworkDelegate:self];
+    [self.rtcPusher setCustomFilterDelegate:self];
+    [self.rtcPusher setCustomDetectorDelegate:self];
 }
 
 - (void)setupRTCPlayer {
@@ -179,6 +192,12 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
                 }
             }
         }];
+    }
+}
+
+- (void)pressBeautyButton:(UIButton *)sender {
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] showPanel:YES];
     }
 }
 
@@ -404,6 +423,10 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
     [self.rtcPusher destory];
     self.rtcPusher = nil;
     self.anchorPushStatus = AUILiveLinkMicAnchorPushStatusNone;
+    
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] destroyBeautyControllerUI];
+    }
 }
 
 #pragma mark - AlivcLiveBaseObserver
@@ -478,9 +501,17 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
 
 #pragma mark - AlivcLivePusherInfoDelegate
 - (void)onPreviewStarted:(AlivcLivePusher *)pusher {
+    if (self.paramManager.beautyOn && !self.paramManager.audioOnly) {
+        BOOL processPixelBuffer = !self.rtcPushConfig.enableLocalVideoTexture;
+        [[AUILiveBeautyController sharedInstance] setupBeautyController:processPixelBuffer];
+    }
 }
 
 - (void)onPreviewStoped:(AlivcLivePusher *)pusher {
+    BOOL processPixelBuffer = !self.rtcPushConfig.enableLocalVideoTexture;
+    if (self.paramManager.beautyOn && !self.paramManager.audioOnly && processPixelBuffer) {
+        [[AUILiveBeautyController sharedInstance] destroyBeautyController];
+    }
 }
 
 - (void)onPushStarted:(AlivcLivePusher *)pusher {
@@ -499,6 +530,57 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
 }
 
 - (void)onPushRestart:(AlivcLivePusher *)pusher {
+}
+
+#pragma mark -- AlivcLivePusherCustomFilterDelegate
+// 通知外置滤镜创建回调
+- (void)onCreate:(AlivcLivePusher*)pusher context:(void*)context {
+    NSLog(@"onCreate");
+}
+
+// 通知外置滤镜处理回调
+- (int)onProcess:(AlivcLivePusher *)pusher texture:(int)texture textureWidth:(int)width textureHeight:(int)height extra:(long)extra {
+    if (self.paramManager.beautyOn) {
+        return [[AUILiveBeautyController sharedInstance] processGLTextureWithTextureID:texture withWidth:width withHeight:height];
+    }
+    return texture;
+}
+
+// 通知外置滤镜销毁回调
+- (void)onDestory:(AlivcLivePusher*)pusher {
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] destroyBeautyController];
+    }
+}
+
+- (BOOL)onProcessVideoSampleBuffer:(AlivcLivePusher *)pusher sampleBuffer:(AlivcLiveVideoDataSample *)sampleBuffer {
+    BOOL result = NO;
+    if (self.paramManager.beautyOn) {
+        result = [[AUILiveBeautyController sharedInstance] processPixelBuffer:sampleBuffer.pixelBuffer withPushOrientation:self.rtcPushConfig.orientation];
+    }
+    return result;
+}
+
+#pragma mark -- AlivcLivePusherCustomDetectorDelegate
+// 通知外置视频检测创建回调
+- (void)onCreateDetector:(AlivcLivePusher *)pusher {
+}
+
+// 通知外置视频检测处理回调
+- (long)onDetectorProcess:(AlivcLivePusher*)pusher data:(long)data w:(int)w h:(int)h rotation:(int)rotation format:(int)format extra:(long)extra {
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] detectVideoBuffer:data
+                                                        withWidth:w
+                                                       withHeight:h
+                                                  withVideoFormat:self.rtcPushConfig.externVideoFormat
+                                              withPushOrientation:self.rtcPushConfig.orientation];
+    }
+    return data;
+}
+
+// 通知外置视频检测销毁回调
+- (void)onDestoryDetector:(AlivcLivePusher *)pusher {
+    
 }
 
 #pragma mark -- AliLivePlayerDelegate
@@ -609,6 +691,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
         _rtcPushConfig.audioEncoderMode = self.paramManager.audioEncoderMode;
         _rtcPushConfig.audioOnly = self.paramManager.audioOnly;
         _rtcPushConfig.videoHardEncoderCodec = self.paramManager.videoHardEncoderCodec;
+        _rtcPushConfig.fps = self.paramManager.fps;
         
         if(self.paramManager.isUserMainStream) {
             _rtcPushConfig.externMainStream = true;
@@ -668,6 +751,16 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePullStatus) {
         [_playerActionButton addTarget:self action:@selector(changeCustomerAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playerActionButton;
+}
+
+- (UIButton *)beautyButton {
+    if (!_beautyButton) {
+        _beautyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _beautyButton.frame = CGRectMake(self.contentView.av_right - 60 - 5, self.contentView.av_top + 20, 60, 60);
+        [_beautyButton setImage:AUILiveCommonImage(@"alivc_beauty") forState:UIControlStateNormal];
+        [_beautyButton addTarget:self action:@selector(pressBeautyButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _beautyButton;
 }
 
 - (AUILiveExternMainStreamManager *)userMainStreamManager {

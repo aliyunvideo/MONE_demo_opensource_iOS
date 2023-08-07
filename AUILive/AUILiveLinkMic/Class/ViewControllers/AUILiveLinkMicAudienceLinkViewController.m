@@ -13,6 +13,7 @@
 #import "AUILiveIntercativeLinkCustomerView.h"
 #import "AUILiveInputNumberAlert.h"
 #import "AUILiveExternMainStreamManager.h"
+#import "AUILiveBeautyController.h"
 
 typedef NS_ENUM(NSInteger, AUILiveLinkMicAudiencePushStatus) {
     AUILiveLinkMicAudiencePushStatusNone = 0,
@@ -30,7 +31,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     AUILiveLinkMicAnchorPullStatusStop,
 };
 
-@interface AUILiveLinkMicAudienceLinkViewController ()<AVPDelegate, AlivcLivePusherInfoDelegate, AlivcLivePusherErrorDelegate, AlivcLivePusherNetworkDelegate, AliLivePlayerDelegate, AlivcLiveBaseObserver>
+@interface AUILiveLinkMicAudienceLinkViewController ()<AVPDelegate, AlivcLivePusherInfoDelegate, AlivcLivePusherErrorDelegate, AlivcLivePusherNetworkDelegate, AlivcLivePusherCustomFilterDelegate, AlivcLivePusherCustomDetectorDelegate, AliLivePlayerDelegate, AlivcLiveBaseObserver>
 
 @property (nonatomic, strong) AUILiveInteractiveParamManager *paramManager;
 
@@ -52,6 +53,8 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 @property (nonatomic, strong) AUILiveIntercativeLinkCustomerView *pusherView;
 @property (nonatomic, strong) UILabel *pusherStatusLabel;
 @property (nonatomic, strong) UIButton *pusherActionButton;
+
+@property (nonatomic, strong) UIButton *beautyButton;
 
 @property (nonatomic, assign) AUILiveLinkMicAudiencePushStatus audiencePushStatus;
 @property (nonatomic, assign) AUILiveLinkMicAnchorPullStatus anchorPullStatus;
@@ -91,6 +94,9 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] setupBeautyControllerUIWithView:self.view];
+    }
     [self showAnchorUserId];
 }
 
@@ -168,10 +174,16 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     [self.view addSubview:self.pusherActionButton];
     self.pusherActionButton.hidden = YES;
     
+    if (self.paramManager.beautyOn) {
+        [self.view addSubview:self.beautyButton];
+    }
+    self.beautyButton.hidden = YES;
+    
     [self.view bringSubviewToFront:self.headerView];
     [self.view bringSubviewToFront:self.pusherView];
     [self.view bringSubviewToFront:self.pusherStatusLabel];
     [self.view bringSubviewToFront:self.pusherActionButton];
+    [self.view bringSubviewToFront:self.beautyButton];
 }
 
 - (void)setupCDNPlayer {
@@ -199,6 +211,8 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     [self.rtcPusher setInfoDelegate:self];
     [self.rtcPusher setErrorDelegate:self];
     [self.rtcPusher setNetworkDelegate:self];
+    [self.rtcPusher setCustomFilterDelegate:self];
+    [self.rtcPusher setCustomDetectorDelegate:self];
 }
 
 - (void)setupRTCPlayer {
@@ -214,6 +228,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
             __strong typeof(self) strongSelf = weakSelf;
             if (!isCanced) {
                 if ([strongSelf stopRTCPush]) {
+                    self.beautyButton.hidden = YES;
                     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                         [strongSelf stopRTCPushPreview];
                         
@@ -244,6 +259,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
                 }
                 
                 [self startRTCPush];
+                self.beautyButton.hidden = NO;
             }
         });
         
@@ -302,6 +318,12 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     if (self.anchorPullStatus == AUILiveLinkMicAnchorPullStatusPause) {
         [self.cdnPlayer start];
         self.anchorPullStatus = AUILiveLinkMicAnchorPullStatusPulling;
+    }
+}
+
+- (void)pressBeautyButton:(UIButton *)sender {
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] showPanel:YES];
     }
 }
 
@@ -511,6 +533,10 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     [self.rtcPlayer stopPlay];
     self.rtcPlayer = nil;
     self.anchorPullStatus = AUILiveLinkMicAnchorPullStatusNone;
+    
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] destroyBeautyControllerUI];
+    }
 }
 
 //- (void)addNotifications {
@@ -613,9 +639,17 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 
 #pragma mark - AlivcLivePusherInfoDelegate
 - (void)onPreviewStarted:(AlivcLivePusher *)pusher {
+    if (self.paramManager.beautyOn && !self.paramManager.audioOnly) {
+        BOOL processPixelBuffer = !self.rtcPushConfig.enableLocalVideoTexture;
+        [[AUILiveBeautyController sharedInstance] setupBeautyController:processPixelBuffer];
+    }
 }
 
 - (void)onPreviewStoped:(AlivcLivePusher *)pusher {
+    BOOL processPixelBuffer = !self.rtcPushConfig.enableLocalVideoTexture;
+    if (self.paramManager.beautyOn && !self.paramManager.audioOnly && processPixelBuffer) {
+        [[AUILiveBeautyController sharedInstance] destroyBeautyController];
+    }
 }
 
 - (void)onPushStarted:(AlivcLivePusher *)pusher {
@@ -634,6 +668,57 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 }
 
 - (void)onPushRestart:(AlivcLivePusher *)pusher {
+}
+
+#pragma mark -- AlivcLivePusherCustomFilterDelegate
+// 通知外置滤镜创建回调
+- (void)onCreate:(AlivcLivePusher*)pusher context:(void*)context {
+    NSLog(@"onCreate");
+}
+
+// 通知外置滤镜处理回调
+- (int)onProcess:(AlivcLivePusher *)pusher texture:(int)texture textureWidth:(int)width textureHeight:(int)height extra:(long)extra {
+    if (self.paramManager.beautyOn) {
+        return [[AUILiveBeautyController sharedInstance] processGLTextureWithTextureID:texture withWidth:width withHeight:height];
+    }
+    return texture;
+}
+
+// 通知外置滤镜销毁回调
+- (void)onDestory:(AlivcLivePusher*)pusher {
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] destroyBeautyController];
+    }
+}
+
+- (BOOL)onProcessVideoSampleBuffer:(AlivcLivePusher *)pusher sampleBuffer:(AlivcLiveVideoDataSample *)sampleBuffer {
+    BOOL result = NO;
+    if (self.paramManager.beautyOn) {
+        result = [[AUILiveBeautyController sharedInstance] processPixelBuffer:sampleBuffer.pixelBuffer withPushOrientation:self.rtcPushConfig.orientation];
+    }
+    return result;
+}
+
+#pragma mark -- AlivcLivePusherCustomDetectorDelegate
+// 通知外置视频检测创建回调
+- (void)onCreateDetector:(AlivcLivePusher *)pusher {
+}
+
+// 通知外置视频检测处理回调
+- (long)onDetectorProcess:(AlivcLivePusher*)pusher data:(long)data w:(int)w h:(int)h rotation:(int)rotation format:(int)format extra:(long)extra {
+    if (self.paramManager.beautyOn) {
+        [[AUILiveBeautyController sharedInstance] detectVideoBuffer:data
+                                                        withWidth:w
+                                                       withHeight:h
+                                                  withVideoFormat:self.rtcPushConfig.externVideoFormat
+                                              withPushOrientation:self.rtcPushConfig.orientation];
+    }
+    return data;
+}
+
+// 通知外置视频检测销毁回调
+- (void)onDestoryDetector:(AlivcLivePusher *)pusher {
+    
 }
 
 #pragma mark -- AliLivePlayerDelegate
@@ -760,6 +845,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
         _rtcPushConfig.audioEncoderMode = self.paramManager.audioEncoderMode;
         _rtcPushConfig.audioOnly = self.paramManager.audioOnly;
         _rtcPushConfig.videoHardEncoderCodec = self.paramManager.videoHardEncoderCodec;
+        _rtcPushConfig.fps = self.paramManager.fps;
         
         if(self.paramManager.isUserMainStream) {
             _rtcPushConfig.externMainStream = true;
@@ -819,6 +905,16 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
         [_pusherActionButton addTarget:self action:@selector(changeCustomerAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _pusherActionButton;
+}
+
+- (UIButton *)beautyButton {
+    if (!_beautyButton) {
+        _beautyButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _beautyButton.frame = CGRectMake(self.contentView.av_right - 60 - 5, self.contentView.av_top + 20, 60, 60);
+        [_beautyButton setImage:AUILiveCommonImage(@"alivc_beauty") forState:UIControlStateNormal];
+        [_beautyButton addTarget:self action:@selector(pressBeautyButton:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _beautyButton;
 }
 
 - (AUILiveExternMainStreamManager *)userMainStreamManager {
