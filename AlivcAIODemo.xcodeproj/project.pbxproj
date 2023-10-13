@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1C721A8CCD21B5F5DF1122D9 /* libPods-AlivcAIODemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 814E128A6FC28879818E2D59 /* libPods-AlivcAIODemo.a */; };
+		41D6B64E283B7B0300256A1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D6B64D283B7B0300256A1E /* AppDelegate.m */; };
+		41D6B659283B7B0500256A1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41D6B658283B7B0500256A1E /* Assets.xcassets */; };
+		41D6B65C283B7B0500256A1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41D6B65A283B7B0500256A1E /* LaunchScreen.storyboard */; };
+		41D6B65F283B7B0500256A1E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D6B65E283B7B0500256A1E /* main.m */; };
+		41D6B667283B7C3800256A1E /* AIOHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D6B665283B7C3800256A1E /* AIOHomeViewController.m */; };
+		41D6B66B283B7C5700256A1E /* license.crt in Resources */ = {isa = PBXBuildFile; fileRef = 41D6B669283B7C5700256A1E /* license.crt */; };
+		41D6B66C283B7C5700256A1E /* AIO.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 41D6B66A283B7C5700256A1E /* AIO.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		414D16FA28A2561100EED8D6 /* AIOSdkHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AIOSdkHeader.h; sourceTree = "<group>"; };
+		415C96C7285B053B00B07B77 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		41D6B649283B7B0300256A1E /* AlivcAIODemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlivcAIODemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		41D6B64C283B7B0300256A1E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		41D6B64D283B7B0300256A1E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		41D6B658283B7B0500256A1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		41D6B65B283B7B0500256A1E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		41D6B65D283B7B0500256A1E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41D6B65E283B7B0500256A1E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		41D6B665283B7C3800256A1E /* AIOHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIOHomeViewController.m; sourceTree = "<group>"; };
+		41D6B666283B7C3800256A1E /* AIOHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIOHomeViewController.h; sourceTree = "<group>"; };
+		41D6B669283B7C5700256A1E /* license.crt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.crt; sourceTree = "<group>"; };
+		41D6B66A283B7C5700256A1E /* AIO.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AIO.bundle; sourceTree = "<group>"; };
+		6763B6EF64B285A24B16F318 /* Pods-AlivcAIODemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlivcAIODemo.release.xcconfig"; path = "Target Support Files/Pods-AlivcAIODemo/Pods-AlivcAIODemo.release.xcconfig"; sourceTree = "<group>"; };
+		814E128A6FC28879818E2D59 /* libPods-AlivcAIODemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AlivcAIODemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9972D7C42295B45151AEFF5B /* Pods-AlivcAIODemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlivcAIODemo.debug.xcconfig"; path = "Target Support Files/Pods-AlivcAIODemo/Pods-AlivcAIODemo.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		41D6B646283B7B0300256A1E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1C721A8CCD21B5F5DF1122D9 /* libPods-AlivcAIODemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		41D6B640283B7B0300256A1E = {
+			isa = PBXGroup;
+			children = (
+				41D6B669283B7C5700256A1E /* license.crt */,
+				41D6B668283B7C5700256A1E /* Resources */,
+				41D6B64B283B7B0300256A1E /* AlivcAIODemo */,
+				41D6B64A283B7B0300256A1E /* Products */,
+				917FB71D162F9CBCC4B6D125 /* Pods */,
+				4C4193578DB1662BBD96EFAC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		41D6B64A283B7B0300256A1E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				41D6B649283B7B0300256A1E /* AlivcAIODemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		41D6B64B283B7B0300256A1E /* AlivcAIODemo */ = {
+			isa = PBXGroup;
+			children = (
+				414D16FA28A2561100EED8D6 /* AIOSdkHeader.h */,
+				41D6B666283B7C3800256A1E /* AIOHomeViewController.h */,
+				41D6B665283B7C3800256A1E /* AIOHomeViewController.m */,
+				41D6B64C283B7B0300256A1E /* AppDelegate.h */,
+				41D6B64D283B7B0300256A1E /* AppDelegate.m */,
+				41D6B658283B7B0500256A1E /* Assets.xcassets */,
+				41D6B65A283B7B0500256A1E /* LaunchScreen.storyboard */,
+				41D6B65D283B7B0500256A1E /* Info.plist */,
+				41D6B65E283B7B0500256A1E /* main.m */,
+			);
+			path = AlivcAIODemo;
+			sourceTree = "<group>";
+		};
+		41D6B668283B7C5700256A1E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				41D6B66A283B7C5700256A1E /* AIO.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4C4193578DB1662BBD96EFAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				814E128A6FC28879818E2D59 /* libPods-AlivcAIODemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		917FB71D162F9CBCC4B6D125 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9972D7C42295B45151AEFF5B /* Pods-AlivcAIODemo.debug.xcconfig */,
+				6763B6EF64B285A24B16F318 /* Pods-AlivcAIODemo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		41D6B648283B7B0300256A1E /* AlivcAIODemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41D6B662283B7B0500256A1E /* Build configuration list for PBXNativeTarget "AlivcAIODemo" */;
+			buildPhases = (
+				A0DEDF5274C2DED21E1D7732 /* [CP] Check Pods Manifest.lock */,
+				41D6B645283B7B0300256A1E /* Sources */,
+				41D6B646283B7B0300256A1E /* Frameworks */,
+				41D6B647283B7B0300256A1E /* Resources */,
+				83AE8C55A4FF90E6037C6E0C /* [CP] Copy Pods Resources */,
+				5757AD9F98CFDB493A5FCED5 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AlivcAIODemo;
+			productName = AlivcAIODemo;
+			productReference = 41D6B649283B7B0300256A1E /* AlivcAIODemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		41D6B641283B7B0300256A1E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					41D6B648283B7B0300256A1E = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 41D6B644283B7B0300256A1E /* Build configuration list for PBXProject "AlivcAIODemo" */;
+			compatibilityVersion = "Xcode 12.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = 41D6B640283B7B0300256A1E;
+			productRefGroup = 41D6B64A283B7B0300256A1E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				41D6B648283B7B0300256A1E /* AlivcAIODemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		41D6B647283B7B0300256A1E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41D6B66B283B7C5700256A1E /* license.crt in Resources */,
+				41D6B65C283B7B0500256A1E /* LaunchScreen.storyboard in Resources */,
+				41D6B659283B7B0500256A1E /* Assets.xcassets in Resources */,
+				41D6B66C283B7C5700256A1E /* AIO.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5757AD9F98CFDB493A5FCED5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlivcAIODemo/Pods-AlivcAIODemo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlivcAIODemo/Pods-AlivcAIODemo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlivcAIODemo/Pods-AlivcAIODemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		83AE8C55A4FF90E6037C6E0C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlivcAIODemo/Pods-AlivcAIODemo-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlivcAIODemo/Pods-AlivcAIODemo-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlivcAIODemo/Pods-AlivcAIODemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A0DEDF5274C2DED21E1D7732 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AlivcAIODemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		41D6B645283B7B0300256A1E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41D6B64E283B7B0300256A1E /* AppDelegate.m in Sources */,
+				41D6B667283B7C3800256A1E /* AIOHomeViewController.m in Sources */,
+				41D6B65F283B7B0500256A1E /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		41D6B65A283B7B0500256A1E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				41D6B65B283B7B0500256A1E /* Base */,
+				415C96C7285B053B00B07B77 /* zh-Hans */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		41D6B660283B7B0500256A1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		41D6B661283B7B0500256A1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		41D6B663283B7B0500256A1E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9972D7C42295B45151AEFF5B /* Pods-AlivcAIODemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K6329CYD7G;
+				ENABLE_BITCODE = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AlivcAIODemo/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "需要访问音乐库为视频剪辑添加音乐";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要使用摄像头进行拍摄视频与直播";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "需要使用麦克风进行拍摄视频与直播";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "访问相册视频与突破进行编辑";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "访问相册视频与突破进行编辑";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aliyun.aio.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = TestForInternal_iOS;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		41D6B664283B7B0500256A1E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6763B6EF64B285A24B16F318 /* Pods-AlivcAIODemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K6329CYD7G;
+				ENABLE_BITCODE = NO;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = AlivcAIODemo/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "需要访问音乐库为视频剪辑添加音乐";
+				INFOPLIST_KEY_NSCameraUsageDescription = "需要使用摄像头进行拍摄视频与直播";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "需要使用麦克风进行拍摄视频与直播";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "访问相册视频与突破进行编辑";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "访问相册视频与突破进行编辑";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aliyun.aio.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = TestForInternal_iOS;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		41D6B644283B7B0300256A1E /* Build configuration list for PBXProject "AlivcAIODemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41D6B660283B7B0500256A1E /* Debug */,
+				41D6B661283B7B0500256A1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		41D6B662283B7B0500256A1E /* Build configuration list for PBXNativeTarget "AlivcAIODemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41D6B663283B7B0500256A1E /* Debug */,
+				41D6B664283B7B0500256A1E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 41D6B641283B7B0300256A1E /* Project object */;
+}

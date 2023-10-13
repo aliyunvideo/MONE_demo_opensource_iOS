@@ -1,26 +1,30 @@
-# 跑通阿里云音视频终端SDK示例代码
+# 阿里云MediaBox SDK Demo
 
-## 集成源码
-* clone源码
-```sh
-git clone git@github.com:aliyunvideo/MONE_demo_opensource_iOS.git
+## 代码结构
 ```
-* demo通过cocoapods进行自动集成，如果没有安装cocoapods，请先安装，安装后在AlivcAIODemo目录下执行pod install
-```sh
-cd AlivcAIODemo
-# 如果失败，请带上“--reop-update”参数
-pod install
-```
-* 打开工程
-```sh
-open AlivcAIODemo.xcworkspace
+├── 根目录                                    
+│   ├── AUIBaseKits                            // 依赖的AUI基础组件源码文件
+│       ├── AUIBeauty                          // 依赖美颜组件
+│       ├── AUIFoundation                      // 依赖基础UI组件
+│   ├── AlivcLiveDemo                          // 直播模块源码文件
+│   ├── AlivcPlayerDemo                        // 播放器模块源码文件
+│   ├── AlivcRtcDemo                           // 互动直播模块源码文件
+│   ├── AlivcUgsvDemo                          // 短视频生产模块源码文件
+│   ├── AlivcAIODemo                           // 一体化聚合页模块源码文件
+│   ├── AlivcAIODemo.xcodeproj                 // Demo的Project
+│   ├── AlivcAIODemo.xcworkspace               // Demo的workspace
+│   ├── Podfile                                // Demo的podfile文件
+│   ├── Resources                              // 资源文件
+│   ├── README.md                              // Readme
 ```
 
-## 配置License
-* 如果还没有License，请先[申请试用License](https://help.aliyun.com/document_detail/438207.html)，把License文件下载到本地，并分别记下申请时填写的“Bundle Id”和控制台颁给的“LicenseKey”
-* 下载后的License文件修改文件名为“license.crt”，并拷贝到“AlivcAIODemo/”目录下
-* 打开工程，修改BundleId为申请License时填写的“Bundle Id”
-* 打开“AlivcAIODemo/Info.plist”，修改AlivcLicenseKey为控制台颁给的“LicenseKey”
 
-## 编译运行
-在配置好License后，直接编译运行即可
+## 跑通demo
+
+1. 源码下载后，进入根目录
+2. 在根目录下执行“pod install  --repo-update”，自动安装依赖SDK
+3. 打开工程文件“AlivcAIODemo.xcworkspace”，修改包Id
+4. 在控制台上申请试用License，获取License文件和LicenseKey，如果已有直接进入下一步
+5. 把License文件放到根目录下，并修改文件名为“license.crt”
+6. 把“LicenseKey”（如果没有，请在控制台拷贝），打开“AlivcAIODemo/Info.plist”，填写到字段“AlivcLicenseKey”的值中
+7. 编译运行
