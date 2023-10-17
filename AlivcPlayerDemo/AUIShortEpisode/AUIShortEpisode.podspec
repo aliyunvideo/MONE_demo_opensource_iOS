@@ -1,5 +1,5 @@
 #
-# Be sure to run `pod lib lint AUIVideoList.podspec' to ensure this is a
+# Be sure to run `pod lib lint AUIShortEpisode.podspec' to ensure this is a
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
@@ -7,9 +7,9 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = 'AUIVideoList'
-  s.version          = '6.5.0'
-  s.summary          = 'A short description of AUIVideoList.'
+  s.name             = 'AUIShortEpisode'
+  s.version          = '1.0.0'
+  s.summary          = 'A short description of AUIShortEpisode.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -30,77 +30,62 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
   s.static_framework = true
-
-  s.subspec 'All' do |ss|
-    ss.dependency 'AUIVideoList/Common'
-    ss.dependency 'AUIVideoList/FunctionList'
-    ss.dependency 'AUIVideoList/StandradList'
-    ss.dependency 'AUIVideoList/ShortEpisode'
-  end
   
-  s.subspec 'Common' do |ss|
-    ss.source_files = 'AUIVideoListCommon/**/*.{h,m,mm}'
-    ss.resource = 'AUIVideoListCommon/Resources/AUIVideoList.bundle'
+  s.default_subspec = 'AliVCSDK_Premium'
+  
+  s.subspec 'src' do |ss|
+    ss.source_files = 'Source/**/*.{h,m,mm}'
+    ss.resource = 'Resources/AUIShortEpisode.bundle'
     ss.dependency 'AUIFoundation/All'
     ss.dependency 'AFNetworking'
     ss.dependency 'SDWebImage'
-    ss.dependency 'MJRefresh'
-    ss.prefix_header_contents = '#import "AUIVideoList.h"'
   end
   
-  s.subspec 'FunctionList' do |ss|
-    ss.source_files = 'AUIVideoFunctionList/AUIVideoFunctionListView.h',
-                      'AUIVideoFunctionList/AUIVideoFunctionListView.m',
-                      'AUIVideoFunctionList/Views/*.{h,m,mm}'
-    ss.dependency 'AUIVideoList/Common'
-  end
-  
-  s.subspec 'StandradList' do |ss|
-    ss.source_files = 'AUIVideoStandradList/AUIVideoStandradListView.h',
-                      'AUIVideoStandradList/AUIVideoStandradListView.m',
-                      'AUIVideoStandradList/Views*/*.{h,m,mm}'
-    ss.dependency 'AUIVideoList/Common'
+  s.subspec 'AliPlayerSDK_iOS' do |ss|
+    ss.dependency 'AUIShortEpisode/src'
+    ss.dependency 'AliPlayerSDK_iOS'
   end
   
   s.subspec 'AliVCSDK_Premium' do |ss|
+    ss.dependency 'AUIShortEpisode/src'
     ss.dependency 'AliVCSDK_Premium'
   end
   
   s.subspec 'AliVCSDK_Standard' do |ss|
+    ss.dependency 'AUIShortEpisode/src'
     ss.dependency 'AliVCSDK_Standard'
   end
   
   s.subspec 'AliVCSDK_BasicLive' do |ss|
+    ss.dependency 'AUIShortEpisode/src'
     ss.dependency 'AliVCSDK_BasicLive'
   end
   
   s.subspec 'AliVCSDK_InteractiveLive' do |ss|
+    ss.dependency 'AUIShortEpisode/src'
     ss.dependency 'AliVCSDK_InteractiveLive'
   end
   
   s.subspec 'AliVCSDK_UGC' do |ss|
+    ss.dependency 'AUIShortEpisode/src'
     ss.dependency 'AliVCSDK_UGC'
   end
   
   s.subspec 'AliVCSDK_UGCPro' do |ss|
+    ss.dependency 'AUIShortEpisode/src'
     ss.dependency 'AliVCSDK_UGCPro'
   end
   
   s.subspec 'AliVCSDK_StandardLive' do |ss|
+    ss.dependency 'AUIShortEpisode/src'
     ss.dependency 'AliVCSDK_StandardLive'
   end
   
   s.subspec 'AliVCSDK_PremiumLive' do |ss|
+    ss.dependency 'AUIShortEpisode/src'
     ss.dependency 'AliVCSDK_PremiumLive'
   end
   
-  s.subspec 'AliPlayerSDK_iOS' do |ss|
-    ss.dependency 'AliPlayerSDK_iOS'
-  end
-  
-  s.subspec 'AliPlayerPartSDK_iOS' do |ss|
-    ss.dependency 'AliPlayerPartSDK_iOS'
-    ss.dependency 'QuCore-ThirdParty'
-  end
+
   
 end

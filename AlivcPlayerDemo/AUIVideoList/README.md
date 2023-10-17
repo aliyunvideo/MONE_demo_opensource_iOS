@@ -6,7 +6,6 @@
 │   ├── AUIVideoListCommon                // 公共组件代码
 │   ├── AUIVideoFunctionList              // 沉浸式短视频性能组件代码
 │   ├── AUIVideoStandradList              // 沉浸式短视频标准组件代码
-│   ├── AUIShortEpisode                   // 短剧组件代码
 │   ├── AUIVideoList.podspec              // 本地pod文件
 │   ├── README.md   // Readme   
 
@@ -23,9 +22,6 @@
    
 - 集成沉浸式短视频标准组件
    pod "AUIVideoList/StandradList", :path => "AUIVideoList/"
-   
-- 集成短剧组件
-   pod "AUIVideoList/ShortEpisode", :path => "AUIVideoList/"
    
 >注意：需要同时集成AUIFoundation这个公共UI组件库。
 
@@ -47,14 +43,6 @@ AUIVideoFunctionListView *vc = [[AUIVideoFunctionListView alloc] init];
 
 AUIVideoStandradListView *vc = [[AUIVideoStandradListView alloc] init];
 [vc loadSources:xxxx]; // xxxx 代表列表数据源，具体可参考接口
-[self.navigationController pushViewController:vc animated:YES];
-```
-
--  集成了AUI短剧组件
-```ObjC
-#import "AUIShortEpisodeViewController.h"
-
-AUIShortEpisodeViewController *vc = [[AUIShortEpisodeViewController alloc] init];
 [self.navigationController pushViewController:vc animated:YES];
 ```
 

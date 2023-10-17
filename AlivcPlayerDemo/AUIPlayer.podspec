@@ -69,16 +69,18 @@ TODO: Add long description of the pod here.
                          'AUIVideoList/AUIVideoStandradList/AUIVideoStandradListView.m',
                          'AUIVideoList/AUIVideoStandradList/Views*/*.{h,m,mm}'
     end
-    ss.subspec "ShortEpisode" do |sss|
-      sss.source_files = 'AUIVideoList/AUIShortEpisode/**/*.{h,m,mm}'
-      sss.resource = 'AUIVideoList/AUIShortEpisode/Resources/AUIShortEpisode.bundle'
-    end
+  end
+  
+  s.subspec "ShortEpisode" do |sss|
+    sss.source_files = 'AUIShortEpisode/Source/*.{h,m,mm}'
+    sss.resource = 'AUIShortEpisode/Resources/AUIShortEpisode.bundle'
   end
         
   s.subspec 'All' do |ss|
     ss.dependency 'AUIPlayer/PlayerList'
     ss.dependency 'AUIPlayer/VideoFlow'
     ss.dependency 'AUIPlayer/VideoList'
+    ss.dependency 'AUIPlayer/ShortEpisode'
   end
   
   s.subspec 'AliVCSDK_Premium' do |ss|
