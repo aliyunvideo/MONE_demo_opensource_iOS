@@ -32,7 +32,7 @@
    AVCommonListItem *item3 = [AVCommonListItem new];
    item3.title = AlivcPlayerString(@"Video List");
    item3.info = AlivcPlayerString(@"The demonstration of the video standrad list");
-   item3.icon = AlivcPlayerImage(@"bofangqi_ic_quanping");
+   item3.icon = AlivcPlayerImage(@"bofangqi_ic_chenjin");
     
     AVCommonListItem *item4 = [AVCommonListItem new];
     item4.title = AlivcPlayerString(@"Short Episode");
@@ -118,14 +118,9 @@
     [module openStandradListPage];
 }
 
-#define AUI_VIDEO_SHORT_EPISODE
 - (void)openVideoShortEpisode {
-#ifndef AUI_VIDEO_SHORT_EPISODE
-    [AVAlertController show:@"敬请期待！"];
-#else
     AUIShortEpisodeViewController *vc = [[AUIShortEpisodeViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-#endif
 }
 
 - (void)openVideoFullScreen {

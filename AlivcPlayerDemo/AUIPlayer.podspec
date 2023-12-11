@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUIPlayer'
-  s.version          = '6.5.0'
+  s.version          = '6.7.0'
   s.summary          = 'A short description of AUIPlayer.'
 
 # This description is used to generate tags and improve search results.
@@ -83,10 +83,6 @@ TODO: Add long description of the pod here.
     ss.dependency 'AUIPlayer/ShortEpisode'
   end
   
-  s.subspec 'AliVCSDK_Premium' do |ss|
-    ss.dependency 'AliVCSDK_Premium'
-  end
-  
   s.subspec 'AliVCSDK_Standard' do |ss|
     ss.dependency 'AliVCSDK_Standard'
   end
@@ -101,18 +97,6 @@ TODO: Add long description of the pod here.
   
   s.subspec 'AliVCSDK_UGC' do |ss|
     ss.dependency 'AliVCSDK_UGC'
-  end
-  
-  s.subspec 'AliVCSDK_UGCPro' do |ss|
-    ss.dependency 'AliVCSDK_UGCPro'
-  end
-  
-  s.subspec 'AliVCSDK_StandardLive' do |ss|
-    ss.dependency 'AliVCSDK_StandardLive'
-  end
-  
-  s.subspec 'AliVCSDK_PremiumLive' do |ss|
-    ss.dependency 'AliVCSDK_PremiumLive'
   end
   
   s.subspec 'AliPlayerSDK_iOS' do |ss|

@@ -16,6 +16,7 @@ typedef NS_ENUM(NSUInteger, AUIRecorderSlidBtnType) {
     AUIRecorderSlidBtnTypeResolution,
     AUIRecorderSlidBtnTypeSpecialEffects,
     AUIRecorderSlidBtnTypeTakePhoto,
+    AUIRecorderSlidBtnTypeMixLayout,
 };
 
 @class AUIRecorderSliderButtonsView;
@@ -28,11 +29,13 @@ typedef NS_ENUM(NSUInteger, AUIRecorderSlidBtnType) {
 @property (nonatomic, weak) id<AUIRecorderSliderButtonsViewDelegate> delegate;
 @property (nonatomic, assign) AUIRecorderResolutionRatio resolution;
 @property (nonatomic, assign) BOOL resolutionDisabled;
+@property (nonatomic, assign) AUIRecorderMixType mixType;
+@property (nonatomic, assign) BOOL mixLayoutDisabled;
 @property (nonatomic, assign) BOOL musicDisabled;
 
 - (instancetype) initWithShowTypes:(NSArray<NSNumber *> *)showTypes
                           delegate:(id<AUIRecorderSliderButtonsViewDelegate>)delegate;
-- (instancetype) initWithDelegate:(id<AUIRecorderSliderButtonsViewDelegate>)delegate;
+- (instancetype) initWithMix:(BOOL)isMix withDelegate:(id<AUIRecorderSliderButtonsViewDelegate>)delegate;
 @end
 
 NS_ASSUME_NONNULL_END

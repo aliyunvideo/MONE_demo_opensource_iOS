@@ -39,7 +39,7 @@ target '你的App target' do
   # 基础UI组件
   pod 'AUIFoundation/All', :path => "./AUIFoundation/"
   
-  # 短剧UI组件，如果终端SDK使用的是AliVCSDK_Premium，需要AliVCSDK_PremiumLive替换为AliVCSDK_Premium
+  # 短剧UI组件，如果终端SDK使用的是AliVCSDK_Premium，需要AliPlayerSDK_iOS替换为AliVCSDK_Premium
   pod 'AUIShortEpisode/AliPlayerSDK_iOS', :path => "./AUIShortEpisode/"
 end
 ```
@@ -62,7 +62,7 @@ AUIShortEpisodeViewController *vc = [[AUIShortEpisodeViewController alloc] init]
 
 本组件默认使用了内置的剧集数据进行演示，在你集成组件后需要修改这块的逻辑，需要对接到你的服务端，通过服务端提供的接口来获取剧集数据
 
-- 在源码中找到AUIShortEpisodeDataManager类，进入fetchData:completed:方法，修改为服务端接口实现
+- 在源码中找到AUIShortEpisodeDataManager类，进入fetchData:completed:方法，修改为通过服务端接口获取剧集数据
 ```ObjC
 //  AUIShortEpisodeData.m
 
@@ -107,7 +107,7 @@ b. 单集视频：AUIVideoInfo
 
 3. 视频互动功能开发
 
-点赞、评论、分享仅在视频上透出入口，点击后具体的操作需要自己来实现，可以到AUIShortEpisodeViewController类中对接
+点赞、评论、分享仅在视频上透出入口，点击后具体的操作需要自己来实现，可以到AUIShortEpisodeViewController类中对接实现
 ```ObjC
 //  AUIShortEpisodeViewController.m
 
@@ -127,7 +127,7 @@ b. 单集视频：AUIVideoInfo
 
 ```
 
-## 核心能力
+## 核心能力介绍
 
-本组件功能通过阿里云播放器SDK的AliListPlayer进行实现，使用了本地缓存、智能预加载、智能预渲染等核心能力，在播放延迟、播放稳定性方面大幅度提升观看体验。
+本组件功能通过阿里云播放器SDK的AliListPlayer进行实现，使用了本地缓存、智能预加载、智能预渲染、HTTPDNS等核心能力，在播放延迟、播放稳定性方面大幅度提升观看体验。
 具体介绍参考[进阶功能](https://help.aliyun.com/zh/vod/developer-reference/advanced-features-1)

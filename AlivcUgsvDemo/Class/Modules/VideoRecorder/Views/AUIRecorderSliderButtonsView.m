@@ -17,12 +17,17 @@
 
 @implementation AUIRecorderSliderButtonsView
 
-- (instancetype) initWithDelegate:(id<AUIRecorderSliderButtonsViewDelegate>)delegate {
+- (instancetype)initWithMix:(BOOL)isMix withDelegate:(id<AUIRecorderSliderButtonsViewDelegate>)delegate {
     NSArray *showTypes = @[@(AUIRecorderSlidBtnTypeMusic),
                            @(AUIRecorderSlidBtnTypeFilter),
                            @(AUIRecorderSlidBtnTypeResolution),
                            @(AUIRecorderSlidBtnTypeSpecialEffects),
                            @(AUIRecorderSlidBtnTypeTakePhoto)];
+    if (isMix) {
+        showTypes = @[@(AUIRecorderSlidBtnTypeFilter),
+                      @(AUIRecorderSlidBtnTypeSpecialEffects),
+                      @(AUIRecorderSlidBtnTypeMixLayout)];
+    }
     return [self initWithShowTypes:showTypes delegate:delegate];
 }
 
@@ -51,6 +56,16 @@
 - (void) setResolutionDisabled:(BOOL)resolutionDisabled {
     _resolutionDisabled = resolutionDisabled;
     [self updateResolutionBtnUI];
+}
+
+- (void) setMixType:(AUIRecorderMixType)mixType {
+    _mixType = mixType;
+    [self updateMixLayoutBtnUI];
+}
+
+- (void) setMixLayoutDisabled:(BOOL)mixLayoutDisabled {
+    _mixLayoutDisabled = mixLayoutDisabled;
+    [self updateMixLayoutBtnUI];
 }
 
 // MARK: - Actions
@@ -93,7 +108,12 @@
         },
         @(AUIRecorderSlidBtnTypeTakePhoto): @{
             @0: [AVBaseStateButtonInfo InfoWithTitle:AUIUgsvGetString(@"拍照") image:AUIUgsvRecorderImage(@"ic_take_photo")]
-        }
+        },
+        @(AUIRecorderSlidBtnTypeMixLayout): @{
+            @(0): [AVBaseStateButtonInfo InfoWithTitle:AUIUgsvGetString(@"布局") image:AUIUgsvRecorderImage(@"ic_mix_layout1") disabledImage:AUIUgsvRecorderImage(@"ic_mix_layout1_disabled")],
+            @(1): [AVBaseStateButtonInfo InfoWithImage:AUIUgsvRecorderImage(@"ic_mix_layout2") disabledImage:AUIUgsvRecorderImage(@"ic_mix_layout2_disabled")],
+            @(2): [AVBaseStateButtonInfo InfoWithImage:AUIUgsvRecorderImage(@"ic_mix_layout3") disabledImage:AUIUgsvRecorderImage(@"ic_mix_layout3_disabled")],
+        },
     };
     
     __weak typeof(self) weakSelf = self;
@@ -109,6 +129,7 @@
     
     [self updateMusicBtnUI];
     [self updateResolutionBtnUI];
+    [self updateMixLayoutBtnUI];
 }
 
 - (void) updateMusicBtnUI {
@@ -119,6 +140,12 @@
     AVBaseStateButton *btn = _buttons[@(AUIRecorderSlidBtnTypeResolution)];
     btn.customState = (int)_resolution;
     btn.disabled = _resolutionDisabled;
+}
+
+- (void) updateMixLayoutBtnUI {
+    AVBaseStateButton *btn = _buttons[@(AUIRecorderSlidBtnTypeMixLayout)];
+    btn.customState = (int)_mixType / 2;
+    btn.disabled = _mixLayoutDisabled;
 }
 
 @end

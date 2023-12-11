@@ -7,7 +7,7 @@ platform :ios, '10.0'
 
 # ===================================集成音视频终端SDK===================================
 def aliyun_demo_dependency_sdk
-  pod 'AliVCSDK_Premium', '6.5.0'
+  pod 'AliVCSDK_Standard', '6.7.0'
 end
 
 # ===================================集成AUIFoundation===================================
@@ -15,32 +15,32 @@ def aliyun_demo_dependency_foundation
   pod 'AUIFoundation/All', :path => './AUIBaseKits/AUIFoundation/'
 end
 
-# ===================================Queen美颜集成===================================
+# ===================================Queen美颜专业版集成===================================
 def aliyun_demo_dependency_queen
-  pod 'AUIBeauty/AliVCSDK_Premium',  :path => './AUIBaseKits/AUIBeauty/'
+  pod 'AUIBeauty/Queen',  :path => './AUIBaseKits/AUIBeauty/'
 end
 
 # ===================================直播推流集成===================================
 def aliyun_demo_aui_live
-  pod 'AUILive/AliVCSDK_Premium', :path => './AlivcLiveDemo/'
+  pod 'AUILive/AliVCSDK_Standard', :path => './AlivcLiveDemo/'
   pod 'AUILive/All', :path => './AlivcLiveDemo/'
 end
 
 # ===================================播放器集成===================================
 def aliyun_demo_aui_player
-  pod 'AUIPlayer/AliVCSDK_Premium', :path => './AlivcPlayerDemo/'
+  pod 'AUIPlayer/AliVCSDK_Standard', :path => './AlivcPlayerDemo/'
   pod 'AUIPlayer/All', :path => './AlivcPlayerDemo/'
 end
 
 # ===================================互动直播集成===================================
 def aliyun_demo_aui_rtc
-  pod 'AUIRtc/AliVCSDK_Premium', :path => './AlivcRtcDemo/'
-  pod 'AUIRtc/All', :path => './AlivcRtcDemo/'
+  pod 'AUIRtc/AliVCSDK_Standard', :path => './AlivcRtcDemo/'
+  pod 'AUIRtc/List', :path => './AlivcRtcDemo/'
 end
 
 # ===================================短视频剪辑集成===================================
 def aliyun_demo_aui_ugsv
-  pod 'AUIUgsv/AliVCSDK_Premium_all', :path => './AlivcUgsvDemo/'
+  pod 'AUIUgsv/AliVCSDK_Standard_all', :path => './AlivcUgsvDemo/'
   pod 'AUIUgsv/All', :path => './AlivcUgsvDemo/'
 end
 

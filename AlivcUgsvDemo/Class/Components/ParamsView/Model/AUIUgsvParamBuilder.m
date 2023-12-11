@@ -35,6 +35,19 @@
     return [[AUIUgsvParamWrapper alloc] initWithParams:_groups];
 }
 
+- (void)setCurrentGroupWithName:(NSString *)name {
+    __block AUIUgsvParamGroup *group = nil;
+     [_groups enumerateObjectsUsingBlock:^(AUIUgsvParamGroup * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+         if ([obj.name isEqualToString:name]) {
+             group = obj;
+             return;
+         }
+     }];
+    if (group) {
+        [self setCurrentGroup:group];
+    }
+}
+
 - (void)setCurrentGroup:(AUIUgsvParamGroup *)currentGroup {
     if (_currentGroup == currentGroup) {
         return;
@@ -398,6 +411,10 @@ static ParamValueConverterSetter s_ParamValueConverterSetter(__weak AUIUgsvParam
 
 - (AUIUgsvParamItemModel *)findParamItemWithName:(NSString *)name {
     return [_innerObj.paramWrapper findParamItemWithName:name];
+}
+
+- (void)changeLastGroupWithName:(NSString *)name {
+    [self.innerObj setCurrentGroupWithName:name];
 }
 
 - (AUIUgsvParamGroupBuilder *)lastGroup {

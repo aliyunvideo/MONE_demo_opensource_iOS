@@ -27,6 +27,15 @@ typedef NS_ENUM(NSUInteger, AUIRecorderResolutionRatio) {
     AUIRecorderResolutionRatioMax,
 };
 
+typedef NS_ENUM(NSUInteger, AUIRecorderMixType) {
+    AUIRecorderMixTypeLeftRight = 0,  // 左合拍视频，右拍摄视频
+    AUIRecorderMixTypeRightLeft,
+    AUIRecorderMixTypeTopBottom,
+    AUIRecorderMixTypeBottomTop,
+    AUIRecorderMixTypeBackFront,
+    AUIRecorderMixTypeFrontBack,
+};
+
 @interface AUIRecorderConfig : NSObject
 @property (nonatomic, strong) AliyunRecorderVideoConfig *videoConfig;
 @property (nonatomic, assign) AUIRecorderHorizontalResolution horizontalResolution;
@@ -36,13 +45,22 @@ typedef NS_ENUM(NSUInteger, AUIRecorderResolutionRatio) {
 
 @property (nonatomic, assign) NSTimeInterval minDuration;
 @property (nonatomic, assign) NSTimeInterval maxDuration;
-@property (nonatomic, readonly) BOOL isUsingAEC; // 暂时没有混音场景，设置为NO，暂不可改
-@property (nonatomic, readonly) BOOL isUsingCamera; // 暂时只有摄像头，设置为YES，暂不可改
-@property (nonatomic, readonly) CGRect cameraFrame; // 后续根据合拍、多源、单源等类型内置设置，暂时只有全屏
+
 @property (nonatomic, copy) NSString *waterMarkPath;
 @property (nonatomic, assign) CGRect waterFrame;
 
+@property (nonatomic, assign, readonly) BOOL isMixRecord;  // 是否合拍
+@property (nonatomic, copy, nullable) NSString *mixVideoFilePath;
+@property (nonatomic, assign) BOOL isUsingAEC;
+@property (nonatomic, assign) AUIRecorderMixType mixType;
+@property (nonatomic, assign, readonly) CGRect mixVideoFrame; // 合拍视图布局
+@property (nonatomic, assign, readonly) int mixVideoZPosition; // 合拍视图层次
+@property (nonatomic, assign, readonly) CGRect cameraFrame;  // 拍摄视图布局
+@property (nonatomic, assign, readonly) int cameraZPosition;  // 拍摄视图层次
+
 - (AUIUgsvParamBuilder *)paramBuilder;
+- (AUIUgsvParamBuilder *)mixRecordParamBuilder;
+
 @end
 
 NS_ASSUME_NONNULL_END

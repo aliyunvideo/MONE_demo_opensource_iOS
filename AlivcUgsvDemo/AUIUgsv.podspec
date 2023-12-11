@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUIUgsv'
-  s.version          = '6.4.0'
+  s.version          = '6.7.0'
   s.summary          = 'A short description of AUIUgsv.'
 
 # This description is used to generate tags and improve search results.
@@ -30,67 +30,67 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
   s.static_framework = true
-
-  s.dependency 'VODUpload'
+  s.default_subspec = 'Common'
+  
   s.dependency 'Masonry'
   s.dependency 'AFNetworking'
   s.dependency 'SDWebImage'
-  s.dependency 'ZipArchive', '~> 1.4.0'
+  s.dependency 'ZipArchive'
 
   s.subspec 'All' do |ss|
-    ss.resource = 'Resources/*.bundle'
-    ss.source_files = 'Class/**/*.{h,m,mm}'
-    ss.vendored_frameworks = 'framework/*.framework'
-    ss.dependency 'AUIFoundation/All'
+    ss.source_files = 'Class/List/**/*.{h,m,mm}'
+    ss.dependency 'AUIUgsv/Recorder'
+    ss.dependency 'AUIUgsv/Editor'
+    ss.dependency 'AUIUgsv/Clipper'
+    ss.dependency 'AUIUgsv/Template'
   end
   
-  s.subspec 'List' do |ss|
+  s.subspec 'Basic' do |ss|
+    ss.source_files = 'Class/List/**/*.{h,m,mm}'
+    ss.dependency 'AUIUgsv/Recorder_NoBeauty'
+    ss.dependency 'AUIUgsv/Clipper'
+  end
+  
+  s.subspec 'Common' do |ss|
     ss.resource = 'Resources/AlivcUgsv.bundle'
-    ss.source_files = 'Class/*.{h,m,mm}'
+    ss.source_files = 'Class/Base/**/*.{h,m,mm}', 'Class/Components/**/*.{h,m,mm}'
+    ss.vendored_frameworks = 'framework/*.framework'
     ss.dependency 'AUIFoundation/All'
+    ss.dependency 'VODUpload'
   end
 
   s.subspec 'Recorder' do |ss|
-    ss.resource = 'Resources/AlivcUgsv.bundle','Resources/FaceSticker.bundle','Resources/Music.bundle','Resources/Filter.bundle'
-    ss.source_files = 'Class/Base/**/*.{h,m,mm}', 'Class/Components/**/*.{h,m,mm}', 'Class/Modules/VideoRecorder/**/*.{h,m,mm}'
-    ss.dependency 'AUIFoundation/All'
+    ss.dependency 'AUIUgsv/Recorder_NoBeauty'
+    ss.dependency 'AUIBeauty/Common'
+    ss.pod_target_xcconfig = {'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) COCOAPODS=1 ENABLE_BEAUTY'}
+  end
+  
+  s.subspec 'Recorder_NoBeauty' do |ss|
+    ss.dependency 'AUIUgsv/Common'
+    ss.resource = 'Resources/FaceSticker.bundle','Resources/Music.bundle','Resources/Filter.bundle','Resources/AnimationEffects.bundle'
+    ss.source_files = 'Class/Modules/VideoRecorder/**/*.{h,m,mm}'
   end
 
   s.subspec 'Editor' do |ss|
-    ss.resource = 'Resources/*.bundle'
-    ss.source_files = 'Class/Base/**/*.{h,m,mm}', 'Class/Components/**/*.{h,m,mm}', 'Class/Modules/VideoEditor/**/*.{h,m,mm}'
-    ss.vendored_frameworks = 'framework/*.framework'
-    ss.dependency 'AUIFoundation/All'
-  end 
+    ss.dependency 'AUIUgsv/Common'
+    ss.resource = 'Resources/AnimationEffects.bundle', 'Resources/AnimationFrag.bundle', 'Resources/CaptionBub.bundle', 'Resources/CaptionFont.bundle', 'Resources/CaptionStyle.bundle', 'Resources/Filter.bundle', 'Resources/FlowerFont.bundle', 'Resources/Music.bundle', 'Resources/Sticker.bundle'
+    ss.source_files = 'Class/Modules/VideoEditor/**/*.{h,m,mm}'
+  end
 
   s.subspec 'Clipper' do |ss|
-    ss.resource = 'Resources/AlivcUgsv.bundle'
-    ss.source_files = 'Class/Base/**/*.{h,m,mm}', 'Class/Components/**/*.{h,m,mm}', 'Class/Modules/VideoCrop/**/*.{h,m,mm}'
-    ss.vendored_frameworks = 'framework/*.framework'
-    ss.dependency 'AUIFoundation/All'
+    ss.dependency 'AUIUgsv/Common'
+    ss.source_files = 'Class/Modules/VideoCrop/**/*.{h,m,mm}'
   end
   
   s.subspec 'Template' do |ss|
-    ss.resource = 'Resources/AlivcUgsv.bundle','Resources/Template.bundle','Resources/Music.bundle'
-    ss.source_files = 'Class/Base/**/*.{h,m,mm}', 'Class/Components/**/*.{h,m,mm}', 'Class/Modules/VideoTemplate/**/*.{h,m,mm}'
-    ss.vendored_frameworks = 'framework/*.framework'
-    ss.dependency 'AUIFoundation/All'
-  end
-  
-  s.subspec 'AliVCSDK_Premium' do |ss|
-    ss.dependency 'AliVCSDK_Premium'
-    ss.dependency 'AUIBeauty/AliVCSDK_Premium'
-  end
-  
-  s.subspec 'AliVCSDK_Premium_all' do |ss|
-    ss.dependency 'AUIUgsv/AliVCSDK_Premium'
-    ss.dependency 'AliVCSDK_Premium/AlivcUgsvTemplate'
-    ss.dependency 'AliVCSDK_Premium/AlivcUgsvBundle'
+    ss.dependency 'AUIUgsv/Common'
+    ss.dependency 'AUIUgsv/Clipper'
+    ss.resource = 'Resources/Template.bundle','Resources/Music.bundle'
+    ss.source_files = 'Class/Modules/VideoTemplate/**/*.{h,m,mm}'
   end
   
   s.subspec 'AliVCSDK_Standard' do |ss|
     ss.dependency 'AliVCSDK_Standard'
-    ss.dependency 'AUIBeauty/Queen'
   end
   
   s.subspec 'AliVCSDK_Standard_all' do |ss|
@@ -101,7 +101,6 @@ TODO: Add long description of the pod here.
   
   s.subspec 'AliVCSDK_UGC' do |ss|
     ss.dependency 'AliVCSDK_UGC'
-    ss.dependency 'AUIBeauty/Queen'
   end
   
   s.subspec 'AliVCSDK_UGC_all' do |ss|
@@ -110,26 +109,13 @@ TODO: Add long description of the pod here.
     ss.dependency 'AliVCSDK_UGC/AlivcUgsvBundle'
   end
   
-  s.subspec 'AliVCSDK_UGCPro' do |ss|
-    ss.dependency 'AliVCSDK_UGCPro'
-    ss.dependency 'AUIBeauty/AliVCSDK_UGCPro'
-  end
-  
-  s.subspec 'AliVCSDK_UGCPro_all' do |ss|
-    ss.dependency 'AUIUgsv/AliVCSDK_UGCPro'
-    ss.dependency 'AliVCSDK_UGCPro/AlivcUgsvTemplate'
-    ss.dependency 'AliVCSDK_UGCPro/AlivcUgsvBundle'
-  end
-  
   
   s.subspec 'AliyunVideoSDKPro' do |ss|
     ss.dependency 'AliyunVideoSDKPro'
-    ss.dependency 'AUIBeauty/Queen'
   end
   
   s.subspec 'AliyunVideoSDKPro_all' do |ss|
     ss.dependency 'AliyunVideoSDKPro/all'
-    ss.dependency 'AUIBeauty/Queen'
   end
 
   s.subspec 'AliyunVideoSDKBasic' do |ss|

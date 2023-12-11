@@ -7,7 +7,6 @@
 
 #import "AUIRtcViewController.h"
 
-//#define ENABLE_AUI_CALL
 #ifdef ENABLE_AUI_CALL
 @import AUICall;
 #endif

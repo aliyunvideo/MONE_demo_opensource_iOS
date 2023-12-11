@@ -20,6 +20,7 @@
 #import "AUIRecorderFaceStickerPanel.h"
 #import "AUIRecorderFilterPanel.h"
 #import "AUIMusicPicker.h"
+#import "AUIRecorderMixLayoutPanel.h"
 #import "AVProgressHUD.h"
 #import "AlivcUgsvSDKHeader.h"
 #import "AUIAssetPlay.h"
@@ -93,9 +94,9 @@ AUIRecorderCameraWrapperDelegate>
     [self setupBottomButtons];
     [self.view bringSubviewToFront:_controlView];
     
-#ifdef INCLUDE_QUEEN
+#ifdef ENABLE_BEAUTY
     [_recorder selectedDefaultBeautyPanel];
-#endif // INCLUDE_QUEEN
+#endif // ENABLE_BEAUTY
 
     [self syncRecorderState];
     [self syncPartCountAndDuration];
@@ -229,6 +230,9 @@ AUIRecorderCameraWrapperDelegate>
         case AUIRecorderSlidBtnTypeSpecialEffects:
             [self openAnimationEffectsPanel];
             break;
+        case AUIRecorderSlidBtnTypeMixLayout:
+            [self openMixLayoutPanel];
+            break;
         default:
             break;
     }
@@ -255,7 +259,7 @@ AUIRecorderCameraWrapperDelegate>
     
     AUIRecorderResolutionRatio next = (_sliderView.resolution + 1)%AUIRecorderResolutionRatioMax;
     if ([_recorder changeResolutionRatio:next]) {
-        _sliderView.resolution = next;
+        [self updateResolutionUI];
     }
 }
 
@@ -277,9 +281,9 @@ AUIRecorderCameraWrapperDelegate>
 - (void) onAUIRecorderBottomButtonsView:(AUIRecorderBottomButtonsView *)bottom btnDidPressed:(AUIRecorderBottomBtnType)btnType {
     switch (btnType) {
         case AUIRecorderBottomBtnTypeBeauty:
-#ifdef INCLUDE_QUEEN
+#ifdef ENABLE_BEAUTY
             [_recorder showBeautyPanel];
-#endif // INCLUDE_QUEEN
+#endif // ENABLE_BEAUTY
             break;
         case AUIRecorderBottomBtnTypeProps:
             [self openPropsPanel];
@@ -345,7 +349,7 @@ const static CGFloat HeaderHeight = 44.0;
     [_sliderView removeFromSuperview];
 
     // create
-    _sliderView = [[AUIRecorderSliderButtonsView alloc] initWithDelegate:self];
+    _sliderView = [[AUIRecorderSliderButtonsView alloc] initWithMix:_recorderConfig.isMixRecord withDelegate:self];
     [self.view addSubview:_sliderView];
     
     [_sliderView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -353,6 +357,7 @@ const static CGFloat HeaderHeight = 44.0;
         make.top.equalTo(self.view).inset(20.0 + HeaderHeight + AVSafeTop);
     }];
     [self updateResolutionUI];
+    [self updateMixLayoutUI];
 }
 
 - (void) setupHeaderButtons {
@@ -453,6 +458,7 @@ const static CGFloat HeaderHeight = 44.0;
     BOOL isIdle = (_recorderState == __RecorderStateIdle);
     self.sliderView.musicDisabled = !isIdle;
     self.sliderView.resolutionDisabled = !isIdle;
+    self.sliderView.mixLayoutDisabled = !isIdle;
     
     BOOL isCountDown = (_recorderState == __RecorderStateCountDown);
     CGFloat countDownAlpha = isCountDown ? 0.0 : 1.0;
@@ -470,6 +476,10 @@ const static CGFloat HeaderHeight = 44.0;
 
 - (void) updateResolutionUI {
     _sliderView.resolution = _recorderConfig.resolutionRatio;
+}
+
+- (void) updateMixLayoutUI {
+    _sliderView.mixType = _recorderConfig.mixType;
 }
 
 // MARK: - Panel
@@ -554,6 +564,22 @@ const static CGFloat HeaderHeight = 44.0;
             [strongSelf.recorder removeBGM];
         }
     };
+}
+
+- (void) openMixLayoutPanel {
+    if (self.sliderView.mixLayoutDisabled) {
+        [AVToastView show:AUIUgsvGetString(@"开始拍摄后不可调整布局")
+                     view:self.view
+                 position:AVToastViewPositionTop];
+        return;
+    }
+    AUIRecorderMixLayoutPanel *panel = [[AUIRecorderMixLayoutPanel alloc] initWithFrame:CGRectMake(0, 0, self.view.av_width, 0) mixType:_recorderConfig.mixType];
+    __weak typeof(self) weakSelf = self;
+    panel.onMixTypeChanged = ^(AUIRecorderMixType mixType) {
+        [weakSelf.recorder changeMixLayout:mixType];
+        [weakSelf updateMixLayoutUI];
+    };
+    [panel showOnView:self.view];
 }
 
 // MARK: - ViewController

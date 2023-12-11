@@ -9,13 +9,15 @@
 #import "AUILiveCheckQueenManager.h"
 #import "AVProgressHUD.h"
 
-#ifdef ALIVC_LIVE_ENABLE_QUEEN
+
+
+#ifdef ALIVC_LIVE_ENABLE_QUEEN_PRO
 @interface AUILiveCheckQueenManager ()<QueenMaterialDelegate>
 #else
 @interface AUILiveCheckQueenManager ()
 #endif
 
-#ifdef ALIVC_LIVE_ENABLE_QUEEN
+#ifdef ALIVC_LIVE_ENABLE_QUEEN_PRO
 @property (nonatomic, copy) void (^checkResult)(BOOL completed);
 @property (nonatomic, strong) AVProgressHUD *hub;
 #endif
@@ -24,7 +26,7 @@
 
 @implementation AUILiveCheckQueenManager
 
-#ifdef ALIVC_LIVE_ENABLE_QUEEN
+#ifdef ALIVC_LIVE_ENABLE_QUEEN_PRO
 + (instancetype)manager {
     static AUILiveCheckQueenManager *manager = nil;
     static dispatch_once_t onceToken;
@@ -90,6 +92,14 @@
         }
     }
 }
+#else
+
++ (void)checkWithCurrentView:(UIView *)view completed:(void (^)(BOOL))completed {
+    if (completed) {
+        completed(YES);
+    }
+}
+
 #endif
 
 @end

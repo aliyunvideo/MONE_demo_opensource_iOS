@@ -12,9 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface AUILiveCheckQueenManager : NSObject
 
-#ifdef ALIVC_LIVE_ENABLE_QUEEN
 + (void)checkWithCurrentView:(UIView *)view completed:(void (^)(BOOL completed))completed;
-#endif
 
 @end
 

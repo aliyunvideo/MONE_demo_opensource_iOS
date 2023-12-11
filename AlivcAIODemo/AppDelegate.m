@@ -49,9 +49,9 @@
 }
 
 - (void)setupQueen {
-#ifdef AIO_DEMO_ENABLE_QUEEN
+#ifdef AIO_DEMO_ENABLE_QUEEN_PRO
     [[QueenMaterial sharedInstance] requestMaterial:kQueenMaterialModel];
-#endif // AIO_DEMO_ENABLE_QUEEN
+#endif // AIO_DEMO_ENABLE_QUEEN_PRO
 }
 
 - (void)setupCrash {
@@ -65,8 +65,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+#ifdef AIO_DEMO_USING_ALIVCSDK
     AlivcBase.IntegrationWay = @"Demo_AIO";
-    
+#endif // AIO_DEMO_USING_ALIVCSDK
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     // 仅支持暗黑模式

@@ -33,6 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithConfig:(AUIRecorderConfig *)config containerView:(UIView *)containerView;
 - (BOOL)changeResolutionRatio:(AUIRecorderResolutionRatio)ratio;
+- (BOOL)changeMixLayout:(AUIRecorderMixType)mixType;
 
 - (void)startRecord;
 - (void)stopRecord;
@@ -45,10 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
                 duration:(NSTimeInterval)duration;
 - (void)removeBGM;
 
-#ifdef INCLUDE_QUEEN
+#ifdef ENABLE_BEAUTY
 - (void)showBeautyPanel;
 - (void)selectedDefaultBeautyPanel;
-#endif // INCLUDE_QUEEN
+#endif // ENABLE_BEAUTY
 @end
 
 NS_ASSUME_NONNULL_END

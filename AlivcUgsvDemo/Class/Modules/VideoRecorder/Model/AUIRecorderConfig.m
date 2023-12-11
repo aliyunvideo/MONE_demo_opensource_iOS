@@ -83,6 +83,52 @@ const static size_t ResolutionRatioInfosCount = sizeof(ResolutionRatioInfos) / s
     }
 
     _videoConfig.resolution = size;
+    [self updateFrame];
+}
+
+- (void)updateFrame {
+    CGSize size = _videoConfig.resolution;
+    if (self.isMixRecord) {
+        CGRect first = CGRectZero;
+        CGRect second = CGRectZero;
+        if (_mixType == AUIRecorderMixTypeBackFront || _mixType == AUIRecorderMixTypeFrontBack) {
+            first.size = size;
+            first.origin = CGPointMake(0, 0);
+            CGFloat ratio = _videoConfig.resolution.width / _videoConfig.resolution.height;
+            second.size = CGSizeMake(size.width / 3.0, size.width / 3.0 / ratio);
+            second.origin = CGPointMake(0, 0);
+        }
+        else if (_mixType == AUIRecorderMixTypeTopBottom || _mixType == AUIRecorderMixTypeBottomTop) {
+            first.size = CGSizeMake(size.width, size.height / 2.0);
+            first.origin = CGPointMake(0, 0);
+            second.size = CGSizeMake(size.width, size.height / 2.0);
+            second.origin = CGPointMake(0, size.height / 2.0);
+        }
+        else {
+            first.size = CGSizeMake(size.width / 2.0, size.height);
+            first.origin = CGPointMake(0, 0);
+            second.size = CGSizeMake(size.width / 2.0, size.height);
+            second.origin = CGPointMake(size.width / 2.0, 0);
+        }
+        if (_mixType % 2 == 0) {
+            _cameraFrame = second;
+            _mixVideoFrame = first;
+            _cameraZPosition = 2;
+            _mixVideoZPosition = 1;
+        }
+        else {
+            _cameraFrame = first;
+            _mixVideoFrame = second;
+            _cameraZPosition = 1;
+            _mixVideoZPosition = 2;
+        }
+    }
+    else {
+        _cameraFrame = CGRectMake(0, 0, size.width, size.height);
+        _mixVideoFrame = CGRectZero;
+        _cameraZPosition = 2;
+        _mixVideoZPosition = 1;
+    }
 }
 
 - (void) setHorizontalResolution:(AUIRecorderHorizontalResolution)horizontalResolution {
@@ -95,6 +141,21 @@ const static size_t ResolutionRatioInfosCount = sizeof(ResolutionRatioInfos) / s
     [self updateVideoResultion];
 }
 
+- (BOOL)isMixRecord {
+    BOOL isMix = _mixVideoFilePath.length > 0;
+    return isMix;
+}
+
+- (void)setMixVideoFilePath:(NSString *)mixVideoFilePath {
+    _mixVideoFilePath = mixVideoFilePath;
+    [self updateFrame];
+}
+
+- (void)setMixType:(AUIRecorderMixType)mixType {
+    _mixType = mixType;
+    [self updateFrame];
+}
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -102,16 +163,14 @@ const static size_t ResolutionRatioInfosCount = sizeof(ResolutionRatioInfos) / s
         _videoConfig.resolution = CGSizeMake(720, 1280);
         _videoConfig.encodeMode = AliyunRecorderEncodeMode_HardCoding;
         [self updateResolutionType];
+        [self updateFrame];
         
         _isUsingAEC = NO;
-        _isUsingCamera = YES;
         _minDuration = 3.0;
         _maxDuration = 15.0;
+        _mergeOnFinish = NO;
         _deleteVideoClipsOnExit = YES;
         _waterMarkPath = [NSBundle.mainBundle pathForResource:@"AlivcUgsv.bundle/logo_aliyun.png" ofType:@""];
-#ifdef USING_SVIDEO_BASIC
-        _mergeOnFinish = YES;
-#endif // USING_SVIDEO_BASIC
     }
     return self;
 }
@@ -121,13 +180,6 @@ const static size_t ResolutionRatioInfosCount = sizeof(ResolutionRatioInfos) / s
         return NO;
     }
     return _deleteVideoClipsOnExit;
-}
-
-- (CGRect) cameraFrame {
-    // TODO: 后续根据合拍、多源、单源等模式计算；当前全屏
-    CGRect frame = CGRectZero;
-    frame.size = _videoConfig.resolution;
-    return frame;
 }
 
 - (AUIUgsvParamBuilder *)paramBuilder {
@@ -182,4 +234,21 @@ const static size_t ResolutionRatioInfosCount = sizeof(ResolutionRatioInfos) / s
                 .KVC(self, @"mergeOnFinish");
     return builder;
 }
+
+- (AUIUgsvParamBuilder *)mixRecordParamBuilder {
+    AUIUgsvParamBuilder *builder = [self paramBuilder];
+    builder.group(@"Mix", @"合拍参数")
+        .radioItem(@"mixType", @"布局")
+            .option(@"左右", @(AUIRecorderMixTypeLeftRight))
+            .option(@"右左", @(AUIRecorderMixTypeRightLeft))
+            .option(@"上下", @(AUIRecorderMixTypeTopBottom))
+            .option(@"下上", @(AUIRecorderMixTypeBottomTop))
+            .option(@"后前", @(AUIRecorderMixTypeBackFront))
+            .option(@"前后", @(AUIRecorderMixTypeFrontBack))
+            .KVC(self, @"mixType")
+        .switchItem(@"isUsingAEC", @"开启回声消除")
+            .KVC(self, @"isUsingAEC");
+    return builder;
+}
+
 @end

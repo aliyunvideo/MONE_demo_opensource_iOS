@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUILive'
-  s.version          = '6.4.0'
+  s.version          = '6.7.0'
   s.summary          = 'A short description of AUILive.'
 
 # This description is used to generate tags and improve search results.
@@ -41,6 +41,7 @@ TODO: Add long description of the pod here.
     ss.resource = 'AUILiveCommon/Resources/AUILiveCommon.bundle'
     ss.source_files = 'AUILiveCommon/Class/**/*.{h,m,mm}'
     ss.dependency 'AUIFoundation/All'
+    ss.dependency 'AUIBeauty/Common'
     ss.dependency 'Masonry'
     ss.prefix_header_contents = '#import "AUILiveCommon.h"'
   end
@@ -49,7 +50,6 @@ TODO: Add long description of the pod here.
     ss.source_files = 'AUILiveCameraPush/Class/**/*.{h,m,mm}'
     ss.resource = 'AUILiveCameraPush/Resources/*'
     ss.dependency 'AUILive/LiveCommon'
-    ss.dependency 'AUIFoundation/All'
     ss.prefix_header_contents = '#import "AUILiveCameraPush.h"'
   end
   
@@ -57,7 +57,6 @@ TODO: Add long description of the pod here.
     ss.source_files = 'AUILiveRecordPush/Class/**/*.{h,m,mm}'
     ss.resource = 'AUILiveRecordPush/Resources/AUILiveRecordPush.bundle'
     ss.dependency 'AUILive/LiveCommon'
-    ss.dependency 'AUIFoundation/All'
     ss.prefix_header_contents = '#import "AUILiveRecordPush.h"'
   end
   
@@ -65,7 +64,6 @@ TODO: Add long description of the pod here.
     ss.source_files = 'AUILivePlay/Class/**/*.{h,m,mm}'
     ss.resource = 'AUILivePlay/Resources/AUILivePlay.bundle'
     ss.dependency 'AUILive/LiveCommon'
-    ss.dependency 'AUIFoundation/All'
     ss.prefix_header_contents = '#import "AUILivePlay.h"'
   end
   
@@ -73,7 +71,6 @@ TODO: Add long description of the pod here.
     ss.source_files = 'AUILiveRtsPlay/Class/**/*.{h,m,mm}'
     ss.resource = 'AUILiveRtsPlay/Resources/AUILiveRtsPlay.bundle'
     ss.dependency 'AUILive/LiveCommon'
-    ss.dependency 'AUIFoundation/All'
     ss.prefix_header_contents = '#import "AUILiveRtsPlay.h"'
   end
   
@@ -92,8 +89,6 @@ TODO: Add long description of the pod here.
       sss.resource = 'AUILiveInteractive/AUILivePK/Resources/AUILivePK.bundle'
       sss.prefix_header_contents = '#import "AUILivePK.h"'
     end
-    
-    ss.dependency 'AUIFoundation/All'
   end
 
   s.subspec 'Basic' do |ss|
@@ -108,35 +103,17 @@ TODO: Add long description of the pod here.
     ss.dependency 'AUILive/LiveRtsPlay'
     ss.dependency 'AUILive/LiveInteractive'
   end
-    
-  s.subspec 'AliVCSDK_Premium' do |ss|
-    ss.dependency 'AliVCSDK_Premium'
-    ss.dependency 'AUIBeauty/AliVCSDK_Premium'
-  end
   
   s.subspec 'AliVCSDK_Standard' do |ss|
     ss.dependency 'AliVCSDK_Standard'
-    ss.dependency 'AUIBeauty/Queen'
   end
   
   s.subspec 'AliVCSDK_BasicLive' do |ss|
     ss.dependency 'AliVCSDK_BasicLive'
-    ss.dependency 'AUIBeauty/Queen'
   end
   
   s.subspec 'AliVCSDK_InteractiveLive' do |ss|
     ss.dependency 'AliVCSDK_InteractiveLive'
-    ss.dependency 'AUIBeauty/Queen'
-  end
-  
-  s.subspec 'AliVCSDK_StandardLive' do |ss|
-    ss.dependency 'AliVCSDK_StandardLive'
-    ss.dependency 'AUIBeauty/AliVCSDK_StandardLive'
-  end
-  
-  s.subspec 'AliVCSDK_PremiumLive' do |ss|
-    ss.dependency 'AliVCSDK_PremiumLive'
-    ss.dependency 'AUIBeauty/AliVCSDK_PremiumLive'
   end
   
   s.subspec 'AlivcLivePusher_Basic' do |ss|
@@ -144,7 +121,6 @@ TODO: Add long description of the pod here.
     ss.dependency 'AliPlayerSDK_iOS'
     ss.dependency 'AliPlayerSDK_iOS_ARTC'
     ss.dependency 'RtsSDK'
-    ss.dependency 'AUIBeauty/Queen'
   end
   
   s.subspec 'AlivcLivePusher_Interactive' do |ss|
@@ -152,7 +128,6 @@ TODO: Add long description of the pod here.
     ss.dependency 'AliPlayerSDK_iOS'
     ss.dependency 'AliPlayerSDK_iOS_ARTC'
     ss.dependency 'RtsSDK'
-    ss.dependency 'AUIBeauty/Queen'
   end
   
   s.subspec 'LiveLocalSDK' do |ss|

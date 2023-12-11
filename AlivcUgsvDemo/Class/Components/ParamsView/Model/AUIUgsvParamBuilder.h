@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) AUIUgsvParamRadioBuilder *lastRadio;
 @property (nonatomic, readonly) AUIUgsvParamOptionBuilder *lastOption;
 - (AUIUgsvParamItemModel *)findParamItemWithName:(NSString *)name;
+- (void)changeLastGroupWithName:(NSString *)name;
 @end
 
 @interface AUIUgsvParamGroupBuilder : AUIUgsvParamBuilder

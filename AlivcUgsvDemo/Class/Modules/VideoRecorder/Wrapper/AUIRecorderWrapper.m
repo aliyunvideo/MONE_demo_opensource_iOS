@@ -14,9 +14,9 @@
 #import "AUIUgsvMacro.h"
 #import "AlivcUgsvSDKHeader.h"
 
-#ifdef INCLUDE_QUEEN
-#import <AliyunQueenUIKit/AliyunQueenUIKit.h>
-#endif // INCLUDE_QUEEN
+#ifdef ENABLE_BEAUTY
+#import "AUIBeautyManager.h"
+#endif // ENABLE_BEAUTY
 
 @interface AUIRecorderWrapper ()<AliyunRecorderDelegate, AliyunRecorderCustomRender>
 {
@@ -24,10 +24,12 @@
 }
 @property (nonatomic, strong) AliyunRecorderConfig *recorderConfig;
 
-#ifdef INCLUDE_QUEEN
-@property (nonatomic, strong) QueenEngine *beautyEngine;
-@property (nonatomic, strong) AliyunQueenPanelController *beautyPanelController;
-#endif // INCLUDE_QUEEN
+@property (nonatomic, strong) id<AliyunAVFileRecordController> mixVideoController;
+@property (nonatomic, strong) UIView *mixVideoPreview;
+
+#ifdef ENABLE_BEAUTY
+@property (nonatomic, strong) id<AUIBeautyControllerProtocol> beautyController;
+#endif // ENABLE_BEAUTY
 @end
 
 @implementation AUIRecorderWrapper
@@ -218,35 +220,18 @@ static void s_retryForFinish(NSError *error, void(^onCompleted)(BOOL isCancel)) 
         return pixelBufferRef;
     }
     
-#ifdef INCLUDE_QUEEN
-    [self setupBeautyIfNeed];
-    QEPixelBufferData *bufferData = [QEPixelBufferData new];
-    bufferData.bufferIn = pixelBufferRef;
-    bufferData.bufferOut = pixelBufferRef;
-    // 对pixelBuffer进行图像处理，输出处理后的buffer
-    kQueenResultCode resultCode = [self.beautyEngine processPixelBuffer:bufferData];//执行此方法的线程需要始终是同一条线程
-    if (resultCode == kQueenResultCodeOK && bufferData.bufferOut) {
-        return bufferData.bufferOut;
-    }
-    else if (resultCode == kQueenResultCodeInvalidLicense) {
-        NSLog(@"============== queen license校验失败。");
-    }
-    else if (resultCode == kQueenResultCodeInvalidParam) {
-        NSLog(@"============== queen 非法参数");
-    }
-    else if (resultCode == kQueenResultCodeNoEffect) {
-//        NSLog(@"============== queen 没有开启任何特效");
-    }
-#endif // INCLUDE_QUEEN
+#ifdef ENABLE_BEAUTY
+    [_beautyController createEngine];
+    [_beautyController.processPixelBufferAutoAngle processPixelBuffer:pixelBufferRef];
+#endif // ENABLE_BEAUTY
     
     return pixelBufferRef;
 }
 
 - (void) onAliyunRecorderDidDestory:(AliyunRecorder *)recorder {
-#ifdef INCLUDE_QUEEN
-    [_beautyEngine destroyEngine];
-    _beautyEngine = nil;
-#endif // INCLUDE_QUEEN
+#ifdef ENABLE_BEAUTY
+    [_beautyController destroyEngine];
+#endif // ENABLE_BEAUTY
 }
 
 // MARK: - Config
@@ -260,6 +245,9 @@ static void s_retryForFinish(NSError *error, void(^onCompleted)(BOOL isCancel)) 
                                                              outputPath:randomPath
                                                                usingAEC:_config.isUsingAEC];
     [self setupCamera];
+    [self setupMixVideo];
+    [self updateRecordLayout];
+    
     [self setupWaterMark];
 
     _recorder = [[AliyunRecorder alloc] initWithConfig:_recorderConfig];
@@ -290,8 +278,8 @@ static void s_retryForFinish(NSError *error, void(^onCompleted)(BOOL isCancel)) 
     
     AliyunRecorderImageSticker *waterMark = [[AliyunRecorderImageSticker alloc] initWithImagePath:_config.waterMarkPath];
     waterMark.size = frame.size;
-    waterMark.center = CGPointMake(frame.origin.x + frame.size.width * 0.5, frame.origin.y + frame.size.height * 0.5);
-    waterMark.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+    waterMark.center = CGPointMake(frame.origin.x + 20, frame.origin.y + 20);
+    waterMark.autoresizingMask = UIViewAutoresizingNone;
     [_recorderConfig addWaterMark:waterMark];
 }
 
@@ -304,13 +292,44 @@ static void s_retryForFinish(NSError *error, void(^onCompleted)(BOOL isCancel)) 
     AliyunVideoRecordLayoutParam *layout = [[AliyunVideoRecordLayoutParam alloc] initWithRenderMode:AliyunRenderMode_ResizeAspectFill];
     CGRect frame = _config.cameraFrame;
     CGPoint center = CGPointMake(frame.origin.x + frame.size.width * 0.5, frame.origin.y + frame.size.height * 0.5);
-    layout.size = _config.cameraFrame.size;
+    layout.size = frame.size;
     layout.center = center;
+    layout.zPosition = _config.cameraZPosition;
     
     id<AliyunCameraRecordController> controller = [_recorderConfig addCamera:layout];
     _camera = [[AUIRecorderCameraWrapper alloc] initWithCameraController:controller];
     [_containerView insertSubview:_camera atIndex:0];
-    [self updateCameraLayout];
+}
+
+- (void) setupMixVideo {
+    if (_mixVideoController) {
+        [_recorderConfig removeAVFileSource:_mixVideoController];
+        [_mixVideoPreview removeFromSuperview];
+        _mixVideoController = nil;
+        _mixVideoPreview = nil;
+    }
+    
+    if (_config.isMixRecord) {
+        AliyunVideoRecordLayoutParam *layout = [[AliyunVideoRecordLayoutParam alloc] initWithRenderMode:AliyunRenderMode_ResizeAspectFill];
+        CGRect frame = _config.mixVideoFrame;
+        CGPoint center = CGPointMake(frame.origin.x + frame.size.width * 0.5, frame.origin.y + frame.size.height * 0.5);
+        layout.size = frame.size;
+        layout.center = center;
+        layout.zPosition = _config.mixVideoZPosition;
+        
+        // 指定View录制源参数
+        AliyunFileRecordSource *source = [[AliyunFileRecordSource alloc] initWithAVFilePath:_config.mixVideoFilePath startTime:0 duration:999];
+        // 添加录制源，返回控制器
+        id<AliyunAVFileRecordController> controller = [_recorderConfig addAVFileSource:source layout:layout];
+        _mixVideoController = controller;
+        
+        _mixVideoPreview = [[UIView alloc] initWithFrame:CGRectZero];
+        [_containerView insertSubview:_mixVideoPreview atIndex:1];
+        controller.preview = _mixVideoPreview;
+        
+        _config.maxDuration = source.duration;
+        _config.minDuration = source.duration;
+    }
 }
 
 - (BOOL) changeResolutionRatio:(AUIRecorderResolutionRatio)ratio {
@@ -319,63 +338,82 @@ static void s_retryForFinish(NSError *error, void(^onCompleted)(BOOL isCancel)) 
     }
     _config.resolutionRatio = ratio;
     _recorderConfig.videoConfig.resolution = _config.videoConfig.resolution;
-    [self updateCameraLayout];
+    [self updateRecordLayout];
     return YES;
 }
 
-#ifdef INCLUDE_QUEEN
+- (BOOL) changeMixLayout:(AUIRecorderMixType)mixType {
+    if (_recorder.state != AliyunRecorderState_Idle) {
+        return NO;
+    }
+    _config.mixType = mixType;
+    [self updateRecordLayout];
+    return YES;
+}
+
+#ifdef ENABLE_BEAUTY
 - (void) showBeautyPanel {
-    [self.beautyPanelController showPanel:YES];
+    [self.beautyController showPanel:YES];
 }
 
 - (void)selectedDefaultBeautyPanel {
-    [self beautyPanelController];
+    [self beautyController];
 }
 
-- (AliyunQueenPanelController *) beautyPanelController {
-    if (!_beautyPanelController) {
-        _beautyPanelController = [[AliyunQueenPanelController alloc] initWithParentView:_containerView];
-        [self setupBeautyIfNeed];
-        [_beautyPanelController selectDefaultBeautyEffect];
+- (id<AUIBeautyControllerProtocol>)beautyController {
+    if (!_beautyController) {
+        _beautyController = [AUIBeautyManager createController:_containerView processMode:AUIBeautyProcessModePixelBufferAutoAngle];
+        [_beautyController setupPanelController];
     }
-    return _beautyPanelController;
+    return _beautyController;
 }
 
-- (void) setupBeautyIfNeed {
-    if (!_beautyEngine) {
-        QueenEngineConfigInfo *configInfo = [QueenEngineConfigInfo new];
-        configInfo.runOnCustomThread = NO;
-        configInfo.autoSettingImgAngle = YES;
-        _beautyEngine = [[QueenEngine alloc] initWithConfigInfo:configInfo];
-        if (_beautyPanelController) {
-            _beautyPanelController.queenEngine = _beautyEngine;
-            if (NSThread.isMainThread) {
-                [_beautyPanelController selectCurrentBeautyEffect];
-            }
-            else {
-                __weak typeof(self) weakSelf = self;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakSelf.beautyPanelController selectCurrentBeautyEffect];
-                });
-            }
-        }
-    }
-}
-#endif // INCLUDE_QUEEN
+#endif // ENABLE_BEAUTY
 
 const static CGFloat HeaderHeight = 44.0;
-- (void) updateCameraLayout {
-    // TODO: 加一个高斯模糊+动画；切换前后摄像头也可以同样处理
+- (void) updateRecordLayout {
+
+    AliyunVideoRecordLayoutParam *cameraLayout = _camera.cameraController.layoutParam;
+    if (cameraLayout) {
+        CGRect frame = _config.cameraFrame;
+        CGPoint center = CGPointMake(frame.origin.x + frame.size.width * 0.5, frame.origin.y + frame.size.height * 0.5);
+        cameraLayout.size = frame.size;
+        cameraLayout.center = center;
+        cameraLayout.zPosition = _config.cameraZPosition;
+    }
+    AliyunVideoRecordLayoutParam *mixLayout = _mixVideoController.layoutParam;
+    if (mixLayout) {
+        CGRect frame = _config.mixVideoFrame;
+        CGPoint center = CGPointMake(frame.origin.x + frame.size.width * 0.5, frame.origin.y + frame.size.height * 0.5);
+        mixLayout.size = frame.size;
+        mixLayout.center = center;
+        mixLayout.zPosition = _config.mixVideoZPosition;
+    }
+    
+    if (_mixVideoPreview) {
+        if (_config.cameraZPosition > _config.mixVideoZPosition) {
+            [_containerView sendSubviewToBack:_mixVideoPreview];
+        }
+        else {
+            [_containerView sendSubviewToBack:_camera];
+        }
+    }
+    
     CGSize resolution = _recorderConfig.videoConfig.resolution;
-    [_camera mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(_containerView).inset(HeaderHeight + AVSafeTop).priority(999);
-        make.centerY.equalTo(_containerView).priority(998);
-        make.bottom.lessThanOrEqualTo(_containerView);
-        make.left.right.equalTo(_containerView);
-        make.height.equalTo(_camera.mas_width).multipliedBy(resolution.height / resolution.width);
-    }];
+    CGRect validFrame = CGRectMake(0, HeaderHeight + AVSafeTop, _containerView.av_width, _containerView.av_width * resolution.height / resolution.width);
+    CGFloat scale = validFrame.size.width / resolution.width;
+    CGRect cameraFrame = CGRectMake(_config.cameraFrame.origin.x * scale + validFrame.origin.x,
+                               _config.cameraFrame.origin.y * scale + validFrame.origin.y,
+                               _config.cameraFrame.size.width * scale,
+                               _config.cameraFrame.size.height * scale);
+    CGRect mixVideoPreviewFrame = CGRectMake(_config.mixVideoFrame.origin.x * scale + validFrame.origin.x,
+                                        _config.mixVideoFrame.origin.y * scale + validFrame.origin.y,
+                                        _config.mixVideoFrame.size.width * scale,
+                                        _config.mixVideoFrame.size.height * scale);
+
     [UIView animateWithDuration:0.2 animations:^{
-        [self.containerView layoutIfNeeded];
+        self.camera.frame = cameraFrame;
+        self.mixVideoPreview.frame = mixVideoPreviewFrame;
     }];
 }
 

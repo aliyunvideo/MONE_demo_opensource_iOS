@@ -22,9 +22,9 @@
 
 - (instancetype) initWithDelegate:(id<AUIRecorderBottomButtonsViewDelegate>)delegate {
     NSMutableArray *showTypes = @[].mutableCopy;
-#ifdef INCLUDE_QUEEN
+#ifdef ENABLE_BEAUTY
     [showTypes addObject:@(AUIRecorderBottomBtnTypeBeauty)];
-#endif // INCLUDE_QUEEN
+#endif // ENABLE_BEAUTY
     
 #ifndef USING_SVIDEO_BASIC
     [showTypes addObject:@(AUIRecorderBottomBtnTypeProps)];

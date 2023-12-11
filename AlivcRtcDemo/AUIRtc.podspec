@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUIRtc'
-  s.version          = '6.4.0'
+  s.version          = '6.7.0'
   s.summary          = 'A short description of AUIRtc.'
 
 # This description is used to generate tags and improve search results.
@@ -31,28 +31,25 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '9.0'
   s.static_framework = true
   
+  s.dependency 'AUIFoundation/All'
+  s.subspec 'List' do |ss|
+    ss.resource = 'Resources/*.bundle'
+    ss.source_files = 'Class/**/*.{h,m,mm}'
+  end
+  
   s.subspec 'Call' do |ss|
-    ss.dependency 'AUICall/1V1Open'
-    ss.dependency 'AUICall/NVNOpen'
+    ss.dependency 'AUICall/1V1'
+    ss.dependency 'AUICall/NVN'
+    ss.pod_target_xcconfig = {'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) COCOAPODS=1 ENABLE_AUI_CALL'}
   end
 
   s.subspec 'All' do |ss|
-    ss.resource = 'Resources/*.bundle'
-    ss.source_files = 'Class/**/*.{h,m,mm}'
-    ss.dependency 'AUIFoundation/All'
-    #ss.dependency 'AUIRtc/Call'
-  end
-  
-  s.subspec 'AliVCSDK_Premium' do |ss|
-    ss.dependency 'AliVCSDK_Premium'
+    ss.dependency 'AUIRtc/List'
+    ss.dependency 'AUIRtc/Call'
   end
   
   s.subspec 'AliVCSDK_Standard' do |ss|
     ss.dependency 'AliVCSDK_Standard'
-  end
-  
-  s.subspec 'AliVCSDK_PremiumLive' do |ss|
-    ss.dependency 'AliVCSDK_PremiumLive'
   end
 
   s.subspec 'AliVCSDK_InteractiveLive' do |ss|
