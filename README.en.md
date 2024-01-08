@@ -1,3 +1,5 @@
+ English | [简体中文](README.md)
+
 # Alibaba Cloud MediaBox SDK Sample
 
 ## Code Structure
