@@ -66,7 +66,7 @@
     if (!self.urlSession) {
         if (onCompletion)
         {
-            onCompletion(nil, APWebApiCustomCodeMissParam, @"缺少参数");
+            onCompletion(nil, APWebApiCustomCodeMissParam, @"param error");
         }
         return;
     }
@@ -89,7 +89,7 @@
                 onCompletion(feedbackData, code, msg);
             }
             else {
-                onCompletion(nil, APWebApiCustomCodeUnknow, @"未知错误");
+                onCompletion(nil, APWebApiCustomCodeUnknow, @"unknow");
             }
         }
         [weakSelf releaseSelf];

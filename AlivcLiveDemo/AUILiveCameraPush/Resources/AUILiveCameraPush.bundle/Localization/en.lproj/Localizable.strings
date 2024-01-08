@@ -1,445 +1,138 @@
 
-"live_scene_list" = "Scene list of live";
-
-"live_basic_function" = "AliPusherSDKV3.6.1";
-
-"live_basic_function_old" = "PusherSDKV1.3";
-
-"license_declaration" = "License Declaration";
-
-"screen_record_live" = "screen record live";
-
-"version" = "Version:v3.6.1";
-
-"pusher_setting" = "Pusher setting";
-
-"input_tips_more_settings" = "Please enter";
-
-"url_copy_tips" = "The play url has been copied and you can play it  by a player after pushing";
-
-"max_bitrate" = "Max Bitrate";
-
-"preview_display_mode" = "Preview Display Mode";
-
-"push_url_notice_text" = "It is recommended to change push url to avoid error caused by many people using same url";
-
-"mirror" = "Mirror";
-
-"video_encode_b_frame" = "B-Frame";
-
-"start_preview_button" = "Start\nPreview";
-
-"stop_preview_button" = "Stop\nPreview";
-
-"start_push" = "Start\nPushing";
-
-"more_data_button" = "More\nData";
-
-"watermark_button" = "Add\nWaterMark";
-
-"remove_watermark_button" = "Show & Hidden\nWaterMark";
-
-"pause_button" = "Pause\n";
-
-"resume_button" = "Resume\n";
-
-"more_setting_button" = "More\nSetting";
-
-"repush_button" = "Restart\nPushing";
-
-"slide_right_view_log_char" = "Slide right to view log";
-
-"slide_left_view_log" = "Slide left to view log chart";
-
-"share_button" = "Share";
-
-"add_button" = "add tags";
-
-"remove_button" = "remove tags";
-
-"tile" = "tile";
-
-"fit" = "fit";
-
-"cut" = "cut";
-
-"save_log" = "Save log";
-
-"modules_time_consuming" = "Time consuming";
-
-"modules_audio_fps" = "Audio fps";
-
-"modules_video_fps" = "Video fps";
-
-"modules_bitrate" = "Bitrate";
-
-"capture" = "Capture";
-
-"zoom" = "Zoom";
-
-"encode" = "Encode";
-
-"push" = "Push";
-
-
-
-
-
-
-
-"audio_mode_music" = "music mode";
-
-"user_mix_stream" = "user mix stream";
-
-"auto_resolution" = "Auto Resolution";
-
-"render" = "render";
-
-"video_encode" = "video_encode";
-
-"audio_encode" = "audio_encode";
-
-"mirror_button_open" = "开启镜像";
-
-"mirror_button_close" = "关闭镜像";
-
-"log_button_open" = "开启日志";
-
-"log_button_close" = "关闭日志";
-
-"no_camera_permission" = "Camera usage is not permitted, please open first";
-
-"no_record_audio_permission" = "Audio is not permitted to record, please open first";
-
-"dialog_title" = "Error tips";
-
-"ok" = "OK";
-
-"network_poor" = "The network is unstable, please quit or try again";
-
-"network_recovery" = "The network has recovered";
-
-"reconnect_start" = "Start reconnecting";
-
-"reconnect_fail" = "Reconnection failed";
-
-"connect_fail" = "Connect failed";
-
-"reconnect_success" = "Reconnection succeed";
-
-"senddata_timeout" = "Sending data timeout";
-
-"restart_success" = "Restart successfully";
-
-"system_error" = "System error:";
-
-"sdk_error" = "SDK error：";
-
-"argument_exception" = "Arguments error";
-
-"state_exception" = "States error";
-
-"bite_error" = "Bitrate setting error";
-
-"drop_frame" = "Drop frame";
-
-"adjust_bitrate" = "Bitrate adjusted";
-
-"adjust_fps" = "Fps adjusted";
-
-"start_drop_gop" = "Start dropping GOP";
-
-"stop_drop_gop" = "Stop dropping GOP";
-
-"bit_control" = "Bitrate control";
-
-"min_control_interval" = "Min interval of bitrate control";
-
-"upbps_duration" = "Min interval of upbps";
-
-"upbps_min_pree" = "Percentage of upbps";
-
-"upbps_size" = "Size of upbps";
-
-"control_times" = "Times of bitrate control";
-
-"url_empty" = "Please enter url";
-
-"start_preview_log" = "Start preview";
-
-"connectRecovery_log" = "Network recovery";
-
-"stop_preview_log" = "Stop preview";
-
-"start_push_log" = "Start push";
-
-"stop_push_log" = "Stop push";
-
-"pause_push_log" = "Pause";
-
-"resume_push_log" = "Resume";
-
-"first_frame_log" = "First frame show";
-
-"push_url_log" = "Push url";
-
-"ispushing_log" = "Pushing";
-
-"restart_push_log" = "Restart Push";
-
-"exit" = "Exit";
-
-"reconnect_button" = "Reconnect";
-
-"modules_time_consuming" = "Time consuming";
-
-"modules_audio_fps" = "Audio fps";
-
-"modules_video_fps" = "Video fps";
-
-"modules_bitrate" = "Bitrate";
-
-"capture" = "Capture";
-
-"render" = "Render";
-
-"encode" = "Encode";
-
-"push" = "Push";
-
-"total_time" = "Total consuming";
-
-"audio_fps" = "Audio fps";
-
-"video_fps" = "Video fps";
-
-"bitrate" = "Bitrate";
-
-"video_encode" = "Video encode";
-
-"audio_encode" = "Audio encode";
-
-"buffer" = "Buffer";
-
-"video_renderbuffer" = "Video render";
-
-"video_encodebuffer" = "Video encode";
-
-"video_uploadbuffer" = "Video upload";
-
-"audio_encodebuffer" = "Audio encode";
-
-"audio_uploadbuffer" = "Audio upload";
-
-"bitrate_enable" = "Bitrate Contrl";
-
-"publisher_log" = "pusher log";
-
-"text_log_1" = "CPU usage:";
-"text_log_2" = "Memory usage:";
-"text_log_3" = "Video capture fps:";
-"text_log_4" = "Audio Capture fps：";
-"text_log_5" = "Audio encoder bitrate:";
-"text_log_6" = "Audio encoder fps:";
-"text_log_7" = "Video render fps:";
-"text_log_8" = "Video encoder model:";
-"text_log_9" = "Video encoder bitrate:";
-"text_log_10" = "Video encoder fps:";
-"text_log_11" = "Total fps of video encoder:";
-"text_log_12" = "Total time costs of video encoder:";
-"text_log_13" = "Video encoder settings:";
-"text_log_14" = "Audio output bitrate:";
-"text_log_15" = "Video output bitrate:";
-"text_log_16" = "Total Number of audio cache frames:";
-"text_log_17" = "Total Number of video cache frames:";
-"text_log_18" = "Video upload fps:";
-"text_log_19" = "Audio upload fps:";
-"text_log_20" = "PTS of current uploaded video frame:";
-"text_log_21" = "PTS of current uploaded audio frame PTS:";
-"text_log_22" = "PTS of the last video keyframe:";
-"text_log_23" = "Final video frame in cache:";
-"text_log_24" = "Final audio frame in cache：";
-"text_log_25" = "Total size of data uploaded:";
-"text_log_26" = "Total time costs of pushing";
-"text_log_27" = "Total number of video frames sent:";
-"text_log_28" = "Total number of viedo frames dropped:";
-"text_log_29" = "The times of video frames dropped:";
-"text_log_30" = "Total times of network disconnected:";
-"text_log_31" = "Total times of network reconnected:";
-"text_log_32" = "Video delay duration:";
-"text_log_33" = "Audio delay duration:";
-"text_log_34" = "Size of current frame uploaded";
-"text_log_35" = "Video Audio pts diff：";
-"text_log_36" = "Total upload data size：";
-"text_log_37" = "The max size of video frame in cache:";
-"text_log_38" = "The max size of audio frame in cache:";
-"text_log_39" = "The pts of last video frame which is waiting for sending";
-"text_log_40" = "The pts of last audio frame which is waiting for sending";
-"text_log_41" = "The pts difference of current frame:";
-"text_log_42" = "The cache size of audio encoder";
-"text_log_43" = "The cache size of video encoder";
-"text_log_44" = "The cache size of render queue";
-"text_log_45" = "The average duration of per frame rendered";
-
-"取消静音" = "Unmute";
-
-"普通版" = "Standard";
-"专业版" = "Professional";
-
-"去设置" = "Go to Settings";
-"取消" = "Cancel";
-"确定" = "OK";
-
+"互动模式" = "Interactive Mode";
+"请输入" = "Please enter";
+"显示模式" = "Preview Display Mode";
+"拉伸" = "Stretched";
+"适合" = "Fit";
+"裁剪" = "Cropped";
+"推流模式" = "Push Streaming";
+"音视频" = "Audio and Video";
+"B-Frame" = "B-Frame";
+"开始预览" = "Start\nPreview";
+"停止预览" = "Stop\nPreview";
+"开始推流" = "Start\nPushing";
+"数据指标" = "More\nData";
+"添加水印" = "Add\nWaterMark";
+"水印显隐" = "Show & Hidden\nWaterMark";
+"暂停推图" = "Pause\nImage";
+"继续推图" = "Resume\nImage";
+"更多设置" = "More\nSetting";
+"重新推流" = "Restart\nPushing";
+"右滑查看log" = "Slide right to view log";
+"左滑查看log图表" = "Slide left to view log chart";
+"各模块音频帧率" = "Audio fps";
+"各模块视频帧率" = "Video fps";
+"各模块码率" = "Bitrate";
+"采集" = "Capture";
+"编码" = "Encode";
+"推流" = "Push";
+"音乐模式" = "music mode";
+"伴奏音量" = "Accompaniment Volume";
+"人声音量" = "Vocal Volume";
+"本地日志" = "Local Logs";
+"分辨率自适应" = "Auto Resolution";
+"高级设置" = "Advanced";
+"渲染" = "Render";
+"视频编码" = "Video encode";
+"音频编码" = "Audio encode";
+"各模块buffer" = "Buffer";
+"视频渲染" = "Video render";
+"视频上传" = "Video upload";
+"音频上传" = "Audio upload";
+"错误提示" = "Error tips";
+"无音乐" = "No Music";
+"Axol(APP资源)" = "Axol(APP Resources)";
+"Pas de Deux(沙盒资源)" = "Pas de Deux (Sandbox Resources)";
+"网络音乐1" = "Online Music 1";
+"系统错误：" = "System error:";
+"退出" = "Exit";
+"SDK错误：" = "SDK error：";
+"重连" = "Reconnect";
+"发送消息" = "Send message";
+"网络恢复" = "Network recovery";
+"重连开始" = "Start reconnecting";
+"重连" = "Reconnect";
+"重连成功" = "Reconnection succeed";
+"停止预览" = "Stop preview";
+"开始推流" = "Start push";
+"停止推流" = "Stop push";
+"暂停" = "Pause";
+"恢复" = "Resume";
+"首帧渲染" = "First frame show";
+"截图已保存至" = "Screenshot saved to";
+"码率参数设置错误！" = "Bitrate setting error";
+"License错误" = "License Error";
+"推流中" = "Pushing";
+"未推流" = "No Stream Ingest";
+"本地视频统计信息" = "Statistics on Local Videos";
+"发送码率：" = "Sent Bitrate:";
+"编码帧率：" = "Encoding Frame Rate:";
 "推流参数" = "Parameters";
 "推流功能" = "Features";
-"分辨率" = "Resolution";
-"音频采样率" = "Audio Sample Rate";
-"采集帧率" = "Collection Frame Rate";
-"最小帧率" = "Minimum Frame Rate";
-"关键帧间隔" = "GOP Size";
-"次" = "Times";
+"请输入有效推流地址" = "Please enter a valid streaming URL";
+"最小帧率不能大于视频帧率" = "The minimum frame rate cannot be greater than the video frame rate.";
 "分辨率自适应需要开启码率自适应，详细请参考Api文档" = "To enable the system to automatically switch to the most suitable resolution, you must enable adaptive bitrate streaming. For more information, see the API reference.";
-"清晰度优先" = "Quality First";
-"流畅度优先" = "Smoothness First";
-"自定义" = "Custom";
 "视频码率和帧率仅在自定义模式下可以调整" = "You can adjust the video bitrate and frame rate only in custom mode.";
-"普通版" = "Standard";
-"专业版" = "Professional";
+"音频采样率" = "Audio Sample Rate";
 "自动重连" = "Auto Reconnection";
-"水印" = "Watermark";
+"次" = "Times";
 "镜像" = "Mirroring";
 "相机控制" = "Camera Control";
 "美颜开关" = "Retouching Switch";
 "垫片推流" = "Ingest Standby Stream";
 "其他功能" = "Other Features";
-"最小帧率不能大于视频帧率" = "The minimum frame rate cannot be greater than the video frame rate.";
-
-"接口输入参数错误" = "Invalid input parameters";
-"接口调用顺序错误" = "Invalid call order";
-"RTC协议暂不支持推纯音频或纯视频流" = "The RTC protocol does not support the ingest of audio-only or video-only streams.";
-"本地视频统计信息" = "Statistics on Local Videos";
-"发送码率：" = "Sent Bitrate:";
-"编码帧率：" = "Encoding Frame Rate:";
-
-"摄像头推流" = "Camera Pushing";
-"录屏推流" = "Screen Sharing";
-"直播播放" = "Live Streaming";
-"本Demo为用于展示阿里云移动推流sdk主要功能" = "This demo is used to demonstrate the major features of AliLive SDK.";
-"线上" = "Online";
-"预发" = "Staging";
-
-"磨皮" = "Polish";
-"美白" = "Whiten";
-"锐化" = "Sharpen";
-"瘦脸" = "Slim Face";
-"脸长" = "Face Length";
-"削脸" = "Narrow Face";
-"瘦颧骨" = "Cheekbones";
-"下颌骨" = "Jaw";
-"下巴" = "Slim Chin";
-"下巴拉长" = "Chin";
-"大眼" = "Enlarge Eyes";
-"眼睑下至" = "Canthus";
-"眼距" = "Eye Distance";
-"瘦鼻" = "Slim Nose";
-"鼻长" = "Nose Length";
-"鼻翼" = "Nose Wings";
-"鼻头长" = "Nose Tip";
-"嘴型" = "Mouth Shape";
-"嘴唇厚度" = "Lip Thickness";
-"人中" = "Philtrum";
-"高光" = "Highlight";
-"美瞳" = "Eye Contact";
-"口红" = "Lipstick";
-"眼妆" = "Eye Makeup";
-"腮红" = "Blusher";
-"整妆" = "Whole";
-"无" = "None";
-"黛紫" = "Deep Purple";
-"蜜橘" = "Tangerine";
-"嫩粉" = "Soft Pink";
-"桃红" = "Peach Pink";
-"樱桃" = "Cherry";
-"活力" = "Vitality";
-"基础" = "Basic";
-"梅子" = "Plum";
-"魅惑" = "Charm";
-"蜜桃" = "Peach";
-"奶橘" = "Orange";
-"杏粉" = "Apricot Pink";
-"优雅" = "Elegant";
-"元气少女" = "Lively Girl";
-"超脱" = "Detached";
-"纯真" = "Innocent";
-"怀旧" = "Nostalgic";
-"蓝调" = "Blues";
-"清新" = "Fresh";
-"元气" = "Lively";
-"美白" = "White";
-"初恋" = "First love";
-"清爽" = "Refreshing";
-"白羊" = "Sheep";
-"八字胡" = "Mustache";
-"布偶" = "Doll";
-"小黄脸" = "Yellow Face";
-"猴子" = "Monkey";
-"胡须" = "Beard";
-"猫耳朵" = "Cat Ears";
-"射手座" = "Sagittarius";
-"手绘胡子" = "Sketch Beard";
-"兔子" = "Rabbit";
-"美颜" = "Retouch";
-"美妆" = "Makeup";
-"滤镜" = "Filter";
-"贴纸" = "Sticker";
-"腮红" = "Blusher";
-"整妆" = "WholeMakeup";
-
-"脸型" = "Face shape";
-"重置" = "Reset";
-"整妆" = "WholeMakeup";
-"未知" = "Unknown";
-
-
-"颧骨" = "Cheekbones";
-"最大值" = "Max";
-
-"黛紫腮红" = "Deep Purple";
-"蜜橘腮红" = "Tangerine";
-"嫩粉腮红" = "Soft Pink";
-"桃红腮红" = "Peach Pink";
-"樱桃腮红" = "Cherry";
-
-"活力妆" = "Vitality";
-"基础妆" = "Basic";
-"梅子妆" = "Plum";
-"魅惑妆" = "Charm";
-"蜜桃妆" = "Peach";
-"奶橘妆" = "Orange";
-"杏粉妆" = "Apricot Pink";
-"优雅妆" = "Elegant";
-"元气少女妆" = "Lively Girl";
-
-"摄像头" = "Camera";
-
-"无音乐" = "No Music";
-
-"Axol(APP资源)" = "Axol(APP Resources)";
-"Pas de Deux(沙盒资源)" = "Pas de Deux (Sandbox Resources)";
-"网络音乐1" = "Online Music 1";
-"伴奏" = "Accompaniment";
-"人声" = "Human Voice";
-"停止" = "Stop";
-"播放" = "Play";
-"关循环" = "Disable Loop";
-"开循环" = "Enable Loop";
-"开静音" = "Mute";
-"关静音" = "Unmute";
-"开耳返" = "Enable In-ear Monitoring";
-"关耳返" = "Disable In-ear Monitoring";
-"开降噪" = "Enable Noise Reduction";
-"关降噪" = "Disable Noise Reduction";
-
-"截图" = "Snapshot";
-"闪光灯" = "Flash";
+"测试鉴权" = "Test Authentication";
+"鉴权时间" = "Authentication Time";
+"鉴权Key" = "Authentication Key";
+"下发题目" = "Send Questions";
+"下发答案" = "Send Answers";
 "背景音乐" = "Music";
+"耳返" = "Ear Monitoring";
+"降噪" = "Noise Reduction";
+"智能降噪" = "Intelligent Noise Reduction";
+"音乐列表" = "Music List";
+"音效" = "sound effects";
+"美颜" = "Retouch";
+"截图" = "Snapshot";
+"摄像头" = "Camera";
+"推流参数log" = "pusher log";
+"当前CPU：" = "CPU usage:";
+"当前Memory：" = "Memory usage:";
+"视频采集帧率：" = "Video capture fps:";
+"音频编码码率：" = "Audio encoder bitrate:";
+"音频编码帧率：" = "Audio encoder fps:";
+"视频渲染帧率：" = "Video render fps:";
+"视频编码模式：" = "Video encoder model:";
+"视频编码码率：" = "Video encoder bitrate:";
+"视频编码帧率：" = "Video encoder fps:";
+"视频编码总帧数：" = "Total fps of video encoder:";
+"视频编码总耗时：" = "Total time costs of video encoder:";
+"视频编码器设置码率：" = "Video encoder settings:";
+"音频输出码率：" = "Audio output bitrate:";
+"视频输出码率：" = "Video output bitrate:";
+"缓存音频帧总数：" = "Total Number of audio cache frames:";
+"缓存视频帧总数：" = "Total Number of video cache frames:";
+"视频上传帧率：" = "Video upload fps:";
+"音频上传帧率：" = "Audio upload fps:";
+"当前上传视频帧PTS：" = "PTS of current uploaded video frame:";
+"当前上传音频帧PTS：" = "PTS of current uploaded audio frame PTS:";
+"上一个视频关键帧PTS：" = "PTS of the last video keyframe:";
+"缓冲区中最后一帧视频：" = "Final video frame in cache:";
+"缓冲区中最后一帧音频：" = "Final audio frame in cache：";
+"数据上传总大小：" = "Total size of data uploaded:";
+"视频推流总耗时：" = "Total time costs of pushing";
+"当前视频流已发送总帧数：" = "Total number of video frames sent:";
+"视频丢帧总数：" = "Total number of viedo frames dropped:";
+"视频丢帧次数：" = "The times of video frames dropped:";
+"总的断网次数：" = "Total times of network disconnected:";
+"总的重连次数：" = "Total times of network reconnected:";
+"视频延迟时长：" = "Video delay duration:";
+"音频延迟时长：" = "Audio delay duration:";
+"当前上传帧大小：" = "Size of current frame uploaded";
+"音视频pts差异：" = "Video Audio pts diff：";
+"缓冲队列中曾经最大的视频帧size：" = "The max size of video frame in cache:";
+"缓冲队列中曾经最大的音频帧size：" = "The max size of audio frame in cache:";
+"音频编码器队列中帧缓存数：" = "The cache size of audio encoder:";
+"视频编码器队列中帧缓存数：" = "The cache size of video encoder";
+"渲染队列中帧缓存数：" = "The cache size of render queue:";
+"每帧平均渲染时长：" = "The average duration of per frame rendered:";

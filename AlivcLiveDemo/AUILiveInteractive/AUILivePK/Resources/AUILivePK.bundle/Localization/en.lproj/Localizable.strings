@@ -1,1 +1,9 @@
-
+"PK互动" = "Battles";
+"确认要退出房间，并结束PK吗？" = "Are you sure that you want to exit the room and end the battle?";
+"确认要结束本次PK吗？" = "Are you sure that you want to end the battle?";
+"请输入主播的房间号" = "Enter the room ID of the streamer";
+"PK主播ID和主播ID不能一致" = "User IDs of the battling streamers cannot be the same.";
+"PK主播房间号和主播房间号不能一致" = "Room IDs of the battling streamers cannot be the same.";
+"开始PK" = "Start";
+"正在PK" = "In Progress";
+"结束PK" = "End";

@@ -123,7 +123,7 @@
     
     self.pushUrlTextField = [[UITextField alloc] init];
     self.pushUrlTextField.frame = CGRectMake(self.pushUrlQRCodeButton.av_right + 8, (inputContentView.av_height - 30)/2.0, inputContentView.av_width - self.pushUrlQRCodeButton.av_right - 8, 30);
-    self.pushUrlTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:AUILiveCommonString(@"input_tips") attributes:@{
+    self.pushUrlTextField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:AUILiveCommonString(@"请输入推流url") attributes:@{
         NSFontAttributeName: AVGetRegularFont(14),
         NSForegroundColorAttributeName: AUIFoundationColor(@"text_ultraweak"),
     }];
@@ -322,7 +322,7 @@
         _pushStartButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         [_pushStartButton setFrame:CGRectMake(20, self.contentView.av_height - 48 - AVSafeBottom - 8, AlivcScreenWidth - 40, 48)];
         [_pushStartButton setBackgroundColor:AUIFoundationColor(@"colourful_fill_strong")];
-        [_pushStartButton setTitle:AUILiveCommonString(@"start_button") forState:UIControlStateNormal];
+        [_pushStartButton setTitle:AUILiveCommonString(@"开始推流") forState:UIControlStateNormal];
         [_pushStartButton setTitleColor:AUIFoundationColor(@"text_strong") forState:UIControlStateNormal];
         [_pushStartButton.titleLabel setFont:AVGetRegularFont(18)];
         [_pushStartButton.layer setMasksToBounds:YES];
@@ -467,13 +467,13 @@
     NSString *pushUrl = self.pushUrlTextField.text;
 
     if (nil == pushUrl || pushUrl.length == 0) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:AUILiveCommonString(@"提示") message:AUILiveCommonString(@"请输入推流地址") delegate:nil cancelButtonTitle:AUILiveCameraPushString(@"确定") otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:AUILiveCommonString(@"提示") message:AUILiveCommonString(@"请输入推流地址") delegate:nil cancelButtonTitle:AUILiveCommonString(@"确定") otherButtonTitles:nil];
         [alert show];
         return;
     }
 
     if (!([[pushUrl lowercaseString] hasPrefix:@"rtmp"] || [[pushUrl lowercaseString] hasPrefix:@"artc"])) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:AUILiveCommonString(@"提示") message:AUILiveCameraPushString(@"请输入有效推流地址") delegate:nil cancelButtonTitle:AUILiveCameraPushString(@"确定") otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:AUILiveCommonString(@"提示") message:AUILiveCameraPushString(@"请输入有效推流地址") delegate:nil cancelButtonTitle:AUILiveCommonString(@"确定") otherButtonTitles:nil];
         [alert show];
         return;
     }
@@ -559,7 +559,7 @@
     
 #ifdef ALIVC_LIVE_INTERACTIVE_MODE
     AlivcLiveParamModel *livePushModeModel = [[AlivcLiveParamModel alloc] init];
-    livePushModeModel.title = NSLocalizedString(@"互动模式", nil);
+    livePushModeModel.title = AUILiveCameraPushString(@"互动模式");
     livePushModeModel.defaultValue = 0;
     livePushModeModel.defaultValueAppose = 0;
     livePushModeModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -570,10 +570,10 @@
 
     AlivcLiveParamModel *titleResolutionModel = [[AlivcLiveParamModel alloc] init];
     titleResolutionModel.reuseId = AlivcLiveParamModelReuseCellSliderHeader;
-    titleResolutionModel.title = AUILiveCameraPushString(@"分辨率");
+    titleResolutionModel.title = AUILiveCommonString(@"分辨率");
 
     AlivcLiveParamModel *resolutionModel = [[AlivcLiveParamModel alloc] init];
-    resolutionModel.title = AUILiveCommonString(@"resolution_label");
+    resolutionModel.title = AUILiveCommonString(@"分辨率");
     resolutionModel.placeHolder = @"540P";
     resolutionModel.infoText = @"540P";
     resolutionModel.defaultValue = 4.0 / 7.0;
@@ -584,7 +584,7 @@
     };
     
     AlivcLiveParamModel *autoBitrate = [[AlivcLiveParamModel alloc] init];
-    autoBitrate.title = AUILiveCommonString(@"auto_bitrate");
+    autoBitrate.title = AUILiveCommonString(@"码率自适应");
     autoBitrate.defaultValue = 1.0;
     autoBitrate.defaultValueAppose = 0;
     autoBitrate.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -600,7 +600,7 @@
     };
 
     AlivcLiveParamModel *pushStreamModel = [[AlivcLiveParamModel alloc] init];
-    pushStreamModel.title = AUILiveCameraPushString(@"auto_resolution");
+    pushStreamModel.title = AUILiveCameraPushString(@"分辨率自适应");
     pushStreamModel.defaultValue = 0;
     pushStreamModel.defaultValueAppose = 0;
     pushStreamModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -613,7 +613,7 @@
     pushStreamDescModel.reuseId = AlivcLiveParamModelReuseCellSegmentWhite;
 
     AlivcLiveParamModel *advancedSettingModel = [[AlivcLiveParamModel alloc] init];
-    advancedSettingModel.title = AUILiveCameraPushString(@"gaojisetting");
+    advancedSettingModel.title = AUILiveCameraPushString(@"高级设置");
     advancedSettingModel.defaultValue = 0;
     advancedSettingModel.defaultValueAppose = 0;
     advancedSettingModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -636,7 +636,7 @@
     blankSegmentModel.title = @"";
 
     AlivcLiveParamModel *qualityModeModel = [[AlivcLiveParamModel alloc] init];
-    qualityModeModel.title = AUILiveCommonString(@"quality_mode_label");
+    qualityModeModel.title = AUILiveCommonString(@"码率模式");
     qualityModeModel.pickerPanelTextArray = @[AUILiveCommonString(@"清晰度优先"), AUILiveCommonString(@"流畅度优先"), AUILiveCommonString(@"自定义")];
     qualityModeModel.defaultValue = 0;
     qualityModeModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;
@@ -650,7 +650,7 @@
     qualityModeDescModel.reuseId = AlivcLiveParamModelReuseCellSegmentWhite;
 
     AlivcLiveParamModel *targetBitrateModel = [[AlivcLiveParamModel alloc] init];
-    targetBitrateModel.title = AUILiveCommonString(@"target_bitrate");
+    targetBitrateModel.title = AUILiveCommonString(@"视频目标码率");
     targetBitrateModel.defaultValue = 800;
     targetBitrateModel.infoText = @"/Kbps";
     targetBitrateModel.reuseId = AlivcLiveParamModelReuseCellInput;
@@ -659,7 +659,7 @@
     };
 
     AlivcLiveParamModel *minBitrateModel = [[AlivcLiveParamModel alloc] init];
-    minBitrateModel.title = AUILiveCommonString(@"min_bitrate");
+    minBitrateModel.title = AUILiveCommonString(@"视频最小码率");
     minBitrateModel.defaultValue = 200;
     minBitrateModel.infoText = @"/Kbps";
     minBitrateModel.reuseId = AlivcLiveParamModelReuseCellInput;
@@ -668,7 +668,7 @@
     };
 
     AlivcLiveParamModel *initBitrateModel = [[AlivcLiveParamModel alloc] init];
-    initBitrateModel.title = AUILiveCommonString(@"initial_bitrate");
+    initBitrateModel.title = AUILiveCommonString(@"视频初始码率");
     initBitrateModel.defaultValue = 800;
     initBitrateModel.infoText = @"/Kbps";
     initBitrateModel.reuseId = AlivcLiveParamModelReuseCellInput;
@@ -677,7 +677,7 @@
     };
 
     AlivcLiveParamModel *audioBitrateModel = [[AlivcLiveParamModel alloc] init];
-    audioBitrateModel.title = AUILiveCommonString(@"audio_bitrate");
+    audioBitrateModel.title = AUILiveCommonString(@"音频码率");
     audioBitrateModel.defaultValue = 64;
     audioBitrateModel.infoText = @"/Kbps";
     audioBitrateModel.infoColor = AUIFoundationColor(@"text_strong");
@@ -688,10 +688,10 @@
     
     AlivcLiveParamModel *minFPSDescModel = [[AlivcLiveParamModel alloc] init];
     minFPSDescModel.reuseId = AlivcLiveParamModelReuseCellSliderHeader;
-    minFPSDescModel.title = AUILiveCameraPushString(@"最小帧率");
+    minFPSDescModel.title = AUILiveCommonString(@"最小帧率");
 
     AlivcLiveParamModel *minFPSModel = [[AlivcLiveParamModel alloc] init];
-    minFPSModel.title = AUILiveCommonString(@"min_fps");
+    minFPSModel.title = AUILiveCommonString(@"最小帧率");
     minFPSModel.defaultValue = 0 / 2.0;
     minFPSModel.infoText = @"8";
     minFPSModel.infoUnit = @"fps";
@@ -702,10 +702,10 @@
     
     AlivcLiveParamModel *fpsDescModel = [[AlivcLiveParamModel alloc] init];
     fpsDescModel.reuseId = AlivcLiveParamModelReuseCellSliderHeader;
-    fpsDescModel.title = AUILiveCameraPushString(@"采集帧率");
+    fpsDescModel.title = AUILiveCommonString(@"采集帧率");
 
     AlivcLiveParamModel *captureFPSModel = [[AlivcLiveParamModel alloc] init];
-    captureFPSModel.title = AUILiveCommonString(@"captrue_fps");
+    captureFPSModel.title = AUILiveCommonString(@"采集帧率");
     captureFPSModel.defaultValue = 1.5 / 2.0;;
     captureFPSModel.infoText = @"20";
     captureFPSModel.infoUnit = @"fps";
@@ -719,7 +719,7 @@
     audioSampleRateDescModel.title = AUILiveCameraPushString(@"音频采样率");
     
     AlivcLiveParamModel *audioSampleRateModel = [[AlivcLiveParamModel alloc] init];
-    audioSampleRateModel.title = AUILiveCommonString(@"audio_sampling_rate");
+    audioSampleRateModel.title = AUILiveCommonString(@"音频采样率");
     audioSampleRateModel.infoText = @"48";
     audioSampleRateModel.infoUnit = @"kHz";
     audioSampleRateModel.defaultValue = 1;
@@ -730,10 +730,10 @@
 
     AlivcLiveParamModel *gopDescModel = [[AlivcLiveParamModel alloc] init];
     gopDescModel.reuseId = AlivcLiveParamModelReuseCellSliderHeader;
-    gopDescModel.title = AUILiveCameraPushString(@"关键帧间隔");
+    gopDescModel.title = AUILiveCommonString(@"关键帧间隔");
 
     AlivcLiveParamModel *gopModel = [[AlivcLiveParamModel alloc] init];
-    gopModel.title = AUILiveCommonString(@"keyframe_interval");
+    gopModel.title = AUILiveCommonString(@"关键帧间隔");
     gopModel.defaultValue = 1.0 / 2.0;
     gopModel.infoText = @"2";
     gopModel.infoUnit = @"s";
@@ -743,7 +743,7 @@
     };
 
     AlivcLiveParamModel *audioProfileModel = [[AlivcLiveParamModel alloc] init];
-    audioProfileModel.title = AUILiveCommonString(@"audio_profile");
+    audioProfileModel.title = AUILiveCommonString(@"音频格式");
     audioProfileModel.pickerPanelTextArray = @[@"AAC_LC", @"HE_AAC", @"HEAAC_V2", @"AAC_LD"];
     audioProfileModel.defaultValue = 0;
     audioProfileModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;
@@ -767,8 +767,8 @@
     };
 
     AlivcLiveParamModel *audioChannelModel = [[AlivcLiveParamModel alloc] init];
-    audioChannelModel.title = AUILiveCommonString(@"sound_track");
-    audioChannelModel.pickerPanelTextArray = @[AUILiveCommonString(@"single_track"), AUILiveCommonString(@"dual_track")];
+    audioChannelModel.title = AUILiveCommonString(@"声道数");
+    audioChannelModel.pickerPanelTextArray = @[AUILiveCommonString(@"单声道"), AUILiveCommonString(@"双声道")];
     audioChannelModel.defaultValue = 0;
     audioChannelModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;
     audioChannelModel.pickerSelectBlock = ^(int value) {
@@ -776,7 +776,7 @@
     };
 
     AlivcLiveParamModel *audioHardwareEncodeModel = [[AlivcLiveParamModel alloc] init];
-    audioHardwareEncodeModel.title = AUILiveCommonString(@"audio_hardware_encode");
+    audioHardwareEncodeModel.title = AUILiveCommonString(@"音频硬编码");
     audioHardwareEncodeModel.defaultValue = 1;
     audioHardwareEncodeModel.defaultValueAppose = 1.0;
     audioHardwareEncodeModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -785,7 +785,7 @@
     };
 
     AlivcLiveParamModel *videoOnly_encodeModeModel = [[AlivcLiveParamModel alloc] init];
-    videoOnly_encodeModeModel.title = AUILiveCommonString(@"video_hardware_encode");
+    videoOnly_encodeModeModel.title = AUILiveCommonString(@"视频硬编码");
     videoOnly_encodeModeModel.defaultValue = 1;
     videoOnly_encodeModeModel.defaultValueAppose = 1.0;
     videoOnly_encodeModeModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -796,7 +796,7 @@
     };
 
     AlivcLiveParamModel *videoHardEncodeCodecModel = [[AlivcLiveParamModel alloc] init];
-    videoHardEncodeCodecModel.title = AUILiveCommonString(@"video_hardware_encode_codec");
+    videoHardEncodeCodecModel.title = AUILiveCommonString(@"视频硬编Codec");
     videoHardEncodeCodecModel.pickerPanelTextArray = @[@"H264", @"H265"];
     videoHardEncodeCodecModel.defaultValue = 0;
     videoHardEncodeCodecModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;
@@ -805,7 +805,7 @@
     };
 
     AlivcLiveParamModel *bFrameModeModel = [[AlivcLiveParamModel alloc] init];
-    bFrameModeModel.title = AUILiveCameraPushString(@"video_encode_b_frame");
+    bFrameModeModel.title = AUILiveCameraPushString(@"B-Frame");
     bFrameModeModel.defaultValue = 0;
     bFrameModeModel.defaultValueAppose = 1.0;
     bFrameModeModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -837,7 +837,7 @@
     blankSegmentModel.title = @"";
 
     AlivcLiveParamModel *orientationModel = [[AlivcLiveParamModel alloc] init];
-    orientationModel.title = AUILiveCommonString(@"landscape_model");
+    orientationModel.title = AUILiveCommonString(@"推流方向");
     orientationModel.pickerPanelTextArray = @[AUILiveCommonString(@"竖屏"), AUILiveCommonString(@"横屏向左"), AUILiveCommonString(@"横屏向右")];
     orientationModel.defaultValue = 0;
     orientationModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;
@@ -850,7 +850,7 @@
     };
     
     AlivcLiveParamModel *previewDisplayModeModel = [[AlivcLiveParamModel alloc] init];
-    previewDisplayModeModel.title = AUILiveCameraPushString(@"preview_display_mode");
+    previewDisplayModeModel.title = AUILiveCameraPushString(@"显示模式");
     previewDisplayModeModel.pickerPanelTextArray = @[AUILiveCameraPushString(@"拉伸"), AUILiveCameraPushString(@"适合"), AUILiveCameraPushString(@"裁剪")];
     previewDisplayModeModel.defaultValue = 1;
     previewDisplayModeModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;
@@ -863,7 +863,7 @@
     reconnectDescModel.title = AUILiveCameraPushString(@"自动重连");
 
     AlivcLiveParamModel *reconnectDurationModel = [[AlivcLiveParamModel alloc] init];
-    reconnectDurationModel.title = AUILiveCommonString(@"reconnect_duration");
+    reconnectDurationModel.title = AUILiveCommonString(@"重连时长");
     reconnectDurationModel.defaultValue = 1000;
     reconnectDurationModel.infoText = @"/ms";
     reconnectDurationModel.infoColor = AUIFoundationColor(@"text_strong");
@@ -873,9 +873,9 @@
     };
 
     AlivcLiveParamModel *reconnectTimeModel = [[AlivcLiveParamModel alloc] init];
-    reconnectTimeModel.title = AUILiveCommonString(@"reconnect_times");
+    reconnectTimeModel.title = AUILiveCommonString(@"重连次数");
     reconnectTimeModel.defaultValue = 5;
-    reconnectTimeModel.infoText = AUILiveCameraPushString(@"/次");
+    reconnectTimeModel.infoText = [@"/" stringByAppendingString:AUILiveCameraPushString(@"次")];
     reconnectTimeModel.infoColor = AUIFoundationColor(@"text_strong");
     reconnectTimeModel.reuseId = AlivcLiveParamModelReuseCellInput;
     reconnectTimeModel.valueBlock = ^(int value) {
@@ -887,7 +887,7 @@
     watermarkDescModel.title = AUILiveCommonString(@"水印");
 
     AlivcLiveParamModel *watermarkModel = [[AlivcLiveParamModel alloc] init];
-    watermarkModel.title = AUILiveCommonString(@"watermark");
+    watermarkModel.title = AUILiveCommonString(@"开启水印");
     watermarkModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
     watermarkModel.defaultValue = self.isUseWatermark;
     watermarkModel.defaultValueAppose = self.isUseWatermark;
@@ -895,24 +895,24 @@
         self.isUseWatermark = open;
     };
 
-    AlivcLiveParamModel *watermarkSetLocationModel = [[AlivcLiveParamModel alloc] init];
-    watermarkSetLocationModel.title = AUILiveCommonString(@"watermark_setting");
-    watermarkSetLocationModel.reuseId = AlivcLiveParamModelReuseCellSwitchSetButton;
-    watermarkSetLocationModel.defaultValue = 1.0;
-    watermarkSetLocationModel.infoText = AUILiveCommonString(@"去设置");
-    watermarkSetLocationModel.switchBlock = ^(int index, BOOL open) {
-        self.isUseWatermark = open;
-    };
-    watermarkSetLocationModel.switchButtonBlock = ^() {
-        [self.view addSubview:self.waterSettingView];
-    };
+//    AlivcLiveParamModel *watermarkSetLocationModel = [[AlivcLiveParamModel alloc] init];
+//    watermarkSetLocationModel.title = AUILiveCommonString(@"水印设置");
+//    watermarkSetLocationModel.reuseId = AlivcLiveParamModelReuseCellSwitchSetButton;
+//    watermarkSetLocationModel.defaultValue = 1.0;
+//    watermarkSetLocationModel.infoText = AUILiveCommonString(@"去设置");
+//    watermarkSetLocationModel.switchBlock = ^(int index, BOOL open) {
+//        self.isUseWatermark = open;
+//    };
+//    watermarkSetLocationModel.switchButtonBlock = ^() {
+//        [self.view addSubview:self.waterSettingView];
+//    };
 
     AlivcLiveParamModel *mirrorDescModel = [[AlivcLiveParamModel alloc] init];
     mirrorDescModel.reuseId = AlivcLiveParamModelReuseCellSliderHeader;
     mirrorDescModel.title = AUILiveCameraPushString(@"镜像");
 
     AlivcLiveParamModel *pushMirrorModel = [[AlivcLiveParamModel alloc] init];
-    pushMirrorModel.title = AUILiveCommonString(@"push_mirror");
+    pushMirrorModel.title = AUILiveCommonString(@"推流镜像");
     pushMirrorModel.defaultValue = 0;
     pushMirrorModel.defaultValueAppose = 0;
     pushMirrorModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -921,7 +921,7 @@
     };
 
     AlivcLiveParamModel *previewMirrorModel = [[AlivcLiveParamModel alloc] init];
-    previewMirrorModel.title = AUILiveCommonString(@"preview_mirror");
+    previewMirrorModel.title = AUILiveCommonString(@"预览镜像");
     previewMirrorModel.defaultValue = 0;
     previewMirrorModel.defaultValueAppose = 0;
     previewMirrorModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -934,7 +934,7 @@
     cameraControlModel.title = AUILiveCameraPushString(@"相机控制");
 
     AlivcLiveParamModel *cameraTypeModel = [[AlivcLiveParamModel alloc] init];
-    cameraTypeModel.title = AUILiveCommonString(@"front_camera");
+    cameraTypeModel.title = AUILiveCommonString(@"前置摄像头");
     cameraTypeModel.defaultValue = 1.0;
     cameraTypeModel.defaultValueAppose = 1.0;
     cameraTypeModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -943,7 +943,7 @@
     };
 
     AlivcLiveParamModel *autoFocusModel = [[AlivcLiveParamModel alloc] init];
-    autoFocusModel.title = AUILiveCommonString(@"auto_focus");
+    autoFocusModel.title = AUILiveCommonString(@"自动对焦");
     autoFocusModel.defaultValue = 1.0;
     autoFocusModel.defaultValueAppose = 0;
     autoFocusModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -956,7 +956,7 @@
     beautyDescModel.title = AUILiveCameraPushString(@"美颜开关");
 
     AlivcLiveParamModel *beautySwitchModel = [[AlivcLiveParamModel alloc] init];
-    beautySwitchModel.title = AUILiveCommonString(@"beauty_button");
+    beautySwitchModel.title = AUILiveCommonString(@"开启美颜");
     beautySwitchModel.defaultValue = self.isBeautyOn;
     beautySwitchModel.defaultValueAppose = self.isBeautyOn;
     beautySwitchModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -969,7 +969,7 @@
     backgroundDescModel.title = AUILiveCameraPushString(@"垫片推流");
 
     AlivcLiveParamModel *pauseImageModel = [[AlivcLiveParamModel alloc] init];
-    pauseImageModel.title = AUILiveCommonString(@"background_image");
+    pauseImageModel.title = AUILiveCommonString(@"暂停图片");
     pauseImageModel.defaultValue = 1.0;
     pauseImageModel.defaultValueAppose = 1.0;
     pauseImageModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -978,7 +978,7 @@
     };
 
     AlivcLiveParamModel *networkWeakImageModel = [[AlivcLiveParamModel alloc] init];
-    networkWeakImageModel.title = AUILiveCommonString(@"network_weak_image");
+    networkWeakImageModel.title = AUILiveCommonString(@"网络差图片");
     networkWeakImageModel.defaultValue = 1.0;
     networkWeakImageModel.defaultValueAppose = 1.0;
     networkWeakImageModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -991,8 +991,8 @@
     };
     
     AlivcLiveParamModel *pushStreamingModel = [[AlivcLiveParamModel alloc] init];
-    pushStreamingModel.title = AUILiveCameraPushString(@"push_streaming");
-    pushStreamingModel.pickerPanelTextArray = @[AUILiveCameraPushString(@"audio_video_push_streaming"), AUILiveCommonString(@"audio_only_push_streaming"), AUILiveCommonString(@"video_only_push_streaming")];
+    pushStreamingModel.title = AUILiveCameraPushString(@"推流模式");
+    pushStreamingModel.pickerPanelTextArray = @[AUILiveCameraPushString(@"音视频"), AUILiveCommonString(@"纯音频"), AUILiveCommonString(@"纯视频")];
     pushStreamingModel.defaultValue = 0;
     pushStreamingModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;
     pushStreamingModel.pickerSelectBlock = ^(int value) {
@@ -1013,7 +1013,7 @@
     authTestModel.title = AUILiveCameraPushString(@"测试鉴权");
     
     AlivcLiveParamModel *authTimeModel = [[AlivcLiveParamModel alloc] init];
-    authTimeModel.title = AUILiveCameraPushString(@"AuthTime");
+    authTimeModel.title = AUILiveCameraPushString(@"鉴权时间");
     authTimeModel.infoText = @"ms";
     authTimeModel.reuseId = AlivcLiveParamModelReuseCellInput;
     authTimeModel.stringBlock = ^(NSString *message) {
@@ -1021,7 +1021,7 @@
     };
     
     AlivcLiveParamModel *authKeyModel = [[AlivcLiveParamModel alloc] init];
-    authKeyModel.title = AUILiveCameraPushString(@"AuthKey");
+    authKeyModel.title = AUILiveCameraPushString(@"鉴权Key");
     authKeyModel.infoText = @"";
     authKeyModel.reuseId = AlivcLiveParamModelReuseCellInput;
     authKeyModel.stringBlock = ^(NSString *message) {
@@ -1033,7 +1033,7 @@
     otherDescModel.title = AUILiveCameraPushString(@"其他功能");
 
     AlivcLiveParamModel *useExternalStreamModel = [[AlivcLiveParamModel alloc] init];
-    useExternalStreamModel.title = AUILiveCommonString(@"user_main_stream");
+    useExternalStreamModel.title = AUILiveCommonString(@"外部音视频");
     useExternalStreamModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
     useExternalStreamModel.defaultValue = self.isUseExternalStream;
     useExternalStreamModel.switchBlock = ^(int index, BOOL open) {
@@ -1045,12 +1045,12 @@
                 }
                 
                 AVProgressHUD *loading = [AVProgressHUD ShowHUDAddedTo:self.view animated:YES];
-                loading.labelText = AUILiveCameraPushString(@"正在下载外部音视频资源中，请等待");
+                loading.labelText = AUILiveCommonString(@"正在下载外部音视频资源中，请等待");
                 
                 [AliveLiveDemoUtil requestExternalStreamResourceWithCompletion:^(BOOL success, NSString * _Nonnull errMsg) {
                     [loading hideAnimated:YES];
                     if (!success) {
-                        [AVToastView show:AUILiveCameraPushString(errMsg) view:self.view position:AVToastViewPositionMid];
+                        [AVToastView show:errMsg view:self.view position:AVToastViewPositionMid];
                         AUILiveParamTableViewCell *targetCell = [self.pushContentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:22 inSection:0]];
                         [targetCell updateDefaultValue:0 enable:YES];
                         self.isUseExternalStream = NO;
@@ -1061,7 +1061,7 @@
     };
 
     AlivcLiveParamModel *asyncModel = [[AlivcLiveParamModel alloc] init];
-    asyncModel.title = AUILiveCommonString(@"asynchronous_interface");
+    asyncModel.title = AUILiveCommonString(@"异步接口");
     asyncModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
     asyncModel.defaultValue = self.isUseAsync;
     asyncModel.switchBlock = ^(int index, BOOL open) {
@@ -1071,7 +1071,7 @@
     };
 
     AlivcLiveParamModel *musicMode = [[AlivcLiveParamModel alloc] init];
-    musicMode.title = AUILiveCameraPushString(@"audio_mode_music");
+    musicMode.title = AUILiveCameraPushString(@"音乐模式");
     musicMode.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
     musicMode.defaultValue = 0.0;
     musicMode.switchBlock = ^(int index, BOOL open) {
@@ -1081,7 +1081,7 @@
     };
     
     AlivcLiveParamModel *localLogModel = [[AlivcLiveParamModel alloc] init];
-    localLogModel.title = AUILiveCameraPushString(@"local_log");
+    localLogModel.title = AUILiveCameraPushString(@"本地日志");
     localLogModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
     localLogModel.defaultValue = 0.0;
     localLogModel.switchBlock = ^(int index, BOOL open) {
@@ -1100,7 +1100,7 @@
     };
 
     return @[orientationModel, previewDisplayModeModel, reconnectDescModel, reconnectDurationModel, reconnectTimeModel,
-            watermarkDescModel, watermarkModel, watermarkSetLocationModel, mirrorDescModel, pushMirrorModel, previewMirrorModel,
+            watermarkDescModel, watermarkModel, mirrorDescModel, pushMirrorModel, previewMirrorModel,
             cameraControlModel, cameraTypeModel, autoFocusModel, beautyDescModel, beautySwitchModel,
             backgroundDescModel, pauseImageModel, networkWeakImageModel, blankSegmentModel, pushStreamingModel,
             otherDescModel, useExternalStreamModel, asyncModel, localLogModel];

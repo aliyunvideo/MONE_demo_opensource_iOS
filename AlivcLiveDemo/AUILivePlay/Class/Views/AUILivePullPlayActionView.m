@@ -29,16 +29,16 @@
         [self.stopPlayBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
             make.right.mas_equalTo(self.mutedBtn.mas_left).mas_offset(-47);
-            make.size.mas_equalTo(CGSizeMake(44, kPullBtn_height));
+            make.size.mas_equalTo(CGSizeMake(55, kPullBtn_height));
         }];
         [self.mutedBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(self);
-            make.size.mas_equalTo(CGSizeMake(44, kPullBtn_height));
+            make.size.mas_equalTo(CGSizeMake(55, kPullBtn_height));
         }];
         [self.dataIndicatorBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
             make.left.mas_equalTo(self.mutedBtn.mas_right).mas_offset(47);
-            make.size.mas_equalTo(CGSizeMake(44, kPullBtn_height));
+            make.size.mas_equalTo(CGSizeMake(55, kPullBtn_height));
         }];
     }
     return self;
@@ -48,7 +48,7 @@
     if (!_stopPlayBtn) {
         _stopPlayBtn = [[AVBaseButton alloc] initWithType:AVBaseButtonTypeImageText titlePos:AVBaseButtonTitlePosBottom];
         _stopPlayBtn.image = AUILivePlayImage(@"pull_stopplay");
-        _stopPlayBtn.title = AUILivePlayString(@"pull_stopPlay");
+        _stopPlayBtn.title = AUILivePlayString(@"结束观看");
         
         __weak typeof(self) weakSelf = self;
         _stopPlayBtn.action = ^(AVBaseButton * _Nonnull btn) {
@@ -65,7 +65,7 @@
     if (!_mutedBtn) {
         _mutedBtn = [[AVBaseButton alloc] initWithType:AVBaseButtonTypeImageText titlePos:AVBaseButtonTitlePosBottom];
         _mutedBtn.image = AUILivePlayImage(@"pull_muted");
-        _mutedBtn.title = AUILivePlayString(@"pull_muted");
+        _mutedBtn.title = AUILivePlayString(@"静音");
         
         __weak typeof(self) weakSelf = self;
         _mutedBtn.action = ^(AVBaseButton * _Nonnull btn) {
@@ -84,7 +84,7 @@
     if (!_dataIndicatorBtn) {
         _dataIndicatorBtn = [[AVBaseButton alloc] initWithType:AVBaseButtonTypeImageText titlePos:AVBaseButtonTitlePosBottom];
         _dataIndicatorBtn.image = AUILivePlayImage(@"pull_dataindicator");
-        _dataIndicatorBtn.title = AUILivePlayString(@"pull_dataIndicator");
+        _dataIndicatorBtn.title = AUILivePlayString(@"数据指标");
         
         __weak typeof(self) weakSelf = self;
         _dataIndicatorBtn.action = ^(AVBaseButton * _Nonnull btn) {
@@ -105,10 +105,10 @@
 - (void)updateMutedButton {
     if (self.muted) {
         self.mutedBtn.image = AUILivePlayImage(@"pull_volume");
-        self.mutedBtn.title = AUILivePlayString(@"pull_volume");
+        self.mutedBtn.title = AUILivePlayString(@"取消静音");
     } else {
         self.mutedBtn.image = AUILivePlayImage(@"pull_muted");
-        self.mutedBtn.title = AUILivePlayString(@"pull_muted");
+        self.mutedBtn.title = AUILivePlayString(@"静音");
     }
 }
 

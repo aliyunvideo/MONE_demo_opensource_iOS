@@ -59,7 +59,7 @@
     nextButton.backgroundColor = AUIFoundationColor(@"colourful_fg_strong");
     nextButton.titleLabel.font = AVGetRegularFont(14);
     [nextButton setTitleColor:AUIFoundationColor(@"text_strong") forState:UIControlStateNormal];
-    [nextButton setTitle:@"剪同款" forState:UIControlStateNormal];
+    [nextButton setTitle:AUIUgsvGetString(@"下一步") forState:UIControlStateNormal];
     nextButton.layer.cornerRadius = 16.0;
     nextButton.layer.masksToBounds = YES;
     [nextButton addTarget:self action:@selector(onNextButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

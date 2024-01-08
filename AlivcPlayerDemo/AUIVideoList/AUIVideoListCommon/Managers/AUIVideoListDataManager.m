@@ -34,7 +34,7 @@
         __strong typeof(self) strongSelf = weakSelf;
         if (![responseObject isKindOfClass:[NSArray class]]) {
             if (completion) {
-                NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey: AUIVideoListString(@"Request_Data_Format_Error")}];
+                NSError *error = [NSError errorWithDomain:@"" code:0 userInfo:@{NSLocalizedDescriptionKey: AUIVideoListString(@"数据格式错误")}];
                 completion(NO, nil, error);
             }
         } else {

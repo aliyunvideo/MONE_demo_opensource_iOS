@@ -129,5 +129,5 @@ b. 单集视频：AUIVideoInfo
 
 ## 核心能力介绍
 
-本组件功能通过阿里云播放器SDK的AliListPlayer进行实现，使用了本地缓存、智能预加载、智能预渲染、HTTPDNS等核心能力，在播放延迟、播放稳定性方面大幅度提升观看体验。
+本组件功能通过阿里云播放器SDK的AliListPlayer进行实现，使用了本地缓存、智能预加载、智能预渲染、HTTPDNS、加密播放等核心能力，在播放延迟、播放稳定性及安全性方面大幅度提升观看体验。
 具体介绍参考[进阶功能](https://help.aliyun.com/zh/vod/developer-reference/advanced-features-1)

@@ -45,7 +45,7 @@ static NSString *kAUITransitionViewCell = @"AUITransitionViewCell";
 }
 
 - (void)setup {
-    self.titleLabel.text = @"转场";
+    self.titleLabel.text = AUIUgsvGetString(@"转场");
     [self.contentView addSubview:self.iconView];
     [self.contentView addSubview:self.titleLabel];
 }

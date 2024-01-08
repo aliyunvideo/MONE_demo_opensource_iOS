@@ -1,0 +1,14 @@
+/* 
+  InfoPlist.strings
+  AlivcAIODemo
+
+  Created by Bingo on 2023/11/29.
+  
+*/
+
+"CFBundleDisplayName" = "音视频终端SDK";
+"NSAppleMusicUsageDescription" = "需要访问音乐库为视频剪辑添加音乐";
+"NSCameraUsageDescription" = "需要使用摄像头进行拍摄视频与直播";
+"NSMicrophoneUsageDescription" = "需要使用麦克风进行拍摄视频与直播";
+"NSPhotoLibraryAddUsageDescription" = "访问相册视频与图片进行编辑";
+"NSPhotoLibraryUsageDescription" = "访问相册视频与图片进行编辑";

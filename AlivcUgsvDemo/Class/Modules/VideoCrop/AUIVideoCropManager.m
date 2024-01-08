@@ -9,6 +9,7 @@
 #import "AUIVideoCropExport.h"
 #import "AlivcUgsvSDKHeader.h"
 #import "AUIUgsvPath.h"
+#import "AUIUgsvMacro.h"
 
 @implementation AUIVideoCropManager
 
@@ -77,11 +78,11 @@ static AUIVideoCropExport *_cropExport = nil;
             
             if (param.isImage) {
                 AVProgressHUD *hud = [AVProgressHUD ShowHUDAddedTo:sender.view animated:YES];
-                hud.labelText = @"正在导出中...";
+                hud.labelText = AUIUgsvGetString(@"正在导出中...");
                 [AUIVideoCropManager startPhotoCrop:param.inputPath cropRect:result.frame outputSize:param.outputAspectRatio completed:^(NSError * _Nullable error, NSString * _Nullable outputPath) {
                     [hud hideAnimated:YES];
                     if (error) {
-                        [AVAlertController show:@"导出失败了。。。" vc:sender];
+                        [AVAlertController show:AUIUgsvGetString(@"导出失败了。。。") vc:sender];
                         return;
                     }
                     if (completedBlock) {
@@ -91,7 +92,7 @@ static AUIVideoCropExport *_cropExport = nil;
                 }];
             }
             else {
-                AVCircularProgressView *progressView = [AVCircularProgressView presentOnView:sender.view message:@"正在导出中..."];
+                AVCircularProgressView *progressView = [AVCircularProgressView presentOnView:sender.view message:AUIUgsvGetString(@"正在导出中...")];
                 AUIVideoOutputParam *cropParam = [[AUIVideoOutputParam alloc] initWithOutputSize:param.outputAspectRatio];
                 cropParam.scaleMode = AliyunScaleModeFit;
                 [AUIVideoCropManager startVideoCrop:param.inputPath startTime:result.startTime endTime:result.startTime+param.outputDuration cropRect:result.frame param:cropParam progress:^(float progress) {
@@ -99,7 +100,7 @@ static AUIVideoCropExport *_cropExport = nil;
                 } completed:^(NSError * _Nullable error, NSString * _Nullable outputPath) {
                     [AVCircularProgressView dismiss:progressView];
                     if (error) {
-                        [AVAlertController show:@"导出失败了。。。" vc:sender];
+                        [AVAlertController show:AUIUgsvGetString(@"导出失败了。。。") vc:sender];
                         return;
                     }
                     if (completedBlock) {

@@ -40,7 +40,7 @@
         
         // _placeholderLabel
            UILabel *placeHolderLabel = [[UILabel alloc] init];
-        placeHolderLabel.text = AUIUgsvGetString(@"Input words");
+        placeHolderLabel.text = AUIUgsvGetString(@"点击输入文字");
            placeHolderLabel.numberOfLines = 1;
         placeHolderLabel.textColor = AUIFoundationColor(@"text_weak");
            [placeHolderLabel sizeToFit];

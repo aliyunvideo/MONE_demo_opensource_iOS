@@ -37,7 +37,7 @@
 
 - (void)setupMenuItem {
     NSInteger count = 4;
-    CGFloat width = 46;
+    CGFloat width = 66;
     CGFloat height = 38;
     CGFloat top = (self.menuView.av_height - height) / 2.0;
     

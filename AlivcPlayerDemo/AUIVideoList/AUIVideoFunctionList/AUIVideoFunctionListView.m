@@ -135,7 +135,7 @@
     self.table.mj_footer = footer;
     [footer setRefreshingTitleHidden:YES];
     if ([self isLoadMoreData]) {
-        [footer setTitle:AUIVideoListString(@"LoadMore_NoData") forState:MJRefreshStateNoMoreData];
+        [footer setTitle:AUIVideoListString(@"—— 我是有底线的 ——") forState:MJRefreshStateNoMoreData];
         [footer setTitle:@"" forState:MJRefreshStateIdle];
         footer.stateLabel.font = [UIFont systemFontOfSize:14.0f];
         footer.stateLabel.textColor = AUIFoundationColor(@"text_weak");
@@ -188,7 +188,7 @@
     } else {
         if (self.currentPlayIndex == self.sources.count - 1) {
             [self.table.mj_footer endRefreshing];
-            [AVToastView show:AUIVideoListString(@"Coming_Soon") view:self.view position:AVToastViewPositionMid];
+            [AVToastView show:AUIVideoListString(@"敬请期待～") view:self.view position:AVToastViewPositionMid];
         }
     }
 }
@@ -322,7 +322,7 @@
     self.dataManager.requestUrl = url;
     self.dataManager.nextIndex = nil;
     AVProgressHUD *loading = [AVProgressHUD ShowHUDAddedTo:self.view animated:YES];
-    loading.labelText = AUIVideoListString(@"Loading");
+    loading.labelText = AUIVideoListString(@"加载中...");
     __weak typeof(self) weakSelf = self;
     [self.dataManager requestVideoInfos:NO completion:^(BOOL success, NSArray *sources, NSError *error) {
         __strong typeof(self) strongSelf = weakSelf;
@@ -351,7 +351,7 @@
     self.dataManager.requestUrl = url;
     self.dataManager.nextIndex = nextIndex;
     AVProgressHUD *loading = [AVProgressHUD ShowHUDAddedTo:self.view animated:YES];
-    loading.labelText = AUIVideoListString(@"Loading");
+    loading.labelText = AUIVideoListString(@"加载中...");
     __weak typeof(self) weakSelf = self;
     [self.dataManager requestVideoInfos:YES completion:^(BOOL success, NSArray *sources, NSError *error) {
         __strong typeof(self) strongSelf = weakSelf;

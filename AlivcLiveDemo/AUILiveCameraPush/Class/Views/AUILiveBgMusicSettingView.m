@@ -109,7 +109,7 @@ typedef NS_ENUM(NSInteger, AUILiveBgMusicSettingCellSectionType) {
     UIButton *okButton = [UIButton buttonWithType:UIButtonTypeCustom];
     okButton.frame = CGRectMake(themeView.av_width - 20 - 80, 0, 80, kThemeHeight);
     okButton.av_centerY = themeView.av_centerY;
-    [okButton setTitle:AUILiveCameraPushString(@"确定") forState:UIControlStateNormal];
+    [okButton setTitle:AUILiveCommonString(@"确定") forState:UIControlStateNormal];
     okButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     okButton.titleLabel.font = AVGetRegularFont(15);
     [okButton setTitleColor:AUILiveCommonColor(@"ir_sheet_button") forState:UIControlStateNormal];
@@ -279,7 +279,7 @@ typedef NS_ENUM(NSInteger, AUILiveBgMusicSettingCellSectionType) {
     for (int i = 0; i < musicDataArray.count; i++) {
         AlivcLiveMusicInfoModel *music = musicDataArray[i];
         AlivcLiveParamModel *musicListModel = [[AlivcLiveParamModel alloc] init];
-        musicListModel.title = AUILiveCameraPushString(music.name);
+        musicListModel.title = music.name;
         musicListModel.defaultValue = self.manager.currentMusicPlayIndex == i;
         musicListModel.reuseId = AlivcLiveParamModelReuseCellTick;
         musicListModel.tickBlock = ^{

@@ -39,4 +39,14 @@
  
 }
 
++ (BOOL)isLocalZHLanguage {
+    NSString *currentLanguageCode = [NSLocale preferredLanguages].firstObject;
+    if ([currentLanguageCode hasPrefix:@"zh"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+
 @end

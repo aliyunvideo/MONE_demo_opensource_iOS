@@ -219,7 +219,7 @@ static AUIVideoOutputParam * s_convertRecordToEdit(AUIRecorderConfig *config) {
              param:(AUIVideoOutputParam *)param
       publishParam:(AUIUgsvPublishParamInfo *)publishParam {
 #ifdef USING_SVIDEO_BASIC
-    [AVAlertController show:@"当前SDK不支持"];
+    [AVAlertController show:AUIUgsvGetString(@"当前SDK不支持")];
 #else // USING_SVIDEO_BASIC
     if (!param) {
         param = [AUIVideoOutputParam Portrait720P];
@@ -295,10 +295,10 @@ static AUIVideoOutputParam * s_convertRecordToEdit(AUIRecorderConfig *config) {
 
 + (void)openTemplateList:(UIViewController *)currentVC {
 #ifdef USING_SVIDEO_BASIC
-    [AVAlertController show:@"当前SDK不支持"];
+    [AVAlertController show:AUIUgsvGetString(@"当前SDK不支持")];
 #else // USING_SVIDEO_BASIC
     if (![AliyunAETemplateManager canSupport]) {
-        [AVAlertController show:@"当前机型不支持"];
+        [AVAlertController show:AUIUgsvGetString(@"当前机型不支持")];
         return;
     }
     AUIVideoTemplateListViewController *vc = [[AUIVideoTemplateListViewController alloc] init];

@@ -28,7 +28,7 @@
     [super viewDidLoad];
     
     self.hiddenMenuButton = YES;
-    self.titleView.text = AUILiveCommonString(@"sweep_code");;
+    self.titleView.text = AUILiveCommonString(@"扫码");;
     
     [self setupCamera];
 

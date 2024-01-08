@@ -267,7 +267,7 @@
 }
 
 - (void)onBackBtnClicked:(UIButton *)sender {
-    [AVAlertController showWithTitle:@"" message:@"确定要放弃编辑中的视频吗？" cancelTitle:@"取消" okTitle:@"确认" onCompleted:^(BOOL isCanced) {
+    [AVAlertController showWithTitle:@"" message:AUIUgsvGetString(@"确定要放弃编辑中的视频吗？") cancelTitle:AUIFoundationLocalizedString(@"Cancel") okTitle:AUIFoundationLocalizedString(@"OK") onCompleted:^(BOOL isCanced) {
         if (!isCanced) {
             [self goBack];
         }

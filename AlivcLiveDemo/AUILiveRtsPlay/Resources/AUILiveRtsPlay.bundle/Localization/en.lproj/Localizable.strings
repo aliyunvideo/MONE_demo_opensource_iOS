@@ -1,1 +1,21 @@
-
+"超低延时直播" = "RTS";
+"播放地址" = "Streaming URL";
+"请输入RTS超低延时播放地址" = "Enter a streaming URL over RTS";
+"播放地址可到视频直播控制台用地址生成器生成" = "You can use the URL generator in the ApsaraVideo Live console to generate a streaming URL.";
+"开始播放" = "Start Playback";
+"常见问题" = "FAQ";
+"播放失败" = "Playback Failures";
+"请前往 视频直播控制台 > 工具箱 > 自助问题排查，输入URL自助定位播放失败问题" = "In the ApsaraVideo Live console, choose Tools > Troubleshooting in the left-side navigation pane. On the page that appears, enter the URL to troubleshoot the issue.";
+"播放卡顿/延时高" = "Stuttering/High Latency";
+"请前往视频直播控制台 > 流管理 > 流检测，分析您当前的推流网络环境是否良好(帧率或时间戳是否正常)" = "In the ApsaraVideo Live console, go to the Stream Management page. Find your stream and check the frame rate and timestamp of the stream to determine whether the network condition is good.";
+"若您的推流网络良好，请点击【TraceID获取】获取相关信息，并提交工单寻求帮助" = "If the network condition is good, click Obtain TraceID to obtain relevant information. Then, submit a ticket that includes the information for technical support.";
+"信息已复制" = "Information copied.";
+"网络建联不成功，当前未获取到TraceID信息" = "Network connection failed. TraceID information is not obtained.";
+"播放失败提示" = "Tip for Playback Failures";
+"降级播放" = "Use a degraded protocol for playback";
+"播放" = "Play";
+"停止" = "Stop";
+"TraceID获取" = "Obtain TraceID";
+"若您在体验Demo时碰到问题，请将以下信息通过工单的形式提交给售后" = "If you encounter problems while experiencing Demo, please submit the following information to after-sales service in the form of work order.";
+"复制" = "Copy";
+"关闭" = "Close";

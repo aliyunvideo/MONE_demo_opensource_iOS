@@ -83,7 +83,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.frame = CGRectMake(kAUILiveChartViewRetractX, kAUILiveChartViewRetractX, 200, kAUILiveChartViewRetractX);
-    titleLabel.text = AUILiveCameraPushString(@"buffer");
+    titleLabel.text = AUILiveCameraPushString(@"各模块buffer");
     [durationView addSubview:titleLabel];
     
     self.videoRenderBuffer = [[AUILiveChartView alloc]
@@ -94,7 +94,7 @@
                             
                             backgroundColor:[UIColor clearColor]
                             barColor:[UIColor redColor]
-                            barTitle:AUILiveCameraPushString(@"video_renderbuffer")
+                            barTitle:AUILiveCameraPushString(@"视频渲染")
                             barTotalProgress:totalProgress];
     [durationView addSubview:self.videoRenderBuffer];
     
@@ -105,7 +105,7 @@
                                                    kAUILiveChartViewRetractX))
                          backgroundColor:[UIColor clearColor]
                          barColor:[UIColor blueColor]
-                         barTitle:AUILiveCameraPushString(@"video_encodebuffer")
+                         barTitle:AUILiveCameraPushString(@"视频编码")
                          barTotalProgress:totalProgress];
     [durationView addSubview:self.videoEncodeBuffer];
     
@@ -117,7 +117,7 @@
                                                      kAUILiveChartViewRetractX))
                            backgroundColor:[UIColor clearColor]
                            barColor:[UIColor blackColor]
-                           barTitle:AUILiveCameraPushString(@"audio_encodebuffer")
+                           barTitle:AUILiveCameraPushString(@"音频编码")
                            barTotalProgress:totalProgress];
     [durationView addSubview:self.audioEncodeBuffer];
     
@@ -129,7 +129,7 @@
                                                    kAUILiveChartViewRetractX))
                          backgroundColor:[UIColor clearColor]
                          barColor:[UIColor greenColor]
-                         barTitle:AUILiveCameraPushString(@"video_uploadbuffer")
+                         barTitle:AUILiveCameraPushString(@"视频上传")
                          barTotalProgress:totalProgress];
     [durationView addSubview:self.videoUploadBuffer];
     
@@ -140,7 +140,7 @@
                                                     kAUILiveChartViewRetractX))
                           backgroundColor:[UIColor clearColor]
                           barColor:[UIColor orangeColor]
-                          barTitle:AUILiveCameraPushString(@"audio_uploadbuffer")
+                          barTitle:AUILiveCameraPushString(@"音频上传")
                           barTotalProgress:totalProgress];
     [durationView addSubview:self.audioUploadBuffer];
     
@@ -158,7 +158,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.frame = CGRectMake(kAUILiveChartViewRetractX, kAUILiveChartViewRetractX, 200, kAUILiveChartViewRetractX);
-    titleLabel.text = AUILiveCameraPushString(@"modules_audio_fps");
+    titleLabel.text = AUILiveCameraPushString(@"各模块音频帧率");
     [audioFPSView addSubview:titleLabel];
     
     self.captureAudioFPS = [[AUILiveChartView alloc]
@@ -168,7 +168,7 @@
                                                       kAUILiveChartViewRetractX))
                             backgroundColor:[UIColor clearColor]
                             barColor:[UIColor redColor]
-                            barTitle:AUILiveCameraPushString(@"capture")
+                            barTitle:AUILiveCameraPushString(@"采集")
                             barTotalProgress:totalProgress];
 //    [audioFPSView addSubview:self.captureAudioFPS];
     
@@ -180,7 +180,7 @@
                                                      kAUILiveChartViewRetractX))
                            backgroundColor:[UIColor clearColor]
                            barColor:[UIColor blackColor]
-                           barTitle:AUILiveCameraPushString(@"encode")
+                           barTitle:AUILiveCameraPushString(@"编码")
                            barTotalProgress:totalProgress];
     [audioFPSView addSubview:self.encodeAudioFPS];
     
@@ -192,7 +192,7 @@
                                                    kAUILiveChartViewRetractX))
                          backgroundColor:[UIColor clearColor]
                          barColor:[UIColor greenColor]
-                         barTitle:AUILiveCameraPushString(@"push")
+                         barTitle:AUILiveCameraPushString(@"推流")
                          barTotalProgress:totalProgress];
     [audioFPSView addSubview:self.pushAudioFPS];
     
@@ -210,7 +210,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.frame = CGRectMake(kAUILiveChartViewRetractX, kAUILiveChartViewRetractX, 200, kAUILiveChartViewRetractX);
-    titleLabel.text = AUILiveCameraPushString(@"modules_video_fps");
+    titleLabel.text = AUILiveCameraPushString(@"各模块视频帧率");
     [videoFPSView addSubview:titleLabel];
     
     self.captureVideoFPS = [[AUILiveChartView alloc]
@@ -220,7 +220,7 @@
                                                       kAUILiveChartViewRetractX))
                             backgroundColor:[UIColor clearColor]
                             barColor:[UIColor redColor]
-                            barTitle:AUILiveCameraPushString(@"capture")
+                            barTitle:AUILiveCameraPushString(@"采集")
                             barTotalProgress:totalProgress];
     [videoFPSView addSubview:self.captureVideoFPS];
     
@@ -231,7 +231,7 @@
                                                    kAUILiveChartViewRetractX))
                          backgroundColor:[UIColor clearColor]
                          barColor:[UIColor blueColor]
-                         barTitle:AUILiveCameraPushString(@"render")
+                         barTitle:AUILiveCameraPushString(@"渲染")
                          barTotalProgress:totalProgress];
     [videoFPSView addSubview:self.zoomVideoFPS];
     
@@ -243,7 +243,7 @@
                                                      kAUILiveChartViewRetractX))
                            backgroundColor:[UIColor clearColor]
                            barColor:[UIColor blackColor]
-                           barTitle:AUILiveCameraPushString(@"encode")
+                           barTitle:AUILiveCameraPushString(@"编码")
                            barTotalProgress:totalProgress];
     [videoFPSView addSubview:self.encodeVideoFPS];
     
@@ -255,7 +255,7 @@
                                                    kAUILiveChartViewRetractX))
                          backgroundColor:[UIColor clearColor]
                          barColor:[UIColor greenColor]
-                         barTitle:AUILiveCameraPushString(@"push")
+                         barTitle:AUILiveCameraPushString(@"推流")
                          barTotalProgress:totalProgress];
     [videoFPSView addSubview:self.pushVideoFPS];
     
@@ -273,7 +273,7 @@
     
     UILabel *titleLabel = [[UILabel alloc] init];
     titleLabel.frame = CGRectMake(kAUILiveChartViewRetractX, kAUILiveChartViewRetractX, 200, kAUILiveChartViewRetractX);
-    titleLabel.text = AUILiveCameraPushString(@"modules_bitrate");
+    titleLabel.text = AUILiveCameraPushString(@"各模块码率");
     [bitrateView addSubview:titleLabel];
     
     self.encodeVideoBitrate = [[AUILiveChartView alloc]
@@ -283,7 +283,7 @@
                                                     kAUILiveChartViewRetractX))
                           backgroundColor:[UIColor clearColor]
                           barColor:[UIColor blackColor]
-                          barTitle:AUILiveCameraPushString(@"video_encode")
+                          barTitle:AUILiveCameraPushString(@"视频编码")
                           barTotalProgress:totalProgress];
     [bitrateView addSubview:self.encodeVideoBitrate];
     
@@ -294,7 +294,7 @@
                                                    kAUILiveChartViewRetractX))
                          backgroundColor:[UIColor clearColor]
                          barColor:[UIColor blackColor]
-                         barTitle:AUILiveCameraPushString(@"audio_encode")
+                         barTitle:AUILiveCameraPushString(@"音频编码")
                          barTotalProgress:totalProgress];
     [bitrateView addSubview:self.encodeAudioBitrate];
     
@@ -305,7 +305,7 @@
                                                    kAUILiveChartViewRetractX))
                          backgroundColor:[UIColor clearColor]
                          barColor:[UIColor greenColor]
-                         barTitle:AUILiveCameraPushString(@"push")
+                         barTitle:AUILiveCameraPushString(@"推流")
                          barTotalProgress:totalProgress];
     [bitrateView addSubview:self.pushBiterate];
     

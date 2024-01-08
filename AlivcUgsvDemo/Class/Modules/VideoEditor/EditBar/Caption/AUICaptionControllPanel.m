@@ -44,7 +44,7 @@
         
         self.showBackButton = YES;
         
-        self.segmenTitles = @[AUIUgsvGetString(@"Font Efect"),AUIUgsvGetString(@"Bubble"),AUIUgsvGetString(@"Style"),AUIUgsvGetString(@"Animation")];
+        self.segmenTitles = @[AUIUgsvGetString(@"花字"),AUIUgsvGetString(@"气泡"),AUIUgsvGetString(@"样式"),AUIUgsvGetString(@"动画")];
         [self.headerView addSubview:self.textInputView];
         [self.contentView addSubview:self.segment];
         [self.contentView addSubview:self.flowerView];
@@ -72,7 +72,7 @@
 
         _textInputView.onTextChanged = ^(NSString * _Nonnull text) {
             if (text.length == 0) {
-                weakSelf.stickerController.model.text = @"点击输入文字";
+                weakSelf.stickerController.model.text = AUIUgsvGetString(@"点击输入文字");
             } else {
                 weakSelf.stickerController.model.text = text;
             }

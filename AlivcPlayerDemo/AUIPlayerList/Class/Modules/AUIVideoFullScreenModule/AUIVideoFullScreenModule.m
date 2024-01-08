@@ -40,11 +40,11 @@
             vc.modalPresentationStyle = UIModalPresentationFullScreen;
             [strongSelf.sourceVC presentViewController:vc animated:YES completion:nil];
         } else {
-            [AVToastView show:@"未获取到数据" view:self.sourceVC.view position:AVToastViewPositionMid];
+            [AVToastView show:AlivcPlayerString(@"获取到播放地址失败") view:self.sourceVC.view position:AVToastViewPositionMid];
         }
     }];
 #else
-    [AVToastView show:AlivcPlayerString(@"No Mudule Tip") view:self.sourceVC.view position:AVToastViewPositionMid];
+    [AVToastView show:AlivcPlayerString(@"未集成该组件") view:self.sourceVC.view position:AVToastViewPositionMid];
 #endif
 }
 

@@ -51,6 +51,7 @@
         _textLabel = [UILabel new];
         _textLabel.textAlignment = NSTextAlignmentCenter;
         _textLabel.numberOfLines = 1;
+        _textLabel.textColor = AUIFoundationColor(@"text_strong");
     }
     
     return _textLabel;;

@@ -1,8 +1,3 @@
-
-"OK" = "OK";
-"Cancel" = "Cancel";
-"Slideup_Tip"="Slide up to view more videos.";
-"Coming_Soon"="Coming Soon～";
-"Loading"="Loading...";
-"Request_Data_Format_Error" = "Data format error";
-"LoadMore_NoData" = "No more data!";
+"加载中..." = "Loading...";
+"无法拉取播放列表，播放失败" = "Unable to retrieve playlist, playback failed.";
+"暂不支持该功能，需要自己实现" = "This feature is not supported yet and needs to be implemented.";

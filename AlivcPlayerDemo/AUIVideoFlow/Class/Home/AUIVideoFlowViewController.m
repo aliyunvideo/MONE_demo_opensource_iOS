@@ -35,7 +35,7 @@
     // Do any additional setup after loading the view.
     
     self.hiddenMenuButton = YES;
-    self.titleView.text = AUIVideoFlowString(@"Video Flow");
+    self.titleView.text = AUIVideoFlowString(@"信息流播放");
         
     self.items = [NSMutableArray array];
     
@@ -138,7 +138,7 @@
     footer.accessibilityIdentifier = AUIVideoFlowAccessibilityStr(@"videoFlowPage_footerRefresh");
     self.collectionView.mj_footer = footer;
     [footer setRefreshingTitleHidden:YES];
-    [footer setTitle:AUIVideoFlowString(@"Home_LoadMore_NoData") forState:MJRefreshStateNoMoreData];
+    [footer setTitle:AUIVideoFlowString(@"—— 我是有底线的 ——") forState:MJRefreshStateNoMoreData];
     [footer setTitle:@"" forState:MJRefreshStateIdle];
     footer.stateLabel.font = [UIFont systemFontOfSize:14.0f];
     footer.stateLabel.textColor = AUIFoundationColor(@"text_weak");
@@ -242,17 +242,17 @@
                 [weakSelf.collectionView.mj_footer resetNoMoreData];
             }
             else {
-                [weakSelf showEmptyView:AUIVideoFlowString(@"Home_Refresh_Empty")];
+                [weakSelf showEmptyView:AUIVideoFlowString(@"空空如也~")];
                 weakSelf.collectionView.mj_footer.hidden = YES;
             }
         }
         else {
             if (weakSelf.items.count > 0) {
-                [AVToastView show:AUIVideoFlowString(@"Home_Refresh_Failed") view:weakSelf.view position:AVToastViewPositionMid];
+                [AVToastView show:AUIVideoFlowString(@"刷新失败！") view:weakSelf.view position:AVToastViewPositionMid];
                 weakSelf.collectionView.mj_footer.hidden = NO;
             }
             else {
-                [weakSelf showEmptyView:AUIVideoFlowString(@"Home_Refresh_Failed")];
+                [weakSelf showEmptyView:AUIVideoFlowString(@"刷新失败！")];
                 weakSelf.collectionView.mj_footer.hidden = YES;
             }
         }
@@ -290,7 +290,7 @@
             [weakSelf delayAutoPlay];
         }
         else {
-            [AVToastView show:AUIVideoFlowString(@"Home_LoadMore_Failed") view:weakSelf.view position:AVToastViewPositionMid];
+            [AVToastView show:AUIVideoFlowString(@"加载失败！") view:weakSelf.view position:AVToastViewPositionMid];
         }
     }];
 }

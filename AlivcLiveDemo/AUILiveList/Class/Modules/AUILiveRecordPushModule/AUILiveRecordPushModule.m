@@ -42,7 +42,7 @@
         [self.sourceVC.navigationController pushViewController:configVC animated:YES];
     }
 #else
-    [AVToastView show:@"未集成该功能" view:self.sourceVC.view position:AVToastViewPositionMid];
+    [AVToastView show:AlivcLiveString(@"未集成该组件") view:self.sourceVC.view position:AVToastViewPositionMid];
 #endif
 }
 

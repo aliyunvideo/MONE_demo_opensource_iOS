@@ -171,7 +171,7 @@
         _pushStartButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         _pushStartButton.frame = CGRectMake(20, self.contentView.av_height - AVSafeBottom - 8 - 48, self.contentView.av_width - 20 * 2, 48);
         [_pushStartButton setBackgroundColor:AUILiveCommonColor(@"ir_button_unenable")];
-        [_pushStartButton setTitle:AUILiveCommonString(@"确认") forState:UIControlStateNormal];
+        [_pushStartButton setTitle:AUILiveCommonString(@"确定") forState:UIControlStateNormal];
         [_pushStartButton setTitleColor:AUIFoundationColor(@"text_weak") forState:UIControlStateNormal];
         [_pushStartButton.titleLabel setFont:AVGetRegularFont(18)];
         [_pushStartButton.layer setMasksToBounds:YES];

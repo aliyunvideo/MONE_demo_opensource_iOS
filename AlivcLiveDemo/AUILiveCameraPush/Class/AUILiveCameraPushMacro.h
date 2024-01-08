@@ -16,4 +16,9 @@
 #define AUILiveCameraPushColor(key)  AVGetColor(key, @"AUILiveCameraPush")
 #define AUILiveCameraPushData(key) [[NSBundle bundleWithPath:[NSBundle.mainBundle.resourcePath stringByAppendingPathComponent:@"AUILiveCameraPush.bundle/Data"]] pathForResource:key ofType:@""]
 
+#define AUILiveAudioEffectsBundle [NSBundle bundleWithPath:[NSBundle.mainBundle.resourcePath stringByAppendingPathComponent:@"AUILiveAudioEffects.bundle"]]
+#define AUILiveAudioEffectsConfig [AUILiveAudioEffectsBundle pathForResource:@"config" ofType:@"json"]
+#define AUILiveAudioEffectsString [AUILiveAudioEffectsBundle.bundlePath stringByAppendingFormat:@"/Localization"]
+#define AUILiveAudioEffectsImage [AUILiveAudioEffectsBundle.bundlePath stringByAppendingFormat:@"/Theme/DarkMode"]
+
 #endif /* AUILiveCameraPushMacro_h */

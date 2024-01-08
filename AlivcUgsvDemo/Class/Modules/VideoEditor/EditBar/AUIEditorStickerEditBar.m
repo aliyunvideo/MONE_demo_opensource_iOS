@@ -29,7 +29,7 @@
 }
 
 - (NSString *)addBtnTitle {
-    return @"+ 贴纸";
+    return AUIUgsvGetString(@"+ 贴纸");
 }
 
 - (void)barWillAppear {

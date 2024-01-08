@@ -8,6 +8,7 @@
 #import "AUIVideoOutputParam.h"
 #import "AUIVideoParamBuilder.h"
 #import "AUIUgsvParamModel_Inner.h"
+#import "AUIUgsvMacro.h"
 
 
 typedef struct _AUIOutputSizeTypeValue {
@@ -231,21 +232,21 @@ const static size_t RatioValueListCount = sizeof(RatioValueList) / sizeof(RatioV
 
 - (AUIUgsvParamBuilder *)paramBuilderWithAudioParam:(BOOL)hasAudioParam {
     AUIUgsvParamBuilder *builder = [AUIUgsvParamBuilder new];
-    AUIUgsvParamGroupBuilder *group = builder.group(@"VideoOutput", @"视频输出");
+    AUIUgsvParamGroupBuilder *group = builder.group(@"VideoOutput", AUIUgsvGetString(@"视频输出"));
     if (self.outputSizeType == AUIVideoOutputSizeTypeCustom) {
         group = group
-            .textFieldItem(@"Ratio", @"视频比例")
-                .defaultValue(@"原始比例")
+            .textFieldItem(@"Ratio", AUIUgsvGetString(@"视频比例"))
+                .defaultValue(AUIUgsvGetString(@"原始比例"))
                 .editabled(NO)
-            .textFieldItem(@"Size", @"分辨率")
+            .textFieldItem(@"Size", AUIUgsvGetString(@"分辨率"))
                 .defaultValue([self outputSizeString])
                 .editabled(NO)
         ;
     }
     else {
         group = group
-            .radioItem(@"Ratio", @"视频比例")
-                .option(@"原始比例", @(AUIVideoOutputSizeRatio_original))
+            .radioItem(@"Ratio", AUIUgsvGetString(@"视频比例"))
+                .option(AUIUgsvGetString(@"原始比例"), @(AUIVideoOutputSizeRatio_original))
                 .option(@"9:16", @(AUIVideoOutputSizeRatio_9_16))
                 .option(@"3:4", @(AUIVideoOutputSizeRatio_3_4))
                 .option(@"1:1", @(AUIVideoOutputSizeRatio_1_1))
@@ -265,8 +266,8 @@ const static size_t RatioValueListCount = sizeof(RatioValueList) / sizeof(RatioV
                         sizeOp.paramValue = @(self.outputSizeType);
                     }
                 })
-            .radioItem(@"Size", @"分辨率")
-                .option(@"原始视频", @(AUIVideoOutputSizeTypeOriginal))
+            .radioItem(@"Size", AUIUgsvGetString(@"分辨率"))
+                .option(AUIUgsvGetString(@"原始视频"), @(AUIVideoOutputSizeTypeOriginal))
                 .option(@"480p", @(AUIVideoOutputSizeType480P))
                 .option(@"540", @(AUIVideoOutputSizeType540P))
                 .option(@"720p", @(AUIVideoOutputSizeType720P))
@@ -289,29 +290,29 @@ const static size_t RatioValueListCount = sizeof(RatioValueList) / sizeof(RatioV
     }
 
     group = group
-        .radioItem(@"ScaleModel", @"缩放模式")
-            .option(@"裁剪", @(AliyunScaleModeFit))
-            .option(@"填充", @(AliyunScaleModeFill))
+        .radioItem(@"ScaleModel", AUIUgsvGetString(@"缩放模式"))
+            .option(AUIUgsvGetString(@"裁剪模式"), @(AliyunScaleModeFit))
+            .option(AUIUgsvGetString(@"填充模式"), @(AliyunScaleModeFill))
             .KVC(self, @"scaleMode")
-        .radioItem(@"CodecType", @"编码模式")
-            .option(@"硬编码", @(AliyunVideoCodecHardware))
-            .option(@"软编码", @(AliyunVideoCodecOpenh264))
+        .radioItem(@"CodecType", AUIUgsvGetString(@"编码模式"))
+            .option(AUIUgsvGetString(@"硬编码"), @(AliyunVideoCodecHardware))
+            .option(AUIUgsvGetString(@"软编码"), @(AliyunVideoCodecOpenh264))
             .KVC(self, @"codecType")
-        .radioItem(@"VideoQuality", @"视频质量")
-            .option(@"优质", @(AliyunVideoQualityVeryHight))
-            .option(@"良好", @(AliyunVideoQualityHight))
-            .option(@"一般", @(AliyunVideoQualityMedium))
-            .option(@"较差", @(AliyunVideoQualityLow))
-            .option(@"非常差", @(AliyunVideoQualityPoor))
-            .option(@"极度差", @(AliyunVideoQualityExtraPoor))
+        .radioItem(@"VideoQuality", AUIUgsvGetString(@"视频质量"))
+            .option(AUIUgsvGetString(@"优质"), @(AliyunVideoQualityVeryHight))
+            .option(AUIUgsvGetString(@"良好"), @(AliyunVideoQualityHight))
+            .option(AUIUgsvGetString(@"一般"), @(AliyunVideoQualityMedium))
+            .option(AUIUgsvGetString(@"较差"), @(AliyunVideoQualityLow))
+            .option(AUIUgsvGetString(@"非常差"), @(AliyunVideoQualityPoor))
+            .option(AUIUgsvGetString(@"极度差"), @(AliyunVideoQualityExtraPoor))
             .KVC(self, @"videoQuality");
     if (hasAudioParam) {
         group = group
-            .radioItem(@"AudioChannel", @"音频声道数")
-                .option(@"单声道", @(AliyunAudioChannelTypeMono))
-                .option(@"双声道", @(AliyunAudioChannelTypeStereo))
+            .radioItem(@"AudioChannel", AUIUgsvGetString(@"音频声道数"))
+                .option(AUIUgsvGetString(@"单声道"), @(AliyunAudioChannelTypeMono))
+                .option(AUIUgsvGetString(@"双声道"), @(AliyunAudioChannelTypeStereo))
                 .KVC(self, @"audioChannel")
-            .radioItem(@"AudioSampleRate", @"音频采样率")
+            .radioItem(@"AudioSampleRate", AUIUgsvGetString(@"音频采样率"))
                 .option(@"8K", @(AliyunAudioSampleRate8K))
                 .option(@"12K", @(AliyunAudioSampleRate12K))
                 .option(@"16K", @(AliyunAudioSampleRate16K))
@@ -324,17 +325,17 @@ const static size_t RatioValueListCount = sizeof(RatioValueList) / sizeof(RatioV
                 .KVC(self, @"audioSampleRate");
     }
     
-    group.textFieldItem(@"Bitrate", @"码率")
+    group.textFieldItem(@"Bitrate", AUIUgsvGetString(@"码率"))
             .isInt()
-            .placeHolder(@"填入码率会忽略视频质量")
+            .placeHolder(AUIUgsvGetString(@"填入码率会忽略视频质量"))
             .converter([AUIBitrateConverter new])
             .unit(@"kbps")
             .KVC(self, @"bitrate")
-        .textFieldItem(@"FPS", @"帧率")
+        .textFieldItem(@"FPS", AUIUgsvGetString(@"帧率"))
             .isInt()
             .placeHolder(@(self.fps).stringValue)
             .KVC(self, @"fps")
-        .textFieldItem(@"GOP", @"关键帧间隔（建议3倍帧率）")
+        .textFieldItem(@"GOP", AUIUgsvGetString(@"关键帧间隔（建议3倍帧率）"))
             .isInt()
             .placeHolder(@(self.gop).stringValue)
             .KVC(self, @"gop")

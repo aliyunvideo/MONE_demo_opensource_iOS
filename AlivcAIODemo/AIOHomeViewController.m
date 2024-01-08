@@ -64,6 +64,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
         [self av_setLayerBorderColor:AUIFoundationColor(@"border_weak") borderWidth:1.0];
         self.infoLabel.textColor = AUIFoundationColor(@"text_ultraweak");
         self.infoLabel.font = AVGetRegularFont(12);
+        self.infoLabel.numberOfLines = 2;
         self.titleLabel.font = AVGetRegularFont(16);
 
     }
@@ -75,7 +76,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     [super layoutSubviews];
     self.iconView.frame = CGRectMake(20, 20, 40, 40);
     self.titleLabel.frame = CGRectMake(20, 72, self.contentView.av_width - 40, 24);
-    self.infoLabel.frame = CGRectMake(20, 100, self.contentView.av_width - 40, 18);
+    self.infoLabel.frame = CGRectMake(20, 100, self.contentView.av_width - 40, 36);
     self.viewIconView.frame = CGRectMake(20, self.contentView.av_height - 20 - 18, 40, 18);
 }
 
@@ -95,42 +96,48 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
 
 - (instancetype)init {
     
+    UIImage *viewIcon = AVLocalization.isInternational ? AIOGetImage(@"ic_view_en") : AIOGetImage(@"ic_view");
+    UIImage *viewIcon2 = AVLocalization.isInternational ? AIOGetImage(@"ic_view2_en") : AIOGetImage(@"ic_view2");
+
     AIOEntranceItem *ugsv = [AIOEntranceItem new];
     ugsv.type = AIOEntranceTypeUgsv;
-    ugsv.title = AIOGetString(@"Short video");
-    ugsv.info = AIOGetString(@"Record & Editor & Crop");
+    ugsv.title = AIOGetString(@"短视频");
+    ugsv.info = AIOGetString(@"短视频拍摄、剪辑、特效");
     ugsv.icon = AIOGetImage(@"ic_ugc");
-    ugsv.viewIcon = AIOGetImage(@"ic_view");
+    ugsv.viewIcon = viewIcon;
     
     AIOEntranceItem *player = [AIOEntranceItem new];
     player.type = AIOEntranceTypePlayer;
-    player.title = AIOGetString(@"Player");
-    player.info = AIOGetString(@"Flow & Smart video & Full screen");
+    player.title = AIOGetString(@"播放器");
+    player.info = AIOGetString(@"常见播放样式");
     player.icon = AIOGetImage(@"ic_player");
-    player.viewIcon = AIOGetImage(@"ic_view");
+    player.viewIcon = viewIcon;
     
     AIOEntranceItem *live = [AIOEntranceItem new];
     live.type = AIOEntranceTypeLive;
-    live.title = AIOGetString(@"Live");
-    live.info = AIOGetString(@"Push & Pull");
+    live.title = AIOGetString(@"直播");
+    live.info = AIOGetString(@"直播推流、播放");
     live.icon = AIOGetImage(@"ic_live");
-    live.viewIcon = AIOGetImage(@"ic_view");
+    live.viewIcon = viewIcon;
     
     AIOEntranceItem *rtc = [AIOEntranceItem new];
     rtc.type = AIOEntranceTypeRtc;
-    rtc.title = AIOGetString(@"Rtc");
-    rtc.info = AIOGetString(@"Call & KTV");
+    rtc.title = AIOGetString(@"互动直播");
+    rtc.info = AIOGetString(@"音视频通话、在线ktv");
     rtc.icon = AIOGetImage(@"ic_rtc");
-    rtc.viewIcon = AIOGetImage(@"ic_view");
+    rtc.viewIcon = viewIcon;
     
     AIOEntranceItem *more = [AIOEntranceItem new];
     more.type = AIOEntranceTypeMore;
-    more.title = AIOGetString(@"Solutions");
-    more.info = AIOGetString(@"Common solutions");
+    more.title = AIOGetString(@"场景化应用");
+    more.info = AIOGetString(@"常见解决方案");
     more.icon = AIOGetImage(@"ic_more");
-    more.viewIcon = AIOGetImage(@"ic_view2");
+    more.viewIcon = viewIcon2;
     
     NSArray *itemList = @[live, ugsv, player, rtc, more];
+    if ([AVLocalization isInternational]) {
+        itemList = @[live, ugsv, player, more];
+    }
     
     self = [super initWithItemList:itemList];
     if (self) {
@@ -148,7 +155,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     UILabel *aliLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.contentView.av_width - 20 - 20, 0)];
     aliLabel.font = AVGetMediumFont(32);
     aliLabel.textColor = AUIFoundationColor(@"text_strong");
-    aliLabel.text = AIOGetString(@"MEDIABOX SDK");
+    aliLabel.text = AIOGetString(@"音视频终端SDK");
     aliLabel.numberOfLines = 0;
     [aliLabel sizeToFit];
     aliLabel.frame = CGRectMake(20, 10, aliLabel.av_width, aliLabel.av_height);
@@ -246,7 +253,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     AUIUgsvViewController *vc = [[AUIUgsvViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 #else
-    [AVAlertController show:@"当前SDK不支持"];
+    [AVAlertController show:AIOGetString(@"当前SDK不支持")];
 #endif
 }
 
@@ -255,7 +262,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     AUIPlayerViewController *vc = [[AUIPlayerViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 #else
-    [AVAlertController show:@"当前SDK不支持"];
+    [AVAlertController show:AIOGetString(@"当前SDK不支持")];
 #endif
 }
 
@@ -264,7 +271,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     AUILiveViewController *vc = [[AUILiveViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 #else
-    [AVAlertController show:@"当前SDK不支持"];
+    [AVAlertController show:AIOGetString(@"当前SDK不支持")];
 #endif
 }
 
@@ -273,7 +280,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     AUIRtcViewController *vc = [[AUIRtcViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 #else
-    [AVAlertController show:@"当前SDK不支持"];
+    [AVAlertController show:AIOGetString(@"当前SDK不支持")];
 #endif
 }
 
@@ -295,7 +302,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     item1.icon = AIOGetImage(@"ic_ugc");
     item1.tag = 0;
     item1.clickBlock = ^{
-        [AVAlertController show:@"敬请期待！"];
+        [AVAlertController show:AIOGetString(@"敬请期待！")];
     };
     
     AVCommonListItem *item2 = [AVCommonListItem new];
@@ -310,7 +317,7 @@ typedef NS_ENUM(NSUInteger, AIOEntranceType) {
     
     AVCommonListViewController *vc = [[AVCommonListViewController alloc] initWithItemList:list];
     vc.hiddenMenuButton = YES;
-    vc.title = AIOGetString(@"Solutions");
+    vc.title = AIOGetString(@"场景化应用");
     [self.navigationController pushViewController:vc animated:YES];
 }
 

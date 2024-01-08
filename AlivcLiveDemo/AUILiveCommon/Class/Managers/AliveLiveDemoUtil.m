@@ -105,7 +105,7 @@ void dispatch_thread_sync(NSThread* thread, dispatch_block_t block)
                 cancelBlock();
             }
         }];
-        UIAlertAction *otherAction = [UIAlertAction actionWithTitle:AUILiveCommonString(@"确认") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertAction *otherAction = [UIAlertAction actionWithTitle:AUILiveCommonString(@"确定") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             if (confirmBlock) {
                 confirmBlock();
             }
@@ -127,7 +127,7 @@ void dispatch_thread_sync(NSThread* thread, dispatch_block_t block)
 UIAlertControllerStyleAlert];
     [alertVc addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     }];
-    UIAlertAction *action1 = [UIAlertAction actionWithTitle:AUILiveCommonString(@"确认") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:AUILiveCommonString(@"确定") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         NSString *string = [[alertVc textFields] objectAtIndex:0].text;
         if (confirmBlock) {
             confirmBlock(string);
@@ -313,7 +313,7 @@ static NSMutableDictionary *colorImageCache = nil;
             if (!response_md5 || response_md5.length == 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (completion) {
-                        completion(NO, @"下载外部音视频文件失败");
+                        completion(NO, AUILiveCommonString(@"下载外部音视频文件失败"));
                     }
                 });
                 return;
@@ -328,7 +328,7 @@ static NSMutableDictionary *colorImageCache = nil;
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if (completion) {
-                        completion(NO, @"下载外部音视频文件失败");
+                        completion(NO, AUILiveCommonString(@"下载外部音视频文件失败"));
                     }
                 });
                 return;
@@ -342,7 +342,7 @@ static NSMutableDictionary *colorImageCache = nil;
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (completion) {
-                    completion(NO, @"下载外部音视频文件失败");
+                    completion(NO, AUILiveCommonString(@"下载外部音视频文件失败"));
                 }
             });
         }
@@ -382,5 +382,13 @@ static NSMutableDictionary *colorImageCache = nil;
     return fileMD5.lowercaseString;
 }
 
++ (BOOL)isLocalZHLanguage {
+    NSString *currentLanguageCode = [NSLocale preferredLanguages].firstObject;
+    if ([currentLanguageCode hasPrefix:@"zh"]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
 
 @end

@@ -7,7 +7,7 @@ platform :ios, '10.0'
 
 # ===================================集成音视频终端SDK===================================
 def aliyun_demo_dependency_sdk
-  pod 'AliVCSDK_Standard', '6.7.0'
+  pod 'AliVCSDK_Standard', '6.8.0'
 end
 
 # ===================================集成AUIFoundation===================================
@@ -47,6 +47,7 @@ end
 
 target 'AlivcAIODemo' do
   pod 'WPKMobi', '~> 1.3.6.5' #itrace崩溃接入
+  pod 'SDWebImage', '5.15.4'
   
   aliyun_demo_dependency_sdk
   aliyun_demo_dependency_queen

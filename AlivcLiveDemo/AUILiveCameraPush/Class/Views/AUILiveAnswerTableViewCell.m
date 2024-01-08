@@ -46,10 +46,10 @@
     self.questionLabel.font = [UIFont systemFontOfSize:12.f];
     [self.contentView addSubview:self.questionLabel];
     
-    self.sendQuestoinButton = [self setupButtonWithFrame:CGRectZero normalTitle:@"下发题目" selectTitle:nil action:@selector(questionButtonAction:)];
+    self.sendQuestoinButton = [self setupButtonWithFrame:CGRectZero normalTitle:AUILiveCameraPushString(@"下发题目") selectTitle:nil action:@selector(questionButtonAction:)];
 
     [self.contentView addSubview:self.sendQuestoinButton];
-    self.sendAnswerButton = [self setupButtonWithFrame:CGRectZero normalTitle:@"下发答案" selectTitle:nil action:@selector(answerButtonAction:)];
+    self.sendAnswerButton = [self setupButtonWithFrame:CGRectZero normalTitle:AUILiveCameraPushString(@"下发答案") selectTitle:nil action:@selector(answerButtonAction:)];
     [self.contentView addSubview:self.sendAnswerButton];
     
     self.lineView = [[UIView alloc] init];

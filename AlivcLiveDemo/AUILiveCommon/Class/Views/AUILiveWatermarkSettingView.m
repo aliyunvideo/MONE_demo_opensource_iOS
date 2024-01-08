@@ -49,7 +49,7 @@
     titleLabel.frame = CGRectMake(kAlivcWaterSettingRetract, kAlivcWaterSettingRetract, 100, kAlivcWaterSettingLabelWidth);
     titleLabel.textAlignment = NSTextAlignmentLeft;
     titleLabel.font = [UIFont systemFontOfSize:14.f];
-    titleLabel.text = AUILiveCommonString(@"watermark_setting");
+    titleLabel.text = AUILiveCommonString(@"水印设置");
     [self addSubview:titleLabel];
     
     CGFloat watermarkCount = 3;

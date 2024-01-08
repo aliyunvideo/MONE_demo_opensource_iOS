@@ -30,7 +30,7 @@
     
     UILabel *leftLabel = [[UILabel alloc] init];
     leftLabel.frame = CGRectMake(0, self.bounds.size.height / 2, self.bounds.size.width / 2, self.bounds.size.height / 2);
-    leftLabel.text = AUILiveCameraPushString(@"slide_right_view_log_char");
+    leftLabel.text = AUILiveCameraPushString(@"右滑查看log");
     leftLabel.textAlignment = NSTextAlignmentLeft;
     leftLabel.textColor = [UIColor whiteColor];
     
@@ -38,7 +38,7 @@
     
     UILabel *rightLabel = [[UILabel alloc] init];
     rightLabel.frame = CGRectMake(self.bounds.size.width / 2, self.bounds.size.height / 2, self.bounds.size.width / 2, self.bounds.size.height / 2);
-    rightLabel.text = AUILiveCameraPushString(@"slide_left_view_log");
+    rightLabel.text = AUILiveCameraPushString(@"左滑查看log图表");
     rightLabel.textAlignment = NSTextAlignmentRight;
     rightLabel.textColor = [UIColor whiteColor];
     

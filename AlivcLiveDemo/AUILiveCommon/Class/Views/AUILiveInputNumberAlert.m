@@ -118,7 +118,7 @@
     
     if (self.maxNumber != kAUILiveInputAlertNotMaxNumer) {
         if (range.location > (self.maxNumber - 1)) {
-            [AVToastView show:[NSString stringWithFormat:AUILiveCommonString(@"input ID error bits"), self.maxNumber] view:self.sourceView position:AVToastViewPositionMid];
+            [AVToastView show:[NSString stringWithFormat:AUILiveCommonString(@"字符长度不能超过%d位"), self.maxNumber] view:self.sourceView position:AVToastViewPositionMid];
             return NO;
         }
     }
@@ -210,7 +210,7 @@
         
         self.okButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _okButton.frame = CGRectMake(_actionView.av_width / 2.0 + 1, 0, _actionView.av_width / 2.0 - 1, _actionView.av_height);
-        [_okButton setTitle:AUILiveCommonString(@"确认") forState:UIControlStateNormal];
+        [_okButton setTitle:AUILiveCommonString(@"确定") forState:UIControlStateNormal];
         [_okButton setTitleColor:AUILiveCommonColor(@"ir_button_unenable") forState:UIControlStateNormal];
         _okButton.titleLabel.font = AVGetRegularFont(16);
         [_okButton addTarget:self action:@selector(pressOK) forControlEvents:UIControlEventTouchUpInside];

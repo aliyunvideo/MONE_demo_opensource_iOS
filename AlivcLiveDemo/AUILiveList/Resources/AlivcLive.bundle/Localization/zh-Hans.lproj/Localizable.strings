@@ -1,13 +1,1 @@
-"Live Demo" = "直播推流";
-"Camera Push" = "摄像头推流";
-"Record Push" = "录屏推流";
-"Pull Play" = "拉流播放";
-"Rts Play" = "超低延时直播";
-"Link Mic" = "连麦互动";
-"PK" = "PK互动";
-"The demonstration of the camera push" = "手机摄像头/麦克风采集，支持参数设置、基础特效";
-"The demonstration of the record push" = "手机屏幕采集，支持参数设置";
-"The demonstration of the pull play" = "支持常见协议，如FLV、RTMP、HLS、RTS等";
-"The demonstration of the rts play" = "超低延时直播";
-"The demonstration of the link mic" = "连麦互动";
-"The demonstration of the PK" = "PK互动";
+

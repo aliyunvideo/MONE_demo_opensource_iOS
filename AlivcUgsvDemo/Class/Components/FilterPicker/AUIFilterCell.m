@@ -44,22 +44,22 @@
     self.contentView.layer.cornerRadius = 2.0;
     self.contentView.layer.masksToBounds = YES;
     
-    _titleLabel = [UILabel new];
-    _titleLabel.backgroundColor = UIColor.clearColor;
-    _titleLabel.font = AVGetRegularFont(12.0);
-    _titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.contentView addSubview:_titleLabel];
-    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self.contentView);
-        make.height.mas_equalTo(20.0);
-    }];
-    
     _iconView = [UIImageView new];
     _iconView.contentMode = UIViewContentModeScaleAspectFit;
     [self.contentView addSubview:_iconView];
     [_iconView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.right.equalTo(self.contentView);
-        make.bottom.equalTo(_titleLabel.mas_top);
+        make.bottom.equalTo(self.contentView).inset(20);
+    }];
+    
+    _titleLabel = [UILabel new];
+    _titleLabel.backgroundColor = UIColor.clearColor;
+    _titleLabel.font = AVGetRegularFont(12.0);
+    _titleLabel.numberOfLines = 0;
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.contentView addSubview:_titleLabel];
+    [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.equalTo(self.contentView);
     }];
     
     _selectedMaskView = [[UIImageView alloc] initWithImage:AUIUgsvGetImage(@"ic_panel_cell_selected")];

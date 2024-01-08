@@ -99,7 +99,7 @@ static const int klittle_num = 10;
     if (!_resetButton) {
         _resetButton = [[UIButton alloc] init];
         [_resetButton  addTarget:self action:@selector(onResetButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_resetButton setTitle:AUIUgsvGetString(@"Reset") forState:UIControlStateNormal];
+        [_resetButton setTitle:AUIUgsvGetString(@"重置") forState:UIControlStateNormal];
         [_resetButton setImage:AUIUgsvEditorImage(@"ic_reset")  forState:UIControlStateNormal];
         _resetButton.titleLabel.font = AVGetRegularFont(12);
         [_resetButton sizeToFit];
@@ -127,7 +127,7 @@ static const int klittle_num = 10;
 {
     CGFloat marginX = 20.f;
         
-    self.titleView.text = AUIUgsvGetString(@"Change speed");
+    self.titleView.text = AUIUgsvGetString(@"变速");
     _rulerView  = [[UIView alloc] initWithFrame:CGRectMake(marginX, 45, self.av_width - marginX *2, 38)];
     [self.contentView addSubview:_rulerView];
     

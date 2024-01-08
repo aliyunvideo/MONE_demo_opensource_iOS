@@ -1,0 +1,15 @@
+/* 
+  InfoPlist.strings
+  AlivcAIODemo
+
+  Created by Bingo on 2023/11/29.
+  
+*/
+
+"CFBundleDisplayName" = "Mediabox SDK";
+"NSAppleMusicUsageDescription" = "Access to the music library is required so that you can add music to video clips.";
+"NSCameraUsageDescription" = "The camera is required to shoot videos or start live streaming.";
+"NSMicrophoneUsageDescription" = "The microphone is required to shoot videos or start live streaming.";
+"NSPhotoLibraryAddUsageDescription" = "Access videos and images in the album to edit them.";
+"NSPhotoLibraryUsageDescription" = "Access videos and images in the album to edit them.";
+

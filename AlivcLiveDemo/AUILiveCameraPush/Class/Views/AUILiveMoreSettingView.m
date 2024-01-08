@@ -90,11 +90,11 @@ typedef NS_ENUM(NSInteger, AUILiveMoreSettingType) {
     UIView *themeView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.av_width, kThemeHeight)];
     themeView.backgroundColor = AUIFoundationColor(@"bg_weak");
     
-    UILabel *themeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 80, kThemeHeight)];
+    UILabel *themeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 150, kThemeHeight)];
     if (self.settingType == AUILiveMoreSettingTypeAll) {
         themeLabel.text = AUILiveCameraPushString(@"更多设置");
     } else {
-        themeLabel.text = AUILiveCameraPushString(@"preview_display_mode");
+        themeLabel.text = AUILiveCameraPushString(@"显示模式");
     }
     themeLabel.textColor = AUIFoundationColor(@"text_strong");
     themeLabel.font = AVGetRegularFont(15);
@@ -131,7 +131,7 @@ typedef NS_ENUM(NSInteger, AUILiveMoreSettingType) {
     UIButton *okButton = [UIButton buttonWithType:UIButtonTypeCustom];
     okButton.frame = CGRectMake(themeView.av_width - 20 - 80, 0, 80, kThemeHeight);
     okButton.av_centerY = themeView.av_centerY;
-    [okButton setTitle:AUILiveCameraPushString(@"确定") forState:UIControlStateNormal];
+    [okButton setTitle:AUILiveCommonString(@"确定") forState:UIControlStateNormal];
     okButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     okButton.titleLabel.font = AVGetRegularFont(15);
     [okButton setTitleColor:AUILiveCommonColor(@"ir_sheet_button") forState:UIControlStateNormal];
@@ -171,7 +171,7 @@ typedef NS_ENUM(NSInteger, AUILiveMoreSettingType) {
     blankSegmentModel.title = @"";
     
     AlivcLiveParamModel *targetBitrateModel = [[AlivcLiveParamModel alloc] init];
-    targetBitrateModel.title = AUILiveCommonString(@"target_bitrate");
+    targetBitrateModel.title = AUILiveCommonString(@"视频目标码率");
     targetBitrateModel.placeHolder = AUILiveCameraPushString(@"请输入");
     targetBitrateModel.defaultValue = self.tempConfig.targetVideoBitrate;
     targetBitrateModel.infoText = @"/kbps";
@@ -184,7 +184,7 @@ typedef NS_ENUM(NSInteger, AUILiveMoreSettingType) {
     };
     
     AlivcLiveParamModel *minBitrateModel = [[AlivcLiveParamModel alloc] init];
-    minBitrateModel.title = AUILiveCommonString(@"min_bitrate");
+    minBitrateModel.title = AUILiveCommonString(@"视频最小码率");
     minBitrateModel.placeHolder = AUILiveCameraPushString(@"请输入");
     minBitrateModel.defaultValue = self.tempConfig.minVideoBitrate;
     minBitrateModel.inputNotEnable = self.tempConfig.qualityMode != AlivcLivePushQualityModeCustom;
@@ -197,7 +197,7 @@ typedef NS_ENUM(NSInteger, AUILiveMoreSettingType) {
     };
 
     AlivcLiveParamModel *pushMirrorModel = [[AlivcLiveParamModel alloc] init];
-    pushMirrorModel.title = AUILiveCommonString(@"push_mirror");
+    pushMirrorModel.title = AUILiveCommonString(@"推流镜像");
     pushMirrorModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
     pushMirrorModel.defaultValue = self.tempConfig.pushMirror;
     pushMirrorModel.defaultValueAppose = 0;
@@ -207,7 +207,7 @@ typedef NS_ENUM(NSInteger, AUILiveMoreSettingType) {
     };
 
     AlivcLiveParamModel *previewMirrorModel = [[AlivcLiveParamModel alloc] init];
-    previewMirrorModel.title = AUILiveCommonString(@"preview_mirror");
+    previewMirrorModel.title = AUILiveCommonString(@"预览镜像");
     previewMirrorModel.defaultValue = self.tempConfig.previewMirror;
     previewMirrorModel.defaultValueAppose = 0;
     previewMirrorModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -218,7 +218,7 @@ typedef NS_ENUM(NSInteger, AUILiveMoreSettingType) {
 
     NSArray *previewDisplayModeTitleArray = @[AUILiveCameraPushString(@"拉伸"), AUILiveCameraPushString(@"适合"), AUILiveCameraPushString(@"裁剪")];
     AlivcLiveParamModel *previewDisplayModeModel = [[AlivcLiveParamModel alloc] init];
-    previewDisplayModeModel.title = AUILiveCameraPushString(@"preview_display_mode");
+    previewDisplayModeModel.title = AUILiveCameraPushString(@"显示模式");
     previewDisplayModeModel.pickerPanelTextArray = previewDisplayModeTitleArray;
     previewDisplayModeModel.defaultValue = self.tempConfig.previewDisplayMode;
     previewDisplayModeModel.reuseId = AlivcLiveParamModelReuseCellSelectCustomOpen;

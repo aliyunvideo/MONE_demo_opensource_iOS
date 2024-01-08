@@ -26,13 +26,13 @@ typedef NS_ENUM(NSUInteger, AUIRtcModuleIndex) {
 
 - (instancetype)init {
     AVCommonListItem *item1 = [AVCommonListItem new];
-    item1.title = @"1v1音视频通话";
+    item1.title = RtcString(@"1v1音视频通话");
     item1.info = @"";
     item1.icon = RtcImage(@"ic_call_1v1");
     item1.tag = AUIRtcModuleIndexCall1V1;
     
     AVCommonListItem *item2 = [AVCommonListItem new];
-    item2.title = @"多人音视频通话";
+    item2.title = RtcString(@"多人音视频通话");
     item2.info = @"";
     item2.icon = RtcImage(@"ic_call_nvn");
     item2.tag = AUIRtcModuleIndexCallNVN;
@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, AUIRtcModuleIndex) {
     // Do any additional setup after loading the view.
     
     self.hiddenMenuButton = YES;
-    self.titleView.text = @"互动直播";
+    self.titleView.text = RtcString(@"互动直播");
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -70,7 +70,7 @@ typedef NS_ENUM(NSUInteger, AUIRtcModuleIndex) {
     AUICall1V1MainViewController *vc = [[AUICall1V1MainViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 #else
-    [AVAlertController show:@"当前App未集成AUICall"];
+    [AVAlertController show:RtcString(@"当前App未集成AUICall")];
 #endif
 }
 
@@ -80,7 +80,7 @@ typedef NS_ENUM(NSUInteger, AUIRtcModuleIndex) {
     AUICallNVNMainViewController *vc = [[AUICallNVNMainViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 #else
-    [AVAlertController show:@"当前App未集成AUICall"];
+    [AVAlertController show:RtcString(@"当前App未集成AUICall")];
 #endif
 }
 

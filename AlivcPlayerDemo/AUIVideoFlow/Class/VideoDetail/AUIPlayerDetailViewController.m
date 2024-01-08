@@ -52,7 +52,7 @@ typedef NS_ENUM(NSUInteger, AlivcPlayerVideoDetailSectionType) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.titleView.text = AUIVideoFlowString(@"Video Detail");
+    self.titleView.text = AUIVideoFlowString(@"视频详情");
     self.hiddenMenuButton = YES;
     
     [self.contentView addSubview:self.detailVideoContainer];
@@ -280,7 +280,7 @@ typedef NS_ENUM(NSUInteger, AlivcPlayerVideoDetailSectionType) {
     switch (indexPath.section) {
         case AlivcPlayerVideoDetailSectionTypeUser:
         {
-            return 126.f;
+            return [AlivcPlayerVideoDetailViewUserInfoCell getCellHeight];
         }
         case AlivcPlayerVideoDetailSectionTypeRecommend:
         {
@@ -315,7 +315,7 @@ typedef NS_ENUM(NSUInteger, AlivcPlayerVideoDetailSectionType) {
             if (self.recommendTitleView == nil) {
                 self.recommendTitleView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, tableView.av_width - 16, 44)];
                 self.recommendTitleView.accessibilityIdentifier = AUIVideoFlowAccessibilityStr(@"playerDetailPage_recommendTitleView");
-                self.recommendTitleView.text  = @"   相关推荐";
+                self.recommendTitleView.text  = [@"   " stringByAppendingString:AUIVideoFlowString(@"相关推荐")];
                 self.recommendTitleView.textColor = AUIFoundationColor(@"text_strong");
                 self.recommendTitleView.font = AVGetMediumFont(14);
 

@@ -187,7 +187,7 @@
         }
         
         if (menuType == AUIVideoTemplateEditMenuTypePopDelete) {
-            [AVAlertController showWithTitle:@"是否删除当前已替换的素材？" message:@"" needCancel:YES onCompleted:^(BOOL isCanced) {
+            [AVAlertController showWithTitle:AUIUgsvGetString(@"是否删除当前已替换的素材？") message:@"" needCancel:YES onCompleted:^(BOOL isCanced) {
                 if (!isCanced) {
                     [item updateClip:nil cover:nil];
                     if (weakSelf.editAssetBlock) {
@@ -251,7 +251,7 @@
     __weak typeof(self) weakSelf =self;
     [self.player pause];
     if (item.musicType == AUIVideoTemplateEditMusicTypeNone) {
-        [AVAlertController showWithTitle:@"确定是否 不设置音乐？" message:@"" needCancel:YES onCompleted:^(BOOL isCanced) {
+        [AVAlertController showWithTitle:AUIUgsvGetString(@"确定是否 不设置音乐？") message:@"" needCancel:YES onCompleted:^(BOOL isCanced) {
             if (!isCanced) {
                 if (weakSelf.selectedMusicBlock) {
                     weakSelf.selectedMusicBlock(@"");
@@ -262,7 +262,7 @@
         }];
     }
     else if (item.musicType == AUIVideoTemplateEditMusicTypeTemplate) {
-        [AVAlertController showWithTitle:@"确定使用模板音乐？" message:@"" needCancel:YES onCompleted:^(BOOL isCanced) {
+        [AVAlertController showWithTitle:AUIUgsvGetString(@"确定使用模板音乐？") message:@"" needCancel:YES onCompleted:^(BOOL isCanced) {
             if (!isCanced) {
                 if (weakSelf.selectedMusicBlock) {
                     weakSelf.selectedMusicBlock(nil);

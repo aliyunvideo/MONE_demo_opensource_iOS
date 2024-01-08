@@ -7,6 +7,7 @@
 
 #import "AUIVideoTemplateResouce.h"
 #import "AUIFoundation.h"
+#import "AUIUgsvMacro.h"
 #import <AFNetworking/AFNetworking.h>
 #import <ZipArchive/ZipArchive.h>
 
@@ -40,7 +41,7 @@
     }
     
     // 从云端下载并解压到本地存储路径
-    AVCircularProgressView *progressView = [AVCircularProgressView presentOnView:onVC.view message:@"下载资源中..."];
+    AVCircularProgressView *progressView = [AVCircularProgressView presentOnView:onVC.view message:AUIUgsvGetString(@"下载资源中...")];
     [self downloadWithUrl:item.zip progress:^(CGFloat progress) {
         progressView.progress = progress;
     } completion:^(NSString *path) {
@@ -49,7 +50,7 @@
             completed(templatePath);
         }
         else {
-            [AVAlertController show:@"资源出错了！" vc:onVC];
+            [AVAlertController show:AUIUgsvGetString(@"资源出错了！") vc:onVC];
         }
     }];
 }

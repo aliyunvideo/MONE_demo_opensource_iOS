@@ -163,11 +163,15 @@
     
     _titleLabel = [UILabel new];
     _titleLabel.font = AVGetRegularFont(12.0);
+    _titleLabel.numberOfLines = 0;
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
     _titleLabel.textColor = AUIFoundationColor(@"text_strong");
     [self.contentView addSubview:_titleLabel];
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(self);
-        make.top.equalTo(_iconView.mas_bottom).inset(12.0);
+        make.width.equalTo(self.contentView);
+        make.centerX.equalTo(self.contentView);
+        make.top.equalTo(_iconView.mas_bottom);
+        make.bottom.equalTo(self.contentView);
     }];
     
     _flagView = [UIView new];

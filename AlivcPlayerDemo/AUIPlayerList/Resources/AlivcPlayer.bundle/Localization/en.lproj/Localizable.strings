@@ -1,13 +1,15 @@
-"Player Demo" = "Player";
-"Video Flow" = "Information Streaming";
-"Video List" = "Immersive Playback";
-"Short Episode" = "Short-episode Playback";
-"Video Full Screen" = "Full-screen Playback";
-"Video Custom" = "自定义播放";
-"Clear Cache" = "Clear Cache";
-"The demonstration of the video flow" = "Suitable for short video scenarios such as news broadcast and community activities.";
-"The demonstration of the video function list" = "Suitable for short video scenarios in which you can switch among multiple videos.";
-"The demonstration of the video standrad list" = "Suitable for short video scenarios in which you can switch among multiple videos.";
-"The demonstration of the video short episode" = "Suitable for short video scenarios in which you can switch among multiple videos.";
-"The demonstration of the video full screen" = "Suitable for copyrighted long video scenarios.";
-"No Mudule Tip" = "The mudule is not integrated.";
+"播放器" = "Player";
+"信息流播放" = "Information Streaming";
+"沉浸式播放" = "Immersive Playback";
+"短剧播放" = "Short Episode Playback";
+"全屏播放" = "Full-screen Playback";
+"清空缓存" = "Clear Cache";
+
+"适用于新闻资讯、社区互动等短视频场景" = "Suitable for short video scenarios such as news broadcast and community activities.";
+"竖屏短视频场景，全屏秒开最佳实践" = "Suitable for short video scenarios in which you can switch among multiple videos.";
+"竖屏短视频场景，标准实现" = "Suitable for short video scenarios in which you can switch among multiple videos.";
+"适用于多个视频间流畅切换的短视频场景" = "Suitable for short video scenarios in which you can switch among multiple videos.";
+"适用于版权视频等长视频场景" = "Suitable for copyrighted long video scenarios.";
+
+"未集成该组件" = "The mudule is not integrated.";
+"获取到播放地址失败" = "Failed to obtain playback URL.";

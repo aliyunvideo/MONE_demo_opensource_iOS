@@ -65,7 +65,7 @@
         _tip.textColor = AUIVideoListColor(@"vl_tiptext");
         _tip.font = AVGetMediumFont(16);
         _tip.textAlignment = NSTextAlignmentCenter;
-        _tip.text = AUIVideoListString(@"Slideup_Tip");
+        _tip.text = AUIVideoListString(@"上滑查看更多视频");
     }
     return _tip;
 }

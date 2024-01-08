@@ -63,7 +63,7 @@
     label.backgroundColor = UIColor.clearColor;
     label.textColor = AUIFoundationColor(@"text_strong");
     label.font = AVGetRegularFont(10.0);
-    label.text = @"拖动调整内容显示区域";
+    label.text = AUIUgsvGetString(@"拖动调整内容显示区域");
     label.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:label];
     [label mas_makeConstraints:^(MASConstraintMaker *make) {

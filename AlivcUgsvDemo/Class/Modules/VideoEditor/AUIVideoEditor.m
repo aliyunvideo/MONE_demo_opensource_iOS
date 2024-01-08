@@ -127,7 +127,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.isError) {
-        [AVAlertController showWithTitle:nil message:AUIUgsvGetString(@"出错了！") needCancel:NO onCompleted:^(BOOL isCanced) {
+        [AVAlertController showWithTitle:nil message:AUIUgsvGetString(@"出错了") needCancel:NO onCompleted:^(BOOL isCanced) {
             [self goBack];
         }];
     }

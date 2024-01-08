@@ -7,99 +7,35 @@
 //
 
 #import "AUILiveCheckQueenManager.h"
+#import "AUIBeautyManager.h"
 #import "AVProgressHUD.h"
 
 
-
-#ifdef ALIVC_LIVE_ENABLE_QUEEN_PRO
-@interface AUILiveCheckQueenManager ()<QueenMaterialDelegate>
-#else
-@interface AUILiveCheckQueenManager ()
-#endif
-
-#ifdef ALIVC_LIVE_ENABLE_QUEEN_PRO
-@property (nonatomic, copy) void (^checkResult)(BOOL completed);
-@property (nonatomic, strong) AVProgressHUD *hub;
-#endif
-
-@end
-
 @implementation AUILiveCheckQueenManager
 
-#ifdef ALIVC_LIVE_ENABLE_QUEEN_PRO
-+ (instancetype)manager {
-    static AUILiveCheckQueenManager *manager = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        manager = [[AUILiveCheckQueenManager alloc] init];
-    });
-    return manager;
-}
-
 + (void)checkWithCurrentView:(UIView *)view completed:(void (^)(BOOL completed))completed {
-    [AUILiveCheckQueenManager manager].checkResult = completed;
-    [[AUILiveCheckQueenManager manager] startCheckWithCurrentView:view];
-}
-
-- (void)startCheckWithCurrentView:(UIView *)view {
-    BOOL result = [[QueenMaterial sharedInstance] requestMaterial:kQueenMaterialModel];
-    if (!result) {
-        if (self.checkResult) {
-            self.checkResult(YES);
-        }
+#ifdef ALIVC_LIVE_ENABLE_QUEEN_PRO
+    id<AUIBeautyResourceProtocol> resource = [AUIBeautyManager resourceChecker];
+    if (resource) {
+        AVProgressHUD *loading = [AVProgressHUD ShowHUDAddedTo:view animated:YES];
+        loading.labelText = AUILiveCommonString(@"正在下载美颜模型中，请等待");
+        [[AUIBeautyManager resourceChecker] checkResource:^(BOOL succ) {
+            [loading hideAnimated:NO];
+            if (completed) {
+                completed(succ);
+            }
+        }];
     }
     else {
-        [self.hub hideAnimated:NO];
-        
-        AVProgressHUD *loading = [AVProgressHUD ShowHUDAddedTo:view animated:YES];
-        loading.labelText = NSLocalizedString(@"正在下载美颜模型中，请等待", nil);
-        self.hub = loading;
-        
-        [QueenMaterial sharedInstance].delegate = self;
-    }
-}
-
-#pragma mark - QueenMaterialDelegate
-
-- (void)queenMaterialOnReady:(kQueenMaterialType)type
-{
-    // 资源下载成功
-    if (type == kQueenMaterialModel) {
-        [self.hub hideAnimated:YES];
-        self.hub = nil;
-        if (self.checkResult) {
-            self.checkResult(YES);
+        if (completed) {
+            completed(YES);
         }
     }
-}
-
-- (void)queenMaterialOnProgress:(kQueenMaterialType)type withCurrentSize:(int)currentSize withTotalSize:(int)totalSize withProgess:(float)progress
-{
-    // 资源下载进度回调
-    if (type == kQueenMaterialModel) {
-        NSLog(@"====正在下载资源模型，进度：%f", progress);
-    }
-}
-
-- (void)queenMaterialOnError:(kQueenMaterialType)type
-{
-    // 资源下载出错
-    if (type == kQueenMaterialModel){
-        [self.hub hideAnimated:YES];
-        self.hub = nil;
-        if (self.checkResult) {
-            self.checkResult(NO);
-        }
-    }
-}
 #else
-
-+ (void)checkWithCurrentView:(UIView *)view completed:(void (^)(BOOL))completed {
     if (completed) {
         completed(YES);
     }
-}
-
 #endif
+}
 
 @end

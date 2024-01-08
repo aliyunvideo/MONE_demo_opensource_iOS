@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C721A8CCD21B5F5DF1122D9 /* libPods-AlivcAIODemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 814E128A6FC28879818E2D59 /* libPods-AlivcAIODemo.a */; };
+		4136DC122B1738AF0010EFAB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4136DC142B1738AF0010EFAB /* InfoPlist.strings */; };
 		41D6B64E283B7B0300256A1E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D6B64D283B7B0300256A1E /* AppDelegate.m */; };
 		41D6B659283B7B0500256A1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41D6B658283B7B0500256A1E /* Assets.xcassets */; };
 		41D6B65C283B7B0500256A1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41D6B65A283B7B0500256A1E /* LaunchScreen.storyboard */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4136DC132B1738AF0010EFAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4136DC152B1738BC0010EFAB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		414D16FA28A2561100EED8D6 /* AIOSdkHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AIOSdkHeader.h; sourceTree = "<group>"; };
 		415C96C7285B053B00B07B77 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		41D6B649283B7B0300256A1E /* AlivcAIODemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlivcAIODemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +82,7 @@
 				41D6B658283B7B0500256A1E /* Assets.xcassets */,
 				41D6B65A283B7B0500256A1E /* LaunchScreen.storyboard */,
 				41D6B65D283B7B0500256A1E /* Info.plist */,
+				4136DC142B1738AF0010EFAB /* InfoPlist.strings */,
 				41D6B65E283B7B0500256A1E /* main.m */,
 			);
 			path = AlivcAIODemo;
@@ -174,6 +178,7 @@
 				41D6B65C283B7B0500256A1E /* LaunchScreen.storyboard in Resources */,
 				41D6B659283B7B0500256A1E /* Assets.xcassets in Resources */,
 				41D6B66C283B7C5700256A1E /* AIO.bundle in Resources */,
+				4136DC122B1738AF0010EFAB /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +257,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		4136DC142B1738AF0010EFAB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4136DC132B1738AF0010EFAB /* en */,
+				4136DC152B1738BC0010EFAB /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		41D6B65A283B7B0500256A1E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -1,3 +1,11 @@
-"origin_resolution" = "Origin Resolution";
-"narrowband_hd" = "Narrowband And HD";
+"示例Demo不提供录屏推流演示过程，需要自行根据文档配置。" = "The example demo does not provide a screen recording streaming demonstration. Please configure according to the documentation.";"录屏使用说明" = "Screen Recording Instructions";
+"请先到控制中心，长按启动系统屏幕录制" = "Go to the control center, and long press the option to start screen recording.";
+"若无此选项请从设置中的控制中心里添加" = "If the option is not available, add it from the control center in Settings.";
+"选择AlivcLiveBroadcast" = "Select AlivcLiveBroadcast";
+"注意：以上设置仅载开始推流前有效，推流后改变设置无效" = "Note: The preceding operation takes effect only if you perform it before stream ingest starts.";
+"iOS13系统由于剪切板限制，无法向extension传递配置信息。请修改SampleHandler.m源码中的配置信息，实现录屏演示。" = "iOS 13 cannot pass configurations to the extension due to clipboard restrictions. Modify the configurations in the source code of SampleHandler.m to implement the screen recording feature.";
+"原始分辨率" = "Origin Resolution";
+"窄带高清" = "Narrowband And HD";
 "当前没有麦克风权限，请在设置中打开麦克风权限" = "The microphone permission is required. Obtain the microphone permission in Settings first.";
+"暂停推流" = "Pause Ingest";
+"录屏推流已停止" = "Screen recording for stream ingest is stopped.";

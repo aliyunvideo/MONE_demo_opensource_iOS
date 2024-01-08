@@ -20,28 +20,28 @@
 
 - (instancetype)init {
    AVCommonListItem *item1 = [AVCommonListItem new];
-   item1.title = AlivcPlayerString(@"Video Flow");
-   item1.info = AlivcPlayerString(@"The demonstration of the video flow");
+   item1.title = AlivcPlayerString(@"信息流播放");
+   item1.info = AlivcPlayerString(@"适用于新闻资讯、社区互动等短视频场景");
    item1.icon = AlivcPlayerImage(@"bofangqi_ic_xinxi");
    
    AVCommonListItem *item2 = [AVCommonListItem new];
-   item2.title = AlivcPlayerString(@"Video List");
-   item2.info = AlivcPlayerString(@"The demonstration of the video function list");
+   item2.title = AlivcPlayerString(@"沉浸式播放");
+   item2.info = AlivcPlayerString(@"竖屏短视频场景，全屏秒开最佳实践");
    item2.icon = AlivcPlayerImage(@"bofangqi_ic_chenjin");
     
    AVCommonListItem *item3 = [AVCommonListItem new];
-   item3.title = AlivcPlayerString(@"Video List");
-   item3.info = AlivcPlayerString(@"The demonstration of the video standrad list");
+   item3.title = AlivcPlayerString(@"沉浸式播放");
+   item3.info = AlivcPlayerString(@"竖屏短视频场景，标准实现");
    item3.icon = AlivcPlayerImage(@"bofangqi_ic_chenjin");
     
     AVCommonListItem *item4 = [AVCommonListItem new];
-    item4.title = AlivcPlayerString(@"Short Episode");
-    item4.info = AlivcPlayerString(@"The demonstration of the video short episode");
+    item4.title = AlivcPlayerString(@"短剧播放");
+    item4.info = AlivcPlayerString(@"适用于多个视频间流畅切换的短视频场景");
     item4.icon = AlivcPlayerImage(@"bofangqi_ic_quanping");
    
    AVCommonListItem *item5 = [AVCommonListItem new];
-    item5.title = AlivcPlayerString(@"Video Full Screen");
-    item5.info = AlivcPlayerString(@"The demonstration of the video full screen");
+    item5.title = AlivcPlayerString(@"全屏播放");
+    item5.info = AlivcPlayerString(@"适用于版权视频等长视频场景");
     item5.icon = AlivcPlayerImage(@"bofangqi_ic_zidingyi");
    
    NSArray *list = @[item1, item2, item3, item4, item5];
@@ -60,9 +60,9 @@
     self.menuButton.av_left = self.headerView.av_width - 20 - 80;
     self.menuButton.av_width = 80;
     [self.menuButton setImage:nil forState:UIControlStateNormal];
-    [self.menuButton setTitle:AlivcPlayerString(@"Clear Cache") forState:UIControlStateNormal];
+    [self.menuButton setTitle:AlivcPlayerString(@"清空缓存") forState:UIControlStateNormal];
 
-   self.titleView.text = AlivcPlayerString(@"Player Demo");
+   self.titleView.text = AlivcPlayerString(@"播放器");
 }
 
 - (void)onMenuClicked:(UIButton *)sender {

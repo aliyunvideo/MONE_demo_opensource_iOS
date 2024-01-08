@@ -71,17 +71,17 @@
 
     UIView *item1TipTheme = [self createBottomTipItemTheme:AUILiveRtsPlayString(@"播放失败") originY:line.av_bottom + 12];
     
-    UILabel *item1TipContent = [self createBottomTipItemContent:@"请前往 视频直播控制台 > 工具箱 > 自助问题排查，输入URL自助定位播放失败问题" textColor:AUIFoundationColor(@"text_weak") originY:item1TipTheme.av_bottom + 8];
+    UILabel *item1TipContent = [self createBottomTipItemContent:AUILiveRtsPlayString(@"请前往 视频直播控制台 > 工具箱 > 自助问题排查，输入URL自助定位播放失败问题") textColor:AUIFoundationColor(@"text_weak") originY:item1TipTheme.av_bottom + 8];
     
     UIView *item2TipTheme = [self createBottomTipItemTheme:AUILiveRtsPlayString(@"播放卡顿/延时高") originY:item1TipContent.av_bottom + 24];
     
     UILabel *item2Tip_step1 = [self createBottomTipItemContent:@"step1" textColor:AUIFoundationColor(@"text_medium") originY:item2TipTheme.av_bottom + 8];
     
-    UILabel *item2Tip_step1_content = [self createBottomTipItemContent:@"请前往视频直播控制台 > 流管理 > 流检测，分析您当前的推流网络环境是否良好(帧率或时间戳是否正常)" textColor:AUIFoundationColor(@"text_weak") originY:item2Tip_step1.av_bottom + 4];
+    UILabel *item2Tip_step1_content = [self createBottomTipItemContent:AUILiveRtsPlayString(@"请前往视频直播控制台 > 流管理 > 流检测，分析您当前的推流网络环境是否良好(帧率或时间戳是否正常)") textColor:AUIFoundationColor(@"text_weak") originY:item2Tip_step1.av_bottom + 4];
     
     UILabel *item2Tip_step2 = [self createBottomTipItemContent:@"step2" textColor:AUIFoundationColor(@"text_medium") originY:item2Tip_step1_content.av_bottom + 8];
     
-    UILabel *item2Tip_step1_content2 = [self createBottomTipItemContent:@"若您的推流网络良好，请点击【TraceID获取】获取相关信息，并提交工单寻求帮助" textColor:AUIFoundationColor(@"text_weak") originY:item2Tip_step2.av_bottom + 4];
+    UILabel *item2Tip_step1_content2 = [self createBottomTipItemContent:AUILiveRtsPlayString(@"若您的推流网络良好，请点击【TraceID获取】获取相关信息，并提交工单寻求帮助") textColor:AUIFoundationColor(@"text_weak") originY:item2Tip_step2.av_bottom + 4];
     
     if (item2Tip_step1_content2.av_bottom > self.bottomTipView.av_height) {
         self.bottomTipView.contentSize = CGSizeMake(self.bottomTipView.av_width, item2Tip_step1_content2.av_bottom + 40);
@@ -89,7 +89,7 @@
 }
 
 - (UIView *)createBottomTipItemTheme:(NSString *)name originY:(CGFloat)originY {
-    UIView *themeView = [[UIView alloc] initWithFrame:CGRectMake(0, originY, self.bottomTipView.av_width, 12)];
+    UIView *themeView = [[UIView alloc] initWithFrame:CGRectMake(0, originY, self.bottomTipView.av_width, 14)];
     [self.bottomTipView addSubview:themeView];
     
     UIView *separatedLine = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 1, themeView.av_height)];
@@ -228,7 +228,7 @@
                 case E_SUB_NO_STREAM:
                     {
                         self.playStatusTipView.hidden = NO;
-                        self.playStatusTipView.errMsg = AUILiveRtsPlayString(@"播放失败提示：");
+                        self.playStatusTipView.errMsg = [AUILiveRtsPlayString(@"播放失败提示") stringByAppendingString:@"："];
                         if (type.intValue == E_DNS_FAIL) {
                             self.playStatusTipView.errMsg = [self.playStatusTipView.errMsg stringByAppendingFormat:@"%d,E_DNS_FAIL", type.intValue];
                         } else if (type.intValue == E_AUTH_FAIL) {
@@ -268,7 +268,7 @@
                             break;
                 case E_RECV_STOP_SIGNAL:
                     {
-                        self.playStatusTipView.errMsg = [AUILiveRtsPlayString(@"播放失败提示：") stringByAppendingFormat:@"%d,E_RECV_STOP_SIGNAL", type.intValue];
+                        self.playStatusTipView.errMsg = [AUILiveRtsPlayString(@"播放失败提示") stringByAppendingFormat:@"：%d,E_RECV_STOP_SIGNAL", type.intValue];
                         [self onStopPlay];
                         [self.playStatusTipView showErrMsg:YES downgradeMsg:NO];
                     }

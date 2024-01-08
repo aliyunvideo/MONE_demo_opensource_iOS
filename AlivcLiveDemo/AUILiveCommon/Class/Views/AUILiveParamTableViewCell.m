@@ -47,7 +47,7 @@
     self.titleLabel.textColor = AUIFoundationColor(@"text_strong");;
     self.titleLabel.text = self.cellModel.title;
     self.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.titleLabel.numberOfLines = 1;
+    self.titleLabel.numberOfLines = 0;
     [self.contentView addSubview:self.titleLabel];
 
     if ([self.cellModel.reuseId isEqualToString:AlivcLiveParamModelReuseCellInput]) {
@@ -144,6 +144,7 @@
     _headerLabel.textAlignment = NSTextAlignmentLeft;
     _headerLabel.font = AVGetRegularFont(12);
     _headerLabel.textColor = AUIFoundationColor(@"text_ultraweak");
+    _headerLabel.numberOfLines = 0;
     self.backgroundColor = AUIFoundationColor(@"bg_medium");
     [self.contentView addSubview:_headerLabel];
 }
@@ -259,7 +260,7 @@
     CGFloat midY = CGRectGetMidY(self.contentView.bounds);
     CGFloat midX = CGRectGetMidX(self.contentView.bounds);
     CGFloat width = CGRectGetWidth(self.contentView.bounds);
-    CGFloat titleWidth = AlivcSizeWidth(82);
+    CGFloat titleWidth = AlivcSizeWidth(midX - 5);
     self.titleLabel.frame = CGRectMake(AlivcSizeWidth(20), 0, titleWidth, self.frame.size.height);
     if ([self.cellModel.reuseId isEqualToString:AlivcLiveParamModelReuseCellInput]) {
         self.inputView.frame = CGRectMake(titleWidth + 5, midY - 12, width - titleWidth - 45 - 10 - 5 * 2, 24);
@@ -315,7 +316,7 @@
 
 - (void)silderValueDidChanged {
 
-    if ([self.titleLabel.text isEqual:AUILiveCommonString(@"resolution_label")]) {
+    if ([self.titleLabel.text isEqual:AUILiveCommonString(@"分辨率")]) {
         CGFloat total = 7;
         CGFloat value = self.slider.value;
         if (value <= (1.0 / total)) {
@@ -342,7 +343,7 @@
         } else {
 
         }
-    } else if ([self.titleLabel.text isEqual:AUILiveCommonString(@"audio_sampling_rate")]) {
+    } else if ([self.titleLabel.text isEqual:AUILiveCommonString(@"音频采样率")]) {
         CGFloat total = 4;
         CGFloat value = self.slider.value;
         if (value <= (1.0 / total) || value == 0) {
@@ -360,7 +361,7 @@
         } else {
 
         }
-    } else if ([self.titleLabel.text isEqual:AUILiveCommonString(@"captrue_fps")] || [self.titleLabel.text isEqual:AUILiveCommonString(@"min_fps")]) {
+    } else if ([self.titleLabel.text isEqual:AUILiveCommonString(@"采集帧率")] || [self.titleLabel.text isEqual:AUILiveCommonString(@"最小帧率")]) {
         CGFloat total = 7;
         CGFloat value = self.slider.value;
         CGFloat FPSValue = 0;
@@ -390,7 +391,7 @@
             FPSValue = 30;
         }
         self.cellModel.sliderBlock(FPSValue);
-    } else if ([self.titleLabel.text isEqual:AUILiveCommonString(@"keyframe_interval")]) {
+    } else if ([self.titleLabel.text isEqual:AUILiveCommonString(@"关键帧间隔")]) {
         CGFloat total = 5;
         CGFloat value = self.slider.value;
         CGFloat FPSValue = 0;
@@ -457,13 +458,13 @@
 }
 
 - (void)segmentValueDidChanged:(UISegmentedControl *)sender {
-    if ([self.cellModel.title isEqualToString:AUILiveCommonString(@"sound_track")]) {
+    if ([self.cellModel.title isEqualToString:AUILiveCommonString(@"声道数")]) {
         int value = (int) sender.selectedSegmentIndex + 1;
         self.cellModel.segmentBlock(value);
-    } else if ([self.cellModel.title isEqualToString:AUILiveCommonString(@"keyframe_interval")]) {
+    } else if ([self.cellModel.title isEqualToString:AUILiveCommonString(@"关键帧间隔")]) {
         int value = (int) sender.selectedSegmentIndex + 1;
         self.cellModel.segmentBlock(value);
-    } else if ([self.cellModel.title isEqualToString:AUILiveCommonString(@"captrue_fps")] || [self.cellModel.title isEqualToString:AUILiveCommonString(@"min_fps")]) {
+    } else if ([self.cellModel.title isEqualToString:AUILiveCommonString(@"采集帧率")] || [self.cellModel.title isEqualToString:AUILiveCommonString(@"最小帧率")]) {
         int value = 12;
         switch (sender.selectedSegmentIndex) {
             case 0:
@@ -491,7 +492,7 @@
                 break;
         }
         self.cellModel.segmentBlock(value);
-    } else if ([self.cellModel.title isEqualToString:AUILiveCommonString(@"audio_profile")]) {
+    } else if ([self.cellModel.title isEqualToString:AUILiveCommonString(@"音频格式")]) {
 
         int value = 2;
         switch (sender.selectedSegmentIndex) {

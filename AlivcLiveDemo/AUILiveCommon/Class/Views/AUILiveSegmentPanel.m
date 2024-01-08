@@ -96,6 +96,7 @@
 
 @property (nonatomic, strong) UIView *fatherView;
 @property (nonatomic, strong) NSArray<NSString *> *items;
+@property (nonatomic, strong) NSMutableArray *contentWidths;
 @property (nonatomic, assign) BOOL animation;
 
 @property (nonatomic, strong) UIScrollView *itemScrollView;
@@ -117,6 +118,8 @@
         [self.itemScrollView addSubview:self.itemBar];
         
         self.items = items;
+        
+        self.contentWidths = [NSMutableArray array];
         
         self.animation = animation;
         
@@ -240,10 +243,37 @@
     }
 }
 
+- (NSString *)displayText:(NSString *)key {
+    BOOL haveContentTitlePath = self.contentTitlePath && self.contentTitlePath.length > 0;
+    if (haveContentTitlePath) {
+        NSBundle *bundle = [NSBundle bundleWithPath:self.contentTitlePath];
+        return NSLocalizedStringFromTableInBundle(key, nil, bundle, nil);
+    }
+    return key;
+}
+
 - (void)setContents:(NSArray<NSArray *> *)contents {
     _contents = contents;
     if (contents && contents.count > 0 && contents.count == self.items.count) {
         [self.contentCollectionView reloadData];
+    }
+    
+    self.contentWidths = [NSMutableArray array];
+    for (int i = 0; i < contents.count; i++) {
+        NSMutableArray *contentWidthArr = [NSMutableArray array];
+        for (int j = 0; j < contents[i].count; j++) {
+            NSString *title = contents[i][j][@"title"];
+            UILabel *label = [[UILabel alloc] init];
+            label.text = [self displayText:title];
+            label.font = AVGetRegularFont(10);
+            CGSize size = [label sizeThatFits:CGSizeMake(MAXFLOAT, 20)];
+            CGFloat width = size.width;
+            if (size.width < 55) {
+                width = 55;
+            }
+            [contentWidthArr addObject:@(width)];
+        }
+        [self.contentWidths addObject:contentWidthArr];
     }
 }
 
@@ -281,7 +311,8 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(55, 60);
+    CGFloat width = [self.contentWidths[self.selectedItemIndex][indexPath.item] floatValue];
+    return CGSizeMake(width, 60);
 }
 
 #pragma mark -- UICollectionViewDelegateFlowLayout

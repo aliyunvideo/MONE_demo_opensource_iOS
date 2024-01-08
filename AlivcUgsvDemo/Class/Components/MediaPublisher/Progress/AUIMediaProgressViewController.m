@@ -6,10 +6,8 @@
 //
 
 #import "AUIMediaProgressViewController.h"
-
 #import "AUIMediaProgressView.h"
-
-
+#import "AUIUgsvMacro.h"
 
 @interface AUIMediaProgressViewController ()
 
@@ -94,7 +92,7 @@
 {
     if (!_textLabel) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, 55, self.contentView.av_width - 20 * 2, 35)];
-        label.text = @"努力导出中…";
+        label.text = AUIUgsvGetString(@"努力导出中…");
         label.textColor = AUIFoundationColor(@"text_strong");
         label.font = AVGetMediumFont(22);
         label.textAlignment = NSTextAlignmentCenter;
@@ -110,12 +108,12 @@
 {
     if (!_descLabel) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(self.textLabel
-                                                                   .av_left, self.textLabel.av_bottom + 10, self.textLabel.av_width, 27)];
-        label.text = @"请努力保持屏幕点亮，不要锁屏或切换程序";
+                                                                   .av_left, self.textLabel.av_bottom + 10, self.textLabel.av_width, 40)];
+        label.text = AUIUgsvGetString(@"请努力保持屏幕点亮，不要锁屏或切换程序");
         label.textColor = AUIFoundationColor(@"text_strong");
         label.font = AVGetMediumFont(12);
         label.textAlignment = NSTextAlignmentCenter;
-        label.numberOfLines = 1;
+        label.numberOfLines = 0;
         _descLabel = label;
     }
     return _descLabel;
@@ -152,7 +150,7 @@
 
 - (void)checkGoBack {
     if (self.state == AUIMediaProgressStateStarted) {
-        [AVAlertController showWithTitle:@"正在导出" message:@"是否要退出" needCancel:YES onCompleted:^(BOOL isCanced) {
+        [AVAlertController showWithTitle:AUIUgsvGetString(@"正在导出") message:AUIUgsvGetString(@"是否要退出") needCancel:YES onCompleted:^(BOOL isCanced) {
             if (!isCanced) {
                 
                 if ([self.handle respondsToSelector:@selector(mediaCancelProgress)]) {

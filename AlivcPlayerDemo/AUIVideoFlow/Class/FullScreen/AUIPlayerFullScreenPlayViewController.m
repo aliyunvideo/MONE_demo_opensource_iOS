@@ -152,7 +152,7 @@
         AVPStatus status = [[userInfo objectForKey:@"status"] integerValue];
         if (status == AVPStatusError) {
             [AVActivityIndicator stop:self.indicator];
-            [AVToastView show:@"加载失败" view:self.view position:AVToastViewPositionMid];
+            [AVToastView show:AUIVideoFlowString(@"加载失败") view:self.view position:AVToastViewPositionMid];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [self dismissViewControllerAnimated:YES completion:nil];
             });

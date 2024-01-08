@@ -8,6 +8,7 @@
 #import "AUIVideoTemplateListViewController.h"
 #import "AUIVideoTemplateItem.h"
 #import "AUIVideoTemplatePreview.h"
+#import "AUIUgsvMacro.h"
 #import <SDWebImage/SDWebImage.h>
 
 @interface AUIVideoTemplateListGroupData : NSObject
@@ -194,7 +195,7 @@
     }
     self.titleLabel.text = item.name;
     self.infoLabel.text = item.info;
-    self.durationLabel.text = [NSString stringWithFormat:@"总时长 %@",[AVStringFormat formatWithDuration:item.duration]];
+    self.durationLabel.text = [NSString stringWithFormat:AUIUgsvGetString(@"总时长 %@"),[AVStringFormat formatWithDuration:item.duration]];
 }
 
 @end
@@ -225,14 +226,14 @@
     // Do any additional setup after loading the view.
     
     self.hiddenMenuButton = YES;
-    self.titleView.text = @"模板列表";
+    self.titleView.text = AUIUgsvGetString(@"模板列表");
     
     AUIVideoTemplateListGroupView *groupView = [[AUIVideoTemplateListGroupView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.av_width, 44)];
     groupView.groupDatas = @[
-        [AUIVideoTemplateListGroupData data:@"1" name:@"VLOG" json:@"templates_vlog.json"],         // ⚠️警告：json文件里记录的所有模板仅用于阿里云Demo的演示，请勿用于商业化
-        [AUIVideoTemplateListGroupData data:@"2" name:@"生活美食" json:@"templates_food.json"],      // ⚠️警告：json文件里记录的所有模板仅用于阿里云Demo的演示，请勿用于商业化
-        [AUIVideoTemplateListGroupData data:@"3" name:@"节日纪念" json:@"templates_festival.json"],  // ⚠️警告：json文件里记录的所有模板仅用于阿里云Demo的演示，请勿用于商业化
-        [AUIVideoTemplateListGroupData data:@"0" name:@"内置模板测试" json:@"templates_test.json"],   // ⚠️警告：json文件里记录的所有模板仅用于阿里云Demo的演示，请勿用于商业化
+        [AUIVideoTemplateListGroupData data:@"1" name:AUIUgsvGetString(@"VLOG") json:@"templates_vlog.json"],         // ⚠️警告：json文件里记录的所有模板仅用于阿里云Demo的演示，请勿用于商业化
+        [AUIVideoTemplateListGroupData data:@"2" name:AUIUgsvGetString(@"生活美食") json:@"templates_food.json"],      // ⚠️警告：json文件里记录的所有模板仅用于阿里云Demo的演示，请勿用于商业化
+        [AUIVideoTemplateListGroupData data:@"3" name:AUIUgsvGetString(@"节日纪念") json:@"templates_festival.json"],  // ⚠️警告：json文件里记录的所有模板仅用于阿里云Demo的演示，请勿用于商业化
+        [AUIVideoTemplateListGroupData data:@"0" name:AUIUgsvGetString(@"内置模板测试") json:@"templates_test.json"],   // ⚠️警告：json文件里记录的所有模板仅用于阿里云Demo的演示，请勿用于商业化
     ];
     [self.contentView addSubview:groupView];
     self.groupView = groupView;

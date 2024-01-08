@@ -7,6 +7,7 @@
 
 #import "AUIEditorCaptionActionItem.h"
 #import "AUICaptionControllPanel.h"
+#import "AUIUgsvMacro.h"
 
 @implementation AUIEditorCaptionAddActionItem
 
@@ -22,7 +23,7 @@ AUI_ACTION_METHOD_DESC(@"Add the caption")
     }
     duration = MIN(duration - start , 3.0 / speed);
    
-    AliyunCaptionStickerController *controller = [[self.currentOperator.currentEditor getStickerManager] addCaptionText:@"点击输入文字" bubblePath:nil startTime:start duration:duration];
+    AliyunCaptionStickerController *controller = [[self.currentOperator.currentEditor getStickerManager] addCaptionText:AUIUgsvGetString(@"点击输入文字") bubblePath:nil startTime:start duration:duration];
 
     NSError *error = nil;
     if (!controller) {

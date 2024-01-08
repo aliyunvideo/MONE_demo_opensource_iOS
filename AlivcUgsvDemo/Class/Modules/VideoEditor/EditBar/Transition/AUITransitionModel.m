@@ -6,6 +6,7 @@
 //
 
 #import "AUITransitionModel.h"
+#import "AUIUgsvMacro.h"
 
 @implementation AUITransitionModel
 
@@ -30,54 +31,54 @@
     switch (type) {
         case TransitionTypeNull:
         {
-            name = @"无";
+            name = AUIUgsvGetString(@"无");
         }
             break;
         case TransitionTypeMoveUp:
         {
-            name = @"向上移动";
+            name = AUIUgsvGetString(@"向上移动");
             self.iconName =@"ic_transition_up";
         }
             break;
         case TransitionTypeMoveDown:
         {
-            name = @"向下移动";
+            name = AUIUgsvGetString(@"向下移动");
             self.iconName =@"ic_transition_down";
         }
             break;
         case TransitionTypeMoveLeft:
         {
-            name = @"向左移动";
+            name = AUIUgsvGetString(@"向左移动");
             self.iconName =@"ic_transition_left";
         }
             break;
         case TransitionTypeMoveRight:
         {
-            name = @"向右移动";
+            name = AUIUgsvGetString(@"向右移动");
             self.iconName =@"ic_transition_right";
         }
             break;
         case TransitionTypeShuffer:
         {
-            name = @"百叶窗";
+            name = AUIUgsvGetString(@"百叶窗");
             self.iconName =@"ic_transition_shuffer";
         }
             break;
         case TransitionTypeFade:
         {
-            name = @"淡入淡出";
+            name = AUIUgsvGetString(@"淡入淡出");
             self.iconName =@"ic_transition_fade";
         }
             break;
         case TransitionTypeCircle:
         {
-            name = @"圆形";
+            name = AUIUgsvGetString(@"圆形");
             self.iconName =@"ic_transition_circle";
         }
             break;
         case TransitionTypeStar:
         {
-            name = @"五角星";
+            name = AUIUgsvGetString(@"五角星");
             self.iconName =@"ic_transition_star";
         }
             break;

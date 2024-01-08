@@ -60,7 +60,7 @@
         _tip.textAlignment = NSTextAlignmentCenter;
         _tip.numberOfLines = 2;
         
-        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:@"长按屏幕\n快进" attributes:@{
+        NSMutableAttributedString *attriStr = [[NSMutableAttributedString alloc] initWithString:AUIVideoFlowString(@"长按屏幕\n快进") attributes:@{
             NSForegroundColorAttributeName: AUIVideoFlowColor(@"vf_tip_text")
         }];
         [attriStr appendAttributedString:[[NSAttributedString alloc] initWithString:@"2X" attributes:@{

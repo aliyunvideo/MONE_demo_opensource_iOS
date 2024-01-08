@@ -33,32 +33,32 @@ typedef NS_ENUM(NSUInteger, AUILiveModuleIndex) {
     NSMutableArray *list = [NSMutableArray array];
    
     AVCommonListItem *item1 = [AVCommonListItem new];
-    item1.title = AlivcLiveString(@"Camera Push");
-    item1.info = AlivcLiveString(@"The demonstration of the camera push");
+    item1.title = AlivcLiveString(@"摄像头推流");
+    item1.info = AlivcLiveString(@"手机摄像头/麦克风采集，支持参数设置、基础特效");
     item1.icon = AlivcLiveImage(@"zhibo_ic_tuiliu");
     item1.tag = AUILiveModuleIndexCameraPush;
     [list addObject:item1];
    
 #ifdef ALIVC_LIVE_DEMO_ENABLE_RECORDPUSH
     AVCommonListItem *item2 = [AVCommonListItem new];
-    item2.title = AlivcLiveString(@"Record Push");
-    item2.info = AlivcLiveString(@"The demonstration of the record push");
+    item2.title = AlivcLiveString(@"录屏推流");
+    item2.info = AlivcLiveString(@"手机屏幕采集，支持参数设置");
     item2.icon = AlivcLiveImage(@"zhibo_ic_luping");
     item2.tag = AUILiveModuleIndexRecordPush;
     [list addObject:item2];
 #endif
 
     AVCommonListItem *item3 = [AVCommonListItem new];
-    item3.title = AlivcLiveString(@"Pull Play");
-    item3.info = AlivcLiveString(@"The demonstration of the pull play");
+    item3.title = AlivcLiveString(@"拉流播放");
+    item3.info = AlivcLiveString(@"支持常见协议，如FLV、RTMP、HLS、RTS等");
     item3.icon = AlivcLiveImage(@"zhibo_ic_laliu");
     item3.tag = AUILiveModuleIndexPlayPull;
     [list addObject:item3];
 
 #ifdef ALIVC_LIVE_DEMO_ENABLE_RTSPLAY
     AVCommonListItem *item4 = [AVCommonListItem new];
-    item4.title = AlivcLiveString(@"Rts Play");
-    item4.info = AlivcLiveString(@"The demonstration of the rts play");
+    item4.title = AlivcLiveString(@"超低延时直播");
+    item4.info = AlivcLiveString(@"超低延时、高并发、高清流畅");
     item4.icon = AlivcLiveImage(@"zhibo_ic_laliu");
     item4.tag = AUILiveModuleIndexPlayRts;
     [list addObject:item4];
@@ -66,8 +66,8 @@ typedef NS_ENUM(NSUInteger, AUILiveModuleIndex) {
 
 #ifdef ALIVC_LIVE_DEMO_ENABLE_LINKMIC
     AVCommonListItem *item5 = [AVCommonListItem new];
-    item5.title = AlivcLiveString(@"Link Mic");
-    item5.info = AlivcLiveString(@"The demonstration of the link mic");
+    item5.title = AlivcLiveString(@"连麦互动");
+    item5.info = AlivcLiveString(@"主播与观众的在线视频连麦互动");
     item5.icon = AlivcLiveImage(@"zhibo_ic_linkmic");
     item5.tag = AUILiveModuleIndexLinkMic;
     [list addObject:item5];
@@ -75,8 +75,8 @@ typedef NS_ENUM(NSUInteger, AUILiveModuleIndex) {
 
 #ifdef ALIVC_LIVE_DEMO_ENABLE_PK
     AVCommonListItem *item6 = [AVCommonListItem new];
-    item6.title = AlivcLiveString(@"PK");
-    item6.info = AlivcLiveString(@"The demonstration of the PK");
+    item6.title = AlivcLiveString(@"PK互动");
+    item6.info = AlivcLiveString(@"主播之间的在线视频连麦互动");
     item6.icon = AlivcLiveImage(@"zhibo_ic_pk");
     item6.tag = AUILiveModuleIndexLinkPK;
     [list addObject:item6];
@@ -93,7 +93,7 @@ typedef NS_ENUM(NSUInteger, AUILiveModuleIndex) {
     // Do any additional setup after loading the view.
     
     self.hiddenMenuButton = YES;
-    self.titleView.text = AlivcLiveString(@"Live Demo");
+    self.titleView.text = AlivcLiveString(@"直播推流");
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

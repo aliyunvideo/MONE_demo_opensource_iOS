@@ -1,1 +1,29 @@
+"音视频终端SDK" = "Mediabox SDK";
+"短视频" = "Short Video";
+"短视频拍摄、剪辑、特效" = "Short Video Shooting, Editing, and Effects";
+"播放器" = "Player";
+"常见播放样式" = "Common Playback Styles";
+"直播" = "Live Push";
+"直播推流、播放" = "Live Push and Play";
+"互动直播" = "Interactive Live Streaming";
+"音视频通话、在线ktv" = "Audio & Video Calls, Online KTV";
+"场景化应用" = "Solutions";
+"常见解决方案" = "Scenario-Based Applications";
 
+"App版本" = "App Version";
+"SDK版本号" = "SDK Version";
+"SDK构建id" = "SDK Build ID";
+"SDKCommitId" = "SDK Commit ID";
+"SDK所有组件名" = "SDK All Components Name";
+"SDK所有组件ID" = "SDK All Components ID";
+"播放器组件版本" = "Player Component Version";
+"短视频组件版本" = "Short Video Component Version";
+"直播推流组件版本" = "Live Push Component Version";
+"美颜组件版本" = "Queen Component Version";
+
+"短视频解决方案" = "Short Video Solution";
+"互动直播解决方案" = "Interactive Live Streaming Solution";
+"适用于从生产到消费的短视频解决方案" = "Suitable for short video scenarios from production to consumption.";
+"适用于各种直播解决方案" = "Suitable for various live streaming scenarios.";
+"敬请期待！" = "Coming Soon";
+"当前SDK不支持" = "The current SDK is not supported.";

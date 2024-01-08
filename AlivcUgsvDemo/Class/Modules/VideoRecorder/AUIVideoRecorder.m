@@ -114,7 +114,7 @@ AUIRecorderCameraWrapperDelegate>
     void(^finish)(NSError *) = ^(NSError *error){
         if (error) {
             hud.iconType = AVProgressHUDIconTypeWarn;
-            hud.labelText = [NSString stringWithFormat:AUIUgsvGetString(@"完成录制出错：%@"), error.localizedDescription];
+            hud.labelText = AUIUgsvGetString(@"录制出错");
             [hud hideAnimated:YES afterDelay:2.0];
             return;
         }

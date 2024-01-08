@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AUILive'
-  s.version          = '6.7.0'
+  s.version          = '6.8.0'
   s.summary          = 'A short description of AUILive.'
 
 # This description is used to generate tags and improve search results.

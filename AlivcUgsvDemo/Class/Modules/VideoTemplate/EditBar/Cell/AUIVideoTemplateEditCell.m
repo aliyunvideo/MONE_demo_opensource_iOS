@@ -68,7 +68,7 @@
         
         AVBaseButton *selectedBtn = [[AVBaseButton alloc] initWithType:AVBaseButtonTypeImageText titlePos:AVBaseButtonTitlePosBottom];
         selectedBtn.backgroundColor = AUIFoundationColor(@"tsp_fill_ultraweak");
-        selectedBtn.title = @"点击编辑";
+        selectedBtn.title = AUIUgsvGetString(@"点击编辑");
         selectedBtn.font = AVGetRegularFont(9.0);
         selectedBtn.image = AUIUgsvTemplateImage(@"ic_edit");
         selectedBtn.spacing = 2;

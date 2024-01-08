@@ -27,7 +27,7 @@
 }
 
 - (NSString *)addBtnTitle {
-    return @"+ 文字";
+    return AUIUgsvGetString(@"+ 文字");
 }
 
 - (void)barWillAppear {

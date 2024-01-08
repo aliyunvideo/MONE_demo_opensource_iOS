@@ -101,7 +101,7 @@
             if (type == AUIVideoTemplateEditMenuTypeMedia) {
                 AUIVideoTemplateEditMenuData *menuData = [AUIVideoTemplateEditMenuData new];
                 menuData.type = type;
-                menuData.text = @"视频";
+                menuData.text = AUIUgsvGetString(@"视频");
                 menuData.normalIcon = AUIUgsvTemplateImage(@"ic_menu_clip");
                 menuData.selectedIcon = AUIUgsvTemplateImage(@"ic_menu_clip_selected");
                 menuData.onClickBlock = ^(AUIVideoTemplateEditMenuData *sender) {
@@ -121,7 +121,7 @@
             if (type == AUIVideoTemplateEditMenuTypeText) {
                 AUIVideoTemplateEditMenuData *menuData = [AUIVideoTemplateEditMenuData new];
                 menuData.type = type;
-                menuData.text = @"文字";
+                menuData.text = AUIUgsvGetString(@"文字");
                 menuData.normalIcon = AUIUgsvTemplateImage(@"ic_menu_text");
                 menuData.selectedIcon = AUIUgsvTemplateImage(@"ic_menu_text_selected");
                 menuData.onClickBlock = ^(AUIVideoTemplateEditMenuData *sender) {
@@ -141,7 +141,7 @@
             if (type == AUIVideoTemplateEditMenuTypeMusic) {
                 AUIVideoTemplateEditMenuData *menuData = [AUIVideoTemplateEditMenuData new];
                 menuData.type = type;
-                menuData.text = @"音乐";
+                menuData.text = AUIUgsvGetString(@"音乐");
                 menuData.normalIcon = AUIUgsvTemplateImage(@"ic_menu_music");
                 menuData.selectedIcon = AUIUgsvTemplateImage(@"ic_menu_music_selected");
                 menuData.onClickBlock = ^(AUIVideoTemplateEditMenuData *sender) {

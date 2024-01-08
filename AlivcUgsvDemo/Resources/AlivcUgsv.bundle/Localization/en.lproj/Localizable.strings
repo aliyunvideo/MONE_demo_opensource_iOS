@@ -1,1 +1,280 @@
 
+"短视频" = "Short Video";
+"视频拍摄" = "Recorder";
+"视频合拍" = "Duet Recorder";
+"视频编辑" = "Editor";
+"视频裁剪" = "Clipper";
+"剪同款" = "Templates";
+"更多" = "More";
+"自定义拍摄" = "Custom Recording";
+"自定义编辑" = "Custom Editing";
+"自定义裁剪" = "Custom Cropping";
+"自定义合拍" = "Custom Duets";
+"通过自定义参数体验拍摄功能" = "Recording with Custom Parameters";
+"通过自定义参数体验编辑功能" = "Editing with Custom Parameters";
+"通过自定义参数体验裁剪功能" = "Cropping with Custom Parameters";
+"通过自定义参数体验合拍功能" = "Duets with Custom Parameters";
+"从相册选择一个视频文件上传到云端" = "Select a video file and upload to cloud.";
+"当前SDK不支持" = "The current SDK is not supported.";
+"当前机型不支持" = "The current phone model is not supported.";
+"正在下载美颜模型中，请等待" = "The retouching model is being downloaded. Please wait.";
+"美颜模型无法加载，退出" = "Failed to load the retouching model. You are forced to exit.";
+"发布成功了" = "Published successfully.";
+"完成录制失败" = "Failed to complete recording.";
+"保存相册失败" = "Failed to be saved to the album.";
+"保存相册成功" = "Saved to the album.";
+"编辑参数" = "Editing Parameters";
+"进入编辑" = "Start Editing";
+"裁剪参数" = "Cropping Parameters";
+"进入裁剪" = "Start Cropping";
+"其他参数" = "Other Parameters";
+"录制参数" = "Recording Parameters";
+"开启录制" = "Start Recording";
+"请填入" = "Enter";
+"视频输出" = "Video Output";
+"视频比例" = "Aspect Ratio";
+"原始比例" = "Original";
+"分辨率" = "Resolution";
+"原始视频" = "Original";
+"缩放模式" = "Scaling Mode";
+"裁剪模式" = "Cropped";
+"填充模式" = "Filled";
+"编码模式" = "Encoding Mode";
+"硬编码" = "Hardware Encoding";
+"软编码" = "Software Encoding";
+"视频质量" = "Video Quality";
+"良好" = "Good";
+"优质" = "Great";
+"一般" = "Moderate";
+"较差" = "Poor";
+"非常差" = "Bad";
+"极度差" = "Very Bad";
+"帧率" = "Frame Rate";
+"关键帧间隔" = "Keyframe Interval";
+"建议3秒（配合帧率计算设置）" = "3s (based on the frame rate)";
+"建议>1s" = "Recommended > 1 second";
+"录制时间" = "Recording Duration";
+"最小时长" = "Minimum";
+"最大时长" = "Maximum";
+"结束设置" = "Exit Settings";
+"输出Mp4" = "Output Mp4";
+"合成后发布到云端" = "Publish to Cloud";
+"合成后保存到相册" = "Save to Album";
+"音频声道数" = "Audio Channels";
+"双声道" = "Binaural";
+"单声道" = "Mono";
+"音频采样率" = "Audio Sampling Rate";
+"码率" = "Bitrate";
+"填入码率会忽略视频质量" = "Invalidates Video quality";
+"关键帧间隔（建议3倍帧率）" = "GOP(3x frame rate recommended)";
+"合拍参数" = "Duet Parameters";
+"左右" = "Left-Right";
+"右左" = "Right-Left";
+"上下" = "Top-Bottom";
+"下上" = "Bottom-Top";
+"后前" = "Back-Front";
+"前后" = "Front-Back";
+"开启回声消除" = "Enable Echo Cancellation";
+"提取日志" = "Extract Logs";
+"动态贴纸" = "Animated Stickers";
+"剪裁压缩" = "Crop and Compress";
+"字幕" = "Subtitles";
+"未知" = "Unknown";
+"SDK版本信息" = "SDK Version";
+"许可证信息" = "License Information";
+"许可证签发时间" = "License Issuing Time";
+"许可证有效时间" = "License Validity Period";
+"业务到期时间" = "Expiration Time";
+"增值服务" = "Value-added Services";
+"SDK初始化中..." = "The SDK is being initialized.";
+"成功" = "Success";
+"证书无效" = "Invalid certificate.";
+"服务端出错，请稍后重试" = "Server error. Try again later.";
+"网络出错，请检查本地网络" = "Network error. Please check the network.";
+"未知错误" = "Unknown error.";
+"提取日志成功" = "Logs are successfully extracted.";
+"提取日志失败" = "Failed to extract logs.";
+"证书更新中" = "The certificate is being updated.";
+"证书更新成功" = "The certificate is updated.";
+
+//////////
+
+
+"下一步" = "Next";
+"提示" = "Info";
+"确认删除？" = "Are you sure you want to delete it?";
+"重置" = "Reset";
+"出错了" = "An error occurred.";
+
+
+//////////
+
+"录制出错" = "An error occurred during recording.";
+"已完成录制" = "Recording is complete.";
+"开始拍摄后剪音乐不可使用" = "You cannot crop music after you start shooting.";
+"开始拍摄后切画稿不可使用" = "You cannot change the aspect ratio after you start shooting.";
+"开始拍摄后不可调整布局" = "";
+"当前摄像头不支持闪光灯" = "The current camera does not support flash.";
+"美颜" = "Beauty";
+"道具" = "Stickers";
+"布局" = "Layout";
+"交换" = "Swap";
+"单击拍摄" = "Click to Shoot";
+"长按拍摄" = "Hold to Shoot";
+"回删" = "Delete";
+"极慢" = "Very Slow";
+"慢" = "Slow";
+"标准" = "Standard";
+"快" = "Fast";
+"极快" = "Very Fast";
+"照片已保存" = "Photo saved.";
+"剪音乐" = "Music";
+"切画稿" = "Aspect Ratio";
+"拍照" = "Take Photo";
+"拍照失败" = "Failed to take photo.";
+"获取渲染结果失败" = "Failed to obtain the rendering result.";
+"上一段正在存储，请稍等" = "The previous clip is being saved. Please wait.";
+"开始录制失败，是否重试" = "Failed to start recording. Do you want to try again?";
+"完成录制出错，是否重试？" = "Error completing recording. Do you want to try again?";
+"预览失败，是否重试" = "Preview failed. Do you want to try again?";
+"录制出错了" = "Recording went wrong.";
+"错误码：%d" = "Error code: %d";
+
+//////////
+
+"音乐" = "Music";
+"使用" = "Use";
+"拖动选择音乐片段" = "Drag to Select Clip";
+
+
+//////////
+
+"设置封面" = "Thumbnail";
+"剪辑" = "Edit";
+"变速" = "Speed";
+"音量" = "Volume";
+"变声" = "Modulate";
+"原声" = "Original";
+"配乐" = "Music";
+"全部镜头" = "All Frames";
+"萝莉" = "Girl";
+"大叔" = "Uncle";
+"回音" = "Echo";
+"男孩" = "Boy";
+"小黄人" = "Minions";
+"机器人" = "Robot";
+"大魔王" = "Devil";
+"方言" = "Dialect";
+"增强" = "Enhance";
+"亮度" = "Bri";
+"对比度" = "Contrast";
+"饱和度" = "Sat";
+"暗角" = "Vignette";
+"锐度" = "Sharp";
+
+//////////
+
+"发布" = "Publish";
+"选封面" = "Thumbnail";
+"填写并使用合适的话题，让更多人看到" = "Enter an appropriate topic for more people to see.";
+"努力导出中…" = "Exporting...";
+"正在导出" = "Export in Progress";
+"是否要退出" = "Do you want to cancel it?";
+"导出成功" = "Exported.";
+"请努力保持屏幕点亮，不要锁屏或切换程序" = "Keep the screen on. Do not lock the screen or switch to another app.";
+"发布成功" = "Published";
+
+//////////
+"特效" = "Effects";
+"+ 特效" = "Add";
+
+//////////
+"滤镜" = "Filters";
+
+//////////
+"贴纸" = "Stickers";
+"+ 贴纸" = "Add";
+
+//////////
+"文字" = "Text";
+"点击输入文字" = "Click to enter text";
+"颜色" = "Color";
+"+ 文字" = "Add";
+
+"花字" = "Font Efect";
+"气泡" = "Bubble";
+"样式" = "Style";
+"动画" = "Animation";
+
+"原始" = "Original";
+"默认字体" = "Default";
+
+"无" = "None";
+"向上移动" = "Move Up";
+"向下移动" = "Move Down";
+"向左移动" = "Move Left";
+"向右移动" = "Move Right";
+"线性擦除" = "Linear Erase";
+"淡入淡出" = "Fade";
+"缩放" = "Zoom";
+"打字机" = "Typewriter";
+"钟摆" = "Pendulum";
+"雨刷" = "Wiper";
+"组合动画1" = "Combination1";
+"组合动画2" = "Combination2";
+"波浪" = "Wave";
+"螺旋上升" = "Spiral Rise";
+"心跳" = "Heartbeat";
+"圆形扫描" = "Clockwise Scan";
+"波浪弹入" = "Wave Bounced";
+"百叶窗" = "Blinds";
+"五角星" = "Five-Pointed Star";
+"圆形" = "Circle";
+
+//////////
+"转场" = "Transition";
+"已经应用全部" = "All applied.";
+
+
+//////////
+"模板列表" = "Templates";
+"总时长 %@" = "Total Duration %@";
+"VLOG" = "VLOG";
+"生活美食" = "Lifestyle & Food";
+"节日纪念" = "Festival";
+"内置模板测试" = "Built-In";
+"下载资源中..." = "Downloading resources...";
+"资源出错了！" = "Something went wrong with the resources.";
+"替换" = "Replace";
+"删除" = "Delete";
+"选择的视频出错了或无权限" = "The selected video is invalid or you do not have the permissions on it.";
+"是否删除当前已替换的素材？" = "Do you want to delete the replaced materials?";
+"确定是否 不设置音乐？" = "Are you sure you want to set no music?";
+"确定使用模板音乐？" = "Are you sure you want to use the template music?";
+"点击编辑" = "Editting";
+"不设置音乐" = "No Music";
+"模板音乐" = "Template Music";
+"其他音乐" = "Other Music";
+"确定要放弃编辑中的视频吗？" = "Are you sure you want to discard the video that you are editing?";
+
+//////////
+
+"处理中" = "Processing...";
+"请选择至少一" = "Select at least one";
+"最多能选" = "You can select up to";
+"个视频或图片" = "videos or images.";
+"选择 %tu 个素材效果最佳" = "It is best to select %tu materials.";
+"个视频" = "videos.";
+"个图片" = "images.";
+"总时长" = "Total Duration";
+"需要打开权限才能访问相册" = "You must grant relevant permissions before you can access the album.";
+"全部" = "All";
+"视频" = "Videos";
+"图片" = "Images";
+
+//////////
+
+"裁剪" = "Crop";
+"拖动调整内容显示区域" = "Drag to adjust content display area";
+"正在导出中..." = "Exporting...";
+"导出失败了。。。" = "Export failed.";

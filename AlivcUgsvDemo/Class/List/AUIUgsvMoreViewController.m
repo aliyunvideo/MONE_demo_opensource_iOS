@@ -29,12 +29,12 @@ typedef NS_ENUM(NSUInteger, AUIUgsvMoreEntranceType) {
 
 @implementation AUIUgsvPublishParamInfo (ParamBulder)
 - (void)buildParam:(AUIUgsvParamBuilder *)builder {
-    [self buildParamWithGroup:builder.group(@"Other", @"其他参数")];
+    [self buildParamWithGroup:builder.group(@"Other", AUIUgsvGetString(@"其他参数"))];
 }
 - (void)buildParamWithGroup:(AUIUgsvParamGroupBuilder *)group {
     group
-        .switchItem(@"NeedToPublish", @"合成后发布到云端").KVC(self, @"needToPublish")
-        .switchItem(@"SaveToAlbum", @"合成后保存到相册").KVC(self, @"saveToAlbum");
+        .switchItem(@"NeedToPublish", AUIUgsvGetString(@"合成后发布到云端")).KVC(self, @"needToPublish")
+        .switchItem(@"SaveToAlbum", AUIUgsvGetString(@"合成后保存到相册")).KVC(self, @"saveToAlbum");
 }
 @end
 
@@ -46,19 +46,19 @@ typedef NS_ENUM(NSUInteger, AUIUgsvMoreEntranceType) {
     
     AVCommonListItem *item1 = [AVCommonListItem new];
     item1.title = AUIUgsvGetString(@"自定义拍摄");
-    item1.info = AUIUgsvGetString(@"The demonstration of the recorder");
+    item1.info = AUIUgsvGetString(@"通过自定义参数体验拍摄功能");
     item1.icon = AUIUgsvGetImage(@"ic_ugsv_recorder");
     item1.tag = AUIUgsvMoreEntranceTypeRecord;
     
     AVCommonListItem *item2 = [AVCommonListItem new];
     item2.title = AUIUgsvGetString(@"自定义编辑");
-    item2.info = AUIUgsvGetString(@"The demonstration of the editor");
+    item2.info = AUIUgsvGetString(@"通过自定义参数体验编辑功能");
     item2.icon = AUIUgsvGetImage(@"ic_ugsv_editor");
     item2.tag = AUIUgsvMoreEntranceTypeEdit;
     
     AVCommonListItem *item3 = [AVCommonListItem new];
     item3.title = AUIUgsvGetString(@"自定义裁剪");
-    item3.info = AUIUgsvGetString(@"The demonstration of the clipper");
+    item3.info = AUIUgsvGetString(@"通过自定义参数体验裁剪功能");
     item3.icon = AUIUgsvGetImage(@"ic_ugsv_clipper");
     item3.tag = AUIUgsvMoreEntranceTypeCrop;
     
@@ -70,7 +70,7 @@ typedef NS_ENUM(NSUInteger, AUIUgsvMoreEntranceType) {
     
     AVCommonListItem *item5 = [AVCommonListItem new];
     item5.title = AUIUgsvGetString(@"自定义合拍");
-    item5.info = AUIUgsvGetString(@"通过调整合拍参数体验合拍功能");
+    item5.info = AUIUgsvGetString(@"通过自定义参数体验合拍功能");
     item5.icon = AUIUgsvGetImage(@"ic_ugsv_mix_recorder");
     item5.tag = AUIUgsvMoreEntranceTypeMixRecord;
     
@@ -145,7 +145,7 @@ typedef NS_ENUM(NSUInteger, AUIUgsvMoreEntranceType) {
     });
 #ifndef USING_SVIDEO_BASIC
     builder.lastGroup
-        .switchItem(@"EnterEditor", @"进入编辑")
+        .switchItem(@"EnterEditor", AUIUgsvGetString(@"进入编辑"))
             .editabled(config.mergeOnFinish)
             .defaultValue(!config.mergeOnFinish);
 #endif // USING_SVIDEO_BASIC
@@ -154,8 +154,8 @@ typedef NS_ENUM(NSUInteger, AUIUgsvMoreEntranceType) {
     [publishInfo buildParamWithGroup:builder.lastGroup];
 
     AUIUgsvParamsViewController *paramController = [AUIUgsvParamsViewController new];
-    paramController.titleText = @"录制参数";
-    paramController.confirmText = @"开启录制";
+    paramController.titleText = AUIUgsvGetString(@"录制参数");
+    paramController.confirmText = AUIUgsvGetString(@"开启录制");
     paramController.paramWrapper = builder.paramWrapper;
     
     __weak typeof(self) weakSelf = self;
@@ -174,8 +174,8 @@ typedef NS_ENUM(NSUInteger, AUIUgsvMoreEntranceType) {
     [publishInfo buildParam:builder];
 
     AUIUgsvParamsViewController *paramController = [AUIUgsvParamsViewController new];
-    paramController.titleText = @"编辑参数";
-    paramController.confirmText = @"进入编辑";
+    paramController.titleText = AUIUgsvGetString(@"编辑参数");
+    paramController.confirmText = AUIUgsvGetString(@"进入编辑");
     paramController.paramWrapper = builder.paramWrapper;
     
     __weak typeof(self) weakSelf = self;
@@ -193,8 +193,8 @@ typedef NS_ENUM(NSUInteger, AUIUgsvMoreEntranceType) {
     [publishInfo buildParam:builder];
     
     AUIUgsvParamsViewController *paramController = [AUIUgsvParamsViewController new];
-    paramController.titleText = @"裁剪参数";
-    paramController.confirmText = @"进入裁剪";
+    paramController.titleText = AUIUgsvGetString(@"裁剪参数");
+    paramController.confirmText = AUIUgsvGetString(@"进入裁剪");
     paramController.paramWrapper = builder.paramWrapper;
     
     __weak typeof(self) weakSelf = self;
@@ -212,7 +212,7 @@ typedef NS_ENUM(NSUInteger, AUIUgsvMoreEntranceType) {
     AUIUgsvParamBuilder *builder = config.mixRecordParamBuilder;
     [builder changeLastGroupWithName:@"OnFinish"];
     builder.lastGroup
-        .switchItem(@"EnterEditor", @"进入编辑")
+        .switchItem(@"EnterEditor", AUIUgsvGetString(@"进入编辑"))
             .editabled(config.mergeOnFinish)
             .defaultValue(!config.mergeOnFinish);
     [builder findParamItemWithName:@"NeedMerge"].onValueDidChanged = ^(id  _Nullable oldValue, id  _Nullable curValue) {
@@ -231,8 +231,8 @@ typedef NS_ENUM(NSUInteger, AUIUgsvMoreEntranceType) {
     [publishInfo buildParamWithGroup:builder.lastGroup];
 
     AUIUgsvParamsViewController *paramController = [AUIUgsvParamsViewController new];
-    paramController.titleText = @"录制参数";
-    paramController.confirmText = @"开启录制";
+    paramController.titleText = AUIUgsvGetString(@"录制参数");
+    paramController.confirmText = AUIUgsvGetString(@"开启录制");
     paramController.paramWrapper = builder.paramWrapper;
     
     __weak typeof(self) weakSelf = self;

@@ -329,7 +329,7 @@ const static CGFloat kBgImageBlurRadius = 64;
     if (!_descLabel) {
         _descLabel = [[UILabel alloc]init];
         _descLabel.accessibilityIdentifier = [self accessibilityId:@"descLabel"];
-        _descLabel.text = AUIVideoFlowString(@"Player_Audio_Tips");
+        _descLabel.text = AUIVideoFlowString(@"在锁屏和切换到后台时也能播放音频");
         _descLabel.textColor = UIColor.whiteColor;
         _descLabel.numberOfLines = 1;
         
@@ -355,7 +355,7 @@ const static CGFloat kBgImageBlurRadius = 64;
         _quitButton.accessibilityIdentifier = [self accessibilityId:@"quitButton"];
         [_quitButton addTarget:self action:@selector(onQuitButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [_quitButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        [_quitButton setTitle:AUIVideoFlowString(@"Player_Back_Video") forState:UIControlStateNormal];
+        [_quitButton setTitle:AUIVideoFlowString(@"返回视频") forState:UIControlStateNormal];
         [_quitButton setImage:AUIVideoFlowImage(@"player_back_video") forState:UIControlStateNormal];
         [_quitButton setBackgroundColor:APGetColor(APColorTypeVideoBg40)];
         _quitButton.layer.cornerRadius = 4;
@@ -375,7 +375,7 @@ const static CGFloat kBgImageBlurRadius = 64;
         _repalyButton.accessibilityIdentifier = [self accessibilityId:@"repalyButton"];
         [_repalyButton addTarget:self action:@selector(onRePlayButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [_repalyButton setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
-        [_repalyButton setTitle:@"重播" forState:UIControlStateNormal];
+        [_repalyButton setTitle:AUIVideoFlowString(@"重播") forState:UIControlStateNormal];
         [_repalyButton setImage:AUIVideoFlowImage(@"player_refresh") forState:UIControlStateNormal];
         [_repalyButton setBackgroundColor:APGetColor(APColorTypeVideoBg40)];
         _repalyButton.layer.cornerRadius = 4;

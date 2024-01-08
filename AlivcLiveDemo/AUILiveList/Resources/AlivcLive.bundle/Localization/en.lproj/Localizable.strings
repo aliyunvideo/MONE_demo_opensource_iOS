@@ -1,1 +1,15 @@
 
+"直播推流" = "Live Push";
+"摄像头推流" = "Camera Pushing";
+"录屏推流" = "Screen Sharing";
+"拉流播放" = "Live Streaming";
+"超低延时直播" = "RTS";
+"连麦互动" = "Co-streaming";
+"PK互动" = "Battles";
+"手机摄像头/麦克风采集，支持参数设置、基础特效" = "Streams are collected from your cameras and microphone. You can configure the parameters and basic effects.";
+"手机屏幕采集，支持参数设置" = "Streams are collected from your screen. You can configure the parameters.";
+"支持常见协议，如FLV、RTMP、HLS、RTS等" = "Common protocols are supported, such as FLV, RTMP, HLS, and RTS.";
+"超低延时、高并发、高清流畅" = "Ultra-Low Latency, High Concurrency, High Definition Smoothness";
+"主播与观众的在线视频连麦互动" = "Online Video Interactions Between Host and Audience";
+"主播之间的在线视频连麦互动" = "Online Video Interactions Between Hosts";
+"未集成该组件" = "The mudule is not integrated.";

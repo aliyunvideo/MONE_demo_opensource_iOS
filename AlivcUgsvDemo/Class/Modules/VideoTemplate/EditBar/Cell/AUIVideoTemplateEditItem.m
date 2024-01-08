@@ -183,15 +183,15 @@
         _musicType = musicType;
         if (_musicType == AUIVideoTemplateEditMusicTypeNone) {
             _coverImage = AUIUgsvTemplateImage(@"ic_music_none");
-            _title = @"不设置音乐";
+            _title = AUIUgsvGetString(@"不设置音乐");
         }
         else if (_musicType == AUIVideoTemplateEditMusicTypeTemplate) {
             _coverImage = AUIUgsvTemplateImage(@"ic_music_template");
-            _title = @"模板音乐";
+            _title = AUIUgsvGetString(@"模板音乐");
         }
         else {
             _coverImage = AUIUgsvTemplateImage(@"ic_music_custom");
-            _title = @"其他音乐";
+            _title = AUIUgsvGetString(@"其他音乐");
         }
     }
     return self;

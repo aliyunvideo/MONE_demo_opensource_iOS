@@ -38,6 +38,9 @@
     
     [self.menuButton setTitle:AUIUgsvGetString(@"交换") forState:UIControlStateNormal];
     [self.menuButton setImage:nil forState:UIControlStateNormal];
+    [self.menuButton sizeToFit];
+    self.menuButton.av_height = 26;
+    self.menuButton.av_right = self.headerView.av_width - 18;
     
     UIButton *left_right = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
     left_right.center = CGPointMake(20 + left_right.av_width, self.contentView.av_height / 2.0);

@@ -6,6 +6,8 @@
 //
 
 #import "AUICaptionFontModel.h"
+#import "AUIUgsvMacro.h"
+
 #import <CoreText/CoreText.h>
 #import <UIKit/UIKit.h>
 
@@ -86,21 +88,18 @@
     return fontName;
 }
 
-static  NSDictionary * k_sortDict()
+static  NSDictionary * k_sortDict(void)
 {
-    return   @{          @"默认字体":@"0",
-                         @"文艺体":@"1",
-                         @"黄油体":@"2",
-                         @"小薇体":@"3",
-                         @"快乐体":@"4",
-                         @"酷黑体":@"5"
-                       };
+    return   @{          
+        AUIUgsvGetString(@"默认字体"):@"0",
+        @"快乐体":@"1",
+    };
 }
 
 + (AUIResourceModel *)EmptyModel
 {
     AUICaptionFontModel *model = [[AUICaptionFontModel alloc] init];
-    model.showName = @"默认字体";
+    model.showName = AUIUgsvGetString(@"默认字体");
     return model;
 }
 

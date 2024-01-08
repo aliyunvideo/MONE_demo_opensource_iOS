@@ -152,7 +152,7 @@
 {
     if (!_colorLabel) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(20, self.templeteView.av_bottom, self.av_width - 20 * 2, 44)];
-        label.text = @"颜色";
+        label.text = AUIUgsvGetString(@"颜色");
         label.textColor = AUIFoundationColor(@"text_strong");
         label.font = AVGetMediumFont(12);
         label.textAlignment = NSTextAlignmentLeft;

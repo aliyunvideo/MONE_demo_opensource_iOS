@@ -30,19 +30,19 @@ typedef NS_ENUM(NSUInteger, AUIUgsvEntranceType) {
 
 - (instancetype)init {
     AVCommonListItem *item1 = [AVCommonListItem new];
-    item1.title = AUIUgsvGetString(@"Recorder");
+    item1.title = AUIUgsvGetString(@"视频拍摄");
     item1.info = @"";
     item1.icon = AUIUgsvGetImage(@"ic_ugsv_recorder");
     item1.tag = AUIUgsvEntranceTypeRecorder;
     
     AVCommonListItem *item2 = [AVCommonListItem new];
-    item2.title = AUIUgsvGetString(@"Editor");
+    item2.title = AUIUgsvGetString(@"视频编辑");
     item2.info = @"";
     item2.icon = AUIUgsvGetImage(@"ic_ugsv_editor");
     item2.tag = AUIUgsvEntranceTypeEditor;
     
     AVCommonListItem *item3 = [AVCommonListItem new];
-    item3.title = AUIUgsvGetString(@"Clipper");
+    item3.title = AUIUgsvGetString(@"视频裁剪");
     item3.info = @"";
     item3.icon = AUIUgsvGetImage(@"ic_ugsv_clipper");
     item3.tag = AUIUgsvEntranceTypeClipper;
@@ -54,13 +54,13 @@ typedef NS_ENUM(NSUInteger, AUIUgsvEntranceType) {
     item4.tag = AUIUgsvEntranceTypeTemplate;
     
     AVCommonListItem *item5 = [AVCommonListItem new];
-    item5.title = AUIUgsvGetString(@"More");
+    item5.title = AUIUgsvGetString(@"更多");
     item5.info = @"";
     item5.icon = AUIUgsvGetImage(@"ic_ugsv_more");
     item5.tag = AUIUgsvEntranceTypeMore;
     
     AVCommonListItem *item6 = [AVCommonListItem new];
-    item6.title = AUIUgsvGetString(@"合拍");
+    item6.title = AUIUgsvGetString(@"视频合拍");
     item6.info = @"";
     item6.icon = AUIUgsvGetImage(@"ic_ugsv_mix_recorder");
     item6.tag = AUIUgsvEntranceTypeMixRecorder;
@@ -78,7 +78,7 @@ typedef NS_ENUM(NSUInteger, AUIUgsvEntranceType) {
     // Do any additional setup after loading the view.
     
     self.hiddenMenuButton = YES;
-    self.titleView.text = AUIUgsvGetString(@"Short video");
+    self.titleView.text = AUIUgsvGetString(@"短视频");
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

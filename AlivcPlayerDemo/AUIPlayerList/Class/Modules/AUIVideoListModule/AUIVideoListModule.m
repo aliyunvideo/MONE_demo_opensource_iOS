@@ -36,7 +36,7 @@
     AUIVideoFunctionListView *vc = [[AUIVideoFunctionListView alloc] init];
     [self.sourceVC.navigationController pushViewController:vc animated:YES];
 #else
-    [AVToastView show:AlivcPlayerString(@"No Mudule Tip") view:self.sourceVC.view position:AVToastViewPositionMid];
+    [AVToastView show:AlivcPlayerString(@"未集成该组件") view:self.sourceVC.view position:AVToastViewPositionMid];
 #endif
 }
 
@@ -45,7 +45,7 @@
     AUIVideoStandradListView *vc = [[AUIVideoStandradListView alloc] init];
     [self.sourceVC.navigationController pushViewController:vc animated:YES];
 #else
-    [AVToastView show:AlivcPlayerString(@"No Mudule Tip") view:self.sourceVC.view position:AVToastViewPositionMid];
+    [AVToastView show:AlivcPlayerString(@"未集成该组件") view:self.sourceVC.view position:AVToastViewPositionMid];
 #endif
 }
 

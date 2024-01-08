@@ -260,16 +260,16 @@
    
     self.tipsLabel.frame = CGRectMake(12,self.containerView.av_height - self.tipsLabel.av_height -  (self.bomView.hidden?12: self.bomView.av_height), self.tipsLabel.av_width, self.tipsLabel.av_height);
     
-    NSString *title =@"自动";
+    NSString *title = AUIVideoFlowString(@"自动");
     if (![AlivcPlayerManager manager].autoTrack) {
        AVPTrackInfo *track = [[AlivcPlayerManager manager] getCurrentTrack:AVPTRACK_TYPE_SAAS_VOD];
         title = [self formatBitrateTitleWithKey:track.trackDefinition];
-        title = [title componentsSeparatedByString:@"\n"].lastObject;
+        title = [title componentsSeparatedByString:@"_"].lastObject;
     }
     
     [self.bomView.buttonView updateBitrateTitle:title];
     
-    title = @"倍速";
+    title = AUIVideoFlowString(@"倍速");
     if ([AlivcPlayerManager manager].rate > 1.0 || [AlivcPlayerManager manager].rate < 1.0) {
         
         NSArray *tempList =  @[@"2.0X",@"1.5X",@"1.25X",@"1.0X",@"0.75X",@"0.5X"];
@@ -299,12 +299,12 @@
         return  @"";
     }
     NSDictionary *dict = @{
-        @"OD":@"1080P\n原画",
-        @"HD":@"1080P\n超清",
-        @"SD":@"720P\n高清",
-        @"LD":@"480P\n清晰",
-        @"FD":@"360P\n流畅",
-        @"AUTO":@"720P\n自动",
+        @"OD": [NSString stringWithFormat:@"1080P_%@", AUIVideoFlowString(@"原画")],
+        @"HD": [NSString stringWithFormat:@"1080P_%@", AUIVideoFlowString(@"超清")],
+        @"SD": [NSString stringWithFormat:@"720P_%@", AUIVideoFlowString(@"高清")],
+        @"LD": [NSString stringWithFormat:@"480P_%@", AUIVideoFlowString(@"清晰")],
+        @"FD": [NSString stringWithFormat:@"360P_%@", AUIVideoFlowString(@"流畅")],
+        @"AUTO": [NSString stringWithFormat:@"720P_%@", AUIVideoFlowString(@"自动")],
     };
     
     NSString *value = dict[key];
@@ -384,8 +384,8 @@
     UILabel *tipsLabel = [[UILabel alloc] init];
     tipsLabel.accessibilityIdentifier = AUIVideoFlowAccessibilityStr(@"bottomTool_tipsLabel");
     
-    NSString *text = @"已为您切换到上次观看位置  ";
-    NSString *suffText = @"取消";
+    NSString *text = [NSString stringWithFormat:@"%@  ", AUIVideoFlowString(@"已为您切换到上次观看位置")];
+    NSString *suffText = AUIVideoFlowString(@"取消");
     
     NSMutableAttributedString *richText = [[NSMutableAttributedString alloc] init];
     
@@ -509,7 +509,7 @@
     view.onRateChanged = ^(float rate) {
         if (rate != [AlivcPlayerManager manager].rate) {
             [AlivcPlayerManager manager].rate = rate;
-            NSString *text =  [NSString stringWithFormat:@"已切换为 %.2f 倍速度播放",rate];
+            NSString *text =  [NSString stringWithFormat:AUIVideoFlowString(@"已切换为 %.2f 倍速度播放"), rate];
             [AVToastView show:text view:weakSelf.containerView position:AVToastViewPositionMid];
         }
     };

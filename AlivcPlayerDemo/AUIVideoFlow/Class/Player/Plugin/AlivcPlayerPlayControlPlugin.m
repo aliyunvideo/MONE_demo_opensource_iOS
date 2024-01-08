@@ -11,6 +11,7 @@
 #import "AUIPlayerCustomImageButton.h"
 #import <Masonry/Masonry.h>
 #import <SDWebImage/SDWebImage.h>
+#import "UIView+AUIPlayerHelper.h"
 
 #define kBgImageBlurRadius 36
 
@@ -96,13 +97,13 @@
         [self.userLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.avatarView.mas_right).mas_equalTo(8);
             make.bottom.mas_equalTo(self.avatarView.mas_centerY).mas_equalTo(-4);
-            make.size.mas_equalTo(CGSizeMake(100, 20));
+            make.size.mas_equalTo(CGSizeMake(170, 20));
         }];
         
         [self.userDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self.avatarView.mas_right).mas_equalTo(8);
             make.top.mas_equalTo(self.avatarView.mas_centerY).mas_equalTo(4);
-            make.size.mas_equalTo(CGSizeMake(100, 18));
+            make.size.mas_equalTo(CGSizeMake(170, 18));
         }];
         
         [self.replayButton mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -117,7 +118,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat ladding = (self.av_width - 48 - 8 - 100 - 84 - 63) / 2.0;
+    CGFloat ladding = (self.av_width - 48 - 8 - 150 - 84 - 63) / 2.0;
     [self.avatarView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(ladding);
     }];
@@ -146,7 +147,7 @@
         _userLabel.accessibilityIdentifier = AUIVideoFlowAccessibilityStr(@"userLabel");
         _userLabel.font = AVGetMediumFont(14);
         _userLabel.textColor = AUIFoundationColor(@"text_strong");
-        _userLabel.text = @"阿里云视频";
+        _userLabel.text = AUIVideoFlowString(@"阿里云视频");
     }
     return _userLabel;
 }
@@ -158,7 +159,7 @@
         _userDescLabel.accessibilityIdentifier = AUIVideoFlowAccessibilityStr(@"userDescLabel");
         _userDescLabel.font = AVGetRegularFont(10);
         _userDescLabel.textColor = UIColor.whiteColor;
-        _userDescLabel.text = @"148视频・56万点赞";
+        _userDescLabel.text = [NSString stringWithFormat:AUIVideoFlowString(@"%zd视频・%zd万点赞"), 148, 56];
     }
     return _userDescLabel;
 }
@@ -197,7 +198,8 @@
 }
 
 - (void)updateReplayTime:(NSString *)time {
-    [self.replayButton setTitle:[NSString stringWithFormat:@"重播・%@秒", time] forState:UIControlStateNormal];
+    [self.replayButton setTitle:[NSString stringWithFormat:AUIVideoFlowString(@"重播・%@秒"), time] forState:UIControlStateNormal];
+
 }
 
 @end

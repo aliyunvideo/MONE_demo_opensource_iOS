@@ -43,11 +43,17 @@
     };
     [self.contentView addSubview:self.urlInputView];
     
-    UILabel *tipLabel = [[UILabel alloc] initWithFrame:CGRectMake(56, self.urlInputView.av_bottom + 110, self.contentView.av_width - 56 * 2, 18)];
+    UILabel *tipLabel = [[UILabel alloc] init];
     tipLabel.text = AUILiveRtsPlayString(@"播放地址可到视频直播控制台用地址生成器生成");
     tipLabel.textAlignment = NSTextAlignmentCenter;
+    tipLabel.numberOfLines = 0;
     tipLabel.font = AVGetRegularFont(12);
     tipLabel.textColor = AUIFoundationColor(@"text_weak");
+    
+    CGFloat tipLabelWidth = self.contentView.av_width - 16 * 2;
+    CGSize tipLabelSize = [tipLabel sizeThatFits:CGSizeMake(tipLabelWidth, MAXFLOAT)];
+    tipLabel.frame = CGRectMake(16, self.urlInputView.av_bottom + 110, tipLabelWidth, tipLabelSize.height);
+    
     [self.contentView addSubview:tipLabel];
     
     self.startButton.frame = CGRectMake(46, tipLabel.av_bottom + 12, self.contentView.av_width - 46 * 2, 48);

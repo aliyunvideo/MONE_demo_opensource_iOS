@@ -1,0 +1,29 @@
+[
+    {
+        "name": "变声",
+        "content":[
+            {"image":"ic_panel_reset", "title":"无"},
+            {"image":"ic_audioeffect_uncle", "title":"老人"},
+            {"image":"ic_audioeffect_minions", "title":"男孩"},
+            {"image":"ic_audioeffect_lolita", "title":"女孩"},
+            {"image":"ic_audioeffect_robot", "title":"机器人"},
+            {"image":"ic_audioeffect_bigdevil", "title":"大魔王"},
+            {"image":"ic_audioeffect_ktv", "title":"KTV"},
+            {"image":"ic_audioeffect_reverb", "title":"回声"},
+        ]
+    },
+    {
+        "name": "混响",
+        "content":[
+            {"image":"", "title":"无"},
+            {"image":"", "title":"人声I"},
+            {"image":"", "title":"人声II"},
+            {"image":"", "title":"澡堂"},
+            {"image":"", "title":"明亮小房间"},
+            {"image":"", "title":"黑暗小房间"},
+            {"image":"", "title":"中等房间"},
+            {"image":"", "title":"大房间"},
+            {"image":"", "title":"教堂走廊"},
+        ]
+    },
+]

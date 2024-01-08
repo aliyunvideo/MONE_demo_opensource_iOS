@@ -142,8 +142,22 @@
 
     self.titleLabel.text = item.title;
     
-    self.descLabel.text = @"故事发生在星球大战：最后的绝地武士死星陨落的五年后，围绕在远离新共和国掌控的银河系边远星带的的一位独行枪手展开。";
+    self.descLabel.text = [self.class videoAbout];
 }
+
++ (NSString *)videoAbout {
+    return AUIVideoFlowString(@"故事发生在星球大战：最后的绝地武士死星陨落的五年后，围绕在远离新共和国掌控的银河系边远星带的的一位独行枪手展开。");;
+}
+
++ (CGFloat)getCellHeight {
+    UILabel *label = [[UILabel alloc] init];
+    label.font = AVGetRegularFont(12);
+    label.numberOfLines= 0;
+    label.text = [self videoAbout];
+    CGSize size = [label sizeThatFits:CGSizeMake(CGRectGetWidth([UIScreen mainScreen].bounds) - 16 * 2, MAXFLOAT)];
+    return size.height + 72.0 + 16.0;
+}
+
 
 + (NSString *)timeformatFromMilSeconds:(NSInteger)seconds {
     //s

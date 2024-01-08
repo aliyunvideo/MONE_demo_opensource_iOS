@@ -43,6 +43,8 @@ void dispatch_thread_sync(NSThread* thread, dispatch_block_t block);
 // 请求外部音视频资源
 + (void)requestExternalStreamResourceWithCompletion:(void(^)(BOOL success, NSString *errMsg))completion;
 
++ (BOOL)isLocalZHLanguage;
+
 @end
 
 NS_ASSUME_NONNULL_END

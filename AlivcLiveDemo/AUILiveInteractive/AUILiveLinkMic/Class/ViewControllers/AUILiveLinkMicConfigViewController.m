@@ -35,10 +35,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.titleView.text = AUILiveLinkMicString(@"连麦互动");
-    self.menuButton.av_left = self.headerView.av_width - 20 - 80;
-    self.menuButton.av_width = 80;
+    self.menuButton.av_left = self.headerView.av_width - 12 - 120;
+    self.menuButton.av_width = 120;
     [self.menuButton setImage:nil forState:UIControlStateNormal];
-    [self.menuButton setTitle:AUILiveLinkMicString(@"参数设置") forState:UIControlStateNormal];
+    [self.menuButton setTitle:AUILiveCommonString(@"参数设置") forState:UIControlStateNormal];
     [self.menuButton addTarget:self action:@selector(openparamManager) forControlEvents:UIControlEventTouchUpInside];
     
     [self setupContent];
@@ -160,7 +160,7 @@
 - (AUILiveInputNumberView *)userIdInputView {
     if (!_userIdInputView) {
         _userIdInputView = [[AUILiveInputNumberView alloc] initWithFrame:CGRectMake(20, 30, self.contentView.av_width - 20 * 2, 73) type:AUILiveInputNumberTypeInput sourceVC:self];
-        _userIdInputView.themeName = AUILiveLinkMicString(@"用户ID");
+        _userIdInputView.themeName = AUILiveCommonString(@"用户ID");
         _userIdInputView.maxNumber = 64;
     }
     return _userIdInputView;
@@ -169,7 +169,7 @@
 - (AUILiveInputNumberView *)streamIdInputView {
     if (!_streamIdInputView) {
         _streamIdInputView = [[AUILiveInputNumberView alloc] initWithFrame:CGRectMake(20, self.userIdInputView.av_bottom + 30, self.contentView.av_width - 20 * 2, 73) type:AUILiveInputNumberTypeInput sourceVC:self];
-        _streamIdInputView.themeName = AUILiveLinkMicString(@"房间号");
+        _streamIdInputView.themeName = AUILiveCommonString(@"房间号");
         _streamIdInputView.maxNumber = 64;
     }
     return _streamIdInputView;
@@ -178,7 +178,7 @@
 - (AUILiveInteractiveURLConfigInfoView *)urlConfigInfoView {
     if (!_urlConfigInfoView) {
         _urlConfigInfoView = [[AUILiveInteractiveURLConfigInfoView alloc] initWithFrame:CGRectMake(20, self.streamIdInputView.av_bottom + 30, self.contentView.av_width - 20 * 2, 153)];
-        _urlConfigInfoView.themeName = NSLocalizedString(@"应用信息", nil);
+        _urlConfigInfoView.themeName = AUILiveCommonString(@"应用信息");
     }
     return _urlConfigInfoView;
 }
@@ -195,7 +195,7 @@
         _pushStartButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         _pushStartButton.frame = CGRectMake(20, self.contentView.av_height - AVSafeBottom - 8 - 48, self.contentView.av_width - 20 * 2, 48);
         [_pushStartButton setBackgroundColor:AUILiveCommonColor(@"ir_button_unenable")];
-        [_pushStartButton setTitle:AUILiveLinkMicString(@"确认") forState:UIControlStateNormal];
+        [_pushStartButton setTitle:AUILiveCommonString(@"确定") forState:UIControlStateNormal];
         [_pushStartButton setTitleColor:AUIFoundationColor(@"text_weak") forState:UIControlStateNormal];
         [_pushStartButton.titleLabel setFont:AVGetRegularFont(18)];
         [_pushStartButton.layer setMasksToBounds:YES];

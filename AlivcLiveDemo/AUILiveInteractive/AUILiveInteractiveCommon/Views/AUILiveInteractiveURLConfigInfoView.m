@@ -58,7 +58,7 @@
     self.appKeyValueLabel = [self setupConfigInfoView:CGRectMake(appKeyNameLabel.av_right, appIDNameLabel.av_bottom, self.contentView.av_width - appKeyNameLabel.av_right, 27) text:@"" align:NSTextAlignmentRight];
     [self.contentView addSubview:self.appKeyValueLabel];
     
-    UILabel *playDomainNameLabel = [self setupConfigInfoView:CGRectMake(0, appKeyNameLabel.av_bottom, 100, 27) text:NSLocalizedString(@"播流域名", nil) align:NSTextAlignmentLeft];
+    UILabel *playDomainNameLabel = [self setupConfigInfoView:CGRectMake(0, appKeyNameLabel.av_bottom, 100, 27) text:AUILiveCommonString(@"播流域名") align:NSTextAlignmentLeft];
     [self.contentView addSubview:playDomainNameLabel];
     
     self.playDomainValueLabel = [self setupConfigInfoView:CGRectMake(playDomainNameLabel.av_right, appKeyNameLabel.av_bottom, self.contentView.av_width - playDomainNameLabel.av_right, 27) text:@"" align:NSTextAlignmentRight];

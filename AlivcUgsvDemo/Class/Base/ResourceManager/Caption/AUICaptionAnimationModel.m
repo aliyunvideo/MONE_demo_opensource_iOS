@@ -6,6 +6,7 @@
 //
 
 #import "AUICaptionAnimationModel.h"
+#import "AUIUgsvMacro.h"
 
 @implementation AUICaptionAnimationModel
 
@@ -36,58 +37,58 @@
         case TextActionTypeNull:
             break;
         case TextActionTypeClear:
-            name = @"无";
+            name = AUIUgsvGetString(@"无");
             break;
         case TextActionTypeMoveTop:
-            name = @"向上移动";
+            name = AUIUgsvGetString(@"向上移动");
             break;
         case TextActionTypeMoveDown:
-            name = @"向下移动";
+            name = AUIUgsvGetString(@"向下移动");
             break;
         case TextActionTypeMoveLeft:
-            name = @"向左移动";
+            name = AUIUgsvGetString(@"向左移动");
             break;
         case TextActionTypeMoveRight:
-            name = @"向右移动";
+            name = AUIUgsvGetString(@"向右移动");
             break;
         case TextActionTypeLinerWipe:
-            name = @"线性擦除";
+            name = AUIUgsvGetString(@"线性擦除");
             break;
         case TextActionTypeFade:
-            name = @"淡入淡出";
+            name = AUIUgsvGetString(@"淡入淡出");
             break;
         case TextActionTypeScale:
-            name = @"缩放";
+            name = AUIUgsvGetString(@"缩放");
             break;
         case TextActionTypePrinter:
-            name = @"打字机";
+            name = AUIUgsvGetString(@"打字机");
             break;
         case TextActionTypeClock:
-            name = @"钟摆";
+            name = AUIUgsvGetString(@"钟摆");
             break;
         case TextActionTypeBrush:
-            name = @"雨刷";
+            name = AUIUgsvGetString(@"雨刷");
             break;
         case TextActionTypeSet_1:
-            name = @"组合动画1";
+            name = AUIUgsvGetString(@"组合动画1");
             break;
         case TextActionTypeSet_2:
-            name = @"组合动画2";
+            name = AUIUgsvGetString(@"组合动画2");
             break;
         case TextActionTypeWave:
-            name = @"波浪";
+            name = AUIUgsvGetString(@"波浪");
             break;
         case TextActionTypeScrewUp:
-            name = @"螺旋上升";
+            name = AUIUgsvGetString(@"螺旋上升");
             break;
         case TextActionTypeHeart:
-            name = @"心跳";
+            name = AUIUgsvGetString(@"心跳");
             break;
         case TextActionTypeCircularScan:
-            name = @"圆形扫描";
+            name = AUIUgsvGetString(@"圆形扫描");
             break;
         case TextActionTypeWaveIn:
-            name = @"波浪弹入";
+            name = AUIUgsvGetString(@"波浪弹入");
             break;
         default:
             break;

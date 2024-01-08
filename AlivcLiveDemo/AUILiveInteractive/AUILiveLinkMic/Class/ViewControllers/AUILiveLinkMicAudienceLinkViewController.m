@@ -106,7 +106,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 
 - (void)showAnchorUserId {
     __weak typeof(self) weakSelf = self;
-    [AUILiveInputNumberAlert show:@[AUILiveLinkMicString(@"请输入主播的用户ID")] view:self.view maxNumber:64 inputAction:^(BOOL ok, NSArray<NSString *> * _Nonnull inputs) {
+    [AUILiveInputNumberAlert show:@[AUILiveCommonString(@"请输入主播的用户ID")] view:self.view maxNumber:64 inputAction:^(BOOL ok, NSArray<NSString *> * _Nonnull inputs) {
         __strong typeof(self) strongSelf = weakSelf;
         if (ok) {
             if (inputs.firstObject == strongSelf.rtcPush.userId) {
@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 }
 
 - (void)goBack {
-    [AVAlertController showWithTitle:nil message:AUILiveLinkMicString(@"确认要退出房间吗？") needCancel:YES onCompleted:^(BOOL isCanced) {
+    [AVAlertController showWithTitle:nil message:AUILiveCommonString(@"确认要退出房间吗？") needCancel:YES onCompleted:^(BOOL isCanced) {
         if (!isCanced) {
             [super goBack];
         }
@@ -202,7 +202,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 - (void)setupRTCPusher {
     self.rtcPusher = [[AlivcLivePusher alloc] initWithConfig:self.rtcPushConfig];
     if (!self.rtcPusher) {
-        [AVToastView show:AUILiveLinkMicString(@"初始化推流失败") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"初始化推流失败") view:self.view position:AVToastViewPositionMid];
         return;
     }
     
@@ -276,7 +276,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     
     NSString *cdnPlayURL = [self.cdnPlay getCDNURL];
     if (cdnPlayURL == nil || cdnPlayURL.length == 0) {
-        [AVToastView show:AUILiveLinkMicString(@"请输入拉流地址") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"请输入拉流地址") view:self.view position:AVToastViewPositionMid];
         return;
     }
 
@@ -435,7 +435,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 - (void)startRTCPlay {
     NSString *rtcPlayURL = [self.rtcPlay getRTCURL];
     if (rtcPlayURL == nil || rtcPlayURL.length == 0) {
-        [AVToastView show:AUILiveLinkMicString(@"请输入拉流地址") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"请输入拉流地址") view:self.view position:AVToastViewPositionMid];
         if (self.anchorPullStatus == AUILiveLinkMicAnchorPullStatusPause) {
             self.anchorPullStatus = AUILiveLinkMicAnchorPullStatusError;
         }
@@ -444,7 +444,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     
     int ret = [self.rtcPlayer setPlayView:self.playerView playCofig:self.rtcPlayConfig];
     if (ret != 0) {
-        [AVToastView show:AUILiveLinkMicString(@"初始化拉流失败") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"初始化拉流失败") view:self.view position:AVToastViewPositionMid];
         if (self.anchorPullStatus == AUILiveLinkMicAnchorPullStatusPause) {
             self.anchorPullStatus = AUILiveLinkMicAnchorPullStatusError;
         }
@@ -469,11 +469,11 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     if (self.rtcPusher) {
         int ret = [self.rtcPusher switchCamera];
         if (ret != 0) {
-            [AVToastView show:AUILiveLinkMicString(@"切换摄像头失败") view:self.view position:AVToastViewPositionMid];
+            [AVToastView show:AUILiveCommonString(@"切换摄像头失败") view:self.view position:AVToastViewPositionMid];
             NSLog(@"switchCamera error:%d", ret);
         }
     } else {
-        [AVToastView show:AUILiveLinkMicString(@"推流没有初始化，无法调用摄像头") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"推流没有初始化，无法调用摄像头") view:self.view position:AVToastViewPositionMid];
     }
 }
 
@@ -492,7 +492,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
         audiencePushStatus == AUILiveLinkMicAudiencePushStatusError) {
         self.pusherStatusLabel.hidden = NO;
         self.pusherStatusLabel.text = AUILiveLinkMicString(@"正在连麦");
-        
+
         self.pusherActionButton.backgroundColor = AUILiveCommonColor(@"ir_button_pulling");
         [self.pusherActionButton setTitle:AUILiveLinkMicString(@"结束连麦") forState:UIControlStateNormal];
     } else {
@@ -584,14 +584,14 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 - (void)onSystemError:(AlivcLivePusher *)pusher error:(AlivcLivePushError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.audiencePushStatus = AUILiveLinkMicAudiencePushStatusError;
-        [AVToastView show:AUILiveLinkMicString(@"系统错误") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"系统错误") view:self.view position:AVToastViewPositionMid];
     });
 }
 
 - (void)onSDKError:(AlivcLivePusher *)pusher error:(AlivcLivePushError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.audiencePushStatus = AUILiveLinkMicAudiencePushStatusError;
-        [AVToastView show:AUILiveLinkMicString(@"SDK 错误") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"SDK错误") view:self.view position:AVToastViewPositionMid];
     });
 }
 
@@ -599,20 +599,20 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 - (void)onConnectFail:(AlivcLivePusher *)pusher error:(AlivcLivePushError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.audiencePushStatus = AUILiveLinkMicAudiencePushStatusError;
-        [AVToastView show:AUILiveLinkMicString(@"链接失败") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"链接失败") view:self.view position:AVToastViewPositionMid];
     });
 }
 
 - (void)onSendDataTimeout:(AlivcLivePusher *)pusher {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.audiencePushStatus = AUILiveLinkMicAudiencePushStatusError;
-        [AVToastView show:AUILiveLinkMicString(@"发送数据超时") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"发送数据超时") view:self.view position:AVToastViewPositionMid];
     });
 }
 
 - (void)onNetworkPoor:(AlivcLivePusher *)pusher {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [AVToastView show:AUILiveLinkMicString(@"当前网速较慢，请检查网络状态") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"当前网速较慢，请检查网络状态") view:self.view position:AVToastViewPositionMid];
     });
 }
 
@@ -628,7 +628,7 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
 - (void)onReconnectError:(AlivcLivePusher *)pusher error:(AlivcLivePushError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.audiencePushStatus = AUILiveLinkMicAudiencePushStatusError;
-        [AVToastView show:AUILiveLinkMicString(@"重连失败") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"重连失败") view:self.view position:AVToastViewPositionMid];
     });
 }
 
@@ -724,11 +724,11 @@ typedef NS_ENUM(NSInteger, AUILiveLinkMicAnchorPullStatus) {
     NSString *errMsg = [NSString stringWithFormat:@"Pull Play Error:[%lu]%@", (unsigned long)code, msg];
     NSLog(@"play error:%@", errMsg);
     if (code == AlivcLivePlayErrorStreamNotFound) {
-        [AVToastView show:AUILiveLinkMicString(@"没有拉到流") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"没有拉到流") view:self.view position:AVToastViewPositionMid];
         [self stopRTCPlay];
         self.anchorPullStatus = AUILiveLinkMicAnchorPullStatusStop;
     } else if (code == AlivcLivePlayErrorStreamStopped) {
-        [AVToastView show:AUILiveLinkMicString(@"主播离开") view:self.view position:AVToastViewPositionMid];
+        [AVToastView show:AUILiveCommonString(@"主播离开") view:self.view position:AVToastViewPositionMid];
         [self stopRTCPlay];
         self.anchorPullStatus = AUILiveLinkMicAnchorPullStatusStop;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

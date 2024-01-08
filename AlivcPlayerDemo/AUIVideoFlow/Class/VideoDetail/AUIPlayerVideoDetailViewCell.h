@@ -11,6 +11,9 @@
 
 @interface AlivcPlayerVideoDetailViewUserInfoCell : UITableViewCell
 @property (nonatomic, strong) AlivcPlayerVideo *item;
+
++ (CGFloat)getCellHeight;
+
 @end
 
 

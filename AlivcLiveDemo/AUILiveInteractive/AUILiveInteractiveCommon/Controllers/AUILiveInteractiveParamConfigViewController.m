@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleView.text = NSLocalizedString(@"参数设置", nil);
+    self.titleView.text = AUILiveCommonString(@"参数设置");
     self.hiddenMenuButton = YES;
     
     [self setupContent];
@@ -52,11 +52,11 @@
     AlivcLiveParamModel *titleResolutionModel = [[AlivcLiveParamModel alloc] init];
     titleResolutionModel.reuseId = AlivcLiveParamModelReuseCellSliderHeader;
     titleResolutionModel.title = AUILiveCommonString(@"分辨率");
-    
+
     NSArray *resolutionArray = @[@"180P", @"240P", @"360P", @"480P", @"540P", @"720P", @"1080P"];
     self.resolution_temp = self.manager.resolution;
     AlivcLiveParamModel *resolutionModel = [[AlivcLiveParamModel alloc] init];
-    resolutionModel.title = AUILiveCommonString(@"resolution_label");
+    resolutionModel.title = AUILiveCommonString(@"分辨率");
     resolutionModel.placeHolder = resolutionArray[self.manager.resolution];
     resolutionModel.infoText = resolutionArray[self.manager.resolution];
     resolutionModel.defaultValue = (CGFloat)self.manager.resolution / (CGFloat)resolutionArray.count;
@@ -67,7 +67,7 @@
     
     self.videoEncoderMode_temp = self.manager.videoEncoderMode;
     AlivcLiveParamModel *videoEncoderModeModel = [[AlivcLiveParamModel alloc] init];
-    videoEncoderModeModel.title = AUILiveCommonString(@"video_hardware_encode");
+    videoEncoderModeModel.title = AUILiveCommonString(@"视频硬编码");
     videoEncoderModeModel.defaultValue = !self.manager.videoEncoderMode;
     videoEncoderModeModel.defaultValueAppose = 1.0;
     videoEncoderModeModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -77,7 +77,7 @@
     
     self.audioEncoderMode_temp = self.manager.audioEncoderMode;
     AlivcLiveParamModel *audioEncoderModeModel = [[AlivcLiveParamModel alloc] init];
-    audioEncoderModeModel.title = AUILiveCommonString(@"audio_hardware_encode");
+    audioEncoderModeModel.title = AUILiveCommonString(@"音频硬编码");
     audioEncoderModeModel.defaultValue = !self.manager.audioEncoderMode;
     audioEncoderModeModel.defaultValueAppose = 1.0;
     audioEncoderModeModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -87,7 +87,7 @@
     
     self.audioOnly_temp = self.manager.audioOnly;
     AlivcLiveParamModel *audiOnlyModeModel = [[AlivcLiveParamModel alloc] init];
-    audiOnlyModeModel.title = AUILiveCommonString(@"audio_only_push_streaming");
+    audiOnlyModeModel.title = AUILiveCommonString(@"纯音频");
     audiOnlyModeModel.defaultValue = self.manager.audioOnly;
     audiOnlyModeModel.defaultValueAppose = 1.0;
     audiOnlyModeModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -101,7 +101,7 @@
     
     self.videoEncodeGop_temp = self.manager.videoEncodeGop;
     AlivcLiveParamModel *videoEncodeGopModel = [[AlivcLiveParamModel alloc] init];
-    videoEncodeGopModel.title = AUILiveCommonString(@"keyframe_interval");
+    videoEncodeGopModel.title = AUILiveCommonString(@"关键帧间隔");
     videoEncodeGopModel.defaultValue = self.manager.videoEncodeGop / 5.0;
     videoEncodeGopModel.infoText = [NSString stringWithFormat:@"%lds", (long)self.manager.videoEncodeGop];
     videoEncodeGopModel.placeHolder = @"2s";
@@ -112,7 +112,7 @@
     
     self.videoHardEncoderCode_temp = self.manager.videoHardEncoderCodec;
     AlivcLiveParamModel *videoHardEncodeCodecModel = [[AlivcLiveParamModel alloc] init];
-    videoHardEncodeCodecModel.title = AUILiveCommonString(@"video_hardware_encode_codec");
+    videoHardEncodeCodecModel.title = AUILiveCommonString(@"视频硬编Codec");
     videoHardEncodeCodecModel.pickerPanelTextArray = @[@"H264", @"H265"];
     videoHardEncodeCodecModel.defaultValue = 0;
     videoHardEncodeCodecModel.reuseId = AlivcLiveParamModelReuseCellPickerSelect;
@@ -122,13 +122,13 @@
     
     AlivcLiveParamModel *titlefpsModel = [[AlivcLiveParamModel alloc] init];
     titlefpsModel.reuseId = AlivcLiveParamModelReuseCellSliderHeader;
-    titlefpsModel.title = AUILiveCommonString(@"captrue_fps");
+    titlefpsModel.title = AUILiveCommonString(@"采集帧率");
     
     NSArray *fpsArray = @[@"8",@"10",@"12",@"15",@"20",@"25",@"30"];
     self.fps_temp = self.manager.fps;
     NSString *fpsStr = [NSString stringWithFormat:@"%ld", self.manager.fps];
     AlivcLiveParamModel *fpsModel = [[AlivcLiveParamModel alloc] init];
-    fpsModel.title = AUILiveCommonString(@"captrue_fps");
+    fpsModel.title = AUILiveCommonString(@"采集帧率");
     fpsModel.defaultValue = [fpsArray indexOfObject:fpsStr] / (float)fpsArray.count;
     fpsModel.infoText = fpsStr;
     fpsModel.placeHolder = fpsStr;
@@ -140,7 +140,7 @@
     
     self.isUserMainStream_temp = self.manager.isUserMainStream;
     AlivcLiveParamModel *userMainStreamModel = [[AlivcLiveParamModel alloc] init];
-    userMainStreamModel.title = AUILiveCommonString(@"user_main_stream");
+    userMainStreamModel.title = AUILiveCommonString(@"外部音视频");
     userMainStreamModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
     userMainStreamModel.defaultValue = self.manager.isUserMainStream;
     userMainStreamModel.switchBlock = ^(int index, BOOL open) {
@@ -153,11 +153,11 @@
                 
                 AVProgressHUD *loading = [AVProgressHUD ShowHUDAddedTo:self.view animated:YES];
                 loading.labelText = AUILiveCommonString(@"正在下载外部音视频资源中，请等待");
-                
+
                 [AliveLiveDemoUtil requestExternalStreamResourceWithCompletion:^(BOOL success, NSString * _Nonnull errMsg) {
                     [loading hideAnimated:YES];
                     if (!success) {
-                        [AVToastView show:AUILiveCommonString(errMsg) view:self.view position:AVToastViewPositionMid];
+                        [AVToastView show:errMsg view:self.view position:AVToastViewPositionMid];
                         AUILiveParamTableViewCell *targetCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:10 inSection:0]];
                         [targetCell updateDefaultValue:0 enable:YES];
                         self.isUserMainStream_temp = NO;
@@ -171,7 +171,7 @@
     
     self.beautyOn_temp = self.manager.beautyOn;
     AlivcLiveParamModel *beautyOnModel = [[AlivcLiveParamModel alloc] init];
-    beautyOnModel.title = AUILiveCommonString(@"beauty_button");
+    beautyOnModel.title = AUILiveCommonString(@"开启美颜");
     beautyOnModel.defaultValue = self.manager.beautyOn;
     beautyOnModel.defaultValueAppose = 1.0;
     beautyOnModel.reuseId = AlivcLiveParamModelReuseCellSwitchButton;
@@ -264,7 +264,7 @@
         _settingButton = [UIButton buttonWithType:(UIButtonTypeCustom)];
         _settingButton.frame = CGRectMake(20, self.contentView.av_height - AVSafeBottom - 8 - 48, self.contentView.av_width - 20 * 2, 48);
         [_settingButton setBackgroundColor:AUIFoundationColor(@"colourful_fill_strong")];
-        [_settingButton setTitle:AUILiveCommonString(@"确认") forState:UIControlStateNormal];
+        [_settingButton setTitle:AUILiveCommonString(@"确定") forState:UIControlStateNormal];
         [_settingButton setTitleColor:AUIFoundationColor(@"text_strong") forState:UIControlStateNormal];
         [_settingButton.titleLabel setFont:AVGetRegularFont(18)];
         [_settingButton.layer setMasksToBounds:YES];

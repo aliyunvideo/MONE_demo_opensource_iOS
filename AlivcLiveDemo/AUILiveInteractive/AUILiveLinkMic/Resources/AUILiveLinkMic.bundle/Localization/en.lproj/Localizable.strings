@@ -1,1 +1,11 @@
-
+"连麦互动" = "Co-streaming";
+"主播" = "Streamer";
+"观众" = "Viewers";
+"确认要结束本次连麦吗？" = "Are you sure that you want to end co-streaming?";
+"请输入观众的用户ID" = "Enter the user ID of the viewer";
+"观众和主播ID不能一致" = "User IDs of the streamer and viewer cannot be the same.";
+"主播和观众ID不能一致" = "User IDs of the streamer and viewer cannot be the same.";
+"开始连麦" = "Start";
+"正在连麦" = "In Progress";
+"结束连麦" = "End";
+"观众离开" = "The viewer left.";

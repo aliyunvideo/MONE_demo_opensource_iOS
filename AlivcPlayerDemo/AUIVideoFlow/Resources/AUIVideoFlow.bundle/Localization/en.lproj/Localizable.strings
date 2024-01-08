@@ -1,16 +1,29 @@
-"Home_LoadMore_NoData" = "No more data!";
-"Home_LoadMore_Failed" = "Load more failed!";
-"Home_Refresh_Failed" = "Refresh failed!";
-"Home_Refresh_Empty" = "No data~";
 
-
-
-"Player_Back_Video" = "back to video";
-"Player_Audio_Tips" = "在锁屏和切换到后台时也能播放音频";
-
-"Player_Air_Playing" = "正在投屏中";
-"Player_Air_Changed" = "更换设备";
-"Player_Air_Quit" = "退出投屏";
-"Player_Air_Back" = "返回详情";
-
-"Card_Detail"="详情";
+"信息流播放" = "Video Flow";
+"—— 我是有底线的 ——" = "No more data!";
+"加载失败！" = "Load more failed!";
+"刷新失败！" = "Refresh failed!";
+"空空如也~" = "No data~";
+"阿里云视频" = "Alibaba Cloud Video";
+"%zd视频・%zd万点赞" = "%zd Videos・%zd TenThousand Likes";
+"重播・%@秒" = "Replay・%@s";
+"自动" = "Auto";
+"超清" = "Super HD";
+"原画" = "Original Quality";
+"高清" = "HD";
+"清晰" = "SD";
+"流畅" = "Smooth";
+"倍速" = "Speed";
+"已为您切换到上次观看位置" = "Jumped to the last viewed position.";
+"取消" = "Cancel";
+"加载失败" = "Load failed";
+"详情"="Detail";
+"已切换为 %.2f 倍速度播放" = "Switched to %.2f Speed Playback";
+"看点" = "Moments";
+"重播" = "Replay";
+"返回视频" = "Back";
+"在锁屏和切换到后台时也能播放音频" = "Audio keeps playing on lock screen or when app is in background.";
+"长按屏幕\n快进" = "Long press screen to\nfast forward ";
+"视频详情" = "Video Detail";
+"相关推荐" = "Recommendations";
+"故事发生在星球大战：最后的绝地武士死星陨落的五年后，围绕在远离新共和国掌控的银河系边远星带的的一位独行枪手展开。" = "The story takes place five years after the collapse of the Death Star in Star Wars: The Last Jedi. It tells about a lone gunslinger in the remote star belt on the edge of the galaxy, which is far from the control of the New Republic.";

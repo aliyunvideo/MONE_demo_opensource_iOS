@@ -104,7 +104,7 @@
     self.commentBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
 //    [self.commentBtn setTitleColor:AUIFoundationColor(@"text_medium") forState:UIControlStateNormal];
 //    [self.commentBtn setImage:AUIVideoFlowImage(@"common_comment") forState:UIControlStateNormal];
-    [self.commentBtn setTitle:AUIVideoFlowString(@"Card_Detail") forState:UIControlStateNormal];
+    [self.commentBtn setTitle:AUIVideoFlowString(@"详情") forState:UIControlStateNormal];
     [self.commentBtn addTarget:self action:@selector(onCommentBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
     [self.infoContainer addSubview:self.commentBtn];
     

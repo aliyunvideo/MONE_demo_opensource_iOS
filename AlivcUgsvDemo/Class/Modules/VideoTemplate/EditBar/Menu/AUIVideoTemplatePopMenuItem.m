@@ -99,7 +99,7 @@
         AUIVideoTemplateEditMenuData *replaceData = [AUIVideoTemplateEditMenuData new];
         replaceData.type = AUIVideoTemplateEditMenuTypePopReplace;
         replaceData.selected = YES;
-        replaceData.text = @"替换";
+        replaceData.text = AUIUgsvGetString(@"替换");
         replaceData.selectedIcon = AUIUgsvTemplateImage(@"ic_pop_replace");
         replaceData.onClickBlock = ^(AUIVideoTemplateEditMenuData * _Nonnull sender) {
             if (!sender.selected) {
@@ -118,7 +118,7 @@
         AUIVideoTemplateEditMenuData *cropData = [AUIVideoTemplateEditMenuData new];
         cropData.type = AUIVideoTemplateEditMenuTypePopCrop;
         cropData.selected = canCrop;
-        cropData.text = @"裁剪";
+        cropData.text = AUIUgsvGetString(@"裁剪");
         cropData.normalIcon = AUIUgsvTemplateImage(@"ic_pop_crop_disable");
         cropData.selectedIcon = AUIUgsvTemplateImage(@"ic_pop_crop");
         cropData.onClickBlock = ^(AUIVideoTemplateEditMenuData * _Nonnull sender) {
@@ -138,7 +138,7 @@
         AUIVideoTemplateEditMenuData *deleteData = [AUIVideoTemplateEditMenuData new];
         deleteData.type = AUIVideoTemplateEditMenuTypePopDelete;
         deleteData.selected = canDelete;
-        deleteData.text = @"删除";
+        deleteData.text = AUIUgsvGetString(@"删除");
         deleteData.normalIcon = AUIUgsvTemplateImage(@"ic_pop_delete_disable");
         deleteData.selectedIcon = AUIUgsvTemplateImage(@"ic_pop_delete");
         deleteData.onClickBlock = ^(AUIVideoTemplateEditMenuData * _Nonnull sender) {

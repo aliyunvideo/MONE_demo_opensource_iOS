@@ -351,10 +351,10 @@
     [self showAlertViewWithErrorCode:error.errorCode
                             errorStr:error.errorDescription
                                  tag:kAlivcLivePusherVCAlertTag+11
-                               title:AUILiveCameraPushString(@"dialog_title")
-                             message:AUILiveCameraPushString(@"system_error")
-                         cancelTitle:AUILiveCameraPushString(@"exit")
-                             okTitle:AUILiveCameraPushString(@"ok")];
+                               title:AUILiveCameraPushString(@"错误提示")
+                             message:AUILiveCameraPushString(@"系统错误：")
+                         cancelTitle:AUILiveCameraPushString(@"退出")
+                             okTitle:AUILiveCommonString(@"确定")];
 }
 
 
@@ -363,10 +363,10 @@
     [self showAlertViewWithErrorCode:error.errorCode
                             errorStr:error.errorDescription
                                  tag:kAlivcLivePusherVCAlertTag+12
-                               title:AUILiveCameraPushString(@"dialog_title")
-                             message:AUILiveCameraPushString(@"sdk_error")
-                         cancelTitle:AUILiveCameraPushString(@"exit")
-                             okTitle:AUILiveCameraPushString(@"ok")];
+                               title:AUILiveCameraPushString(@"错误提示")
+                             message:AUILiveCameraPushString(@"SDK错误：")
+                         cancelTitle:AUILiveCameraPushString(@"退出")
+                             okTitle:AUILiveCommonString(@"确定")];
 }
 
 
@@ -378,10 +378,10 @@
     [self showAlertViewWithErrorCode:error.errorCode
                             errorStr:error.errorDescription
                                  tag:kAlivcLivePusherVCAlertTag+23
-                               title:AUILiveCameraPushString(@"dialog_title")
-                             message:AUILiveCameraPushString(@"connect_fail")
-                         cancelTitle:AUILiveCameraPushString(@"reconnect_button")
-                             okTitle:AUILiveCameraPushString(@"exit")];
+                               title:AUILiveCameraPushString(@"错误提示")
+                             message:AUILiveCommonString(@"链接失败")
+                         cancelTitle:AUILiveCameraPushString(@"重连")
+                             okTitle:AUILiveCameraPushString(@"退出")];
 
 }
 
@@ -391,22 +391,22 @@
     [self showAlertViewWithErrorCode:0
                             errorStr:nil
                                  tag:0
-                               title:AUILiveCameraPushString(@"dialog_title")
-                             message:AUILiveCameraPushString(@"senddata_timeout")
-                         cancelTitle:AUILiveCameraPushString(@"ok")
+                               title:AUILiveCameraPushString(@"错误提示")
+                             message:AUILiveCommonString(@"发送数据超时")
+                         cancelTitle:AUILiveCommonString(@"确定")
                              okTitle:nil];
 }
 
 - (void)onSendSeiMessage:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"send message")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"发送消息")];
 
 }
 
 
 - (void)onConnectRecovery:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"connectRecovery_log")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"网络恢复")];
 }
 
 
@@ -414,22 +414,22 @@
     [self showAlertViewWithErrorCode:0
                             errorStr:nil
                                  tag:0
-                               title:AUILiveCameraPushString(@"dialog_title")
-                             message:AUILiveCameraPushString(@"当前网速较慢，请检查网络状态")
-                         cancelTitle:AUILiveCameraPushString(@"ok")
+                               title:AUILiveCameraPushString(@"错误提示")
+                             message:AUILiveCommonString(@"当前网速较慢，请检查网络状态")
+                         cancelTitle:AUILiveCommonString(@"确定")
                              okTitle:nil];
 }
 
 
 - (void)onReconnectStart:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"reconnect_start")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"重连开始")];
 }
 
 
 - (void)onReconnectSuccess:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"reconnect_success")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"重连成功")];
 }
 
 - (void)onConnectionLost:(AlivcLivePusher *)pusher {
@@ -442,10 +442,10 @@
     [self showAlertViewWithErrorCode:error.errorCode
                             errorStr:error.errorDescription
                                  tag:kAlivcLivePusherVCAlertTag+22
-                               title:AUILiveCameraPushString(@"dialog_title")
-                             message:AUILiveCameraPushString(@"reconnect_fail")
-                         cancelTitle:AUILiveCameraPushString(@"reconnect_button")
-                             okTitle:AUILiveCameraPushString(@"ok")];
+                               title:AUILiveCameraPushString(@"错误提示")
+                             message:AUILiveCommonString(@"重连失败")
+                         cancelTitle:AUILiveCameraPushString(@"重连")
+                             okTitle:AUILiveCommonString(@"确定")];
 }
 
 - (NSString *)onPushURLAuthenticationOverdue:(AlivcLivePusher *)pusher {
@@ -481,7 +481,7 @@
 
 - (void)onPreviewStoped:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"stop_preview_log")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"停止预览")];
     
     BOOL isInteractiveMode = NO;
 #ifdef ALIVC_LIVE_INTERACTIVE_MODE
@@ -495,37 +495,37 @@
 
 - (void)onPushStarted:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"start_push_log")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"开始推流")];
 }
 
 
 - (void)onPushPaused:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"pause_push_log")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"暂停")];
 }
 
 
 - (void)onPushResumed:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"resume_push_log")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"恢复")];
 }
 
 
 - (void)onPushStoped:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"stop_push_log")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"停止推流")];
 }
 
 
 - (void)onFirstFramePreviewed:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"first_frame_log")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"首帧渲染")];
 }
 
 
 - (void)onPushRestart:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"restart_push_log")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"重新推流")];
 }
 
 
@@ -551,7 +551,7 @@
 
 - (void)onResumed:(AlivcLivePusher *)pusher {
     
-    [self.publisherView updateInfoText:AUILiveCameraPushString(@"bgm Resume")];
+    [self.publisherView updateInfoText:AUILiveCameraPushString(@"BGM Resume")];
 }
 
 
@@ -573,9 +573,9 @@
     [self showAlertViewWithErrorCode:0
                             errorStr:nil
                                  tag:0
-                               title:AUILiveCameraPushString(@"dialog_title")
+                               title:AUILiveCameraPushString(@"错误提示")
                              message:AUILiveCameraPushString(@"BGM File Open Failed")
-                         cancelTitle:AUILiveCameraPushString(@"ok")
+                         cancelTitle:AUILiveCommonString(@"确定")
                              okTitle:nil];
 }
 
@@ -586,9 +586,9 @@
     [self showAlertViewWithErrorCode:0
                             errorStr:nil
                                  tag:0
-                               title:AUILiveCameraPushString(@"dialog_title")
+                               title:AUILiveCameraPushString(@"错误提示")
                              message:AUILiveCameraPushString(@"BGM Download Timeout")
-                         cancelTitle:AUILiveCameraPushString(@"ok")
+                         cancelTitle:AUILiveCommonString(@"确定")
                              okTitle:nil];
 }
 
@@ -692,8 +692,9 @@
 //                [self.view makeToast:@"保存成功"];
 //                UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
             __strong typeof(self) strongSelf = weakSelf;
-            AUILiveFixedOrientationDirAlertController *alertController = [AUILiveFixedOrientationDirAlertController alertControllerWithTitle:nil message:[AUILiveCameraPushString(@"截图已保存至：\n") stringByAppendingString:filePath] preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:[UIAlertAction actionWithTitle:AUILiveCameraPushString(@"ok") style:UIAlertActionStyleCancel handler:nil]];
+            NSString *tip = [AUILiveCameraPushString(@"截图已保存至") stringByAppendingString:@"：\n"];
+            AUILiveFixedOrientationDirAlertController *alertController = [AUILiveFixedOrientationDirAlertController alertControllerWithTitle:nil message:[tip stringByAppendingString:filePath] preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addAction:[UIAlertAction actionWithTitle:AUILiveCommonString(@"确定") style:UIAlertActionStyleCancel handler:nil]];
             [strongSelf presentViewController:alertController animated:YES completion:nil];
         });
 
@@ -822,9 +823,9 @@
         [self showAlertViewWithErrorCode:ret
                                 errorStr:nil
                                      tag:0
-                                   title:AUILiveCameraPushString(@"dialog_title")
+                                   title:AUILiveCameraPushString(@"错误提示")
                                  message:@"Restart Error"
-                             cancelTitle:AUILiveCameraPushString(@"ok")
+                             cancelTitle:AUILiveCommonString(@"确定")
                                  okTitle:nil];
     }
     
@@ -865,9 +866,9 @@
         [self showAlertViewWithErrorCode:ret
                                 errorStr:nil
                                      tag:0
-                                   title:AUILiveCameraPushString(@"dialog_title")
+                                   title:AUILiveCameraPushString(@"错误提示")
                                  message:message
-                             cancelTitle:AUILiveCameraPushString(@"ok")
+                             cancelTitle:AUILiveCommonString(@"确定")
                                  okTitle:nil];
     }
 }
@@ -931,9 +932,9 @@
             [self showAlertViewWithErrorCode:ret
                                     errorStr:nil
                                          tag:0
-                                       title:AUILiveCameraPushString(@"dialog_title")
-                                     message:AUILiveCameraPushString(@"bite_error")
-                                 cancelTitle:AUILiveCameraPushString(@"ok")
+                                       title:AUILiveCameraPushString(@"错误提示")
+                                     message:AUILiveCameraPushString(@"码率参数设置错误！")
+                                 cancelTitle:AUILiveCommonString(@"确定")
                                      okTitle:nil];
         }
     }
@@ -949,9 +950,9 @@
             [self showAlertViewWithErrorCode:ret
                                     errorStr:nil
                                          tag:0
-                                       title:AUILiveCameraPushString(@"dialog_title")
-                                     message:AUILiveCameraPushString(@"bite_error")
-                                 cancelTitle:AUILiveCameraPushString(@"ok")
+                                       title:AUILiveCameraPushString(@"错误提示")
+                                     message:AUILiveCameraPushString(@"码率参数设置错误！")
+                                 cancelTitle:AUILiveCommonString(@"确定")
                                      okTitle:nil];
         }
     }
@@ -1104,8 +1105,8 @@
         __weak typeof(self) weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
             __strong typeof(self) strongSelf = weakSelf;
-            AUILiveFixedOrientationDirAlertController *alert = [AUILiveFixedOrientationDirAlertController alertControllerWithTitle:AUILiveCameraPushString(@"AlivcLivePusher License Error") message:showMessage preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:AUILiveCameraPushString(@"confirm") style:UIAlertActionStyleCancel handler:nil]];
+            AUILiveFixedOrientationDirAlertController *alert = [AUILiveFixedOrientationDirAlertController alertControllerWithTitle:AUILiveCameraPushString(@"License错误") message:showMessage preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:AUILiveCommonString(@"确定") style:UIAlertActionStyleCancel handler:nil]];
             [strongSelf presentViewController:alert animated:YES completion:nil];
         });
     }
@@ -1122,9 +1123,9 @@
             [self showAlertViewWithErrorCode:ret
                                     errorStr:nil
                                          tag:0
-                                       title:AUILiveCameraPushString(@"dialog_title")
+                                       title:AUILiveCameraPushString(@"错误提示")
                                      message:@"Send Question Error"
-                                 cancelTitle:AUILiveCameraPushString(@"ok")
+                                 cancelTitle:AUILiveCommonString(@"确定")
                                      okTitle:nil];
             return;
         }
@@ -1144,9 +1145,9 @@
             [self showAlertViewWithErrorCode:ret
                                     errorStr:nil
                                          tag:0
-                                       title:AUILiveCameraPushString(@"dialog_title")
+                                       title:AUILiveCameraPushString(@"错误提示")
                                      message:@"Send Answer Error"
-                                 cancelTitle:AUILiveCameraPushString(@"ok")
+                                 cancelTitle:AUILiveCommonString(@"确定")
                                      okTitle:nil];
         }
     }
@@ -1182,7 +1183,7 @@
                                              tag:0
                                            title:@"Error"
                                          message:@"Request Answer Game HTTP Error"
-                                     cancelTitle:@"OK"
+                                     cancelTitle:AUILiveCommonString(@"确定")
                                          okTitle:nil];
             } else {
                 [self.publisherView updateInfoText:AUILiveCameraPushString(@"Request Answer Game HTTP  Success")];
@@ -1205,9 +1206,9 @@
     [self showAlertViewWithErrorCode:error
                             errorStr:nil
                                  tag:kAlivcLivePusherVCAlertTag+31
-                               title:AUILiveCameraPushString(@"dialog_title")
+                               title:AUILiveCameraPushString(@"错误提示")
                              message:@"Init AlivcLivePusher Error"
-                         cancelTitle:AUILiveCameraPushString(@"exit")
+                         cancelTitle:AUILiveCameraPushString(@"退出")
                              okTitle:nil];
 }
 
@@ -1223,9 +1224,9 @@
     [self showAlertViewWithErrorCode:error
                             errorStr:nil
                                  tag:tag
-                               title:AUILiveCameraPushString(@"dialog_title")
+                               title:AUILiveCameraPushString(@"错误提示")
                              message:message
-                         cancelTitle:AUILiveCameraPushString(@"ok")
+                         cancelTitle:AUILiveCommonString(@"确定")
                              okTitle:nil];
 }
 
@@ -1240,9 +1241,9 @@
     [self showAlertViewWithErrorCode:error
                             errorStr:nil
                                  tag:0
-                               title:AUILiveCameraPushString(@"dialog_title")
+                               title:AUILiveCameraPushString(@"错误提示")
                              message:message
-                         cancelTitle:AUILiveCameraPushString(@"ok")
+                         cancelTitle:AUILiveCommonString(@"确定")
                              okTitle:nil];
 }
 
@@ -1257,9 +1258,9 @@
     [self showAlertViewWithErrorCode:error
                             errorStr:nil
                                  tag:0
-                               title:AUILiveCameraPushString(@"dialog_title")
+                               title:AUILiveCameraPushString(@"错误提示")
                              message:message
-                         cancelTitle:AUILiveCameraPushString(@"ok")
+                         cancelTitle:AUILiveCommonString(@"确定")
                              okTitle:nil];
 }
 
@@ -1353,10 +1354,10 @@
     BOOL isPushing = [self.livePusher isPushing];
     NSString *text = @"";
     if (isPushing) {
-        text = [NSString stringWithFormat:@"%@:%@|%@:%@",AUILiveCameraPushString(@"ispushing_log"), isPushing?@"YES":@"NO", AUILiveCameraPushString(@"push_url_log"), [self.livePusher getPushURL]];
+        text = [NSString stringWithFormat:@"%@:%@|%@:%@",AUILiveCameraPushString(@"推流中"), isPushing?@"YES":@"NO", AUILiveCameraPushString(@"推流中"), [self.livePusher getPushURL]];
     } else {
         // 未推流
-        text = [NSString stringWithFormat:@"%@",AUILiveCameraPushString(@"un_ispushing_log")];
+        text = [NSString stringWithFormat:@"%@",AUILiveCameraPushString(@"未推流")];
     }
 
     [self.publisherView updateInfoText:text];

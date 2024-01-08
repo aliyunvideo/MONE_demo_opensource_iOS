@@ -103,7 +103,7 @@
     for (int i = 0; i< dataList.count; i++) {
         AVPTrackInfo *obj = [dataList objectAtIndex:i];
         NSString *title = [self formatBitrateTitleWithKey:obj.trackDefinition];
-        title = [title stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+        title = [title stringByReplacingOccurrencesOfString:@"_" withString:@" "];
         UIButton *button = [[UIButton alloc] init];
         button.tag = i;
       
@@ -135,12 +135,12 @@
         return  @"";
     }
     NSDictionary *dict = @{
-        @"OD":@"1080P\n原画",
-        @"HD":@"1080P\n超清",
-        @"SD":@"720P\n高清",
-        @"LD":@"480P\n清晰",
-        @"FD":@"360P\n流畅",
-        @"AUTO":@"720P\n自动",
+        @"OD": [NSString stringWithFormat:@"1080P_%@", AUIVideoFlowString(@"原画")],
+        @"HD": [NSString stringWithFormat:@"1080P_%@", AUIVideoFlowString(@"超清")],
+        @"SD": [NSString stringWithFormat:@"720P_%@", AUIVideoFlowString(@"高清")],
+        @"LD": [NSString stringWithFormat:@"480P_%@", AUIVideoFlowString(@"清晰")],
+        @"FD": [NSString stringWithFormat:@"360P_%@", AUIVideoFlowString(@"流畅")],
+        @"AUTO": [NSString stringWithFormat:@"720P_%@", AUIVideoFlowString(@"自动")],
     };
     
     NSString *value = dict[key];

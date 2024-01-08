@@ -99,7 +99,7 @@ const static CGFloat kPaddingX = 24;
     }
     // zzy 20220630 暂时注释功能
     // NSArray * rightTitles = @[@"中字",@"选集",@"倍速",@"自动",@"开发者模式"];
-    NSArray * rightTitles = @[@"倍速",@"自动"];
+    NSArray * rightTitles = @[AUIVideoFlowString(@"倍速"), AUIVideoFlowString(@"自动")];
     // zzy 20220630 暂时注释功能
     
 

@@ -65,8 +65,8 @@
         _leftLabel.clipsToBounds = YES;
         _leftLabel.backgroundColor = APGetColor(APColorTypeCyanBg20);
         _leftLabel.textAlignment = NSTextAlignmentCenter;
-        NSString *text = @"看点 ";
-        NSMutableAttributedString *attrubuteString = [[NSMutableAttributedString alloc] initWithString:text];
+        NSString *text = AUIVideoFlowString(@"看点");
+        NSMutableAttributedString *attrubuteString = [[NSMutableAttributedString alloc] initWithString:[text stringByAppendingString:@" "]];
         
         NSTextAttachment *attchment = [[NSTextAttachment alloc] init];
         attchment.image = AUIVideoFlowImage(@"player_watchPoint");

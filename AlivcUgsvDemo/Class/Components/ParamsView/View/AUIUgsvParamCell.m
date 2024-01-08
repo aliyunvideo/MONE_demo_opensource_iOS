@@ -194,10 +194,11 @@
         _unitLabel.text = @"";
     }
     if (self.textFieldModel.placeHolder.length > 0) {
-        _textField.placeholder = self.textFieldModel.placeHolder;
+        _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.textFieldModel.placeHolder attributes:@{NSForegroundColorAttributeName: AUIFoundationColor(@"text_ultraweak")}];
     }
     else {
-        _textField.placeholder = AUIUgsvGetString(@"请填入");
+        _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:AUIUgsvGetString(@"请填入") attributes:@{NSForegroundColorAttributeName: AUIFoundationColor(@"text_ultraweak")}];
+
     }
     _textField.text = self.textFieldModel.text;
 }

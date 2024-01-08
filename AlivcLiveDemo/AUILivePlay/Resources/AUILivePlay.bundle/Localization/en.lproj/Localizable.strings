@@ -1,5 +1,11 @@
+"拉流播放" = "Live Streaming";
 "输入拉流url" = "Enter the source URL";
-"拉流" = "Pull Stream";
+"拉流" = "Pull";
 "无效的URL" = "Invalid URL";
 "开始拉流" = "Start";
 "输入URL" = "Enter a URL";
+"搜索或输入网址" = "Search or enter a website";
+"结束观看" = "Stop";
+"静音" = "Mute";
+"取消静音" = "Unmute";
+"数据指标" = "More Data";

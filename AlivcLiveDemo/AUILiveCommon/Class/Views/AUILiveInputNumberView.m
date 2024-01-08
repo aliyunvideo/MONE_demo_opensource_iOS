@@ -109,7 +109,7 @@
     
     if (self.maxNumber != kAUILiveInputNotMaxNumer) {
         if (range.location > (self.maxNumber - 1)) {
-            [AVToastView show:[NSString stringWithFormat:AUILiveCommonString(@"input ID error bits"), self.maxNumber] view:self.sourceVC.view position:AVToastViewPositionMid];
+            [AVToastView show:[NSString stringWithFormat:AUILiveCommonString(@"字符长度不能超过%d位"), self.maxNumber] view:self.sourceVC.view position:AVToastViewPositionMid];
             return NO;
         }
     }

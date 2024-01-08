@@ -122,7 +122,7 @@
     promptLabel.textAlignment = NSTextAlignmentCenter;
     promptLabel.font = [UIFont boldSystemFontOfSize:13.0];
     promptLabel.textColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
-    promptLabel.text = AUILiveCommonString(@"sweep_code_label");
+    promptLabel.text = AUILiveCommonString(@"将二维码放入框内, 即可自动扫描");
     [self addSubview:promptLabel];
     
     // 添加闪光灯按钮
@@ -132,8 +132,8 @@
     CGFloat light_buttonW = self.frame.size.width;
     CGFloat light_buttonH = 25;
     light_button.frame = CGRectMake(light_buttonX, light_buttonY, light_buttonW, light_buttonH);
-    [light_button setTitle:AUILiveCommonString(@"flash") forState:UIControlStateNormal];
-    [light_button setTitle:AUILiveCommonString(@"flash") forState:UIControlStateSelected];
+    [light_button setTitle:AUILiveCommonString(@"闪光灯") forState:UIControlStateNormal];
+    [light_button setTitle:AUILiveCommonString(@"闪光灯") forState:UIControlStateSelected];
     [light_button setTitleColor:promptLabel.textColor forState:(UIControlStateNormal)];
     light_button.titleLabel.font = [UIFont systemFontOfSize:17];
     

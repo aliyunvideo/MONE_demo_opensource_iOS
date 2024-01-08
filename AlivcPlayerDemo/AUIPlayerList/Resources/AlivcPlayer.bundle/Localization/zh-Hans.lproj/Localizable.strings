@@ -1,14 +1,1 @@
-"Player Demo" = "播放器";
-"Video Flow" = "信息流播放";
-"Video List" = "沉浸式播放";
-"Short Episode" = "短剧播放";
-"Video Full Screen" = "全屏播放";
-"Video Custom" = "自定义播放";
-"Clear Cache" = "清空缓存";
-"The demonstration of the video flow" = "适用于新闻资讯、社区互动等短视频场景";
-"The demonstration of the video function list" = "竖屏短视频场景，全屏秒开最佳实践";
-"The demonstration of the video standrad list" = "竖屏短视频场景，标准实现";
-"The demonstration of the video short episode" = "竖屏短视频剧集播放场景";
-"The demonstration of the video full screen" = "适用于版权视频等长视频场景";
-"The demonstration of the video custom" = "这是自定义播放功能演示";
-"No Mudule Tip" = "未集成该功能";
+
